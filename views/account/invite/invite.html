@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>邀请好友/理财经理</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        .explain legend:before,
+        .explain legend:after {
+            color: #333;
+        }
+
+        .in-activity {
+            background: #fff;
+        }
+
+        .hiddenImportant {
+            display: none !important;
+        }
+
+        .un-get .f-left {
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+    <div id="box">
+        <div id="inviteBox">
+            <template id="inviteTemplate">
+                <div class="in-activity" v-if="jumpState == 1">
+                    <div v-if="inviActStatus == 1 || inviActStatus == 2 || inviActStatus == 3 || inviActStatus == 4">
+                        <!-- 焦点图 -->
+                        <div class="slider" id="slider">
+                            <ul>
+                                <li>
+                                    <a href="{{inviFriBannerUrl}}">
+                                        <img src="/h5/images/account/invite/invite1.jpg" data-src="/h5/images/account/invite/invite1.jpg" alt="banner" class="async">
+                                    </a>
+                                </li>
+                                <!-- <li>
+                                    <a href="{{finManagerBannerUrl}}">
+                                        <img src="/h5/images/account/invite/invite2.jpg" data-src="/h5/images/account/invite/invite2.jpg" alt="banner" class="async">
+                                    </a>
+                                </li> -->
+                            </ul>
+                        </div>
+                        <!-- 理财经理考核未通过横幅 -->
+                        <div class="un-get overflow" v-if="finPreperAssessState == 2">
+                            <p class="f-left">抱歉，您上期考核未通过，可在佣金记录中查看往期佣金！</p>
+                            <!-- 关闭横幅按钮 -->
+                            <p class="f-right">
+                                <span @click="unGet()">X</span>
+                            </p>
+                        </div>
+                        <!-- 轮播图下方任务说明 -->
+                        <div class="group group-transparent bg-main bottom-none">
+                            <div class="group-item group-noborder">
+                                <div class="group-rowspan">
+                                    <div class="group-colspan invite-detail">
+                                        <div v-if="(rewardType == 0 || rewardType == 2) && (inviActStatus == 1 || inviActStatus == 2 || inviActStatus == 5)">
+                                            <i class="iconfont">&#xe660;</i>
+                                            <span>红包任务：</span>
+                                            <p>{{ hongbaoTaskBrief }}</p>
+                                        </div>
+                                        <div v-if="(rewardType == 1 || rewardType == 2) && (inviActStatus == 1 || inviActStatus == 2 || inviActStatus == 5)">
+                                            <i class="iconfont">&#xe661;</i>
+                                            <span>现金任务：</span>
+                                            <p>{{ cashTaskBrief }}</p>
+                                        </div>
+                                        <!-- <div v-if="finRuleBrief != '' && finActStatus == 0 && (inviActStatus == 1 || inviActStatus == 2 || inviActStatus == 5)">
+                                            <i class="iconfont">&#xe65f;</i>
+                                            <span>理财经理：</span>
+                                            <p>{{ finRuleBrief }}</p>
+                                        </div> -->
+                                        <p>本期活动时间：{{ commonStart }} 至 {{ commonEnd }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 锯齿线 -->
+                        <div class="serrate"></div>
+                        <div class="group group-transparent">
+                            <!-- 邀请好友活动时间与活动状态 -->
+                            <div class="group-item group-noborder">
+                                <div class="group-rowspan">
+                                    <div class="group-colspan">
+                                        <!--活动预告-->
+                                        <div v-if="inviActStatus == 1" class="start-time common-time">
+                                            <p>距离本期活动开始还有</p>
+                                            <p>
+                                                <strong>{{days}}天</strong>
+                                                <strong>{{hours}}小时</strong>
+                                                <strong>{{minutes}}分</strong>
+                                                <strong>{{seconds}}秒</strong>
+                                            </p>
+                                        </div>
+                                        <!--活动中-->
+                                        <div v-if="inviActStatus == 2" class="in-time common-time">
+                                            <p>距离本期活动结束还有</p>
+                                            <p>
+                                                <strong>{{days}}天</strong>
+                                                <strong>{{hours}}小时</strong>
+                                                <strong>{{minutes}}分</strong>
+                                                <strong>{{seconds}}秒</strong>
+                                            </p>
+                                        </div>
+                                        <!--活动结束-->
+                                        <div v-if="inviActStatus == 3" class="end-time common-time">
+                                            <p>活动已结束</p>
+                                        </div>
+                                        <!--活动中止-->
+                                        <div v-if="inviActStatus == 4" class="stop-time common-time">
+                                            <p>{{breakExplain}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 邀请好友奖励情况 -->
+                            <div class="group-item group-noborder">
+                                <div class="group-rowspan">
+                                    <div class="group-colspan">
+                                        <div class="reward-record" v-if="finPreperAssessState == 2">
+                                            <a href="/h5/views/account/invite/rewardRecord.html">查看佣金记录》</a>
+                                        </div>
+                                        <div class="reward-total overflow">
+                                            <div class="f-left">
+                                                <h4>
+                                                    <a class="color-main" href="/h5/views/account/invite/rewardDetail.html?ruleId={{finRuleId}}">本期奖励(元)</a>
+                                                </h4>
+                                                <p>
+                                                    <em class="font-middle color-main">{{ curPerHbReward }}</em>
+                                                    <em class="font-middle color-main">{{ curPerCashReward }}</em>
+                                                </p>
+                                                <p>
+                                                    <span>红包</span>
+                                                    <span>现金</span>
+                                                </p>
+                                            </div>
+                                            <div class="f-right">
+                                                <h4>
+                                                    <a href="/h5/views/account/invite/rewardRecord.html">累计奖励(元)</a>
+                                                </h4>
+                                                <p>
+                                                    <em class="font-middle">{{ totalHbReward }}</em>
+                                                    <em class="font-middle">{{ totalCashReward }}</em>
+                                                </p>
+                                                <p>
+                                                    <span>红包</span>
+                                                    <span>现金</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 分割线 -->
+                        <div class="separete "></div>
+                        <!-- 邀请好友任务 -->
+                        <div class="task group group-transparent">
+                            <div class="group-item group-noborder" v-if="inviActStatus == 1 || inviActStatus == 2 || inviActStatus == 5">
+                                <div class="group-rowspan">
+                                    <div class="group-colspan">
+                                        <div class="title" v-if="hongbaoGearList.length">
+                                            <span>红包任务</span>
+                                        </div>
+                                        <div class="red-list" v-if="hongbaoGearList.length">
+                                            <div class="r-list overflow" v-for="list in hongbaoGearList">
+                                                <div class="task-img f-left">
+                                                    <img src="/h5/images/account/invite/red.png" alt="">
+                                                </div>
+                                                <div class="task-pro f-left">
+                                                    <h3>邀请用户数量{{ list.amountRequirement }}人</h3>
+                                                    <p>
+                                                        <span>{{ list.proBarValue }}/{{ list.amountRequirement }}</span>
+                                                    </p>
+                                                    <p class="cur-pro" style="width: {{ list.proBarValue/list.amountRequirement*100 }}%;"></p>
+                                                </div>
+                                                <div class="task-result f-right">
+                                                    <p>红包{{ list.rewardAmount }}元</p>
+                                                    <p v-if="list.hasAlreadyReceive == 0 && list.hasCanReceive == 0">
+                                                        <a href="javascript:void(0);" data-id="{{ list.id }}">领取</a>
+                                                    </p>
+                                                    <p v-if="list.hasAlreadyReceive == 0 && list.hasCanReceive == 1">
+                                                        <a href="javascript:void(0);" class="red-receive" @click="gearGet(list.id,list.rewardType,list.rewardAmount,$index)" data-id="{{ list.id }}">领取</a>
+                                                    </p>
+                                                    <p v-if="list.hasAlreadyReceive == 1">
+                                                        <a href="javascript:void(0);" class="">已领取</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-item group-noborder" v-if="inviActStatus == 1 || inviActStatus == 2 || inviActStatus == 5">
+                                <div class="group-rowspan">
+                                    <div class="group-colspan">
+                                        <div class="title" v-if="cashGearList.length">
+                                            <span>现金任务</span>
+                                        </div>
+                                        <div class="red-list" v-if="cashGearList.length">
+                                            <div class="r-list overflow" v-for="list in cashGearList">
+                                                <div class="task-img f-left">
+                                                    <img src="/h5/images/account/invite/cash.png" alt="">
+                                                </div>
+                                                <div class="task-pro f-left">
+                                                    <h3>邀请用户总投资额{{ list.amountRequirement }}元</h3>
+                                                    <p>
+                                                        <span>{{ list.proBarValue }}/{{ list.amountRequirement }}</span>
+                                                    </p>
+                                                    <p class="cur-pro" style="width: {{ list.proBarValue/list.amountRequirement*100 }}%;"></p>
+                                                </div>
+                                                <div class="task-result f-right">
+                                                    <p>现金{{ list.rewardAmount }}元</p>
+                                                    <p v-if="list.hasAlreadyReceive == 0 && list.hasCanReceive == 0">
+                                                        <a href="javascript:void(0);" data-id="{{ list.id }}">领取</a>
+                                                    </p>
+                                                    <p v-if="list.hasAlreadyReceive == 0 && list.hasCanReceive == 1">
+                                                        <a href="javascript:void(0);" class="red-receive" @click="gearGet(list.id,list.rewardType,list.rewardAmount,$index)" data-id="{{ list.id }}">领取</a>
+                                                    </p>
+                                                    <p v-if="list.hasAlreadyReceive == 1 ">
+                                                        <a href="javascript:void(0);" class="">已领取</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-item group-noborder">
+                                <div class="group-rowspan">
+                                    <div class="group-colspan">
+                                        <!-- hasUpgradeFinManager 为1可升级为理财经理 -->
+
+                                        <!-- <div v-if="finActStatus == 0 && (inviActStatus == 1 || inviActStatus == 2 || inviActStatus == 5)">
+                                            <div v-if="hasUpgradeFinManager == 1">
+                                                <button class="upgrade can-upgrade" @click="upgrade()">升级为理财经理</button>
+                                            </div>
+                                            <div v-else>
+                                                <button class="upgrade">升级为理财经理</button>
+                                            </div>
+                                        </div> -->
+                                        <p class="cur-total">本期已邀请
+                                            <strong>{{ regiterNum }}</strong>位好友注册，
+                                            <strong>{{ firInvestNum }}</strong>位好友首次投资，本期好友总投资额为
+                                            <strong>{{ investAmount }}</strong>元。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 邀请好友活动已结束 -->
+                    <div class="end-activity" v-else>
+                        <div>
+                            <img src="/h5/images/account/invite/un.jpg" alt="invite" width="100%">
+                        </div>
+                    </div>
+                </div>
+                <!-- 什么鬼？通过JS控制 -->
+                <div class="group group-transparent group-noborder hidden">
+                    <div class="group-item">
+                        <div class="group-rowspan">
+                            <div class="group-colspan">
+                                <fieldset class="explain" style="color:#333;border-color:#333;">
+                                    <legend>温馨提示</legend>
+                                    <p>分享“邀请红包”给好友，好友通过领取你的红包绑定邀请关系； </p>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 操作按钮 -->
+                <div class="footer">
+                    <div class="group group-excel2" style="margin:0;border-top:1px solid #eee;">
+                        <div class="group-item">
+                            <div class="group-rowspan font-18" style="height:3.75rem;">
+                                <a href="/h5/views/account/invite/inviteRecord.html" class="group-colspan clr-strike" style="font-weight: normal;">邀请记录</a>
+                                <a href="javascript:void(0)" class="group-colspan button-fill" @click="show">立即邀请</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 分享 -->
+                <a href="javascript:void(0)" v-show="isShare" @click="hide" style="position:fixed;top:0;left:0;z-index:999;display:none;width:100%;height:100%;background:rgba(0,0,0,0.75)">
+                    <img src="/h5/images/share2.png" alt="" width="100%">
+                </a>
+            </template>
+            <my-invite></my-invite>
+        </div>
+        <div id="financeBox">
+            <template id="financeTemplate">
+                <div class="in-activity" v-if="jumpState == 2">
+                    <!-- 焦点图 -->
+                    <div class="slider" id="slider">
+                        <ul>
+                            <!-- <li><a href="/h5/views/account/invite/invite1detail.html"><img src="/h5/images/account/invite/invite1.jpg" data-src="/h5/images/account/invite/invite1.jpg" alt="banner" class="async"></a></li> -->
+                            <li>
+                                <a href="{{finManagerBannerUrl}}">
+                                    <img src="/h5/images/account/invite/invite2.jpg" data-src="/h5/images/account/invite/invite2.jpg" alt="banner" class="async">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 理财经理横幅，需要融合 -->
+                    <div v-if="assmentStatus == 2" class="un-get overflow">
+                        <p class="f-left info-activity" v-if="hasOutOfDate == 0">抱歉，您上期考核未通过，可在佣金记录中查看往期佣金！</p>
+                        <p class="f-left info-activity" v-else>抱歉，您上期考核未通过！</p>
+                        <p class="f-right">
+                            <span @click="unGet()">X</span>
+                        </p>
+                    </div>
+                    <div class="group group-transparent">
+                        <!-- 理财经理考核时间 -->
+                        <div class="group-item group-noborder">
+                            <div class="group-rowspan">
+                                <div class="group-colspan">
+                                    <div class="assessment">
+                                        <h1 v-if="activityStatus == 1">{{breakExplain}}</h1>
+                                        <div v-else>
+                                            <p v-if="hasOutOfDate == 0">本期考核时间</p>
+                                            <p v-else>上期考核时间</p>
+                                            <h2>{{startTime}}至{{endTime}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 理财经理佣金，需要融合 -->
+                        <div class="group-item group-noborder">
+                            <div class="group-rowspan">
+                                <div class="group-colspan">
+                                    <div class="reward-record">
+                                        <a href="/h5/views/account/invite/rewardRecord.html">查看任务奖励记录》</a>
+                                    </div>
+                                    <div class="reward-total overflow">
+                                        <div class="f-left">
+                                            <h4 v-if="hasOutOfDate == 0">
+                                                <a class="color-main" href="/h5/views/account/invite/commissionDetail.html?id={{assmentId}}">本期佣金(元)</a>
+                                            </h4>
+                                            <h4 v-else>
+                                                <a class="color-main" href="/h5/views/account/invite/commissionDetail.html?id={{assmentId}}">上期佣金(元)</a>
+                                            </h4>
+                                            <p>
+                                                <em class="font-middle color-main">{{ curNoPayCommission }}</em>
+                                                <em class="font-middle color-main">{{ curPayCommission }}</em>
+                                            </p>
+                                            <p>
+                                                <span>待结算</span>
+                                                <span>已结算</span>
+                                            </p>
+                                        </div>
+                                        <div class="f-right">
+                                            <h4>
+                                                <a href="/h5/views/account/invite/commissionList.html">累计佣金(元)</a>
+                                            </h4>
+                                            <p>
+                                                <em class="font-middle">{{ totalNoPayCommission }}</em>
+                                                <em class="font-middle">{{ totalPayCommission }}</em>
+                                            </p>
+                                            <p>
+                                                <span>待结算</span>
+                                                <span>已结算</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="t-tip t-center">*已结算的佣金在账户余额中可进行提现</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 分割线 -->
+                    <div class="separete "></div>
+                    <!-- 理财经理考核指标，需要融合 -->
+                    <div class="task light-task group group-transparent">
+                        <div class="group-item group-noborder" v-if=" activityStatus == 0">
+                            <div class="group-rowspan">
+                                <div class="group-colspan">
+                                    <div v-if="hasOutOfDate == 0" class="title">
+                                        <span>本期理财经理考核指标</span>
+                                    </div>
+                                    <div v-else class="title">
+                                        <span>上期理财经理考核指标</span>
+                                    </div>
+                                    <h3 v-if="hasOutOfDate == 0">本期邀请用户总投资额{{assmentAmount}}元</h3>
+                                    <h3 v-else>上期邀请用户总投资额{{assmentAmount}}元</h3>
+                                    <div class="process task-pro">
+                                        <p>
+                                            <span>{{proBarAmount}}/{{assmentAmount}}</span>
+                                        </p>
+                                        <p class="cur-pro" style="width:{{ proBarAmount/assmentAmount*100 }}%;"></p>
+                                    </div>
+                                    <p class="t-tip">需完成以上指标下期才可继续享受理财经理资格</p>
+                                    <div v-if="hasOutOfDate == 0 && hasReachTarget == 0" class="img">
+                                        <img src="/h5/images/account/invite/unget.png" alt="">
+                                    </div>
+                                    <div v-if="hasOutOfDate == 0 && hasReachTarget == 1" class="img">
+                                        <img src="/h5/images/account/invite/get.png" alt="">
+                                    </div>
+                                    <div v-if="hasOutOfDate == 1" class="img">
+                                        <img src="/h5/images/account/invite/expired.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-item group-noborder">
+                            <div class="group-rowspan">
+                                <div class="group-colspan">
+                                    <p v-if="hasOutOfDate == 0" class="cur-total fin-total">本期好友总投资额为
+                                        <strong>{{ investAmount }}</strong>元。</p>
+                                    <p v-else class="cur-total fin-total">上期好友总投资额为
+                                        <strong>{{ investAmount }}</strong>元。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 邀请好友活动结束 -->
+                <div class="end-activity" v-else>
+                    <div>
+                        <img src="/h5/images/account/invite/un.jpg" alt="invite" width="100%">
+                    </div>
+                </div>
+                <div class="group group-transparent group-noborder hidden">
+                    <div class="group-item">
+                        <div class="group-rowspan">
+                            <div class="group-colspan">
+                                <fieldset class="explain" style="color:#333;border-color:#333;">
+                                    <legend>温馨提示</legend>
+                                    <p>分享“邀请红包”给好友，好友通过领取你的红包绑定邀请关系； </p>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 底部按钮 -->
+                <div class="footer">
+                    <div class="group group-excel2" style="margin:0;border-top:1px solid #eee;">
+                        <div class="group-item">
+                            <div class="group-rowspan font-18" style="height:3.75rem;">
+                                <a href="/h5/views/account/invite/inviteRecord.html" class="group-colspan clr-strike" style="font-weight: normal;">邀请记录</a>
+                                <a href="javascript:void(0)" class="group-colspan button-fill" @click="show">立即邀请</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 分享 -->
+                <a href="javascript:void(0)" v-show="isShare" @click="hide" style="position:fixed;top:0;left:0;z-index:999;display:none;width:100%;height:100%;background:rgba(0,0,0,0.75)">
+                    <img src="/h5/images/share2.png" alt="" width="100%">
+                </a>
+            </template>
+            <my-finance></my-finance>
+        </div>
+    </div>
+    <!-- 邀请好友升级理财经理弹窗 -->
+    <div id="upgrade-success">
+        <div class="d-item">
+            <img src="/h5/images/account/invite/upgrade.png" alt="">
+        </div>
+        <div class="d-item">
+            <p>恭喜您成为理财经理</p>
+        </div>
+        <div class="d-item">
+            <p>享受邀请用户投资额1%的奖励</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['account/invite/invite']);
+    </script>
+</body>
+
+</html>

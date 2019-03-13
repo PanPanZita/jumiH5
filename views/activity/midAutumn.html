@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>月满中秋好“食”光</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            font-family: "PingFang SC", "PingFangSC-Regular", "PingFangSC-Semibold", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            font-size: 3.73vw;
+            /* 14px */
+        }
+
+
+        #mask,
+        #shareMask {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        #maskTips {
+            width: 52.93vw;
+            height: 13.17vh;
+            position: absolute;
+            left: 50%;
+            margin-left: -26.465vw;
+            top: 32%;
+            text-align: center;
+            line-height: 13.17vh;
+            background: #fff;
+            color: #444444;
+            font-size: 4.8vw;
+            border-radius: 4px;
+            z-index: 11;
+        }
+
+        .wrapImg {
+            width: 100%;
+            height: 100%;
+            background: url('/h5/images/activity/midAutumn/bg.png') no-repeat;
+            background-size: cover;
+            background-position: center center;
+            padding: 6.93vw 6.93vw 5.33vw 6.93vw;
+        }
+
+        .titleBg {
+            width: 100%;
+            height: 8.52vw;
+            line-height: 8.52vw;
+            background: #050d2d;
+            opacity: 0.1;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .titleStr {
+            width: 100%;
+            height: 8.52vw;
+            line-height: 8.52vw;
+            font-size: 5.86vw;
+            letter-spacing: 1px;
+        }
+
+        .resultStr {
+            margin: 3vw auto 5vw;
+        }
+
+        .bigShow {
+            width: 50.66vw;
+            height: 81.06vw;
+            margin: 0 auto;
+            background: url('/h5/images/activity/midAutumn/lantern.png') no-repeat;
+            background-size: contain;
+            text-align: center;
+            padding: 9.06vw 8.53vw 0;
+        }
+
+        .bigshowImg {
+            width: 20.26vw;
+            height: 20.26vw;
+            margin: 0 auto 4vw;
+            text-align: center;
+            line-height: 20.26vw;
+        }
+
+        .bigshowIntr {
+            letter-spacing: 1px;
+        }
+
+        .goLightup {
+            width: 17.06vw;
+            height: 8vw;
+            margin-top: 3.2vw;
+            font-size: 3.2vw;
+            color: #DF4D3C;
+            border-radius: 4px;
+            border: 0;
+            background: -moz-linear-gradient(top, #FBE294, #FFDB6A);
+            /*火狐*/
+            background: -webkit-linear-gradient(top, #FBE294, #FFDB6A);
+            /*Safari5.1 Chrome 10+*/
+            background: -o-linear-gradient(top, #FBE294, #FFDB6A);
+            /*Opera 11.10+*/
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FBE294), to(#FFDB6A));
+            /*谷歌*/
+        }
+
+        .prizes,
+        .ruleDesc {
+            position: relative;
+            color: #eeb247;
+        }
+
+        .prizes:before,
+        .ruleDesc:before {
+            content: '◆';
+            color: #eeb247;
+            display: inline-block;
+            width: 5.32vw;
+            height: 5.32vw;
+            text-align: center;
+            line-height: 5.32vw;
+            position: absolute;
+            left: -5.32vw;
+            top: 0;
+        }
+
+        .prizes:after,
+        .ruleDesc:after {
+            content: '◆';
+            color: #eeb247;
+            display: inline-block;
+            width: 5.32vw;
+            height: 5.32vw;
+            text-align: center;
+            line-height: 5.32vw;
+            position: absolute;
+            left: 15vw;
+            top: 0;
+        }
+
+        .lampList {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3.2vh;
+        }
+
+        .lampList .lamp {
+            width: 18.4vw;
+            height: 18.4vw;
+            text-align: center;
+            line-height: 18.4vw;
+            border-radius: 4px;
+        }
+
+        .bigshowImg img,
+        .lampList .lamp .imgPar,
+        .lampList .lamp .imgPar img {
+            width: 100%
+        }
+
+        .getReward {
+            width: 30.93vw;
+            height: 10.66vw;
+            margin-top: 4.15vh;
+            margin-left: 27.2vw;
+            font-size: 4.8vw;
+            color: #e5533e;
+            border: 1px solid #e5533e;
+            border-radius: 4px;
+            border: 0;
+            background: -moz-linear-gradient(top, #FBE294, #FFDB6A);
+            /*火狐*/
+            background: -webkit-linear-gradient(top, #FBE294, #FFDB6A);
+            /*Safari5.1 Chrome 10+*/
+            background: -o-linear-gradient(top, #FBE294, #FFDB6A);
+            /*Opera 11.10+*/
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FBE294), to(#FFDB6A));
+            /*谷歌*/
+        }
+
+        /* 地址弹出框样式 */
+        #addressWrap {
+            width: 85.33vw;
+            /* height: 83.39vh; */
+            height: 124vw;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -42.665vw;
+            /* margin-top: -41.695vh; */
+            margin-top: -62vw;
+            background: #f2f4f6;
+            border-radius: 4px;
+            z-index: 11;
+        }
+
+        #addressCon {
+            /* height: 75.45vh; */
+            height: 112vw;
+            padding: 0 10.13vw;
+            overflow-y: scroll;
+            /*  属性控制元素在移动设备上是否使用滚动回弹效果----属性值有两个，auto和touch，使用具有回弹效果的滚动, 当手指从触摸屏上移开，内容会继续保持一段时间的滚动效果。继续滚动的速度和持续的时间和滚动手势的强烈程度成正比。同时也会创建一个新的堆栈上下文 */
+            -webkit-overflow-scrolling: touch;
+            -moz-overflow-scrolling: touch;
+            -ms-overflow-scrolling: touch;
+            -o-overflow-scrolling: touch;
+        }
+
+        #addressCon .formPar {
+            /* margin-bottom: 2.88vh; */
+            margin-bottom: 3.46vw;
+        }
+
+        #addressCon .formPar label {
+            display: inline-block;
+            width: 20vw;
+            text-align: right;
+        }
+
+        #addressCon .formPar input,
+        #addressCon .formPar textarea {
+            display: inline-block;
+            width: 43vw;
+            background: #f2f4f6;
+            border: 1px solid #cdcdcd;
+            border-radius: 5px;
+            padding: 0 2.13vw;
+            font-size: 3.73vw;
+        }
+
+        #addressCon .formPar textarea {
+            padding: 0 1.94vw;
+        }
+
+        #addressCon .formPar #userAddress {
+            /* height: 14.26vh; */
+            height: 21.067vw;
+            resize: none;
+            vertical-align: top;
+            /* padding-top: 1vh; */
+            padding-top: 1.4vw;
+        }
+
+        #addressBtn {
+            width: 100%;
+            /* height: 7.94vh; */
+            height: 12vw;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #addressBtn button {
+            border: 0;
+            font-size: 4.26vw;
+            width: 50%;
+            height: 100%;
+        }
+
+        #addressBtn .cancelAddress {
+            background: #ffffff;
+            border-bottom-left-radius: 4px;
+        }
+
+        #addressBtn .sureAddress {
+            background: #ee6108;
+            border-bottom-right-radius: 4px;
+        }
+
+        .linePar {
+            width: 100%;
+            /* height: 9.56vh; */
+            height: 14.13vw;
+            /* line-height: 9.56vh; */
+            line-height: 14.13vw;
+            position: relative;
+        }
+
+        .linePar:after {
+            display: inline-block;
+            content: "";
+            width: 100%;
+            height: 1px;
+            background: #dbdbdb;
+            position: absolute;
+            left: 0;
+            top: 48%;
+        }
+
+        .linePar span {
+            display: inline-block;
+            width: 42.4vw;
+            height: 100%;
+            text-align: center;
+            background: #f2f4f6;
+            position: absolute;
+            left: 50%;
+            margin-left: -21.2vw;
+            top: 0;
+            z-index: 10;
+        }
+
+        .addressList li {
+            width: 100%;
+            /* margin-bottom: 1.8vh; */
+            margin-bottom: 2.66vw;
+            display: flex;
+            justify-content: space-between;
+            /* padding: 1.8vh 2.66vw; */
+            padding: 2.66vw;
+            border: 1px solid #cdcdcd;
+            border-radius: 5px;
+        }
+
+        .addressList .li-checked {
+            border: 1px solid #ee6108;
+        }
+
+        .addressDetail {
+            width: 50.13vw;
+        }
+
+        .addressList .addressChecked {
+            width: .4.4vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .addressList .addressChecked .checkedSign {
+            width: 4.4vw;
+            height: 4.4vw;
+            background: #cdcdcd;
+            border-radius: 50%;
+            position: relative;
+            border: none;
+        }
+
+        .addressList .addressChecked .checkedSign:after {
+            content: "";
+            width: 1.4vw;
+            height: 2.6vw;
+            border-right: 0.54vw solid #fff;
+            border-bottom: 0.54vw solid #fff;
+            transform: rotate3d(0, 0, 1, 38deg);
+            text-align: center;
+            position: absolute;
+            left: 1.2vw;
+            top: 0.2vw;
+            color: #ffffff;
+            z-index: 10;
+            font-size: 3.73vw;
+        }
+
+        .addressList .addressChecked .bg-checked {
+            background: #EC6121;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+    <!-- 横屏展示结果 -->
+    <div id="landscape">
+        <img src="/h5/images/landscape.jpg" alt="横屏警告">
+        <p>聚小米提醒您：为了更好的体验，请竖屏浏览~~~</p>
+    </div>
+
+    <template id="midautumnTemplate">
+
+        <!-- 活动已经结束的遮罩层 -->
+        <div v-if="actStatus == '1'">
+            <div id="mask"></div>
+            <p id="maskTips">活动已结束</p>
+        </div>
+        <!-- 分享到朋友圈的遮罩层 -->
+        <div v-if="isShare" @click="hideSharemask" id="shareMask">
+            <img src="/h5/images/share3.png" alt="" width="80%" style="margin:0 auto">
+        </div>
+
+        <div id="prizePar" style="display: none;">
+            <img src='/h5/images/activity/midAutumn/prize.png' />
+        </div>
+
+        <div class="wrapImg">
+            <div class="textcenter" style="position: relative;">
+                <p class="titleBg"></p>
+                <p class="titleStr clr-white">集齐四字，即得精美月饼礼盒</p>
+                <p class="clr-white resultStr">{{count}}人已集齐，奖品剩余{{ 200 - count}}份</p>
+            </div>
+            <div class="bigShow">
+                <div class="stageOne" v-if="stage == '1'">
+                    <p class="bigshowImg">
+                        <img src='/h5/images/activity/midAutumn/bigZhongBg.png' />
+                    </p>
+                    <p class="clr-white bigshowIntr">在发现页参与一次天天转盘</p>
+                    <button class="goLightup" @click="goLightupOne" v-if="taskOneend == '0'">去点亮</button>
+                    <button class="goLightup" v-else>已点亮</button>
+                </div>
+                <div class="stageTwo" v-if="stage == '2'">
+                    <p class="bigshowImg">
+                        <img src='/h5/images/activity/midAutumn/bigQiuBg.png' />
+                    </p>
+                    <p class="clr-white bigshowIntr">对任意项目发表一次评论或回复</p>
+                    <button class="goLightup" @click="goLightupTwo" v-if="taskTwoend == '0'">去点亮</button>
+                    <button class="goLightup" v-else>已点亮</button>
+                </div>
+                <div class="stageThere" v-if="stage == '3'">
+                    <p class="bigshowImg">
+                        <img src='/h5/images/activity/midAutumn/bigJiaBg.png' />
+                    </p>
+                    <p class="clr-white bigshowIntr">分享活动至朋友圈</p>
+                    <button class="goLightup" @click="goLightupThere" v-if="taskThereend == '0'">去点亮</button>
+                    <button class="goLightup" v-else>已点亮</button>
+                </div>
+                <div class="stageFour" v-if="stage == '4'">
+                    <p class="bigshowImg">
+                        <img src='/h5/images/activity/midAutumn/bigJieBg.png' />
+                    </p>
+                    <p class="clr-white bigshowIntr">投资满2万元</p>
+                    <button class="goLightup" @click="goLightupFour" v-if="taskFourend == '0'">去点亮</button>
+                    <button class="goLightup" v-else>已点亮</button>
+                </div>
+            </div>
+            <p style="height: 3.2vh;margin-top: -6vh;">
+                <span class="left prizes" style="margin-left: 5.32vw;" @click="prizes">奖品说明</span>
+                <span class="right ruleDesc" style="margin-right: 5.32vw;" @click="ruleDesc">规则说明</span>
+            </p>
+            <ul class="lampList">
+                <li class="lamp" @click="clickZhong">
+                    <p v-if="zhongStatus==='1'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/nolightupZhongBg.png' />
+                    </p>
+                    <p v-if="zhongStatus==='2'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/underwayZhongBg.png' />
+                    </p>
+                    <p v-if="zhongStatus==='3'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/smallZhongBg.png' />
+                    </p>
+                </li>
+                <li class="lamp" @click="clickQiu">
+                    <p v-if="qiuStatus==='1'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/nolightupQiuBg.png' />
+                    </p>
+                    <p v-if="qiuStatus==='2'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/underwayQiuBg.png' />
+                    </p>
+                    <p v-if="qiuStatus==='3'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/smallQiuBg.png' />
+                    </p>
+                </li>
+                <li class="lamp" @click="clickJia">
+                    <p v-if="jiaStatus==='1'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/nolightupJiaBg.png' />
+                    </p>
+                    <p v-if="jiaStatus==='2'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/underwayJiaBg.png' />
+                    </p>
+                    <p v-if="jiaStatus==='3'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/smallJiaBg.png' />
+                    </p>
+                </li>
+                <li class="lamp" @click="clickJie">
+                    <p v-if="jieStatus==='1'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/nolightupJieBg.png' />
+                    </p>
+                    <p v-if="jieStatus==='2'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/underwayJieBg.png' />
+                    </p>
+                    <p v-if="jieStatus==='3'" class="imgPar">
+                        <img src='/h5/images/activity/midAutumn/smallJieBg.png' />
+                    </p>
+                </li>
+            </ul>
+            <button class="getReward" @click="getReward">领取奖励</button>
+        </div>
+
+        <!-- 填写地址的弹出框 -->
+        <div v-if="addressDialog">
+            <div id="mask"></div>
+            <div id="addressWrap">
+                <div id="addressCon">
+                    <p class="formPar" style="margin-top: 5.33vw; ">
+                        <label for="userName" class="clr-gray45">收货人：</label>
+                        <input type="text" @focus="inputFocus" placeholder="请输入收货人姓名" id="userName" style="height: 10.2vw;"
+                            maxlength="10" class="newAddress" v-model="userName" />
+                    </p>
+                    <p class="formPar">
+                        <label for="userPhone" class="clr-gray45">联系电话：</label>
+                        <input type="text" @focus="inputFocus" placeholder="请输入手机号" id="userPhone" style="height: 10.2vw;"
+                            maxlength="11" class="newAddress" v-model="userPhone" />
+                    </p>
+                    <p class="formPar" style="margin-bottom: 0.88vw;">
+                        <label for="userAddress" class="clr-gray45" style="padding-top: 1.4vw;">收货地址：</label>
+                        <textarea @focus="inputFocus" placeholder="请输入详细的收货地址" id="userAddress" maxlength="50" class="newAddress"
+                            v-model="userAddress"></textarea>
+                    </p>
+                    <p class="linePar" v-show="addressList.length > 0"><span>以下常用地址可供选择</span></p>
+                    <ul class="addressList" v-show="addressList.length > 0">
+                        <li v-for="item in addressList" :class="'address'+item.addressId" class="address">
+                            <div class="addressDetail">
+                                <p class="clr-gray45" style="height: 10.67vw;font-size:3.73vw;">
+                                    <span class="left">{{item.userName}}</span>
+                                    <span class="right">{{item.userPhone}}</span>
+                                </p>
+                                <p class="clr-gray6" style="font-size: 3.2vw;">{{item.address}}</p>
+                            </div>
+                            <div class="addressChecked">
+                                <input type="checkbox" class="checkedSign" @click="checkedSign(item,$event)">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="addressBtn">
+                    <button @click="cancelAddress" class="cancelAddress clr-gray">取消</button>
+                    <button @click="sureAddress" class="sureAddress clr-white">提交</button>
+                </div>
+            </div>
+        </div>
+
+
+    </template>
+    <my-midautumn></my-midautumn>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['activity/midAutumn']);
+    </script>
+</body>
+
+</html>

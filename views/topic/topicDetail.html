@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>发现-聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        .activityList {
+            overflow: hidden;
+        }
+
+        .activityList li {
+            float: left;
+            width: 50%;
+            font-size: 0.85714285714285714285714285714286rem;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+        <template id="detailTemplate">
+            <img :src="data.image1 || '/h5/images/default21.jpg'" alt="" width="100%" />
+            <div class="group">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <span>{{data.name}}</span>
+                            <button type="button" class="button button-primary button-xsm" v-if="data.type == 2">抽奖</button>
+                            <button type="button" class="button button-primary button-xsm" v-if="data.type == 3">兑换</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <ul class="activityList">
+                                <li>
+                                    <i class="iconfont font-8" style="vertical-align:middle">&#xe61e;</i> 剩余数量：{{data.remainingNumber}}份</li>
+                                <li v-if="data.activityStatus == 1">
+                                    <i class="iconfont font-8" style="vertical-align:middle">&#xe61e;</i> 距离开始时间：{{data.remainingDays}}</li>
+                                <li v-if="data.activityStatus == 2">
+                                    <i class="iconfont font-8" style="vertical-align:middle">&#xe61e;</i> 距离结束时间：{{data.remainingDays}}</li>
+                                <!-- 				<li v-if="data.singleLimit > 0 && data.type == 2"><i class="iconfont font-8" style="vertical-align:middle">&#xe61e;</i> 单人限制抽奖{{data.singleLimit}}次</li> -->
+                                <li v-if="data.singleLimit > 0 && data.type == 3">
+                                    <i class="iconfont font-8" style="vertical-align:middle">&#xe61e;</i> 单人限制兑换{{data.singleLimit}}次</li>
+                                <li v-if="data.islevel > 0">
+                                    <i class="iconfont font-8" style="vertical-align:middle">&#xe61e;</i> {{data.levelName}}专享</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="topicRecord.html?special_id={{data.id}}" class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan" v-if="data.type == 2">抽奖记录</div>
+                        <div class="group-colspan" v-if="data.type == 3">兑换记录</div>
+                        <div class="group-colspan">
+                            <i class="iconfont right">&#xe60c;</i>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <h3 class="font-14" style="margin-bottom:0.5rem;">活动详情</h3>
+                            <div>{{{data.activityContent}}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 重要说明 -->
+            <!--<div class="group">-->
+            <!--<div class="group-item">-->
+            <!--<div class="group-rowspan">-->
+            <!--<div class="group-colspan">-->
+            <fieldset class="explain explain-nothing">
+                <legend>活动规则</legend>
+                <p>1、平台所有提供的兑换/抽奖等活动，在操作成功后一律不退还聚米币，请在操作前仔细阅读活动内容；</p>
+                <p>2、操作成功后，可在活动管理中查看相应记录，也可在聚米币账户中查询对应的交易流水；</p>
+                <p>3、活动部分物品由第三方提供，聚米平台具有活动的最终解释权，若在操作过程中遇到任何问题，请联系聚米客服：
+                    <a href="tel:400-801-4680" class="clr-strike">400-801-4680</a>
+                </p>
+            </fieldset>
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>		-->
+            <!--</div>-->
+
+
+            <!-- foot -->
+            <div class="footer">
+                <div class="group group-clear">
+                    <div class="group-item">
+                        <div class="group-rowspan">
+                            <div class="group-colspan">
+                                <span class="font-16" v-if="data.type == 2">抽奖：
+                                    <em class="clr-strike">{{data.expendCoin}}聚米币</em>
+                                </span>
+                                <span class="font-16" v-if="data.type == 3">兑换：
+                                    <em class="clr-strike">{{data.expendCoin}}聚米币</em>
+                                </span>
+                                <p class="font-10 clr-gray">现有{{data.useCoin}}聚米币</p>
+                            </div>
+                            <div class="group-colspan" style="padding-right:0.1rem;">
+
+
+
+                                <!-- 预告中 -->
+                                <template v-if="data.activityStatus == 1">
+                                    <button type="button" class="button button-primary button-block disabled">预告中</button>
+                                </template>
+
+                                <!-- 进行中 -->
+                                <template v-if="data.activityStatus == 2">
+                                    <!-- 剩余数量 > 0 -->
+                                    <template v-if="data.remainingNumber > 0">
+                                        <!-- 登录状态下 -->
+                                        <template v-if="data.useCoin < data.expendCoin && data.login">
+                                            <button type="button" class="button button-primary button-block disabled">聚米币不足</button>
+                                        </template>
+                                        <template v-else>
+                                            <button type="button" class="button button-primary button-block" v-if="data.type == 2" @click="next">我要抽奖</button>
+                                            <button type="button" class="button button-primary button-block" v-if="data.type == 3" @click="next">我要兑换</button>
+                                        </template>
+                                    </template>
+                                    <template v-else>
+                                        <button type="button" class="button button-primary button-block disabled" v-if="data.type == 2">奖品已抽完</button>
+                                        <button type="button" class="button button-primary button-block disabled" v-if="data.type == 3">奖品已兑完</button>
+                                    </template>
+                                </template>
+
+                                <!-- 已结束 -->
+                                <template v-if="data.activityStatus == 3">
+                                    <button type="button" class="button button-primary button-block disabled">活动结束</button>
+                                </template>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="isIOSShow" style="font-size:0.625rem;color:#999; text-align:center;padding:1rem 0;">活动由聚米众筹提供，与设备生产商Apple Inc.公司无关。</div>
+        </template>
+        <my-detail></my-detail>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['topic/topicDetail']);
+    </script>
+    <script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+
+</html>

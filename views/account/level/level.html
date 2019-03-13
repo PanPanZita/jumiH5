@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>我的聚米-聚米众筹</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<!-- 个人资料 -->
+		<template id="levelTemplate">
+			<div style="posotion:relative;background:#F6F6EC;">
+				<img src="/h5/images/account/level.png" alt="" style="height:12rem;margin:0 auto;"/>
+				<h1 style="position:absolute;top:4.25rem;left:0;width:100%;text-align:center;color:#FFF;">{{data.levelName}}</h1>
+				<p style="position:absolute;top:8.25rem;left:0;width:100%;text-align:center;color:#FFF;font-size:0.75rem">成长值:{{data.border}}</p>
+			</div>
+			
+			<div class="group group-justify">
+				<a href="getGrowth.html" class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan font-16">我的等级</div>
+						<div class="group-colspan">
+							<span class="font-12 clr-strike">如何获得成长值</span>
+							<i class="iconfont" data-more>&#xe60c;</i>
+						</div>
+					</div>
+				</a>
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan" style="width:100%;padding-top:2.5rem;">
+							<div class="progress">
+								<p id="levelNumber" style="position:absolute;top:-1.5rem;"><span class="clr-strike">{{data.border}}</span>/<em class="clr-gray" v-if="data.requirement">{{data.requirement}}</em><em class="clr-gray" v-else>{{jmMembershipLevel.requirement}}</em></p>
+								<div class="progress-bar" style="overflow: hidden;" :style="{width:widthprocess+'%'}"></div>
+							</div>
+							<div class="left clr-strike">{{data.levelName}}</div>
+							<div class="right">{{data.levelNameNext}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="group">
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan" style="width:100%;">
+							<p>您当前享有的特权：</p>
+							<p class="font-12 clr-gray">{{{jmMembershipLevel.levelIntroduce}}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="group" v-if="data.levelNameNext">
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan" style="width:100%;">
+							<p>升级至{{data.levelNameNext}}享有的特权：</p>
+							<p class="font-12 clr-gray">{{{data.levelIntroduceNext}}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+		<my-level></my-level>
+	</div>
+	
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/level/level']);
+	</script>
+</body>
+</html>

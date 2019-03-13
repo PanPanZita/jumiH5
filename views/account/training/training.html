@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>新手训练营</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <template id="investDetailTemplate">
+        <!-- 非新手用户isNoviceUser == 1 -->
+        <template v-if="isNoviceUser == 1">
+            <div class="group group-noborder group-center">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">距离您获得奖励还剩
+                            <span class="clr-strike">{{data.remainDays}}</span> 天</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 产品要求改成无分隔线 -->
+            <div class="group group-justify group-top group-noborder width80">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">支持金额</div>
+                        <div class="group-colspan clr-strike">{{data.invPrice}}元</div>
+                    </div>
+                </div>
+
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">预期奖励</div>
+                        <div class="group-colspan clr-strike">{{data.minProfit}}-{{data.maxProfit}}元</div>
+                    </div>
+                </div>
+
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">支付方式</div>
+                        <div class="group-colspan">账户支付</div>
+                    </div>
+                </div>
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">参与时间</div>
+                        <div class="group-colspan">{{data.createTime}}</div>
+                    </div>
+                </div>
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">预期兑付</div>
+                        <div class="group-colspan">{{data.expectRepayTime}}</div>
+                    </div>
+                </div>
+
+                <div class="group-item" v-if="data.orderType != 0">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">订单编号</div>
+                        <div class="group-colspan">{{data.order.id}}</div>
+                    </div>
+                </div>
+                <div class="group-item" v-if="data.orderType == 1">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">订单状态</div>
+                        <div class="group-colspan" v-if="data.order.orderStatus == 2">待发货</div>
+                        <div class="group-colspan" v-if="data.order.orderStatus == 3">已完成</div>
+                        <div class="group-colspan" v-if="data.order.orderStatus == 5">已失效</div>
+                        <div class="group-colspan" v-if="data.order.orderStatus == 6">待收货</div>
+                    </div>
+                </div>
+                <div class="group-item" v-if="data.orderType == 1">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">收货信息</div>
+                        <div class="group-colspan">
+                            <p>{{data.order.receiveName}}</p>
+                            <p>{{data.order.receivePhone}}</p>
+                            <p>{{data.order.receiveProvince}}{{data.order.receiveCity}}{{data.order.receiveAddress}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="group-item" v-if="data.orderType!=0">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">备注信息</div>
+                        <div class="group-colspan">{{data.order.remark}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group group-noborder group-transparent group-small">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <button type="button" class="button button-block" @click="showInfo">回报内容</button>
+                        </div>
+                    </div>
+                    <div class="group-rowspan" v-if="data.orderType == 1">
+                        <!-- 待发货和待收货 -->
+                        <div class="group-colspan">
+                            <button type="button" class="button button-fill button-block disabled" v-if="data.order.orderStatus == 2" @click="ok(data.orderNumber)">确认收货</button>
+                            <button type="button" class="button button-fill button-block" v-if="data.order.orderStatus == 6" @click="ok(data.orderNumber)">确认收货</button>
+                        </div>
+                    </div>
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <a href="tel:400-801-4680" style="display:block;text-align:center;color:#999;">客服热线：400-801-4680</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <div style="padding-top:6rem; text-align: center;" v-else>
+            <i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;line-height:1;">&#xe64b;</i>
+            <p class="clr-gray" style="margin:1rem 0;">您还没有训练记录</p>
+            <p>
+                <a href="/h5/views/training/training.html" class="button button-orange">去参加</a>
+            </p>
+        </div>
+
+    </template>
+    <my-detail></my-detail>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['account/training/training']);
+    </script>
+</body>
+
+</html>

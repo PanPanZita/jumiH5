@@ -1,0 +1,84 @@
+.DdateBox{
+	position:fixed;
+	bottom:0;
+	z-index:999;
+	width:100%;
+	height:100%;
+	background:#f0f0f0;
+	border-top:1px solid #ddd;
+}
+.DdateBox .Dcontent{
+	width:100%;
+	height:92%;
+	/*background: cadetblue;*/
+	overflow:scroll;
+	overflow-y: auto;
+	-webkit-overflow-scrolling:touch;
+	-moz-overflow-scrolling:touch;
+	-o-overflow-scrolling:touch
+}
+.DdateBox .Dcontent .Ditem{
+	overflow:hidden;
+}
+.DdateBox .Dcontent .Dtitle{
+	width:100%;
+	height:2rem;
+	line-height: 2rem;
+	text-align: center;
+	font-size:4vw;
+	/*background: #e6e6e6;*/
+	/*border-top:1px solid #eee;*/
+	/*border-bottom:1px solid #eee;*/
+}
+.DdateBox .Dcontent .Dlist{
+	overflow:hidden;
+	margin-bottom:2vw;
+}
+.DdateBox .Dcontent .Dlist li{
+	float:left;
+	width:14.3vw;
+	height: 14.3vw;
+	margin-left: 2vw;
+	margin-top:2vw;
+	text-align: center;
+	line-height: 14.3vw;
+	background:#fff;
+	list-style: none;
+	border-radius:1vw;
+}
+.DdateBox .Dcontent .Dlist li a{
+	display: block;
+	width:14.3vw;
+	height: 14.3vw;
+	text-decoration: none;
+	color:#666;
+	font-size: 5vw;
+	border-radius:1vw;
+}
+.DdateBox .Dcontent .Dlist li.active a{
+	background:#EC6121;
+	color:#FFF;
+}
+.DdateBox .Dbutton{
+	position:absolute;
+	bottom:0;
+	width:100%;
+	height: 10vw;
+}
+.DdateBox .Dbutton a{
+	width: 45vw;
+	height: 10vw;
+	line-height: 10vw;
+	text-align: center;
+	text-decoration: none;
+	/*border-top:1px solid #eee;*/
+	/*background: gray;*/
+}
+.DdateBox .Dbutton a:first-child{
+	float:left;
+	color:#666;
+}
+.DdateBox .Dbutton a:last-child{
+	float:right;
+	color:#EC6121;
+}

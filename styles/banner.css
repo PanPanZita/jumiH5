@@ -1,0 +1,195 @@
+/*  
+* @description: banners
+* @author: adhehe
+* @update: null
+*/
+
+@media screen and (max-device-width: 480px) {}
+/* banner 初始化JS未加载时显示方式*/
+@media screen and (max-device-width: 1920px) {.slider{height:960px;}}
+@media screen and (max-device-width: 1600px) {.slider{height:800px;}}
+@media screen and (max-device-width: 1200px) {.slider{height:600px;}}
+@media screen and (max-device-width: 1024px) {.slider{height:512px;}}
+@media screen and (max-device-width: 960px) {.slider{height:480px;}}
+@media screen and (max-device-width: 768px) {.slider{height:384px;}}
+@media screen and (max-device-width: 736px) {.slider{height:368px;}}
+@media screen and (max-device-width: 720px) {.slider{height:360px;}}
+@media screen and (max-device-width: 667px) {.slider{height:333.5px;}}
+@media screen and (max-device-width: 600px) {.slider{height:300px;}}
+@media screen and (max-device-width: 568px) {.slider{height:284px;}}
+@media screen and (max-device-width: 540px) {.slider{height:270px;}}
+@media screen and (max-device-width: 480px) {.slider{height:240px;}}
+@media screen and (max-device-width: 414px) {.slider{height:207px;}}
+@media screen and (max-device-width: 400px) {.slider{height:200px;}}
+@media screen and (max-device-width: 384px) {.slider{height:192px;}}
+@media screen and (max-device-width: 375px) {.slider{height:187.5px;}}
+@media screen and (max-device-width: 360px) {.slider{height:180px;}}
+@media screen and (max-device-width: 320px) {.slider{height:160px;}}
+
+.slider,
+.slider ul{
+	position:relative;
+}
+.slider ul li{
+	position:absolute;
+}
+.slider ul,
+.slider ul li,
+.slider ul li a,
+.slider ul li a img{
+	display:block;
+	width:100%;
+	height:100%;
+}
+
+.slider{overflow:hidden;position:relative;}
+.slider ul,
+.slider ul li,
+.slider ul li a,
+.slider ul li a img{display:block;width:100%;height:100%;}
+.slider ul{position:relative;}
+.slider ul li{position:absolute;}
+.slider .slidepage{width:100%;position:absolute;bottom:0.5em;text-align:center;}
+.slider .slidepage span{display:inline-block;width:0.5em;height:0.5em;border-radius:100%;background-color:rgba(255,255,255,0.5);margin:0 0.25em;}
+.slider .slidepage span.active{background-color:rgba(255,102,0,1)}
+
+/* banner扩展信息 */
+.slider-extend{
+	display:-moz-box;
+	display:-webkit-box;
+	overflow:hidden;
+	background:#FFF;
+}
+.slider-extend .extend-item{
+	padding:0.625rem;
+}
+.slider-extend .extend-item h3.txt-rowspan2{
+	margin-bottom:1rem;
+	font-size:1.28571429rem;
+}
+
+.slider-extend .extend-item a{
+	display: block;
+	overflow: hidden;
+	margin-bottom: 1rem;
+	padding-bottomer-bottom: 1px dashed #CCC;
+}
+.slider-extend .extend-item a span:first-child{
+	
+}
+.slider-extend .extend-item a span:nth-child(2){
+	padding-left: 0.5rem;
+	vertical-align: top;
+	line-height: 2rem;
+	font-size: 1rem;
+}
+.slider-extend .extend-item a span:last-child{
+	line-height:2rem;
+}
+
+.slider-extend .extend-item:first-child{
+	display:block;
+	-moz-box-flex:1.0;
+	-webkit-box-flex:1.0;
+}
+.slider-extend .extend-item:last-child{}
+.slider-extend .item-price{
+	text-align:center;
+}
+.slider-extend .item-price em,
+.slider-extend .item-price span{
+	display:block;
+}
+.slider-extend .item-price em{
+	font-size:2rem;
+	color:#FA8806
+}
+.slider-extend .item-price span{
+	color:#999;
+}
+.slider-extend .item-operate{
+	margin-top:0.5rem;
+}
+.slider-extend .flag{
+	position:absolute;
+	top:-0rem;
+	right:0;
+	border-radius:6px;
+	background:#FA8806;
+	padding:0rem 0.5rem;
+	text-align:right;
+	font-weight:normal;
+	color:#fff;
+}
+.slider-extend .flag:after{
+	content:"";
+	position:absolute;
+	right:0.5rem;
+	bottom:-0.75rem;
+	width:0;
+	height:0;
+	border-top:0.5rem solid #FA8806;
+	border-right:0.5rem solid transparent;
+	border-bottom:0.5rem solid transparent;
+	border-left:0.5rem solid transparent;
+}
+.slider-extend .flag.blue{background:#009de7}
+.slider-extend .flag.blue:after{border-top:0.5rem solid #009de7;}
+.slider-extend .flag.orange{background:#FA8806}
+.slider-extend .flag.orange:after{border-top:0.5rem solid #FA8806;}
+.slider-extend .flag.gray{background:#ccc}
+.slider-extend .flag.gray:after{border-top:0.5rem solid #ccc;}
+
+.progress-explain{
+	width:100%;
+	display:-moz-box;
+	display:-webkit-box;
+	font-size:1rem;
+	color:#999;
+	margin-bottom:0.5rem;
+}
+.progress-explain .explain-item{
+	display:block;
+	-moz-box-flex:1.0;
+	-webkit-box-flex:1.0;
+	
+	position:relative;
+	width:33.33%;
+	text-align:center;
+}
+.progress-explain .explain-item:first-child{
+	text-align:left;
+}
+.progress-explain .explain-item:last-child{
+	text-align:right;
+}
+.progress-explain .explain-item em,
+.progress-explain .explain-item span{
+	font-size:0.71428571428571428571428571428571rem;
+}
+.progress-explain .explain-item em{
+	font-weight:bold;
+}
+.progress-explain .explain-item span{
+	color:#999;
+}
+.progress-explain .explain-item:nth-child(1) em,
+.progress-explain .explain-item:nth-child(1) span{
+	text-align:left;
+}
+.progress-explain .explain-item:nth-child(2) em,
+.progress-explain .explain-item:nth-child(2) span{
+	text-align:center;
+}
+.progress-explain .explain-item:nth-child(3) em,
+.progress-explain .explain-item:nth-child(3) span{
+	text-align:right;
+}
+#announcement{
+	height:50px;
+	margin:0 1rem;
+}
+#announcement .swiper-pagination-bullet-active{
+    opacity: 1;
+    background: #fe6c94;
+}

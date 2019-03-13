@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
+    />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>春节活动</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png" />
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css" />
+    <style>
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+
+      html,
+      body {
+        -webkit-overflow-scrolling: touch;
+        -moz-overflow-scrolling: touch;
+        -ms-overflow-scrolling: touch;
+        -o-overflow-scrolling: touch;
+      }
+
+      #nationAct {
+        -webkit-overflow-scrolling: touch;
+        -moz-overflow-scrolling: touch;
+        -ms-overflow-scrolling: touch;
+        -o-overflow-scrolling: touch;
+        position: relative;
+        width: 100%;
+        height: 100vh;
+      }
+
+      #nationAct::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+
+      #nationAct img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        vertical-align: top;
+      }
+
+      #nationAct .gogo {
+        position: absolute;
+        top: 294.375vw;
+        left: 18.75vw;
+        width: 62.5vw;
+        height: 12.5vw;
+        background: #ec6121;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 4.375vw;
+        outline: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+      <img src="/h5/images/loading.gif" width="100" />
+    </div>
+    <template id="nationActTemplate">
+      <div id="nationAct">
+        <img src="/h5/images/activity/activity/newyearh5.jpg" />
+      </div>
+    </template>
+    <nation-act></nation-act>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+      requirejs(["activity/activity"], function() {});
+    </script>
+    <script
+      type="text/javascript"
+      async="async"
+      charset="utf-8"
+      src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"
+    ></script>
+  </body>
+</html>

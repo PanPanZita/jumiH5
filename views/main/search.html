@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="msapplication-tap-highlight" content="no" />
+<title>投资-项目列表页-聚米众筹</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+
+	<div id="box" style="padding-top:5rem">
+		
+		<!-- 快速搜索 -->
+		<template id="searchTemplate">
+			<div class="search">
+				<div class="jump-search">
+					<div class="c-search"><i class="iconfont">&#xe65b;</i><input type="text" class="search-input" placeholder="搜索、筛选众筹项目" v-model="itemName"></div>
+				</div>
+				<div class="choice-search">
+					<h3>项目类型</h3>
+					<div class="type common">
+						<a href="javascript:void(0);" @click="typeChoice(0)" v-bind:class="{selected:(isTypeSelected==0)}" data-value="2">全部</a>
+						<a href="javascript:void(0);" @click="typeChoice(1)" v-bind:class="{selected:(isTypeSelected==1)}" data-value="0">影视娱乐</a>
+						<a href="javascript:void(0);" @click="typeChoice(2)" v-bind:class="{selected:(isTypeSelected==2)}"  data-value="1">泛文化</a>
+					</div>
+					<h3>项目状态</h3>
+					<div class="status common">
+						<a href="javascript:void(0);" @click="statusChoice(0)" v-bind:class="{selected:(isStatusSelected==0)}" data-value="0">全部</a>
+						<a href="javascript:void(0);" @click="statusChoice(1)" v-bind:class="{selected:(isStatusSelected==1)}" data-value="2">即将开始</a>
+						<a href="javascript:void(0);" @click="statusChoice(2)" v-bind:class="{selected:(isStatusSelected==2)}" data-value="3">正在众筹</a>
+						<a href="javascript:void(0);" @click="statusChoice(3)" v-bind:class="{selected:(isStatusSelected==3)}" data-value="4">众筹结束</a>
+						<a href="javascript:void(0);" @click="statusChoice(4)" v-bind:class="{selected:(isStatusSelected==4)}" data-value="5">完成兑付</a>
+					</div>
+					<div class="btn-search"><a href="javascript:void(0);" @click="btnJump()" >确定</a></div>
+				</div>
+					
+			</div>
+		</template>
+		<my-search></my-search>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['main/search']);
+	</script>
+	<script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+</html>

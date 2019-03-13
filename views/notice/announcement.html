@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="description" content="聚米众筹:一家专注互联网影视的众筹平台,拥有互动娱乐新玩法的粉丝聚集地,最大的影视垂直行业的金融互联网平台,将互联网新型投资模式和互动方式完美结合">
+    <meta name="keywords" content="聚米众筹、互联网影视众筹、互联网影视众筹平台、文化众筹社区">
+    <title>平台公告</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style>
+        /* html,
+        body {
+            background: #FFF;
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+        <template id="announcementTemplate">
+            <div class="group group-noborder">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan font-18">
+                            {{{data.title}}}
+                        </div>
+                    </div>
+                    <div class="group-rowspan">
+                        <div class="group-colspan font-12 clr-gray">
+                            {{{data.createTime}}}
+                        </div>
+                    </div>
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            {{{data.h5Content}}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-item" style="margin:0;border-top:1px solid #eeeeee;">
+                    <div class="group-rowspan">
+                        <a class="group-colspan" style="text-align: center;" href="/h5/views/invest/investComment.html?itemid={{idz}}&commentType=0">
+                            <i class="iconfont">&#xe60d;</i>评论({{data.commentCount}})
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <a class="backNoticeList" href="/h5/views/notice/information.html">返回资讯</a>
+
+        </template>
+        <my-announcement></my-announcement>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['notice/announcement']);
+    </script>
+</body>
+
+</html>

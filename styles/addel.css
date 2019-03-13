@@ -1,0 +1,54 @@
+/*  
+* @description: 加减数量
+* @author: adhehe
+* @update: null
+*/
+.addel {
+	display: inline-block;
+	border: 1px solid #999;
+	border-radius: 5px;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-ms-box-sizing: content-box;
+	-o-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+.addel .addel-add,
+.addel .addel-del {
+	float: left;
+/* 	width: 3rem; */
+	width:2.4rem;
+	height: 2rem;
+/* 	border-right: 1px solid #999; */
+/* 	border:1px solid #999; */
+/* 	border-radius: 1.2rem 0 0 1.2rem; */
+	border-radius:0;
+/* 	background-color: #f5f4f4; */
+/* 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#fffeff), to(#f5f4f4)); */
+	text-align: center;
+	line-height:2rem;
+}
+
+.addel .addel-info input {
+	float: left;
+	width: 2.5rem;
+	height: 2rem;
+/* 	background-color: #f5f4f4; */
+/* 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#fffeff), to(#f5f4f4)); */
+	border: 0;
+	border-radius: 0;
+	font-size:1.25rem;
+	line-height: 2rem;
+	color: #333;
+	vertical-align: middle;
+	text-align:center;
+	-webkit-appearance: none;
+}
+
+/* .addel .addel-add { */
+/* 	border-radius: 0 1.2rem 1.2rem 0; */
+/* 	border-left: 1px solid #999; */
+/* 	border-right: none; */
+/* } */

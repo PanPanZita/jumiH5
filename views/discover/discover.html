@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="msapplication-tap-highlight" content="no" />
+<title>发现-聚米众筹</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+	.title{display:inline-block;width:100%;text-align: center;font-weight: bold}
+	.group-active{background-color: #f4f4f4}
+	.group-active .group-item .group-rowspan:nth-child(3) a{width:50%;display: inline-block;}
+	.group-active .group-item .group-rowspan:nth-child(3) a:nth-child(1){padding: .75rem 0.25rem .75rem 0rem;}
+	.group-active .group-item .group-rowspan:nth-child(3) a:nth-child(2){padding: .75rem 0rem .75rem .25rem;}
+	.group-item{background-color: #fff;padding: 0 1rem;margin:1rem 0 0;}
+	.group-rowspan .group-colspan a{display: block;width:100%;text-align: center;}
+	.slider .slidepage span{background-color: #f4f4f4}
+.ui-dialog-upgrade .ui-dialog-grid .ui-dialog-body{padding:20px 0 16px 0;}
+.ui-dialog-upgrade .ui-dialog-content{width:100%;}
+.ui-dialog-upgrade .ui-dialog-footer button.ui-dialog-autofocus{color:#999999;}
+.ui-dialog-upsuccess .ui-dialog-grid .ui-dialog-body{padding:0;}
+.upsuccess img{border-top-left-radius: 6px;border-top-right-radius: 6px;}
+.ui-dialog-upsuccess .ui-dialog-footer{border-top:none;}
+.ui-dialog-upsuccess .ui-dialog-button{	background-color: #ec6121;border-radius: 6px;}
+.ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus, .ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus:active, .ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus:focus, .ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus:hover{color:#ffffff;}
+input{
+    -webkit-text-security:disc;
+    text-security:disc; /*使用指定形状代替文字显示 circle圆圈 disc 圆形 square 正方形*/
+}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="discoverTemplate">		
+			
+			 <!-- 发现页上部导航 -->
+			<div class="group group-excel4 group-noborder top-fixed">
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<a href="/h5/views/wheel/wheel.html">
+							    <i class="discoverEntrance1"></i>
+								<span class="font-14">天天转盘</span>
+							</a>	
+						</div>
+						<div class="group-colspan">
+							<a href="/h5/views/topic/topicList.html">
+							    <i class="discoverEntrance2"></i>
+								<sapn class="font-14">专题活动</span>
+							</a>	
+						</div>
+						<div class="group-colspan">
+							<a href="/h5/views/exchange/exchange.html">
+							    <i class="discoverEntrance3"></i>
+								<span class="font-14">兑换专区</span>
+							</a>	
+						</div>
+						<div class="group-colspan">
+							<a href="/h5/views/lottery/lottery.html">
+							    <i class="discoverEntrance4"></i>
+								<span class="font-14">抽奖专区</span>
+							</a>	
+						</div>
+					</div>
+				</div>
+			</div>
+  
+			<!-- 活动推荐(专题活动结合>>>指定专题活动集合)  -->
+			<div class="group group-clear group-noborder group-active" style="margin-top:5.1rem;" v-if="specialList != null && specialList.length > 0">
+				<div class="group-item" v-for="list in specialList">   
+					<div class="group-rowspan">
+						<div class="group-colspan"><span class="title">{{list.name}}</span></div>
+					</div>
+					<a href="/h5/views/topic/topicSingle.html?topic_id={{list.id}}" class="group-rowspan">
+						<img src="/h5/images/default21.jpg" data-src="{{list.h5Pic1}}" alt="" width="100%" class="async"/>
+					</a>
+					<div class="group-rowspan">
+						<a href="/h5/views/topic/topicDetail.html?action_id={{sublist.id}}" class="group-colspan" v-for="sublist in list.activityList">
+							<div style="position:relative;">
+								<img src="/h5/images/default85.jpg" data-src="{{sublist.image1}}" alt="" width="100%" class="async"/>
+								<span class="statusLimitTime fixed" v-if="sublist.activityStatus == 1">预告</span>
+								<span class="statusLimitNum fixed" v-if="sublist.activityStatus == 2 && sublist.type == 2" >抽奖</span>
+								<span class="statusLimitNum fixed" v-if="sublist.activityStatus == 2 && sublist.type == 3" >兑换</span>
+								<span class="statusEnd fixed" v-if="sublist.activityStatus == 3" >已结束</span>
+							</div>
+							
+							<p class="txt-rowspan1" style="height:1.5rem;overflow:hidden;margin-top:0.5rem;">{{sublist.name}}</p>
+							<p class="clr-strike">  <!-- singleLimit > 0表示限制；1表示专0表示不针对 -->
+							    {{sublist.expendCoin}}聚米币
+								<i class="iconfont clr-strike font-12" v-if="sublist.singleLimit > 0">&#xe69c;</i>   
+								<i class="iconfont clr-strike font-12" v-if="sublist.islevel == 1">&#xe69b;</i>
+							</p>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div style="padding-top:6rem; text-align: center;" v-else>
+				<i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;line-height:1;">&#xe628;</i>
+				<p class="clr-gray" style="margin:1rem 0;">等一等，活动马上就来</p>
+			</div>
+			
+			<div v-if="isIOSShow" style="font-size:0.625rem;color:#999; text-align:center;padding:1rem 0;">活动由聚米众筹提供，与设备生产商Apple Inc.公司无关。</div>
+
+			<!-- 修改密码弹出框 -->
+			<div class="upgradeWrap" id="upgradeWrap" style="display: none;">
+				<div class="group group-noborder" style="border-bottom: 1px solid #eeeeee;padding:0 0 0 16px;">
+					<div class="group-rowspan">
+						<div class="group-colspan" style="width:28%;">真实姓名</div>
+						<div class="group-colspan" id="realname"></div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan" style="width:28%;">身份证号</div>
+						<div class="group-colspan" id="idNumber"></div>
+					</div>
+				</div>
+				<form class="group group-noborder" style="padding:0 0 0 16px;">
+					<div class="group-rowspan" style="position: relative;">
+						<label for="userpwdreal" class="group-colspan">设置支付密码</label>
+						<input type="tel" class="group-colspan userpwd userpwdreal" name="userpwdreal" id="userpwdreal" v-model="userpwdreal" maxlength="6" @keyup="userpwdrealKeyup" placeholder="请输入6位数字支付密码" style="padding-top: 1rem;" proving="0">
+					</div>
+					<div class="group-rowspan" style="position: relative;">
+						<label for="userconfirmpwdreal" class="group-colspan">确认支付密码</label>
+						<input type="tel" class="group-colspan userpwd userconfirmpwdreal" name="userconfirmpwdreal" id="userconfirmpwdreal" v-model="userconfirmpwdreal" maxlength="6" @keyup="userconfirmpwdrealKeyup"  placeholder="请再次输入支付密码" style="padding-top: 1rem;" proving="0">
+					</div>
+				</form>
+				<!-- <p class="upgradetips clr-gray font-12" style="padding:0 0 0 16px;">*账户资金由北京银行存管对接中</p> -->
+			</div>
+
+			<!-- 恭喜您，升级成功 -->
+			<div class="upsuccess textcenter" id="upsuccess" style="display: none;">
+				<img src="/h5/images/ios/upsuccess.png">
+				<p class="font-24" style="padding:20px 0">恭喜您，升级成功！</p>
+			</div>
+			
+		</template>
+		<my-discover></my-discover>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['discover/discover']);
+	</script>
+	<script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+</html>

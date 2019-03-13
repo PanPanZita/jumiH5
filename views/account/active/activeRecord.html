@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>活动管理-记录列表</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        .group-current .group-colspan:last-child {
+            width: 40%;
+        }
+
+        .group-current .group-colspan:last-child p:nth-child(2) {
+            text-decoration: underline;
+        }
+
+        .shadowz {
+            box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .middle-linez {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 100%;
+            background: #E6E6E6;
+        }
+
+        .selector {
+            width: 40%;
+            height: 100%;
+            background: white;
+            border: none;
+            font-size: 3.73vw;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+        }
+
+        .selector option {
+            width: 100%;
+        }
+
+        .iconz-type {
+            display: inline-block;
+            width: 5vw;
+            height: 5vw;
+            border-radius: 3px;
+            color: white;
+            line-height: 5vw;
+            text-align: center;
+        }
+
+        .show-eclipse {
+            display: inline-block;
+            max-width: 40vw;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .left-cursor {
+            display: inline-block;
+            width: 2.1vw;
+            height: 2.1vw;
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+            transform: rotate3d(0, 0, 1, 45deg);
+        }
+
+        .spanz {
+            vertical-align: middle;
+        }
+
+        .create-timez {
+            color: #808080;
+            font-size: 3.73vw;
+        }
+
+        .orange-btnz {
+            width: 21.25vw;
+            height: 6.875vw;
+            background: #EC6121;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            outline: none;
+        }
+
+        .plain-btnz {
+            width: 21.25vw;
+            height: 6.875vw;
+            background: white;
+            border: 1px solid #EC6121;
+            border-radius: 3px;
+            color: #EC6121;
+            outline: none;
+        }
+
+        .self-control {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .first-elez {
+            width: 21.875vw;
+            height: 16.5625vw;
+        }
+
+        .second-elez {
+            width: 50vw;
+            height: 16.5625vw;
+            padding: 0 2vw;
+            box-sizing: border-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+
+        .third-elez {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 18vw;
+            height: 16.5625vw;
+        }
+
+        .third-elez span {
+            display: inline-block;
+            width: 100%;
+            height: 5.625vw;
+            color: #666666;
+            font-size: 3.75vw;
+            line-height: 5.625vw;
+            text-align: right;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chouColor {
+            background: #EC6121;
+        }
+
+        .duiColor {
+            background: #81C735;
+        }
+
+        .jiangColor {
+            background: #EF3B2D;
+        }
+
+        .yingColor {
+            background: #5797DE;
+        }
+
+        .buttonz .ui-dialog-button {
+            display: flex !important;
+            justify-content: space-around !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+        <template id="activeTemplate">
+            <div class="tab tab-normal tab-noborder">
+                <ul class="tab-handle top-fixed shadowz">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <select name="orderFromz" id="orderFromz" class="selector" v-model="currentSourceType">
+                                <option value="-1">全部</option>
+                                <option value="0">众筹项目</option>
+                                <option value="1">发现活动</option>
+                                <option value="3">营销活动</option>
+                            </select>
+                            <span class="left-cursor spanz" style="transform: rotateZ(135deg) translateY(4px);"></span>
+                        </a>
+                    </li>
+                    <div class="middle-linez"></div>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <select name="orderStatuz" id="orderStatuz" class="selector" v-model="currentStatus">
+                                <option value="-1">全部</option>
+                                <option value="1">待确认</option>
+                                <option value="2">待发货</option>
+                                <option value="6">待收货</option>
+                                <option value="3">已完成</option>
+                                <option value="5">已失效</option>
+                            </select>
+                            <span class="left-cursor spanz" style="transform: rotateZ(135deg) translateY(4px);"></span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content" style="padding-top:3.25rem;">
+                    <div class="tab-pane active" id="tabs1">
+                        <div v-if="listSum.items.length">
+                            <div class="group group-justify group-top group-current" v-for="item in listSum.items">
+                                <a href="javascript:void(0)" class="group-item">
+                                    <div class="group-rowspan">
+                                        <!-- <a href="javascript:void(0)"> -->
+                                        <div class="group-colspan" @click="goOrigin(item.sourceType, item.actionType, item.itemId)">
+                                            <span class="iconz-type spanz chouColor" v-show="item.sourceType == 0">筹</span>
+                                            <span class="iconz-type spanz yingColor" v-show="item.sourceType == 3">营</span>
+                                            <span class="iconz-type spanz duiColor" v-show="item.sourceType == 1 && item.actionType == 3">兑</span>
+                                            <span class="iconz-type spanz jiangColor" v-show="item.sourceType == 1 && item.actionType != 3">奖</span>
+                                            <span class="show-eclipse spanz">{{item.sourceName}}</span>
+                                            <span class="left-cursor spanz"></span>
+                                        </div>
+                                        <!-- </a> -->
+                                        <div class="group-colspan">
+                                            <p class="clr-strike" v-if="item.orderStatus != 5">{{item.orderStatus | statusFilter}}</p>
+                                            <p class="clr-gray" v-if="item.orderStatus == 5">已失效</p>
+                                        </div>
+                                    </div>
+                                    <div class="group-rowspan self-control" style="padding-top: .75rem;padding-bottom: .75rem;" @click="goDetail(item.id)">
+                                        <!-- <a href="javascript:void(0)"> -->
+                                        <img :src="item.imageUrl" alt="订单配图" class="first-elez">
+                                        <div class="second-elez">{{item.orderContent}}</div>
+                                        <!-- </a> -->
+                                        <div class="third-elez" style="width: 22vw">
+                                            <span>{{item.singlePrice}}</span>
+                                            <span>x{{item.number}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="group-rowspan">
+                                        <div class="group-colspan">
+                                            <span class="create-timez spanz">创建时间：{{item.createTime | timeFilter}}</span>
+                                        </div>
+                                        <div class="group-colspan">
+                                            <button class="orange-btnz spanz" v-if="item.orderStatus == 1" @click="goDetail(item.id)">立即确认</button>
+                                            <button class="orange-btnz spanz" v-if="item.orderStatus == 6" @click="sureHave(item.id)">确认收货</button>
+                                            <button class="plain-btnz spanz" v-if="item.orderStatus == 5" @click="deleteOrder(item.id)">删除订单</button>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="loadMoreButton1" class="loadMoreButton" v-if="listSum.items.length >= 10">
+                                <i class="iconfont">&#xe65d;</i>
+                                <span>上拉刷新数据</span>
+                            </div>
+                        </div>
+                        <div style="padding-top:6rem; text-align: center;" v-else>
+                            <i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;line-height:1;">&#xe676;</i>
+                            <p class="clr-gray" style="margin:1rem 0;">您还没有相关的记录</p>
+                            <a href="/h5/views/discover/discover.html" class="button button-orange button-md">去逛逛</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="isIOSShow" style="font-size:0.625rem;color:#999; text-align:center;padding:1rem 0;">活动由聚米众筹提供，与设备生产商Apple Inc.公司无关。</div>
+        </template>
+        <my-active></my-active>
+    </div>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['account/active/activeRecord']);
+    </script>
+</body>
+
+</html>

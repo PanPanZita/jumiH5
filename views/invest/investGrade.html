@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>投资-聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style>
+        .group {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+
+        <!-- 档位列表 -->
+        <template id="gradeTemplate">
+            <div class="group group-small group-justify" v-for="grade in gearList">
+                <div class="group-item">
+                    <div class="group-rowspan" style="border-bottom:1px solid #eee;">
+                        <div class="group-colspan">
+                            <span style="font-size:1.25rem; color: #EC6121;">{{grade.invPrice}} 元/份</span>
+                        </div>
+                        <div class="group-colspan">
+                            <a href="javascript:void(0)" class="button button-primary button-fill" @click="toLink(grade.itemId,grade.id,grade.invPrice,grade.levelName)"
+                                v-if="data.itemProcessStatus == 2 && grade.remainCount > 0">去支持</a>
+                            <a href="javascript:void(0)" class="button button-primary button-fill disabled" @click="toLink(grade.itemId,grade.id,grade.invPrice,grade.levelName)"
+                                v-else>去支持</a>
+                        </div>
+                    </div>
+                    <div class="group-rowspan" style="border:none;">
+                        <div class="group-colspan">{{{grade.descr}}}</div>
+                    </div>
+                    <div class="group-rowspan" style="border:none;">
+                        <div class="group-colspan">
+                            <p>
+                                <span class="initiator-items" v-if="grade.pic1Path">
+                                    <img src="/h5/images/default85.jpg" data-src="{{grade.pic1Path}}" alt="" width="100%" class="async">
+                                </span>
+                                <span class="initiator-items" v-if="grade.pic2Path">
+                                    <img src="/h5/images/default85.jpg" data-src="{{grade.pic2Path}}" alt="" width="100%" class="async">
+                                </span>
+                                <span class="initiator-items" v-if="grade.pic3Path">
+                                    <img src="/h5/images/default85.jpg" data-src="{{grade.pic3Path}}" alt="" width="100%" class="async">
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="group-rowspan" style="border:none;">
+                        <div class="group-colspan">
+                            <p class="clr-gray font-12">
+                                <span>已支持{{grade.supportCount}}份</span>
+                                <span v-if="grade.isLimitUser == 1">/剩余{{grade.remainCount}}份</span>
+                                <span v-if='grade.isCountLimit == 1'> 单人限购{{grade.limitCount}}份/已购{{grade.haveBuyNumber}}份</span>
+                                <span v-if="grade.isLevelLimit == 1"> {{grade.levelName}}专享</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <my-grade></my-grade>
+
+        <!-- 关于支持与退款 -->
+        <template id="explainTemplate">
+            <!--<div class="group">-->
+            <!--<div class="group-item">-->
+            <!--<div class="group-rowspan">-->
+            <!--<div class="group-colspan">-->
+            <fieldset class="explain explain-nothing">
+                <legend>关于支持与退款</legend>
+                <p>本项目在
+                    <em class="clr-strike">{{data.endTime}}</em> 前募集达到
+                    <em class="clr-strike">￥{{data.successAmount | moneyStr}}</em> 的金额视为众筹成功，否则您投资的金额将自动退至【聚米账户】，请您留意聚米众筹短信提醒及您的账户余额变动情况。退还的金额您可选择支持其他项目，或【申请提现】将资金提现至您绑定的银行卡中。</p>
+            </fieldset>
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+        </template>
+        <my-explain></my-explain>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['invest/investGrade']);
+    </script>
+</body>
+
+</html>

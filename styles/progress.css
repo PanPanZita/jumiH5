@@ -1,0 +1,68 @@
+/*  
+* @description: 进度条
+* @author: adhehe
+* @update: null
+*/
+/* ////////////////进度条1 */
+.progress {
+	position: relative;
+	width:100%;
+	height: 2px;
+	margin: 5px auto;
+	background-color: #eee;
+/* 	border-radius: 10px; */
+/* 	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .5); */
+/* 			box-shadow: inset 0 1px 2px rgba(0, 0, 0, .5); */
+}
+
+.progress-bar {
+	width: 0;
+	height: 2px;
+	background-color: #FF7300;
+/* 	border-radius: 10px; */
+/* 	-webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .3); */
+/* 			box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .3); */
+	-webkit-transition: width .6s ease;
+	-o-transition: width .6s ease;
+	transition: width .6s ease;
+}
+.progress-button {
+	position: absolute;
+	left: 0;
+	top: -5px;
+	width: 20px;
+	height: 20px;
+	margin-left:-10px;
+	border-radius: 100%;
+	background: #919191;
+	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+			box-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+	font-size:12px;
+}
+.progress-button.active {
+	background: #FE6A00;
+}
+
+
+/* ////////////////进度条2 */
+.progressing{
+	position:absolute;
+	bottom:5px;
+	left:0;
+	z-index:9;
+	width:100%;
+	height:8px;
+	font-size:0;
+	background:rgba(0,0,0,0.2);
+	border-radius:6px;
+}
+.progressing span{
+	position:relative;
+	z-index:10;
+	display:block;
+	width:0;
+	height:8px;
+	font-size:0;
+	background:#FA8806;
+	border-radius:6px;
+}

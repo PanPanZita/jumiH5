@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>详情-聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" href="//g.alicdn.com/de/prismplayer/1.5.4/skins/default/index.css" />
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        #sliderBox {
+            width: 100%;
+            overflow: hidden;
+            padding: 0.5rem;
+            background: #f6f6f6;
+            border-radius: 4px;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        #slider {
+            float: left;
+            height: 1.65rem;
+            overflow: hidden;
+        }
+
+        .imgPar {
+            width: 24.53vw;
+            height: 29.375vw;
+            margin: 41.25vw auto 6.25vw;
+        }
+
+        .imgPar img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 项目信息 -->
+    <template id="itemTemplate">
+        <!-- 新手训练营活动持续中 -->
+        <div v-if="noviceStatus == 1">
+            <img :src="data.imagePath1610 || '/h5/images/default85.jpg'" alt="" width="100%" />
+
+            <div class="group group-noborder">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <h3 class="txt-rowspan2 textleft">新手训练营</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan" style="padding:0;">
+                            <div class="progress-explain" style="margin:0;">
+                                <div class="explain-item">
+                                    <p>年化收益</p>
+                                    <p class="font-18 clr-strike">{{data.profitMin}}-{{data.profitMax}}%</p>
+                                </div>
+                                <div class="explain-item">
+                                    <p>累计支持</p>
+                                    <p class="font-18 clr-strike">{{data.completeAmount | tenthousand}}</p>
+                                </div>
+                                <div class="explain-item">
+                                    <p>训练周期</p>
+                                    <p class="font-18 clr-strike">{{data.noviceReturnPeriod}}天</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-rowspan">
+                        <div class="group-colspan clr-gray">
+                            起投金额:1000元 | 投资上限:1000元/人 | 计息方式:T+1
+                        </div>
+                    </div>
+                    <div class="group-rowspan" v-if="data.investPhoneList">
+                        <div class="group-colspan">
+                            <div id="sliderBox">
+                                <ul id="slider">
+                                    <li v-for="item in data.investPhoneList" :style="{opacity:($index==0)?1:0}">用户
+                                        <em class="clr-green">{{item}}</em> 加入训练营</li>
+                                </ul>
+                                <div style="float:right;width:7rem;text-align:right;overflow:hidden;font-size:0.75rem;line-height:1.6rem;">
+                                    <em class="clr-strike">{{data.supportCount}}</em> 人已加入</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 详情 -->
+            <div class="group group-noborder">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <h3 class="txt-rowspan2 textleft">项目介绍</h3>
+                        </div>
+                    </div>
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            {{{data.phoneDetailUrl}}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div class="imgPar">
+                <img src="/h5/images/account/noviceStop.png" alt="新手训练营已经关闭">
+            </div>
+            <div class="clr-gray textcenter" style="margin-bottom:2vw">
+                <h4 class="font-18" style="font-weight: bolder;">亲，您来晚了~</h4>
+                <p class="font-12">活动结束了哦，去看看其它活动吧</p>
+            </div>
+        </div>
+
+    </template>
+    <my-item></my-item>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['training/trainingapp']);
+    </script>
+    <script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+
+</html>

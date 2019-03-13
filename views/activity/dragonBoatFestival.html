@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>"粽"情端午</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/dragonBoatFestival.css?v=4.3.0.0">
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" width="100" />
+    </div>
+    <template id="dragonBoatTemplate">
+        <div id="dragonBoat">
+            <img src="/h5/images/activity/dragonBoatFestival/dragonBoat.png" @click="preventDefaultz($event)">
+            <button class="get-zongzi" @click="catchZz" v-if="catchStatuv == 0">领取粽子</button>
+            <button class="get-zongzi" disabled v-if="catchStatuv == 1">已领取</button>
+            <a class="watch-detail" :href="orderHref" v-if="catchStatuv == 1">查看订单 ▶</a>
+            <!-- 当页面显示时，阻止页面滚动 -->
+            <div class="shelter" v-if="isShelter">
+                <div class="bye-shelter" @click="byeShelter"></div>
+                <div class="shelter-box">
+                    <div class="scroll-box">
+                        <div class="send-people form-universal">
+                            <label>收货人</label>：
+                            <input type="text" placeholder="请输入收货人姓名" v-model="formName" class="universal-item" maxlength="10">
+                        </div>
+                        <div class="send-phone form-universal">
+                            <label>联系电话</label>：
+                            <input type="tel" placeholder="请输入手机号" v-model="formPhone" class="universal-item" maxlength="11">
+                        </div>
+                        <div class="send-address form-universal">
+                            <label>收货地址</label>：
+                            <textarea placeholder="请输入详细的收货地址" rows="5" v-model="formAddress" class="universal-item" maxlength="50"></textarea>
+                        </div>
+                        <p class="address-title" v-show="addressList.length > 0">
+                            <span>以下常用地址可供选择</span>
+                        </p>
+                        <ul class="regular-address" v-show="addressList.length > 0">
+                            <li v-for="(i, item) in addressList" :key="i">
+                                <div class="address-details">
+                                    <div class="top-detail">
+                                        <span>{{item.userName}}</span>
+                                        <span>{{item.mobile}}</span>
+                                    </div>
+                                    <div class="bottom-detail">
+                                        {{item.province}}{{item.city}}{{item.address}}
+                                    </div>
+                                </div>
+                                <div class="switcher">
+                                    <input type="checkbox" name="address" value="item.id" :id="'checkbox' + i" @click="chooseThis(item, $event)">
+                                    <label for="{{'checkbox' + i}}"></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <button class="submit-address" @click="submitInfo">提 交</button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <dragon-boat></dragon-boat>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['activity/dragonBoatFestival'], function () {
+        });
+    </script>
+    <script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
+    />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>大转盘-聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png" />
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css" />
+    <style type="text/css">
+      html,
+      body {
+        background: #fdeda1;
+      }
+
+      .wheel-bg {
+        position: relative;
+      }
+
+      .wheel-bg img {
+        width: 100%;
+      }
+
+      .wheel-body {
+        width: 100%;
+        height: 100vw;
+        position: absolute;
+        top: 52vw;
+        left: 0;
+      }
+
+      .wheel-itemlist {
+        width: 76%;
+        height: 76vw;
+        position: absolute;
+        left: 12%;
+        top: 0;
+      }
+
+      .wheel-itemlist .wheel-item {
+        float: left;
+        width: 25vw;
+        height: 25vw;
+        padding: 1vw;
+        line-height: 25vw;
+        text-align: center;
+        border-radius: 2vw;
+        position: absolute;
+        overflow: hidden;
+      }
+      .wheel-itemlist .wheel-item span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 2vw;
+        background: #7a8999;
+      }
+
+      .wheel-itemlist .wheel-item span img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .wheel-itemlist .wheel-item.award0 {
+        top: 0;
+        left: 0;
+      }
+      .wheel-itemlist .wheel-item.award1 {
+        top: 0px;
+        left: 25.5vw;
+      }
+      .wheel-itemlist .wheel-item.award2 {
+        top: 0px;
+        left: 51vw;
+      }
+      .wheel-itemlist .wheel-item.award3 {
+        top: 25.5vw;
+        left: 51vw;
+      }
+      .wheel-itemlist .wheel-item.award4 {
+        top: 51vw;
+        left: 51vw;
+      }
+      .wheel-itemlist .wheel-item.award5 {
+        top: 51vw;
+        left: 25.5vw;
+      }
+      .wheel-itemlist .wheel-item.award6 {
+        top: 51vw;
+        left: 0;
+      }
+      .wheel-itemlist .wheel-item.award7 {
+        top: 25.5vw;
+        left: 0;
+      }
+
+      .wheel-itemlist .wheel-item.active {
+        background: #d3a126;
+      }
+
+      .wheel-start {
+        width: 23vw;
+        height: 23vw;
+        top: 26.5vw;
+        left: 50%;
+        margin-left: -11.5vw;
+        line-height: 23vw;
+        text-align: center;
+        border-radius: 2vw;
+        position: absolute;
+        overflow: hidden;
+      }
+
+      .wheel-start img {
+        border-radius: 2vw;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+      <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box" style="margin:0 auto;">
+      <template id="wheelTemplate">
+        <div class="wheel" style="position: relative;">
+          <div class="wheel-bg">
+            <img src="/h5/images/wheel/origin/originBg.png" alt="" />
+          </div>
+          <div class="wheel-body">
+            <ul class="wheel-itemlist" id="wheelBox">
+              <li
+                class="wheel-item"
+                v-for="(index,list) in awardList"
+                :key="index"
+                :class="['award'+index,{'active': ((index==current) && (!neverClickbtn))}]"
+              >
+                <span>
+                  <img :src="list.image" alt="" class="async" />
+                </span>
+              </li>
+            </ul>
+            <div href="javascript:void(0)" class="wheel-start" @click="start">
+              <img
+                src="/h5/images/wheel/origin/wheel-start.png"
+                width="100%"
+                alt="开始图标"
+              />
+            </div>
+
+            <div
+              style="text-align:center;color:#B35612;width: 100%;position: absolute;top: 82vw;font-size: 3.5vw;"
+              v-if="data.isLogin == 0"
+            >
+              请
+              <a
+                href="javascript:void(0)"
+                @click="toLogin"
+                style="text-decoration: underline;color:#eb6100;"
+                >登录</a
+              >
+              以查看抽奖记录
+            </div>
+            <div
+              style="text-align:center;color:#B35612;width: 100%;position: absolute;top: 82vw;font-size: 3.5vw;"
+              v-else
+            >
+              <p v-if="freetimes > 0">
+                今日您还有
+                <em class="font-18" id="times">{{ freetimes }}</em>
+                次免费抽奖机会
+              </p>
+              <p v-else>
+                <em style="font-size: 3.5vw;"
+                  >今日免费抽奖次数已用完，继续抽奖将消耗{{
+                    data.expendCoin
+                  }}个聚米币</em
+                >
+              </p>
+              <p style="margin-top: 20px;">
+                <a
+                  href="javascript:void(0);"
+                  style="font-size: 3.5vw;text-decoration: underline;color:#B35612;"
+                  @click="viewshistory"
+                  >查看历史记录</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-if="isIOSShow"
+          style="font-size:0.625vw;color:#B35612; text-align:center;padding:1vw 0;"
+        >
+          活动由聚米众筹提供，与设备生产商Apple Inc.公司无关。
+        </div>
+      </template>
+      <my-wheel></my-wheel>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+      requirejs(["wheel/wheel"]);
+    </script>
+    <script
+      type="text/javascript"
+      async="async"
+      charset="utf-8"
+      src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"
+    ></script>
+  </body>
+</html>

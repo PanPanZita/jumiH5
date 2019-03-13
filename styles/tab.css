@@ -1,0 +1,146 @@
+/*  
+* @description: 标签页/滑动门/tab切换
+* @author: adhehe
+* @update: null
+*/
+/* 默认样式 */
+.tab{
+	padding:0;
+}
+.tab-handle {
+ 	display:-webkit-box;  
+ 	display:-moz-box;  
+ 	display:box;
+ 	width:100%;
+ 	padding:0.5rem;
+}
+.tab-handle li {
+ 	-webkit-box-flex:1.0;
+ 	-moz-box-flex:1.0;
+ 	box-flex:1.0;
+}
+.tab-handle li a {
+	display: block;
+	padding: 0.5rem 0;
+	background: #ddd;
+	border-right:1px solid #eee;
+	text-align: center;
+	color:#666;
+	font-size:1rem;
+}
+.tab-handle li:first-child a{
+	border-radius:3px 0 0 3px;
+}
+.tab-handle li:last-child a{
+	border-right:none;
+	border-radius:0 3px 3px 0;
+}
+.tab-handle li.active a {
+	position:relative;
+	background: #FA8806;
+	border-right:1px solid #FA8806;
+	color: #fff;
+}
+/* .tab-handle li.active a:after {
+	position:absolute;
+	bottom:-19px;
+	left:40%;
+	content:"";
+	width:0;
+	height:0;
+	overflow:hidden;
+	border-top:10px solid #FA8806;
+	border-right:10px solid transparent;
+	border-bottom:10px solid transparent;
+	border-left:10px solid transparent;
+} */
+.tab-content{
+	padding:0;
+}
+.tab-content .tab-pane {
+	display:none;
+}
+.tab-content .tab-pane.active {
+	display:block;
+}
+
+/* 样式2 */
+.tab-normal{}
+.tab-normal .tab-handle {
+ 	padding:0;
+ 	margin-bottom:0.5rem;
+}
+.tab-normal .tab-handle li {}
+.tab-normal .tab-handle li a {
+	display: block;
+	padding: 0.5rem 0;
+	background: #ddd;
+	border-right:1px solid #eee;
+	text-align: center;
+	color:#666;
+	font-size:1rem;
+	
+	padding: 0.75rem 0;
+	background:#FFF;
+	border-right:1px solid #f0f0f0;
+	border-bottom:1px solid #e7e7e7;
+	border-top:1px solid #e7e7e7;
+	color:#333;
+	font-size:1.1428571428571428571428571428571rem;
+}
+.tab-normal .tab-handle li:first-child a{
+	border-radius:0;
+}
+.tab-normal .tab-handle li:last-child a{
+	border-right:none;
+	
+	border-radius:0;
+}
+.tab-normal .tab-handle li.active a {
+	position:relative;
+	background: #FA8806;
+	border-right:1px solid #FA8806;
+	color: #fff;
+	
+	background:#FFF;
+	border-right:1px solid #f0f0f0;
+	border-bottom:1px solid #F60;
+	color:#F60;
+}
+
+/* 无边线 */
+.tab-noborder{}
+.tab-noborder .tab-handle li a{
+	border:none;
+}
+.tab-noborder .tab-handle li.active a{
+	border-right:none;
+}
+
+
+/* 样式3 */
+.tab-primary{}
+.tab-primary .tab-handle {}
+.tab-primary .tab-handle li {}
+.tab-primary .tab-handle li a {
+	background: transparent;
+	border-right:none;
+	color:#333;
+}
+.tab-primary .tab-handle li:first-child a{
+	border-radius:0;
+}
+.tab-primary .tab-handle li:last-child a{
+	border-radius:0;
+}
+.tab-primary .tab-handle li.active a {
+	background: transpaent;
+	border-right:none;
+	color:#FA8806;
+}
+.tab-primary .tab-handle li a span{
+	padding:0 0.25rem 0.25rem;
+}
+.tab-primary .tab-handle li.active a span{
+	border-bottom:1px solid #FA8806;
+}

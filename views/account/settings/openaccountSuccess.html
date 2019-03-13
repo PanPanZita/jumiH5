@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>开户认证（2/2）</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="openaccountTemplate">
+			<div class="group group-noborder">
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<p class="textcenter" style="padding-top: 3rem;"><i class="iconfont font-40 clr-green">&#xe611;</i></p>
+						</div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<p class="textcenter">北京银行开户成功</p>
+						</div>
+					</div>
+					<div class="group-rowspan" style="padding-bottom: 1rem;">
+						<div class="group-colspan">
+							<button type="button" class="button button-fill button-block" @click="over">完成</button>
+						</div>
+					</div>	
+				</div>
+				<!--<div class="group-item group-clear" style="background: #f5f5f5;padding:0.75rem 0">-->
+					<!--<div class="group-rowspan">-->
+						<!--<div class="group-colspan">-->
+							<!--<p class="textcenter">*账户资金由北京银行存管对接中</p>-->
+						<!--</div>-->
+					<!--</div>	-->
+				<!--</div>	-->
+			</div>
+		</template>
+		<my-openaccount></my-openaccount>
+	</div>
+
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/settings/openaccountSuccess']);
+	</script>
+</body>
+</html>

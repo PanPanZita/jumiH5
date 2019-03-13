@@ -1,0 +1,429 @@
+.iconFlag {
+  border: 1px solid #ec6121;
+  border-radius: 8px;
+  padding: 0.1rem 0.4rem;
+}
+.radiusLight {
+  border: 1px solid #ec6121;
+  border-radius: 2px;
+  padding: 0.1rem 0.2rem;
+}
+.borderBlue {
+  border: 1px solid #45a1f8;
+  color: #45a1f8;
+}
+.borderGreen {
+  border: 1px solid #70b363;
+  color: #70b363;
+}
+/*项目详情-项目动态进程图*/
+.tabCon2 .group .process:before {
+  content: "";
+  border: 3px solid #fdac36;
+  background-color: #fff;
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  top: 50%;
+  margin-top: -2.48px;
+  left: -1.4rem;
+  border-radius: 50%;
+  z-index: 8;
+}
+.tabCon2 .group .process:first-child .group-rowspan:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: -1.1rem;
+  top: 50%;
+  border-radius: 50%;
+  width: 1px;
+  height: 50%;
+  border-left: 1px dashed #fdac36;
+}
+.tabCon2 .group .process:last-child .group-rowspan:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: -1.1rem;
+  border-radius: 50%;
+  width: 1px;
+  height: 50%;
+  border-left: 1px dashed #fdac36;
+}
+.tabCon2 .group .process .group-rowspan:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: -1.1rem;
+  border-radius: 50%;
+  width: 1px;
+  height: 100%;
+  border-left: 1px dashed #fdac36;
+}
+.tabCon2
+  .group
+  .process:first-child
+  .group-rowspan:first-child
+  .group-colspan:first-child
+  p:first-child {
+  color: #fa8806;
+}
+
+/*密码框样式*/
+.wrap {
+  position: relative;
+}
+.wrap .real {
+  opacity: 0;
+  z-index: 3;
+}
+.wrap .box {
+  z-index: 1;
+  overflow: hidden;
+}
+.wrap,
+.wrap .box .fake {
+  height: 40px;
+  line-height: 40px;
+}
+.wrap .box .fake {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: -o-flexbox;
+  justify-content: space-between;
+}
+.wrap .real,
+.wrap .box,
+.wrap .active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+}
+/*密码框聚焦的时候需要改变其位置，否则IOS上会有闪动的光标~【解决兼容】*/
+.wrap.phonecode .real:focus {
+  left: -1000px;
+  top: -300px;
+}
+.wrap.phonecode .box {
+  border: 1px solid #d7d7d7;
+  border-radius: 5px;
+}
+.wrap.phonecode .box .fake input {
+  width: 16.66%;
+  height: 40px;
+  color: #810213;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  padding: 0;
+  border: none;
+  border-right: 1px solid #eeeeee;
+}
+.wrap.phonecode .box .fake input:last-child {
+  border-right: none;
+}
+.wrap .active {
+  width: 16.66%;
+  text-align: center;
+  z-index: 2;
+}
+.wrap .active img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 滑动验证样式，共分为3种stage状态：stage1(初始状态)、stage2(二次验证)、stage3(拦截状态) */
+._nc {
+  height: 6vh;
+}
+._nc .stage {
+  padding: 0 !important;
+}
+._nc .stage1 .slider {
+  width: 100%;
+  height: 6vh !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+._nc .stage1 .track div,
+._nc .stage1 .label {
+  line-height: 6vh !important;
+  height: 6vh !important;
+  font-size: 14px !important;
+}
+._nc .stage1 .label {
+  padding-left: 10.2vw;
+}
+._nc .stage1 .button {
+  width: 15.46vw !important;
+  height: 6vh !important;
+}
+._nc .stage3 {
+  height: 10vh !important;
+}
+._nc .stage3 .title {
+  height: 3vh;
+  line-height: 3vh;
+  font-size: 14px !important;
+  margin: 0 !important;
+}
+._nc .stage3 .refresh {
+  left: 0;
+  top: 3.6vh;
+}
+._nc .stage3 .menu.feedback {
+  top: 3.6vh;
+}
+._nc .stage3 .menu .icon {
+  font-size: 24px !important;
+  padding-top: 4px;
+}
+._nc .stage3 .menu .icon.icon-message {
+  font-size: 20px !important;
+}
+._nc .stage3 .menu .label {
+  height: 24px !important;
+  line-height: 24px !important;
+  top: -4px !important;
+}
+._nc .stage3 .menu.nc-sep {
+  margin-top: 8px;
+  height: 22px !important;
+}
+
+/* 七夕活动，两个页面用，又因为代码量较大，所以提出来 */
+
+.arrow {
+  display: inline-block;
+  width: 2vw;
+  height: 2vw;
+  border-radius: 1px;
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  /* Internet Explorer */
+  -moz-transform: rotate(45deg);
+  /* Firefox */
+  -webkit-transform: rotate(45deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(45deg);
+  /* Opera */
+}
+
+.rightArrow {
+  border-top: 3px solid #e6586a;
+  border-right: 3px solid #e6586a;
+  margin-right: 4vw;
+  animation: arrowRight 1.5s infinite;
+  -webkit-animation: arrowRight 1.5s infinite;
+  -moz-animation: arrowRight 1.5s infinite;
+  -ms-animation: arrowRight 1.5s infinite;
+  -o-animation: arrowRight 1.5s infinite;
+}
+
+.leftArrow {
+  border-bottom: 3px solid #e6586a;
+  border-left: 3px solid #e6586a;
+  margin-left: 4vw;
+  animation: arrowLeft 1.5s infinite;
+  -webkit-animation: arrowLeft 1.5s infinite;
+  -moz-animation: arrowLeft 1.5s infinite;
+  -ms-animation: arrowLeft 1.5s infinite;
+  -o-animation: arrowLeft 1.5s infinite;
+}
+
+@keyframes arrowRight {
+  from {
+    margin-right: 10vw;
+  }
+  to {
+    margin-right: 4vw;
+  }
+}
+
+@-moz-keyframes arrowRight {
+  from {
+    margin-right: 10vw;
+  }
+  to {
+    margin-right: 4vw;
+  }
+}
+
+@-webkit-keyframes arrowRight {
+  from {
+    margin-right: 10vw;
+  }
+  to {
+    margin-right: 4vw;
+  }
+}
+
+@-o-keyframes arrowRight {
+  from {
+    margin-right: 10vw;
+  }
+  to {
+    margin-right: 4vw;
+  }
+}
+
+@keyframes arrowLeft {
+  from {
+    margin-left: 10vw;
+  }
+  to {
+    margin-left: 4vw;
+  }
+}
+
+@-moz-keyframes arrowLeft {
+  from {
+    margin-left: 10vw;
+  }
+  to {
+    margin-left: 4vw;
+  }
+}
+
+@-o-keyframes arrowLeft {
+  from {
+    margin-left: 10vw;
+  }
+  to {
+    margin-left: 4vw;
+  }
+}
+
+@-webkit-keyframes arrowLeft {
+  from {
+    margin-left: 10vw;
+  }
+  to {
+    margin-left: 4vw;
+  }
+}
+
+/* 背景音乐 */
+#music-off {
+  position: absolute;
+  right: 5.86vw;
+  top: 7vw;
+  z-index: 5;
+  width: 9.6vw;
+  height: 9.6vw;
+  background: url("/h5/images/activity/seventhMoon/music.png") no-repeat;
+  background-size: cover;
+}
+
+#noMusic {
+  width: 6vw;
+  height: 6vw;
+  border-top: 2px solid #fff;
+  position: absolute;
+  left: 0;
+  top: 4vw;
+  transform: rotateZ(45deg);
+  -ms-transform: rotateZ(45deg);
+  -moz-transform: rotateZ(45deg);
+  -webkit-transform: rotateZ(45deg);
+  -o-transform: rotateZ(45deg);
+}
+
+.musicAnimate {
+  -webkit-animation: round 4s linear infinite;
+  -moz-animation: round 4s linear infinite;
+  -ms-animation: round 4s linear infinite;
+  -o-animation: round 4s linear infinite;
+  animation: round 4s linear infinite;
+}
+
+@keyframes round {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+@-moz-keyframes round {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+@-o-keyframes round {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+@-moz-keyframes round {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.fontSize10 {
+  font-size: 2.66vw;
+}
+.fontSize12 {
+  font-size: 3.2vw;
+}
+.fontSize14 {
+  font-size: 3.73vw;
+}
+.fontSize16 {
+  font-size: 4.26vw;
+}
+.fontSize18 {
+  font-size: 4.8vw;
+}
+.fontSize20 {
+  font-size: 5.33vw;
+}
+.fontSize22 {
+  font-size: 5.86vw;
+}
+
+.logoImg {
+  width: 21.86vw;
+  height: 6.4vw;
+  position: absolute;
+  right: 8vw;
+  bottom: 7.2vw;
+}
+
+.logoImg img {
+  width: 100%;
+}
+
+/* 防止横屏操作 */
+#landscape {
+  position: absolute;
+  top: -99999px;
+  left: -99999px;
+  padding-top: 18vh;
+  width: 100%;
+  height: 120%;
+  background: #ffffff;
+  box-sizing: border-box;
+  color: #000000;
+  font-size: 3.2vw;
+  text-align: center;
+  z-index: 9999999999;
+}
+
+#landscape img {
+  display: inline-block;
+  width: 12vw;
+  height: 12vw;
+  left: 50%;
+  margin-left: -6vw;
+  top: 0;
+}

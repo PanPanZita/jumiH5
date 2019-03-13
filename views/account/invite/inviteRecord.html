@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>邀请好友记录</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+    <div id="box">
+        <template id="recordTemplate">
+            <div class="tab tab-normal tab-noborder">
+                <ul class="tab-handle hidden">
+                    <li class="active"><a href="#tabs1" data-toggle="tab">邀请注册记录</a></li>
+                    <li><a href="#tabs2" data-toggle="tab">邀请投资记录</a></li>
+                </ul>
+                <div class="has-record">
+                    <template v-if="items != null && items.length > 0">
+                        <div class="group" v-for="item in items">
+                            <div class="group-item">
+                                <div class="group-rowspan">
+                                    <div class="group-colspan">
+                                        <a href="/h5/views/account/invite/inviteDetail.html?userId={{item.userId}}">
+                                            <div class="f-left">
+                                                <p><span>被邀用户：</span>{{item.userPhone}}</p>
+                                                <p><span>实名：</span><em v-if="item.realname">{{item.realname}}</em><em v-else>未实名</em></p>
+                                                <p><span>注册时间：</span>{{item.registerTime}}</p>
+                                            </div>
+                                            <div class="f-right v-center" v-if="item.investStatus == 0">已注册&gt;</div>
+                                            <div class="f-right v-center" v-else>已投资&gt;</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <div style="padding-top:6rem; text-align: center;" v-else>
+                        <i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;line-height:1;">&#xe691;</i>
+                        <p class="clr-gray" style="margin:1rem 0;">邀请好友也有收益哦</p>
+                        <a href="/h5/views/account/invite/invite.html" class="button button-orange button-md">去邀请好友</a>
+                    </div>
+                    <div id="loadMoreButton" v-if="items != null && items.length >= 10">
+                        <i class="iconfont">&#xe65d;</i>
+                        <span>上拉刷新数据</span>
+                    </div>
+                </div>
+                <div class="un-record"></div>
+            </div>
+        </template>
+        <my-record></my-record>
+    </div>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+    requirejs(['account/invite/inviteRecord']);
+    </script>
+</body>
+
+</html>

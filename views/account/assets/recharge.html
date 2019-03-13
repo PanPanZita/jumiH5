@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Cache-control" content="max-age=0" />
+<meta http-equiv="Cache-control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+<title>充值</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="rechargeTemplate">
+			<form action="javascript:void(0)" method="post" id="payForm">
+				<input type="hidden" name="req_data" id="req_data" value=''>
+				
+				<div class="group">
+					<div class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan" style="width:4rem;">
+								<img class="form-label" :src="data.bankLogo" alt="银行图标">
+							</div>
+							<div class="group-colspan">{{data.bankName}} ({{data.bankCardNo}})</div>
+						</div>
+					</div>
+				</div>
+				<div class="group group-transparent">
+					<div class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan" style="padding:0;">
+								<p class="font-12 clr-gray">{{data.bankMemo}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="group">
+					<div class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan" style="width:5rem;"><label class="form-label">充值金额</label></div>
+							<div class="group-colspan">
+								<input type="number" v-model="money" @keyup="inputMoneyKeyup" @blur="inputMoneyBlur" placeholder="请输入充值金额" class="form-control-noborder"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="group group-transparent">	
+					<div class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan">
+								<button type="submit" class="button button-fill button-block" :class="{'disabled':isAbled}" @click="ok">确认充值</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="group group-transparent">
+					<div class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan">
+								<button type="button" class="button button-link button-block" style="color:#999" @click="aboutRecharge">关于充值</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+
+		<!-- 输入-发送到手机的6位验证码 -->
+		<div class="wrap phonecode" id="phonecodeWrap" style="display: none;">
+		 	<input type="tel" maxlength="6" class="real" id="real" @keyup="inputpwdKeyup" v-model="phonecode"/>
+		 	<div class="box">
+			 	<div class="fake">
+				 	<input type="password" disabled="disabled" style="background: #fff;">
+				 	<input type="password" disabled="disabled" style="background: #fff;">
+				 	<input type="password" disabled="disabled" style="background: #fff;">
+				 	<input type="password" disabled="disabled" style="background: #fff;">
+				 	<input type="password" disabled="disabled" style="background: #fff;">
+				 	<input type="password" disabled="disabled" style="background: #fff;">
+			 	</div>
+		 	</div>
+		 	<div class="active"><img src="/h5/images/ios/paylogo.gif"></div>
+		</div>	
+
+		</template>
+		<my-recharge></my-recharge>
+	</div>
+	
+	
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/assets/recharge']);
+		window.onpageshow = function(event) {
+			if (event.persisted) {   
+			   window.location.reload()
+			}
+		};
+	</script>
+</body>
+</html>

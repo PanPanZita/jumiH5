@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>佣金记录-邀请好友-聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+    <div id="box">
+        <template id="recordTemplate">
+            <div class="tab tab-normal tab-noborder">
+                <div class="has-record">
+                    <div class="group" v-if="items.length">
+                        <div class="group-item" v-for="list in items">
+                            <a href="/h5/views/account/invite/commissionDetail.html?id={{list.assessmentPeriodId}}">
+                                <div class="group-rowspan">
+                                    <div class="group-colspan overflow group-reward">
+                                        <div class="f-left">
+                                            <p>考核期：{{list.asstStartTime}} 至 {{list.asstEndTime}}</p>
+                                            <p>待结算：{{list.noPayCommission}}元</p>
+                                            <p>已结算：{{list.payCommission}}元</p>
+                                        </div>
+                                        <div class="f-right"><i class="iconfont">&#xe60c;</i></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="padding-top:6rem; text-align: center;" v-else>
+                        <!-- <i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;line-height:1;">&#xe691;</i> -->
+                        <p class="clr-gray" style="margin:1rem 0;">暂无投资记录~</p>
+                        <!-- <a href="/h5/views/account/invite/invite.html" class="button button-orange button-md">去邀请</a> -->
+                    </div>
+                </div>
+                <div class="un-record hidden">
+                    <p class="t-center">暂无投资记录！</p>
+                </div>
+            </div>
+        </template>
+        <my-record></my-record>
+    </div>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+    requirejs(['account/invite/commissionList']);
+    </script>
+</body>
+
+</html>

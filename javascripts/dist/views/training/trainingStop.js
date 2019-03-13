@@ -1,0 +1,1 @@
+define(["jumi","vue","nav"],function(e,n,t){new n({el:"body",components:{"my-novicestop":{template:"#novicestopTemplate",data:function(){return{}},methods:{}}},ready:function(){t.setActiveNav("account"),$("#myloading").remove()}})});

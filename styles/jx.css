@@ -1,0 +1,586 @@
+.hidden{
+	display: none;
+}
+.overflow{
+	overflow: hidden;
+}
+.f-left{
+	float: left;
+}
+.f-right{
+	float: right;
+}
+.bg-main{
+	background: #FEF2BE;
+}
+.warn-small{
+	font-size: 12px;
+	color: #f00;
+}
+
+/*首页start*/
+#ptgg, #xmdt, #mtbd{
+	display: inline-block;
+}
+#ptgg img, #xmdt img, #mtbd img{
+	width: 48px;
+}
+/*首页end*/
+
+/* 项目列表搜索start */
+.search{
+	border-bottom: 1px solid #f4f4f4;
+}
+.jump-search{
+	margin:0 1rem;
+	height: 5rem;
+}
+.jump-search a{
+	width: 100%;
+	height: 3rem;
+	line-height: 3rem;
+	display: inline-block;
+	text-align: center;
+	position: relative;
+	border-radius: 18px;
+	background-color: #f4f4f4;
+	color: #999;
+	margin-top: 1rem;
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+.c-search{
+	width: 100%;
+	height: 3rem;
+	line-height: 3rem;
+	display: inline-block;
+	position: relative;
+	border-radius: 18px;
+	background-color: #f4f4f4;
+	color: #999;
+	margin-top: 1rem;
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+.jump-search i{
+	color: #999;
+	position: relative;
+	margin-right: .6rem;
+	font-size: 1.2rem;
+}
+.c-search i{
+	margin-left: 1.5rem;
+}
+.c-search .search-input{
+	height: 2.5rem;
+	width: 70%;
+	position: relative;
+	top: -0.1rem;
+	background-color: #f4f4f4;
+	font-size: 1.2rem;
+}
+.choice-search{
+	padding: 0 1rem;
+	border-top: 1px solid #f4f4f4;
+}
+.choice-search h3{
+	font-size: 1.2rem;
+	color: #999;
+	margin:0.4rem 0;
+}
+
+.common a{
+	color: #999;
+	width: 6rem;
+	height: 2.2rem;
+	line-height: 2.2rem;
+	display: inline-block;
+	border-radius: 18px;
+	text-align: center;
+	border: 1px solid #dedede;
+	font-size: 1rem;
+	margin-right: .7rem;
+	margin-bottom: 1rem;
+}
+.common .selected{
+	color: #ec6121;
+	border: 1px solid #ec6121;
+}
+.btn-search{
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+}
+.btn-search a{
+	width: 100%;
+	height: 3rem;
+	line-height: 3rem;
+	display: inline-block;
+	text-align: center;
+	background-color: #ec6121;
+	color: #fff;
+	border-radius: 4px;
+	font-size: 1.2rem;
+}
+/* 项目列表搜索end */
+
+/*邀请好友start*/
+.end-activity{
+	background-color: #FFF2BE; 
+}
+.bottom-none{
+	margin-bottom: 0;
+}
+.font-big{
+	font-size: 2rem;
+	font-weight: normal;
+}
+.font-middle{
+	font-size: 1.4rem;
+}
+.color-main{
+	color: #ec6121;
+}
+.yqhy-group{
+	margin-bottom: 0;
+}
+.serrate{
+	width: 100%;
+	height: 20px;
+	background: url(/h5/images/account/invite/serrate.png);
+	position: relative;
+	margin-top: -10px;
+}
+.separete{
+	width: 100%;
+	height: 10px;
+	background-color: #f4f4f4;
+}
+.common-time p{
+	text-align: center;
+	color: #999;
+	line-height: 2rem;
+}
+.common-time strong{
+	margin:0 4px;
+	color: #ec6121;
+	font-size: 1.2rem;
+	font-weight: normal;
+}
+
+.reward-total{
+	border: 1px solid #f4f4f4;
+	padding: 2rem 0;
+	margin-bottom: 1rem;
+	color: #999;
+	border-radius: 4px;
+}
+.reward-total > div{
+	width: 50%; 
+	text-align: center;
+}
+.reward-total h4{
+	line-height: 45px;
+	font-size: 16px;
+}
+.reward-total .f-left{
+	border-right: 1px solid #f4f4f4;
+}
+.reward-total em{
+	width: 5rem;
+	display: inline-block;
+	text-align: center;
+}
+.reward-total strong, .reward-total em{
+	display: inline-block;
+	padding: .2rem 0;
+}
+.reward-total span{
+	width: 5rem;
+	display: inline-block;
+	text-align: center;
+	padding: .2rem 0;
+}
+.tab-record span{
+	width: 50%;
+	height: 3.5rem;
+	line-height: 3.5rem;
+	display: inline-block;
+	text-align: center;
+	border-bottom: 2px solid #f4f4f4;
+	color: #999;
+	font-size: 1rem;
+}
+.tab-record .selected{
+	border-bottom: 2px solid #ec6121;
+	color: #ec6121;
+}
+.c-tab table{
+	width: 100%;
+	font-size: 1rem;
+}
+#tab1 tr th,#tab1 tr td{
+	width: 50%;
+	text-align: center;
+	line-height: 2rem;
+}
+.c-tab tr th,.c-tab tr td{
+	text-align: center;
+	height: 35px;
+	line-height: 35px;
+}
+.c-tab tr{
+}
+#tab1 tr th,#tab2 tr th{
+	line-height: 2.5rem;
+	color: #999;
+	font-weight: normal;
+}
+.c-tab tfoot td{
+	color: #999;
+}
+/*邀请好友end*/
+
+/*邀请好友记录start*/
+.has-record,.un-record{
+	margin-bottom: 0.75rem;
+}
+.has-record .record{
+	padding: 1rem;
+	background: #fff;
+	text-align: center;
+	margin-bottom: 0.75rem;
+
+}
+.has-record .record em{
+	color: #ec6121;
+	padding: 0 0.5rem;
+}
+.has-record .f-left{
+	width: 73%;
+}
+.has-record .f-left span{
+	color: #999;
+	width: 70px;
+	display: inline-block;
+}
+.has-record .f-left em{
+	color: #999;
+	width: 50px;
+	display: inline-block;
+}
+.v-center{
+	line-height: 4rem;
+	color: #999;
+}
+.t-center{
+	text-align: center;
+}
+.user-info{
+	position:fixed;
+	top:0;
+	z-index:999;
+	display:block;
+	width:100%;
+	background-color: #FFF;
+	border-bottom:2px solid #EC6121;
+	padding: .75rem 0 .75rem 1.5rem;
+	box-shadow: 0px 1px 6px rgba(0,0,0,0.2);
+}
+.stop-time p,.end-time p{
+	color:#ec6121;
+}
+
+
+/*邀请好友记录end*/
+/*邀请好友记录新版start*/
+
+
+.title{
+	text-align: center;
+}
+.title span{
+	display: block;
+	position:relative;
+	color: #999;
+	font-size: 16px;
+}
+.title span:before,.title span:after{
+	content: '';
+	position: absolute;
+	top: 52%;
+	background-color: #ccc;
+	width: 35%;
+	height: 1px;
+}
+.light-task .title span:before,.light-task .title span:after{
+		width: 20%;
+}
+.title span:before{
+	left:0%;
+}
+.title span:after{
+	right: 0%;
+}
+
+.r-list{
+	border-bottom: 1px solid #dedede;
+	padding: 30px 0 20px 0;
+}
+.r-list:last-child{
+	border:0;
+}
+.task-img{
+	width: 3rem; 
+	margin-right: 1rem;
+}
+.task-pro{
+	width: 11rem;
+	position: relative;
+}
+.process{
+	width: 100%;
+	position: relative;
+	margin-bottom: 10px;
+}
+.task-pro h3{
+	height: 2.7rem;
+	color: #333;
+	font-size: 12px;
+}
+.task-pro p{
+	width: 100%;
+	background-color: #eee;
+	text-align: center;
+	border-radius: 8px;
+	height: 16px;
+	line-height: 16px;
+	color: #B78A56;
+}
+.task-pro .cur-pro{
+	position: absolute;
+	top: 2.7rem;
+	background-color: #ffd35a;
+	width: 0%;
+}
+.process .cur-pro{
+	top: 0px;
+}
+.task-pro span{
+	position: relative;
+	z-index: 8;
+}
+.task-result p{
+	color: #999;
+}
+.task-result a{
+	background-color: #dbdbdb;
+	color: #a1a1a1;
+	display: inline-block;
+	width: 5rem;
+	line-height: 2rem;
+	text-align: center;
+	border-radius: 4px;
+	position: relative;
+	margin-top: 8px;
+	font-size: 12px;
+}
+.task-result a.red-receive{
+	background-color: #ffd35a;
+	color: #B78A56;
+}
+.upgrade{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	border: 0;
+	background-color: #dbdbdb;
+	border-radius: 4px;
+	color: #999;
+	font-size: 14px;
+}
+.can-upgrade{
+	background-color: #ffd35b;
+	color: #b78a56;
+}
+.cur-total{
+	margin-top: 30px;
+	font-size: 14px;
+	color: #999;
+}
+.fin-total{
+	margin-top: 0;
+	border-top: 1px dashed #dedede;
+	padding-top: 10px;
+}
+.cur-total strong{
+	font-weight: normal;
+	color: #ec6121;
+	padding: 0 2px;
+}
+
+#upgrade-success{
+	display: none;
+}
+#upgrade-success .d-item img{
+	width: 15rem;
+}
+#upgrade-success p{
+	text-align: center;
+	font-size: 1.2rem;
+	color: #999;
+	line-height: 28px;
+	margin: 0 auto;
+}
+
+.un-get{
+	height: 50px;
+	background-color: #C19451;
+	color: #F0E4AC;
+}
+.un-get .f-left{
+	width: 75%;
+	margin-left: 5%;
+	line-height: 20px;
+	position: relative;
+	margin-top: 5px;
+}
+.un-get .f-right{
+	width: 15%;
+	margin-right: 5%;
+	text-align: right;
+	height: 50px;
+	line-height: 50px;
+	font-size: 1.5rem;
+}
+.has-get{
+	height: 40px;
+	line-height: 40px;
+	background-color: #C19451;
+	color: #F0E4AC;
+}
+.has-get .f-left{
+	width: 75%;
+	margin-left: 5%;
+	position: relative;
+}
+.has-get .f-right{
+	width: 15%;
+	margin-right: 5%;
+	text-align: right;
+	height: 40px;
+	line-height: 40px;
+	font-size: 1.5rem;
+}
+.invite-detail p{
+	line-height: 26px;
+	margin-bottom: 10px;
+}
+.invite-detail i{
+	font-size: 24px;
+}
+/*邀请好友记录新版end*/
+/*理财经理start*/
+.assessment{
+	text-align: center;
+	font-size: 16px;
+}
+.assessment p{
+	color: #999;
+	line-height: 40px;
+}
+.assessment h1{
+	font-size: 20px;
+	line-height: 60px;
+	color: #999;
+}
+.assessment h2{
+	font-size: 18px;
+	color: #ec6121;
+}
+.reward-record{
+	text-align: right;
+	line-height: 30px;
+}
+.reward-record a{
+	color: #999;
+}
+.t-tip{
+	color: #999;
+}
+
+.light-task h3{
+	line-height: 50px;
+	margin-top: 15px;
+}
+.img{
+	width: 12rem;
+	margin: 30px auto;
+}
+/*理财经理end*/
+/*佣金明细start*/
+.com-list{
+	position: relative;
+	color: #999;
+	margin-bottom: 1rem;
+	overflow: hidden;
+	background-color: #fff;
+	padding: 0.5rem 1rem;
+}
+.com-list span{
+	display:block;
+	font-size: 12px;
+}
+.com-list h3{
+	width: 150px;
+	font-size: 14px;
+	margin-left: 15px;
+	line-height: 22px;
+	margin-top: 10px;
+	min-height: 44px;
+}
+.com-list p{
+	margin-left: 15px;
+	font-size: 12px;
+}
+.com-list .f-right{
+	margin-top: 10px;
+	text-align: right;
+}
+.com-list em{
+	color: #333;
+	height: 30px;
+	display: inline-block;
+	font-size: 16px;
+}
+.com-list .f-right span{
+	font-size: 16px;
+}
+/*佣金明细end*/
+/*奖励记录start*/
+.group-reward i{
+	vertical-align: middle;
+	line-height: 84px;
+	font-size: 18px;
+}
+.group-reward span{
+	color: #999;
+}
+/*奖励记录end*/
+.invite img{
+	width: 50px;
+	display: inline-block;
+	padding-right: 15px;
+}
+.invite .inviteimg{
+	width: 60px;
+}
+.invite h3{
+	font-size: 14px;
+}
+.invite p{
+	color: #999;
+	font-size: 12px;
+}
+.task{
+	margin-bottom: 0;
+}

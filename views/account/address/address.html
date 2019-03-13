@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>收货地址管理--聚米众筹</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+.group-order .group-colspan {vertical-align: top;}
+.group-order .group-colspan:first-child{width:5.5rem;text-align:right;}
+.addressManagerBox a.clr-orange:hover{color:#FF7300;}
+.clear{padding:0.325rem 0;}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="addressTemplate">
+			<div v-if="addressList.length">
+				<div class="group group-justify" v-for="address in addressList">
+					<div  class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan">
+								<div class="clear">
+									<p class="left">{{address.userName}}</p>
+									<p class="right">{{address.mobile}}</p>
+								</div>
+								<div class="clear">
+									<span>{{address.province}}</span> 
+									<span>{{address.city}}</span>
+									<span>{{address.address}}</span>
+								</div>
+								<div class="clear" style="border-top:1px solid #eee;">
+									<p class="left">
+										<a href="javascript:void(0)" v-if="address.isUse == 1" class="clr-strike"><i class="iconfont clr-strike">&#xe624;</i> 默认地址</a>
+										<a href="javascript:void(0)" @click="setDefault(address.id,address.isUse)" v-else><i class="iconfont">&#xe625;</i> 设为默认</a>
+									</p>
+									<p class="right">
+										<a href="javascript:void(0)" @click="editAddress(address.id)"><i class="iconfont">&#xe626;</i> 编辑</a>
+										<a href="javascript:void(0)" @click="delAddress(address.id)"><i class="iconfont">&#xe627;</i> 删除</a>
+									</p>				
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="padding-top:6rem; text-align: center;" v-else>
+				<i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;line-height:1;">&#xe690;</i>
+				<p class="clr-gray" style="margin:1rem 0;">暂无收货地址~</p>
+			</div>
+			
+			<div class="footer">
+				<a href="javascript:void(0)" class="button button-fill button-block button-lg" @click="createAddress" style="border-radius:0;">+ 新增地址</a>
+			</div>
+		</template>
+		<my-address></my-address>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/address/address']);
+	</script>
+</body>
+</html>

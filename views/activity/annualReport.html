@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>2016年影视众筹年度报告</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+html,body{
+	background:#FFF;
+	width:100%;
+	min-width:320px;
+	max-width:640px;
+}
+.activityWrap{
+	width:100%;
+	height:100%;
+	position: fixed;
+	background:rgb(0,0,0);
+	opacity: 0.7;
+	left:0;
+	top:0;
+	z-index: 1024;
+	display: none;
+}
+.wrap1{
+	width:100%;
+	position: relative;
+}
+.knowJumi,.experienceNow{
+	display: block;
+	width:44.38%;
+	height:3.16%;
+	position: absolute;
+    left:50%;
+    margin-left: -22.19%;
+    top:44.524%;
+}
+.experienceNow{
+   top:89.94%; 
+}
+.registerActivity{
+	width:91.25%;
+	height:26%;
+	background-color: #e43520;	
+	position: absolute;
+	left:50%;
+	margin-left: -45.625%;
+	top:16%;
+	border-radius: 15px;
+	padding:1rem 0; 
+}
+.button.disabled,
+.button[disabled]{
+	background: transparent;
+}
+.button-fill.button.disabled,
+.button-fill.button[disabled]{
+	background: #ee7b3e;
+}
+.button-fill{
+	background:#ffe56a; 
+}
+.button-fill.hover, .button-fill:hover{
+	background:#ffe56a; 
+}
+.tips1{
+	width:80%;
+	height:200px;
+	position: absolute;
+	left:50%;
+	margin-left:-40%;
+	top:0;
+	background-color: #e43520;
+	border-radius: 10px;
+	display: none;
+	z-index: 1024;
+}
+.Header1{
+	background: #ce2b18;
+	width:100%;
+	line-height: 3rem;
+	text-align: center;
+	position: relative;
+	padding:0 1rem;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.Con1{
+	color: #fff;
+	padding:30px 20px;	
+	text-align: center;
+}
+.Con1 .sureBtn{
+    width:38.66%;
+	height:2.4rem;
+	line-height: 2.4rem;
+	background-color: #ffe56a;
+	border-radius: 12px;
+	text-align: center;
+	color:#e4331f;
+	margin-top:30px; 
+	margin-left:31.06%; 
+}
+</style>
+</head>
+<body>
+    <div class="wrap1">	
+        <div class="activityWrap"></div>    
+	    <img src="/h5/images/activity/annualReport/annualReportBg.jpg" style="width:100%">
+	    <a href="/h5/views/account/faq/about.html" class="knowJumi"></a>
+	    <a href="" class="experienceNow" @click="experienceNow"></a>	   
+	    <div class="registerActivity">
+	    	<template id="registerTemplate">
+	    	    <div class="tips1">
+			        <div class="Header1">
+			        	<p>提示</p>
+			        </div>	    	
+			    	<div class="Con1">
+			    		<p>聚小米提醒您，</p>
+			    		<p>该红包只能送给聚米新成员哦~</p>
+			    		<p class="sureBtn" @click="sureBtn">确定</p>
+			    	</div>
+				</div>
+				<form action="javascript:void(0)" id="formRegister">
+					<div class="group group-noborder group-form" style="margin-bottom: 0">					    
+						<div class="group-item">
+							<div class="group-rowspan">
+								<div class="group-colspan" style="padding-bottom:4%">
+									<input type="tel" v-model="phone" placeholder="请输入手机号" @blur="inputPhoneBlur" @keyup="inputPhoneKeyup"  class="form-control form-border" style="border-radius:.6rem" maxlength="11"/>
+								</div>
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="group-rowspan">
+								<div class="group-colspan" style="padding-bottom:4%">
+									<input type="password" v-model="password" placeholder="6-16位数字和字母组成" @blur="inputPasswordBlur" @keyup="inputPasswordKeyup" class="form-control form-border" style="border-radius:.6rem"/>
+								</div> 
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="group-rowspan">
+								<div class="group-colspan" style="padding-bottom:4%">
+									<input type="text" v-model="phone_code" @keyup="inputCodeKeyup" placeholder="请输入验证码" class="form-control form-border" style="border-radius:.6rem"/>
+								</div>								
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="group-rowspan">
+								<div class="group-colspan" id="getCodeButtonBox" style="position:relative;padding-bottom:4%" >
+									<button id="getCodeButtonMask" type="button" class="button button-fill button-block" :class="{'disabled':isShowHide}" style="border-radius:.6rem;color:#c72201">获取验证码</button>
+								</div>
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="group-rowspan">
+								<div class="group-colspan clr-gray" style="padding-bottom:4%">
+									<p style="color:#fefefe">点击注册，即表示您同意 <a href="javascript:void(0)" @click="protocols" style="text-decoration: underline;">《用户协议》</a></p>
+									<div id="protocolBox" style="display:none;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="group-item">
+							<div class="group-rowspan">
+								<div class="group-colspan" style="padding-bottom: 0">
+									<button type="button" class="button button-fill button-block" :class="{'disabled':isShowHideRegister}" @click="ok" style="border-radius:.6rem;color:#c72201">领取188元红包</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</template>
+			<my-register></my-register>
+
+
+			<div id="getCodeButton" style="display:none;position:absolute;top:0;opacity:0; width:100%;height:2.5rem;overflow:hidden;">
+				<div class="l-captcha" data-width="2000px" data-height="1000px" data-site-key="1d7d581cc8eb2456d2e6dd90c94ad095" data-callback="getResponse"></div>
+			</div>
+			
+	    </div>
+	</div>    
+
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['activity/annualReport']);
+	</script>   
+</body>
+</html>

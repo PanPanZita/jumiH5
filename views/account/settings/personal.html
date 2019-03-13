@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>个人信息</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+	.varInfo{display:inline-block;width:14rem;text-overflow:ellipsis;white-space: nowrap;color:#999;}
+	#pic img{max-width:none;}
+</style>
+</head>
+<body>
+
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="personalTemplate">
+			<div class="group group-justify">
+				<div class="group-item">
+					<form id="uploadForm" method="post" action="javascript:void(0)" enctype="multipart/form-data" >
+						<a href="javascript:void(0)" class="group-rowspan" style="border:none;">
+							<span class="group-colspan">头像</span>
+							<span class="group-colspan">
+								<span id="imgShow" style="display:inline-block;vertical-align:middle;">
+									<img :src="data.litpicPath || '/h5/images/face.jpg'" alt="" style="width:4rem;height:4rem;border-radius:5px;">
+								</span>
+								<i class="iconfont" data-more>&#xe60c;</i>
+							</span>
+						</a>
+						<input type="file" id="myfile" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;">
+						<div id="upload-select">
+							<div id="upload-select-header">
+								<a href="javascript:void(0)" id="upload-select-cancel" >取消</a>
+								<a href="javascript:void(0)" id="upload-select-next" >下一步</a>
+							</div>
+							<div id="upload-select-img">
+								<div id="mask"></div>
+								<div id="pic"></div>
+								<canvas id="mycanvas" style="display:none;"></canvas>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<div class="group-item">
+					<a href="personalNickname.html?user_id={{data.userId}}&nickname={{data.nickname}}" class="group-rowspan">
+						<span class="group-colspan" style="width:5rem;">昵称</span>
+						<span class="group-colspan">
+							<var class="varInfo">{{data.nickname}}</var>
+							<i class="iconfont" data-more>&#xe60c;</i>
+						</span>
+					</a>
+				</div>
+				
+				<div class="group-item">
+					<a href="personalSex.html?user_id={{data.userId}}&sex={{data.sex}}" class="group-rowspan">
+						<span class="group-colspan" style="width:5rem;">性别</span>
+						<span class="group-colspan">
+							<var class="varInfo" v-if="data.sex == 0">女</var>
+							<var class="varInfo" v-if="data.sex == 1">男</var>
+							<i class="iconfont" data-more>&#xe60c;</i>
+						</span>
+					</a>
+				</div>
+				
+				<div class="group-item">
+					<a href="/h5/views/account/level/level.html" class="group-rowspan">
+						<span class="group-colspan" style="width:5rem;">用户等级</span>
+						<span class="group-colspan">
+							<var class="varInfo">{{data.levelName}}</var>
+							<i class="iconfont" data-more>&#xe60c;</i>
+						</span>
+					</a>
+				</div>
+			</div>
+		</template>
+		<my-personal></my-personal>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/settings/personal']);
+	</script>
+</body>
+</html>

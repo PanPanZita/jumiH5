@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
+    />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>详情-聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png" />
+    <link
+      rel="stylesheet"
+      href="//g.alicdn.com/de/prismplayer/1.5.4/skins/default/index.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css" />
+    <style type="text/css">
+      #details img {
+        margin: auto;
+      }
+
+      .tab-primary .tab-handle li a span {
+        padding: 0 1rem 1.16rem;
+      }
+
+      .tabFixed {
+        position: fixed;
+        top: 0;
+        z-index: 999;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+      <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+      <!-- 一张图  -->
+      <template id="bannerTemplate">
+        <img
+          src="/h5/images/default85.jpg"
+          data-src="{{ data.imagePath1610 }}"
+          alt=""
+          width="100%"
+          class="async"
+        />
+      </template>
+      <my-banner></my-banner>
+
+      <!-- 项目信息 -->
+      <template id="itemTemplate">
+        <div class="group group-others group-noborder">
+          <div class="group-item">
+            <div class="group-rowspan">
+              <div class="group-colspan">
+                <h3 class="txt-rowspan2 textleft">{{ data.showName }}</h3>
+              </div>
+            </div>
+          </div>
+          <a
+            href="/h5/views/invest/initiator.html?user_id={{ data.founderId }}"
+            class="group-item"
+            style="border-bottom:1px dashed #eee;"
+          >
+            <div class="group-rowspan">
+              <div class="group-colspan" style="width:2rem;">
+                <img
+                  src="/h5/images/producers.png"
+                  data-src="{{ data.litpicPath }}"
+                  alt="发起方头像图片"
+                  width="100%"
+                  class="async"
+                />
+              </div>
+              <div class="group-colspan">{{ data.founderName }}</div>
+              <div class="group-colspan"><i class="iconfont">&#xe60c;</i></div>
+            </div>
+          </a>
+          <div class="group-item">
+            <div class="group-rowspan">
+              <div class="group-colspan">
+                <div class="progress-explain">
+                  <div
+                    class="explain-item"
+                    style="width:80%;"
+                    v-if="data.itemProcessStatus == '1' || data.itemProcessStatus == '2'"
+                  >
+                    <div v-if="data.itemProcessStatus == '1'">
+                      距离开始 {{ data.remainTime }}
+                    </div>
+                    <div v-if="data.itemProcessStatus == '2'">
+                      距离结束 {{ data.remainTime }}
+                    </div>
+                  </div>
+                  <div class="explain-item" style="width:80%;" v-else>
+                    <div>已结束</div>
+                  </div>
+                  <div class="explain-item" style="width:20%;">
+                    <var class="clr-strike">{{ scaleStr }}%</var>
+                  </div>
+                </div>
+                <div class="progress"><div class="progress-bar"></div></div>
+                <div class="progress-explain">
+                  <div class="explain-item" style="width:38%">
+                    <span>目标金额:</span> <em>{{ data.targetAmount }}元</em>
+                  </div>
+                  <div class="explain-item" style="width:36%">
+                    <span>已募集:</span> <em>{{ data.completeAmount }}元</em>
+                  </div>
+                  <div class="explain-item" style="width:26%">
+                    <span>已支持:</span> <em>{{ data.supportCount }}人</em>
+                  </div>
+                </div>
+                <div
+                  style="color:#999;font-size:0.71428571428571428571428571428571rem;text-align:left;"
+                >
+                  该项目在
+                  <em class="clr-strike">{{ data.endTime }}</em> 前，募集达到
+                  <em class="clr-strike">{{ data.successAmount }}</em> 元，视为
+                  <em class="clr-strike">众筹成功</em>
+                </div>
+                <div
+                  v-if="data.itemLabel != ''"
+                  style="text-align:center;font-size:1rem;color:#000;background:#FFF;padding:0.5rem;"
+                >
+                  <span
+                    style="padding:0 0.5rem;font-size:0.75rem; color:#999;"
+                    v-for="label in data.itemLabel.split('|')"
+                    >▪ {{ label }}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+      <my-item></my-item>
+
+      <div class="tab tab-primary" id="tabBox">
+        <ul
+          id="tabFixed"
+          class="tab-handle"
+          style="background-color: #fff;border-bottom: 1px solid #eee"
+        >
+          <li class="active">
+            <a href="javascript:void(0)"> <span>项目详情</span> </a>
+          </li>
+          <li class="">
+            <a href="javascript:void(0)"> <span>项目动态</span> </a>
+          </li>
+          <li class="">
+            <a href="javascript:void(0)"> <span>支持者</span> </a>
+          </li>
+        </ul>
+        <div class="tab-con">
+          <div class="tabCon1 tabCon">
+            <!-- 视频 -->
+            <template id="videoTemplate">
+              <div
+                class="group group-noborder"
+                style="margin-bottom:0;"
+                v-if="data.sourceVideoPath != ''"
+              >
+                <div class="group-item">
+                  <div class="group-rowspan">
+                    <div class="group-colspan">
+                      <div id="J_prismPlayer" class="prism-player"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <my-video></my-video>
+
+            <!-- 详情 -->
+            <template id="detailTemplate">
+              <div class="group group-noborder" style="margin-bottom:0;">
+                <div class="group-item">
+                  <div class="group-rowspan">
+                    <div class="group-colspan">
+                      <!-- <div id="dynamic" v-if="data.borrow.projecttrends_status && data.borrow.projecttrends_status == 1 && data.borrow.h5_projecttrends && data.borrow.h5_projecttrends.indexOf('<') != -1">
+										{{{data.borrow.h5_projecttrends}}}
+									</div> -->
+                      <!-- data.phoneDetailUrl.indexOf('<') != -1 -->
+
+                      <div id="details" v-if="data.phoneDetailUrl">
+                        {{{data.phoneDetailUrl}}}
+                      </div>
+                      <div id="details" v-else>
+                        <div id="j-showDetail" class="norecord">
+                          <i class="iconfont">&#xe621;</i>暂无项目详情
+                        </div>
+                      </div>
+
+                      <div
+                        id="security_risk"
+                        style="margin-top:1rem;text-align:center;"
+                        v-if="data.h5Safeguard"
+                      >
+                        <a
+                          href="javascript:void(0)"
+                          v-on:click="safeguard"
+                          style="display:inline-block;padding:0.5rem; border-top:1px solid #ccc; border-bottom:1px solid #ccc;"
+                        >
+                          <span>保障与风险</span>
+                          <span
+                            style="display:block;font-size:0.75rem;color:#CCC;"
+                            >点击展开阅读</span
+                          >
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <my-detail></my-detail>
+          </div>
+
+          <div class="tabCon2 tabCon" style="display: none;">
+            <!-- 项目动态 -->
+            <template id="trendsTemplate">
+              <div class="group">
+                <div v-if="data.isInvestUser == 1">
+                  <div v-if="itemtrends != null && itemtrends.length > 0">
+                    <a
+                      href="javascript:void(0)"
+                      v-for="trend in itemtrends"
+                      class="group-item process"
+                      style="margin-left: 2rem"
+                      @click="detailDynamics($index)"
+                    >
+                      <div class="group-rowspan group-others">
+                        <div class="group-colspan">
+                          <p class="font-14">{{ trend.title }}</p>
+                          <p class="clr-gray font-12" v-if="trend.createTime">
+                            {{ trend.createTime | timeStr }}
+                          </p>
+                        </div>
+                        <div class="group-colspan">
+                          <i class="iconfont">&#xe60c;</i>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div style="padding:3rem; text-align:center;" v-else>
+                    <p class="clr-gray">项目正在努力推进中！</p>
+                  </div>
+                </div>
+                <div v-if="data.isInvestUser == 0">
+                  <div style="padding:3rem; text-align:center;">
+                    <p class="clr-gray">该模块仅对收益型投资者开放</p>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <my-trends></my-trends>
+          </div>
+
+          <!-- 投资记录&&支持者 -->
+          <div class="tabCon3 tabCon" style="display: none;">
+            <template id="supportTemplate">
+              <div class="group group-top width40">
+                <div v-if="data.isInvestUser == 1">
+                  <div
+                    class="group-item"
+                    style="border:none;"
+                    v-if="lists != null && lists.length > 0"
+                  >
+                    <div class="group-rowspan" v-for="list in lists">
+                      <div class="group-colspan">
+                        <img
+                          :src="list.litpic || '/h5/images/face.jpg'"
+                          alt=""
+                          width="100%"
+                          style="border-radius:5px; width:2.857rem;height:2.857rem;"
+                        />
+                      </div>
+                      <div class="group-colspan">
+                        <p>{{ list.nickname }}</p>
+                        <p class="clr-gray font-10">{{ list.investTime }}</p>
+                      </div>
+                      <div
+                        class="group-colspan clr-gray"
+                        style="text-align:right;width:6rem;"
+                      >
+                        {{ list.supportAmount }}元
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="padding:3rem; text-align:center;" v-else>
+                    <p class="clr-gray">好项目需要您的支持！</p>
+                  </div>
+                </div>
+                <div v-if="data.isInvestUser == 0">
+                  <div style="padding:3rem; text-align:center;">
+                    <p class="clr-gray">该模块仅对收益型投资者开放</p>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <my-support></my-support>
+          </div>
+        </div>
+      </div>
+
+      <!-- footer  -->
+      <template id="footTemplate">
+        <div class="footer">
+          <div
+            class="group group-noborder group-excel4"
+            style="margin:0;border-top:1px solid #eee;"
+          >
+            <div class="group-item">
+              <div class="group-rowspan">
+                <a
+                  href="/h5/views/main/index.html"
+                  class="group-colspan"
+                  style="width:5%;"
+                >
+                  <p><i class="iconfont">&#xe642;</i></p>
+                  <p class="font-10">首页</p>
+                </a>
+                <a
+                  href="javascript:void(0)"
+                  v-on:click="addToWeixin"
+                  class="group-colspan"
+                  id="addtoweixinButton"
+                  style="width:5%;"
+                >
+                  <p><i class="iconfont">&#xe65c;</i></p>
+                  <p class="font-10">客服</p>
+                </a>
+                <a
+                  href="/h5/views/invest/investComment.html?itemid={{
+                    data.id
+                  }}&itemFlag={{ data.itemFlag }}&commentType=3"
+                  class="group-colspan"
+                  style="width:5%;"
+                >
+                  <p><i class="iconfont">&#xe60e;</i></p>
+                  <p class="font-10" style="white-space: nowrap;">
+                    评论 {{ data.commentCount | countFilter }}
+                  </p>
+                </a>
+                <div class="group-colspan" v-if="data.itemStatus == 2">
+                  <a
+                    href="/h5/views/invest/investGrade.html?itemid={{
+                      data.id
+                    }}"
+                    class="button button-primary button-block button-fill button-lg"
+                    >去支持</a
+                  >
+                </div>
+                <div class="group-colspan" v-else>
+                  <a
+                    href="/h5/views/invest/investGrade.html?itemid={{
+                      data.id
+                    }}"
+                    class="button button-primary button-block button-fill button-lg disabled"
+                    >去支持</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+      <my-foot></my-foot>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+      requirejs(["invest/invest"]);
+    </script>
+    <script
+      type="text/javascript"
+      async="async"
+      charset="utf-8"
+      src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"
+    ></script>
+  </body>
+</html>

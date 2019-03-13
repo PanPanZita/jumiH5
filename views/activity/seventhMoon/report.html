@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>一份来自聚小米的情书</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <link rel="stylesheet" href="/h5/styles/swiper-4.3.3.min.css">
+    <link rel="stylesheet" href="/h5/styles/animate.css">
+    <style type="text/css">
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: "PingFang SC", "PingFangSC-Regular", "PingFangSC-Semibold", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        #container,
+        #wrapper,
+        .swiper-slide {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .bgText {
+            box-sizing: border-box;
+            background: #ffffff;
+            opacity: 0.9;
+            filter: alpha(opacity=90);
+            position: absolute;
+            left: 9vw;
+            z-index: 5;
+            padding: 5vw;
+            border-radius: 5px;
+            font-size: 4.26vw;
+            box-shadow: 1px 1px 20px 1px rgba(222, 85, 103, .16);
+            -webkit-box-shadow: 1px 1px 20px 1px rgba(222, 85, 103, .16);
+            -moz-box-shadow: 1px 1px 20px 1px rgba(222, 85, 103, .16);
+            -ms-box-shadow: 1px 1px 20px 1px rgba(222, 85, 103, .16);
+            -o-box-shadow: 1px 1px 20px 1px rgba(222, 85, 103, .16);
+        }
+
+        .bgOnetext {
+            width: 80vw;
+            top: 13.2vh;
+            left: 4vw;
+        }
+
+        .bgTwotext {
+            width: 80vw;
+            top: 14.8vh;
+            left: 4vw;
+        }
+
+        .bgThreetext {
+            width: 82.4vw;
+            top: 13.6vh;
+        }
+
+        .bgFourtext {
+            width: 75.46vw;
+            top: 13.6vh;
+        }
+
+        .heart {
+            display: inline-block;
+            width: 3.2vw;
+        }
+
+        .box {
+            /* 这个高度尽量设置的高一点，这样就可以避免整行数值在一条线上 */
+            height: 6.4vw;
+            overflow: hidden;
+        }
+
+        .box span {
+            display: inline-block;
+            /*background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#fef637), to(#ec6121));*/
+            background-image: -webkit-linear-gradient(#ec6121, #ec6121);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: transparent;
+            width: 3.2vw;
+            height: 6.4vw;
+            font-size: 5.33vw;
+            line-height: 6.4vw;
+            font-weight: bolder;
+        }
+
+        .box .sign-box span {
+            width: 6vw;
+        }
+
+        .box .signDot-box span {
+            width: 3vw;
+        }
+
+        .box .digit-container {
+            width: 3.2vw;
+            text-align: left;
+            overflow: hidden;
+            font-size: 0;
+        }
+
+        .l {
+            float: left;
+        }
+
+        .arrow_down {
+            position: absolute;
+            right: 7.7vw;
+            bottom: -3vw;
+            width: 0;
+            height: 0;
+            border-left: 3.2vw solid transparent;
+            border-right: 3.2vw solid transparent;
+            border-top: 3.2vw solid #ffffff;
+        }
+
+        .gaps {
+            height: 7.46vw;
+            line-height: 7.46vw;
+        }
+
+        .goKeyword {
+            width: 100%;
+            height: 16vw;
+            position: absolute;
+            left: 0;
+            bottom: 22.4vw;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hrefKeyword {
+            display: inline-block;
+            width: 30.68vw;
+        }
+
+        .bgImgOne {
+            background: url('/h5/images/activity/seventhMoon/bg01.jpg') no-repeat;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .bgImgTwo {
+            background: url('/h5/images/activity/seventhMoon/bg02.jpg') no-repeat;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .bgImgThree {
+            background: url('/h5/images/activity/seventhMoon/bg03.jpg') no-repeat;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .bgImgFour {
+            background: url('/h5/images/activity/seventhMoon/bg04.jpg') no-repeat;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .arrowUp {
+            width: 100%;
+            height: 10vw;
+            position: absolute;
+            bottom: 7vw;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: up 1s linear infinite;
+            -webkit-animation: up 1s linear infinite;
+            -moz-animation: up 1s linear infinite;
+            -ms-animation: up 1s linear infinite;
+            -o-animation: up 1s linear infinite;
+        }
+
+        .firstArrow,
+        .secondArrow {
+            width: 4vw;
+            height: 4vw;
+            border-top: 4px solid #ceeac6;
+            border-right: 4px solid #ceeac6;
+            transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+        }
+
+        @keyframes up {
+            from {
+                bottom: 12vw;
+            }
+            to {
+                bottom: 7vw;
+            }
+        }
+
+        @-moz-keyframes up {
+            from {
+                bottom: 12vw;
+            }
+            to {
+                bottom: 7vw;
+            }
+        }
+
+        @-webkit-keyframes up {
+            from {
+                bottom: 12vw;
+            }
+            to {
+                bottom: 7vw;
+            }
+        }
+
+        @-o-keyframes up {
+            from {
+                bottom: 12vw;
+            }
+            to {
+                bottom: 7vw;
+            }
+        }
+
+        .parText {
+            vertical-align: top;
+            display: inline-block;
+            padding: 1vw 0;
+        }
+
+        .floatText {
+            float: left;
+        }
+
+        .leftText {
+            float: left;
+            margin-right: 1.4vw;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+    <!-- 横屏展示结果 -->
+    <div id="landscape">
+        <img src="/h5/images/activity/seventhMoon/landscape.jpg" alt="横屏警告">
+        <p>聚小米提醒您：为了更好的体验，请竖屏浏览~~~</p>
+    </div>
+
+    <template id="reportTemplate">
+
+        <div id="music-off" @click="pauseMusic">
+            <audio id="audio" loop="loop" src="/h5/images/activity/seventhMoon/bgmusic.mp3">抱歉，您的浏览器不支持 audio 标签。</audio>
+            <p id="noMusic" style="display: none;"></p>
+        </div>
+
+        <div class="swiper-container" id="container">
+            <div class="swiper-wrapper" id="wrapper">
+                <div class="swiper-slide bgImgOne">
+                    <div class="bgOnetext ani bgText" swiper-animate-effect="rotateInDownLeft" swiper-animate-duration="1.5s">
+                        <div class="gaps">
+                            <span class="fontSize18">初识聚米</span>
+                            <img src="/h5/images/activity/seventhMoon/heart.png" alt="heart" class="heart ani" swiper-animate-effect="bounceInRight"
+                                swiper-animate-duration="1.5s" swiper-animate-delay="1s">
+                        </div>
+                        <div class="date-box box"></div>
+                        <p class="gaps">来到了聚米</p>
+                        <div style="margin-top:2vw;">
+                            <p class="leftText">您是</p>
+                            <div class="order-box box leftText"></div>
+                            <p class="ani" swiper-animate-effect="bounceInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1.5s">聚小米心上人</p>
+                        </div>
+                        <span class="arrow_down"></span>
+                    </div>
+                    <div class="arrowUp">
+                        <p class="firstArrow"></p>
+                        <p class="secondArrow"></p>
+                    </div>
+                    <div class="logoImg">
+                        <img src="/h5/images/activity/seventhMoon/logo.png" alt="logo">
+                    </div>
+                </div>
+                <div class="swiper-slide bgImgTwo" v-if="hasInvest == 1">
+                    <div class="bgTwotext ani bgText" swiper-animate-effect="lightSpeedIn" swiper-animate-duration="1.5s">
+                        <p class="gaps">第一个钟意的项目是</p>
+                        <p class="clr-strike ani" style="font-weight: bolder;" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s">"{{firItemName}}"</p>
+                        <div class="parText">
+                            <span class="leftText">投资金额</span>
+                            <div class="money-box box floatText"></div>
+                            <img src="/h5/images/activity/seventhMoon/heart.png" alt="heart" class="heart ani" swiper-animate-effect="bounceInUp" swiper-animate-duration="1.5s"
+                                swiper-animate-delay="1s">
+                        </div>
+                        <span class="arrow_down"></span>
+                    </div>
+                    <div class="arrowUp">
+                        <p class="firstArrow"></p>
+                        <p class="secondArrow"></p>
+                    </div>
+                    <div class="logoImg">
+                        <img src="/h5/images/activity/seventhMoon/logo.png" alt="logo">
+                    </div>
+                </div>
+                <div class="swiper-slide bgImgTwo" v-else>
+                    <div class="bgTwotext ani bgText" swiper-animate-effect="lightSpeedIn" swiper-animate-duration="1.5s">
+                        <p class="gaps">
+                            <span>暂未投资项目</span>
+                        </p>
+                        <p class="gaps ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s">
+                            <span>期待与您的第一次邂逅</span>
+                            <img src="/h5/images/activity/seventhMoon/heart.png" alt="heart" class="heart ani" swiper-animate-effect="bounceInUp" swiper-animate-duration="1.5s"
+                                swiper-animate-delay="1s">
+                        </p>
+                        <span class="arrow_down"></span>
+                    </div>
+                    <div class="arrowUp">
+                        <p class="firstArrow"></p>
+                        <p class="secondArrow"></p>
+                    </div>
+                    <div class="logoImg">
+                        <img src="/h5/images/activity/seventhMoon/logo.png" alt="logo">
+                    </div>
+                </div>
+                <div class="swiper-slide bgImgThree">
+                    <div class="bgThreetext ani bgText" swiper-animate-effect="slideInDown" swiper-animate-duration="1.5s">
+                        <div class="parText">
+                            <p class="leftText">共参与投资项目</p>
+                            <div class="itemAmount-box box floatText rightText"></div>
+                            <img src="/h5/images/activity/seventhMoon/heart.png" alt="heart" class="heart ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s"
+                                swiper-animate-delay="1s">
+                        </div>
+                        <div class="parText">
+                            <p class="leftText">总投资金额达到</p>
+                            <div class="totalMoney-box box floatText rightText"></div>
+                        </div>
+                        <div class="parText">
+                            <p class="leftText">其中单个项目最多投资了</p>
+                            <div class="singleMoney-box box floatText rightText"></div>
+                        </div>
+                        <span class="arrow_down"></span>
+                    </div>
+                    <div class="arrowUp">
+                        <p class="firstArrow"></p>
+                        <p class="secondArrow"></p>
+                    </div>
+                    <div class="logoImg">
+                        <img src="/h5/images/activity/seventhMoon/logo.png" alt="logo">
+                    </div>
+                </div>
+                <div class="swiper-slide bgImgFour">
+                    <div class="bgFourtext ani bgText" swiper-animate-effect="zoomInLeft" swiper-animate-duration="1s">
+                        <div class="parText">
+                            <p class="leftText">陪伴聚小米的</p>
+                            <div class="accompany-box box floatText rightText"></div>
+                            <img src="/h5/images/activity/seventhMoon/heart.png" alt="heart" class="heart ani" swiper-animate-effect="bounceInDown" swiper-animate-duration="1.5s"
+                                swiper-animate-delay="1s">
+                        </div>
+                        <div class="parText">
+                            <p class="leftText">已为你赚得收益</p>
+                            <div class="alreadyGet-box box floatText rightText"></div>
+                        </div>
+                        <div class="parText">
+                            <p class="leftText">待收本金</p>
+                            <div class="tobeCollected-box box floatText rightText"></div>
+                        </div>
+                        <span class="arrow_down"></span>
+                    </div>
+                    <div class="goKeyword ani" swiper-animate-effect="slideInUp" swiper-animate-duration="1.5s">
+                        <span class="rightArrow arrow"></span>
+                        <a href="javascript:void(0);" class="hrefKeyword" @click="hrefKeyword">
+                            <img src="/h5/images/activity/seventhMoon/goKeyword.png" alt="生成关键字">
+                        </a>
+                        <span class="leftArrow arrow"></span>
+                    </div>
+                    <div class="logoImg">
+                        <img src="/h5/images/activity/seventhMoon/logo.png" alt="logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <my-report></my-report>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['seventhMoon/report']);     
+    </script>
+</body>
+
+
+</html>

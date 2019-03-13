@@ -1,0 +1,135 @@
+{
+  "account/account.js": "account/account.js?v=0985782c5e",
+  "account/active/activeDetail.js":
+    "account/active/activeDetail.js?v=a223eb55e2",
+  "account/active/activeRecord.js":
+    "account/active/activeRecord.js?v=2af20e0477",
+  "account/active/cartAddress.js": "account/active/cartAddress.js?v=e36cdb9128",
+  "account/active/cartAddressCreate.js":
+    "account/active/cartAddressCreate.js?v=342e4aade7",
+  "account/active/cartAddressEdit.js":
+    "account/active/cartAddressEdit.js?v=c916c9f586",
+  "account/address/address.js": "account/address/address.js?v=6c52a8868a",
+  "account/address/addressCreate.js":
+    "account/address/addressCreate.js?v=726530bed0",
+  "account/address/addressEdit.js":
+    "account/address/addressEdit.js?v=72e7978e99",
+  "account/assets/assets.js": "account/assets/assets.js?v=6f961d3931",
+  "account/assets/assetsLog.js": "account/assets/assetsLog.js?v=f59b2f290c",
+  "account/assets/cashout.js": "account/assets/cashout.js?v=aa0d33bbe0",
+  "account/assets/cashoutRecord.js":
+    "account/assets/cashoutRecord.js?v=f5ec095e2f",
+  "account/assets/cashoutSuccess.js":
+    "account/assets/cashoutSuccess.js?v=64a9b149ee",
+  "account/assets/recharge.js": "account/assets/recharge.js?v=6c5818c6b3",
+  "account/assets/rechargeSuccess.js":
+    "account/assets/rechargeSuccess.js?v=0bfcd9e4ad",
+  "account/faq/FAQ.js": "account/faq/FAQ.js?v=103c889742",
+  "account/faq/FAQapp.js": "account/faq/FAQapp.js?v=091987831d",
+  "account/invest/invest.js": "account/invest/invest.js?v=1e3e2d02d1",
+  "account/invest/investDetail.js":
+    "account/invest/investDetail.js?v=b323218a37",
+  "account/invest/redpacketReceive.js":
+    "account/invest/redpacketReceive.js?v=d2a9da726b",
+  "account/invest/redpacketSend.js":
+    "account/invest/redpacketSend.js?v=00e43049e0",
+  "account/invite/commissionDetail.js":
+    "account/invite/commissionDetail.js?v=0fceaa220e",
+  "account/invite/commissionList.js":
+    "account/invite/commissionList.js?v=0175f683b2",
+  "account/invite/invite.js": "account/invite/invite.js?v=dd8a799f7f",
+  "account/invite/inviteFriend.js":
+    "account/invite/inviteFriend.js?v=a3a4bef83c",
+  "account/invite/inviteRecord.js":
+    "account/invite/inviteRecord.js?v=22bf469114",
+  "account/invite/inviteRecordDetail.js":
+    "account/invite/inviteRecordDetail.js?v=1047641429",
+  "account/invite/rewardDetail.js":
+    "account/invite/rewardDetail.js?v=6e90ea4261",
+  "account/invite/rewardRecord.js":
+    "account/invite/rewardRecord.js?v=ab242e515d",
+  "account/level/getGrowth.js": "account/level/getGrowth.js?v=b64b258875",
+  "account/level/level.js": "account/level/level.js?v=2f7d3aa436",
+  "account/reward/jumibiLog.js": "account/reward/jumibiLog.js?v=f7913cf4ef",
+  "account/reward/redpacketLog.js":
+    "account/reward/redpacketLog.js?v=677497caf6",
+  "account/settings/bankcardToBind.js":
+    "account/settings/bankcardToBind.js?v=aee2789b5e",
+  "account/settings/bankcardToBindAndCashout.js":
+    "account/settings/bankcardToBindAndCashout.js?v=9b421fe79e",
+  "account/settings/bankcardToBindAndCashoutCg.js":
+    "account/settings/bankcardToBindAndCashoutCg.js?v=587a4ea894",
+  "account/settings/bankcardToBindCg.js":
+    "account/settings/bankcardToBindCg.js?v=426c87faae",
+  "account/settings/bankcardToBindFail.js":
+    "account/settings/bankcardToBindFail.js?v=7188120073",
+  "account/settings/bankcardToBindSuccess.js":
+    "account/settings/bankcardToBindSuccess.js?v=55f0801adf",
+  "account/settings/bankcardToShow.js":
+    "account/settings/bankcardToShow.js?v=ba830ec009",
+  "account/settings/forgetPaypwd.js":
+    "account/settings/forgetPaypwd.js?v=1cef0ad4af",
+  "account/settings/openaccountCg.js":
+    "account/settings/openaccountCg.js?v=436c7acb93",
+  "account/settings/openaccountFail.js":
+    "account/settings/openaccountFail.js?v=3b0e95d4d2",
+  "account/settings/openaccountSuccess.js":
+    "account/settings/openaccountSuccess.js?v=55f0801adf",
+  "account/settings/passwordResetpay.js":
+    "account/settings/passwordResetpay.js?v=52811e3f99",
+  "account/settings/personal.js": "account/settings/personal.js?v=c5a5d5b9e2",
+  "account/settings/personalNickname.js":
+    "account/settings/personalNickname.js?v=1c8db419a2",
+  "account/settings/personalSex.js":
+    "account/settings/personalSex.js?v=461fe4b803",
+  "account/settings/safe.js": "account/settings/safe.js?v=ee5f97dceb",
+  "account/settings/setting.js": "account/settings/setting.js?v=e7911f7df7",
+  "account/settings/updateAccountPwd.js":
+    "account/settings/updateAccountPwd.js?v=118c2641ad",
+  "account/settings/updatePayPwd.js":
+    "account/settings/updatePayPwd.js?v=7d7e9e136c",
+  "account/training/training.js": "account/training/training.js?v=c5ba122368",
+  "activity/anniversary.js": "activity/anniversary.js?v=cf34e39957",
+  "activity/anniversaryInvest.js": "activity/anniversaryInvest.js?v=c829228fd1",
+  "activity/anniversaryNewUser.js":
+    "activity/anniversaryNewUser.js?v=acaa148392",
+  "activity/annualReport.js": "activity/annualReport.js?v=2a7b4c2cbd",
+  "activity/christmasAndNeujahr.js":
+    "activity/christmasAndNeujahr.js?v=79ce1fb4aa",
+  "activity/exchangeDumplings.js": "activity/exchangeDumplings.js?v=9537f5ac24",
+  "activity/exchangeResult.js": "activity/exchangeResult.js?v=a9928f31e6",
+  "activity/gardenParty.js": "activity/gardenParty.js?v=d6b4e01477",
+  "activity/playrockSound.js": "activity/playrockSound.js?v=6b5b45959b",
+  "discover/discover.js": "discover/discover.js?v=c59dfef831",
+  "exchange/exchange.js": "exchange/exchange.js?v=3e5f9d607a",
+  "invest/initiator.js": "invest/initiator.js?v=ed6d93a181",
+  "invest/initiatorapp.js": "invest/initiatorapp.js?v=717522526a",
+  "invest/invest.js": "invest/invest.js?v=b8e4b88bb7",
+  "invest/investCartAddress.js": "invest/investCartAddress.js?v=2e3af55b95",
+  "invest/investCartAddressCreate.js":
+    "invest/investCartAddressCreate.js?v=af39a21145",
+  "invest/investCartAddressEdit.js":
+    "invest/investCartAddressEdit.js?v=5689deac5b",
+  "invest/investComment.js": "invest/investComment.js?v=fae8b773cf",
+  "invest/investFail.js": "invest/investFail.js?v=818a01af98",
+  "invest/investGrade.js": "invest/investGrade.js?v=26cebb2673",
+  "invest/investSuccess.js": "invest/investSuccess.js?v=933a054d74",
+  "lottery/lottery.js": "lottery/lottery.js?v=83522659d3",
+  "main/index.js": "main/index.js?v=b83b8f00d3",
+  "main/list.js": "main/list.js?v=fe4771e51e",
+  "main/search.js": "main/search.js?v=31cccf7044",
+  "notice/announcement.js": "notice/announcement.js?v=a00a010c1a",
+  "notice/information.js": "notice/information.js?v=15db672502",
+  "notice/mediaReport.js": "notice/mediaReport.js?v=4afe5b21d4",
+  "notice/projectDynamics.js": "notice/projectDynamics.js?v=eefb18c075",
+  "payment/investCart.js": "payment/investCart.js?v=2dab728a53",
+  "payment/investCartweixin.js": "payment/investCartweixin.js?v=c6ef80849e",
+  "topic/topicDetail.js": "topic/topicDetail.js?v=4bce4b4090",
+  "topic/topicList.js": "topic/topicList.js?v=dc8b43cdfa",
+  "topic/topicRecord.js": "topic/topicRecord.js?v=b148774d59",
+  "topic/topicSingle.js": "topic/topicSingle.js?v=8737394a0e",
+  "training/training.js": "training/training.js?v=2dc4f8c395",
+  "training/trainingapp.js": "training/trainingapp.js?v=9c929f1851",
+  "wheel/wheel.js": "wheel/wheel.js?v=ca982f58ad",
+  "wheel/wheelRecord.js": "wheel/wheelRecord.js?v=a20ffd1bf5"
+}

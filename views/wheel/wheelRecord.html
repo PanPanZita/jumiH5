@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>大转盘-聚米众筹</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+.group-current .group-colspan:first-child{width:33%}
+.group-current .group-colspan:nth-child(2){text-align:center;}
+.group-current .group-colspan:last-child{width:33%}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="recordTemplate">
+			<template v-if="awardLogList != null && awardLogList.length > 0">
+				<div class="group group-justify">
+					<div class="group-item" v-for="list in awardLogList">
+						<span class="group-rowspan">
+							<span class="group-colspan">
+								<p v-if="list.awardType == 0">现金</p>
+								<p v-if="list.awardType == 1">红包</p>
+								<p v-if="list.awardType == 2">聚米币</p>
+								<p v-if="list.awardType == 3">{{list.awardContent}}</p>
+								<p v-if="list.awardType == 4">{{list.awardContent}}</p>
+								<p class="clr-gray font-12" v-if="list.createTime">{{list.createTime | timeStr}}</p>
+							</span>
+							<span class="group-colspan">
+								<p v-if="list.awardType == 0" class="clr-strike">{{list.awardValue}} 元</p>
+								<p v-if="list.awardType == 1" class="clr-strike">{{list.awardValue}} 元</p>
+								<p v-if="list.awardType == 2" class="clr-strike">{{list.awardValue}} 个</p>
+								<!-- <p v-if="list.awardType == 3" class="clr-strike">{{list.awardValue}} 份</p>
+								<p v-if="list.awardType == 4" class="clr-strike">{{list.awardValue}} 份</p> -->
+							</span>
+						</span>
+					</div>
+				</div>
+			</template>
+
+			<div style="padding: 0.5rem; text-align: center;" v-else>
+				<i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;">&#xe628;</i>
+				<p class="clr-gray">手指一抖，每天都有，转转转!</p>
+			</div>
+
+			<div id="loadMoreButton" v-if="awardLogList != null && awardLogList.length >= 20">
+				<i class="iconfont">&#xe65d;</i>
+				<span>上拉刷新数据</span>
+			</div>
+			
+			<div v-if="isIOSShow" style="font-size:0.625rem;color:#999; text-align:center;padding:1rem 0;">活动由聚米众筹提供，与设备生产商Apple Inc.公司无关。</div>
+		</template>
+		<my-record></my-record>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['wheel/wheelRecord']);
+	</script>
+</body>
+</html>

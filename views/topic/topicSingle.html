@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="msapplication-tap-highlight" content="no" />
+<title>发现-聚米众筹</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="topicSingleTemplate">
+			<img src="/h5/images/default21.jpg" data-src="{{data.h5Pic1}}" alt="" width="100%" class="async"/>
+			
+			<div v-if="actionList.length">
+				<div class="group group-justify group-list" style="background:transparent;margin-top:0.5rem;">
+					<a href="topicDetail.html?action_id={{item.id}}" class="group-item" v-for="item in actionList">
+						<span class="group-rowspan">
+							<div style="position:relative;">
+								<img :src="item.image1" width="100%" alt="产品图片" class="async">
+								<span class="statusLimitTime fixed" v-if="item.activityStatus == 1">预告</span>
+								<span class="statusLimitNum fixed" v-if="item.activityStatus == 2 && item.type == 2">抽奖</span>
+								<span class="statusLimitNum fixed" v-if="item.activityStatus == 2 && item.type == 3">兑换</span>
+								<span class="statusEnd fixed" v-if="item.activityStatus == 3">已结束</span>
+							</div>
+						</span>
+						<span class="group-rowspan"><var class="txt-rowspan1 font-12" style="height:1.5rem;overflow:hidden;">{{item.name}}</var></span>
+						<span class="group-rowspan">
+							<span class="group-colspan clr-strike">
+								<i class="iconfont clr-strike font-12" v-if="item.singleLimit > 0">&#xe69c;</i>
+								<i class="iconfont clr-strike font-12" v-if="item.islevel == 1">&#xe69b;</i>
+								{{item.expendCoin}}聚米币
+							</span>
+						</span>
+					</a>
+				</div>
+			</div>
+			<div style="padding: 0.5rem; text-align: center;" v-else>
+				<i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;">&#xe628;</i>
+				<p class="clr-gray">暂无数据</p>
+			</div>
+			
+			<div v-if="isIOSShow" style="font-size:0.625rem;color:#999; text-align:center;padding:1rem 0;">活动由聚米众筹提供，与设备生产商Apple Inc.公司无关。</div>
+		</template>
+		<my-topicsingle></my-topicsingle>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['topic/topicSingle']);
+	</script>
+	<script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+</html>

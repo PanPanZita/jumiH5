@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Cache-control" content="max-age=0" />
+<meta http-equiv="Cache-control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+<title>提现</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+	.button-fill.button.disabled, .button-fill.button[disabled]{
+		background: #ee9c76;
+	}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="cashoutTemplate">
+			<form action="javascript:void(0)" method="post" id="form">
+				<div class="group width80 group-clear solid" style="margin-top:1rem;">
+					<div class="group-item">
+						<div class="group-rowspan" >
+							<div class="group-colspan"><img class="form-label" :src="data.bankLogo" alt="银行图标"></div>
+							<div class="group-colspan">{{data.bankName}} ({{data.bankCardNo}})</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="group group-justify group-clear">
+					<div class="group-item" style="border-bottom: none;">
+						<div class="group-rowspan clr-gray solid">
+							<div class="group-colspan"><label class="form-label">可提现金额</label></div>
+							<div class="group-colspan textright">{{canCashMoney}} 元
+							<!-- &nbsp;&nbsp;<i class="iconfont" @click="cashouttips">&#xe630;</i></div> -->
+						</div>
+					</div>
+				</div>
+				<div class="group group-clear clr-gray">
+					<div class="group-rowspan" style="background-color: #f4f4f4;padding:0 1rem;">
+						<div class="group-colspan" style="text-align: right;">本月剩余<span>{{cashFreeTimes}}<span>次免费提现次数</div>
+					</div>							
+				</div>
+				<div class="group group-justify group-clear">
+					<div class="group-item" style="border-bottom: none;">
+						<div class="group-rowspan">
+							<div class="group-colspan">
+								<label class="form-label">提现金额</label>
+								<input type="number" v-model="cashMoney" @blur="cashoutInputBlur" @keyup="cashoutInputKeyup" @focus="cashoutInputFocus" placeholder="请输入金额" class="form-control-noborder" style="width:60%;padding-left: 1rem;"/>
+							</div>
+							<div class="group-colspan" style="width:30%;">
+								<a href="javascript:void(0)" class="clr-crash" @click="allCashout">全部提现</a>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="group group-clear clr-gray">
+					<div class="group-rowspan" style="background-color: #f4f4f4;padding:0 1rem;">
+						<div class="group-colspan">实际到账<span>{{arriveMoney}}</span>元</div>
+						<div class="group-colspan right">手续费<span>{{fees}}</span>元</div>
+					</div>						
+				</div>
+				<div class="group group-noborder group-transparent group-clear" style="padding-top:2rem;background-color: #f4f4f4;">
+					<div class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan">
+								<button type="button" class="button button-fill button-block" :class="{'disabled':isShowButton}" @click="ok">确认提现</button>
+							</div>
+						</div>
+						<div class="group-rowspan">
+							<div class="group-colspan" >
+								<a href="javascript:void(0)" @click="aboutCashout" class="clr-gray">关于提现</a>
+							</div>
+							<div class="group-colspan">
+								<a href="cashoutRecord.html" class="clr-gray right">提现记录</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<!-- 6位支付密码框 -->
+			<div class="wrap phonecode" id="phonecodeWrap" style="display: none;">
+			 	<input type="tel" maxlength="6" class="real" id="real" @keyup="inputpwdKeyup" v-model="paypassword"/>
+			 	<div class="box">
+				 	<div class="fake">
+					 	<input type="password" disabled="disabled" style="background: #fff;">
+					 	<input type="password" disabled="disabled" style="background: #fff;">
+					 	<input type="password" disabled="disabled" style="background: #fff;">
+					 	<input type="password" disabled="disabled" style="background: #fff;">
+					 	<input type="password" disabled="disabled" style="background: #fff;">
+					 	<input type="password" disabled="disabled" style="background: #fff;">
+				 	</div>
+			 	</div>
+			 	<div class="active"><img src="/h5/images/ios/paylogo.gif"></div>
+			</div>	
+
+		</template>
+		<my-cashout></my-cashout>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/assets/cashout']);
+		window.onpageshow = function(event) {
+			if (event.persisted) {   
+			   window.location.reload()
+			}
+		};
+	</script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>活动管理-活动详情</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <link rel="stylesheet" type="text/css" href="/h5/javascripts/selectlinkage/selectlinkage.css">
+    <style>
+        .group-order .group-colspan {
+            vertical-align: top;
+        }
+
+        .group-order .group-colspan:first-child {
+            width: 5.5rem;
+            text-align: right;
+        }
+
+        .addressManagerBox a.clr-orange:hover {
+            color: #FF7300;
+        }
+
+        .clear {
+            padding: 0.325rem 0;
+        }
+
+        .status {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            padding: 1rem;
+            width: 100vw;
+            height: 34.375vw;
+            background-image: url(/h5/images/account/orderDetail.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            line-height: initial;
+            text-align: center;
+        }
+
+        .status span {
+            color: #FFF;
+            font-weight: 600;
+        }
+
+        .status span:first-of-type {
+            font-size: 5.625vw;
+        }
+
+        .status span:last-of-type {
+            font-size: 4.2vw;
+        }
+
+        .iconz-type {
+            display: inline-block;
+            width: 5vw;
+            height: 5vw;
+            border-radius: 3px;
+            color: white;
+            line-height: 5vw;
+            text-align: center;
+        }
+
+        .show-eclipse {
+            display: inline-block;
+            max-width: 40vw;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .left-cursor {
+            display: inline-block;
+            width: 2.1vw;
+            height: 2.1vw;
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+            transform: rotate3d(0, 0, 1, 45deg);
+        }
+
+        .spanz {
+            vertical-align: middle;
+        }
+
+        .chouColor {
+            background: #EC6121;
+        }
+
+        .duiColor {
+            background: #81C735;
+        }
+
+        .jiangColor {
+            background: #EF3B2D;
+        }
+
+        .yingColor {
+            background: #5797DE;
+        }
+
+        .first-elez {
+            width: 21.875vw;
+            height: 16.5625vw;
+        }
+
+        .second-elez {
+            width: 50vw;
+            height: 16.5625vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+
+        .third-elez {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 18vw;
+            height: 16.5625vw;
+        }
+
+        .self-control {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .third-elez span {
+            display: inline-block;
+            width: 100%;
+            height: 5.625vw;
+            color: #666666;
+            font-size: 3.75vw;
+            line-height: 5.625vw;
+            text-align: right;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+    <div id="box">
+        <template id="activeTemplate">
+            <div class="status" v-if="data.orderStatus == 1">
+                <span>待确认</span>
+                <br>
+                <span>请尽快确认您的订单</span>
+            </div>
+            <div class="status" v-if="data.orderStatus == 2">
+                <span>待发货</span>
+                <br>
+                <span>我们将会尽快处理您的订单，请耐心等待</span>
+            </div>
+            <div class="status" v-if="data.orderStatus == 3">
+                <span>已完成</span>
+            </div>
+            <div class="status" v-if="data.orderStatus == 6">
+                <span>待收货</span>
+                <br>
+                <span>您的订单已发出，请留意查收</span>
+            </div>
+            <div class="status" v-if="data.orderStatus == 5">
+                <span>已失效</span>
+                <br>
+                <span>失败原因：系统关闭</span>
+            </div>
+            <!-- 1寄送订单2备注0无订单 -->
+            <div class="group group-small group-justify" v-if="data.orderType == 1">
+                <a href="cartAddress.html?orderId={{data.id}}" class="group-item" v-if="data.orderStatus == 1 && data.addressId !=0">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <div style="overflow:hidden;padding-bottom:0.5rem;">
+                                <span class="left font-16">{{data.receiveName}}</span>
+                                <span class="right font-16">{{data.receivePhone}}</span>
+                            </div>
+                            <div>
+                                <span>{{data.receiveProvince}}</span>
+                                <span>{{data.receiveCity}}</span>
+                                <span>{{data.receiveAddress}}</span>
+                            </div>
+                        </div>
+                        <div class="group-colspan">
+                            <i class="iconfont">&#xe60c;</i>
+                        </div>
+                    </div>
+                </a>
+                <a href="javascript:void(0);" class="group-item" v-if="data.orderStatus != 1">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <div style="overflow:hidden;padding-bottom:0.5rem;">
+                                <span class="left font-16">{{data.receiveName}}</span>
+                                <span class="right font-16">{{data.receivePhone}}</span>
+                            </div>
+                            <div>
+                                <span>{{data.receiveProvince}}</span>
+                                <span>{{data.receiveCity}}</span>
+                                <span>{{data.receiveAddress}}</span>
+                            </div>
+                        </div>
+                        <div class="group-colspan">
+                            <i class="iconfont">&#xe60c;</i>
+                        </div>
+                    </div>
+                </a>
+                <!-- 只有====寄送订单待确认=====状态下才可以修改地址 -->
+                <a href="cartAddress.html?orderId={{data.id}}" class="group-item" v-if="data.orderStatus == 1 && data.addressId == 0">
+                    <div class="group-rowspan">
+                        <div class="group-colspan" style="padding:2rem 0;line-height:2;text-align:center;">
+                            + 维护收货地址
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="group group-justify group-top group-small">
+                <a href="/h5/views/topic/topicDetail.html?action_id={{data.sourceId}}" class="group-item" v-show="data.sourceType != 3">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <span class="iconz-type spanz chouColor" v-show="data.sourceType == 0">筹</span>
+                            <span class="iconz-type spanz duiColor" v-show="data.sourceType == 1 && data.actionType == 3">兑</span>
+                            <span class="iconz-type spanz jiangColor" v-show="data.sourceType == 1 && data.actionType != 3">奖</span>
+                            <span class="show-eclipse spanz">{{data.sourceName}}</span>
+                            <span class="left-cursor spanz"></span>
+                        </div>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" class="group-item" v-show="data.sourceType == 3">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <span class="iconz-type spanz yingColor" v-show="data.sourceType == 3">营</span>
+                            <span class="show-eclipse spanz">{{data.sourceName}}</span>
+                            <span class="left-cursor spanz"></span>
+                        </div>
+                    </div>
+                </a>
+                <div class="group-item">
+                    <div class="group-rowspan self-control" style="padding-top: .75rem;padding-bottom: .75rem;">
+                        <img :src="data.imageUrl" alt="订单配图" class="first-elez">
+                        <div class="second-elez">{{data.orderContent}}</div>
+                        <div class="third-elez" v-if="data.sourceType == 0">
+                            <span>￥{{data.singlePrice}}</span>
+                            <span>x{{data.number}}</span>
+                        </div>
+                        <div class="third-elez" v-if="data.sourceType == 1 || data.sourceType == 2">
+                            <span>{{data.singlePrice}}米币</span>
+                            <span>x{{data.number}}</span>
+                        </div>
+                        <!-- <div class="third-elez" v-if="data.sourceType == 3"></div> -->
+                    </div>
+                </div>
+                <!-- <div class="group-item" v-if="remark"> -->
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">备注</div>
+                        <div class="group-colspan">
+                            <textarea id="remarkDom" resize="none" v-model="remark" class="form-control" style="border:none;text-align:right;padding:0;resize: none;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="group">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <p>订单编号：{{data.id}}</p>
+                            <p>创建时间：{{data.createTime | timeFilter}}</p>
+                            <p v-if="(data.orderStatus == 2 || data.orderStatus == 3 || data.orderStatus == 6) && data.orderType == 1 && data.sourceType != 0">确认时间：{{data.payTime
+                                | timeFilter}}</p>
+                            <template v-if="(data.orderStatus == 3 || data.orderStatus == 6) && data.orderType == 1">
+                                <p>快递单号：{{data.express}}&nbsp;&nbsp;{{data.expressCode}}</p>
+                                <p>发货时间：{{data.sendTime | timeFilter}}</p>
+                            </template>
+                            <p v-if="data.orderStatus == 3">完成时间：{{data.finishTime | timeFilter}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding:0.5rem;text-align:center;" v-if="data.orderStatus == 1">
+                <button type="button" class="button" @click="ok" style="width:91.25vw;height:12.5vw;color:#FFF;background:#FF7300;border-radius:1.25vw;">确认订单</button>
+            </div>
+            <div style="padding:0.5rem;text-align:center;" v-if="data.orderStatus == 6">
+                <button type="button" class="button" @click="receive" style="width:91.25vw;height:12.5vw;color:#FFF;background:#FF7300;border-radius:1.25vw;">确认收货</button>
+            </div>
+            <div style="padding:0.5rem;text-align:center;" v-if="data.orderStatus == 5">
+                <button type="button" class="button" @click="deleteOrder" style="width:91.25vw;height:12.5vw;color:#FF7300;background:transparent;border-radius:1.25vw; border: 1px solid #FF7300;">删除订单</button>
+            </div>
+            <div v-if="isIOSShow" style="font-size:0.625rem;color:#999; text-align:center;padding:1rem 0;">活动由聚米众筹提供，与设备生产商Apple
+                Inc.公司无关。</div>
+            <a href="tel:400-801-4680" style="display:block;padding:1rem 0;text-align:center;">客服热线：400-801-4680</a>
+        </template>
+        <my-active></my-active>
+    </div>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['account/active/activeDetail']);
+    </script>
+</body>
+
+</html>

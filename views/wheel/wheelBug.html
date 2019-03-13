@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
+    />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>大转盘-聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png" />
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css" />
+    <style type="text/css">
+      html,
+      body {
+        background: #fdeda1;
+      }
+
+      .wheel-bg {
+        position: relative;
+      }
+
+      .wheel-body {
+        width: 100%;
+        position: absolute;
+        top: 50vw;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+      }
+
+      .wheel-itemlist {
+        margin: 0 auto;
+      }
+
+      .wheel-itemlist .wheel-item {
+        float: left;
+        border-radius: 2vw;
+      }
+
+      .wheel-itemlist .wheel-item.active {
+        background: #d3a126;
+      }
+
+      .wheel-itemlist .wheel-item span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 2vw;
+        background: #7a8999;
+      }
+
+      .wheel-start {
+        display: block;
+        position: absolute;
+        margin: 0 auto;
+        border-radius: 2vw;
+      }
+
+      .wheel-start img {
+        border-radius: 2vw;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+      <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box" style="margin:0 auto;">
+      <template id="wheelTemplate">
+        <div class="wheel" style="position: relative;">
+          <div class="wheel-bg">
+            <img src="/h5/images/wheel/origin/originBg.png" alt="" />
+          </div>
+          <div class="wheel-body">
+            <ul class="wheel-itemlist" id="wheelBox">
+              <li class="wheel-item" v-for="list in awardList">
+                <span>
+                  <img :src="list.image" alt="" class="async" />
+                </span>
+              </li>
+              <a href="javascript:void(0)" class="wheel-start">
+                <img
+                  src="/h5/images/wheel/origin/wheel-start.png"
+                  width="100%"
+                  alt=""
+                />
+              </a>
+            </ul>
+            <div
+              style="text-align:center;color:#B35612;line-height:2vw;margin-top: 6vw;"
+              v-if="data.isLogin == 0"
+            >
+              请
+              <a
+                href="javascript:void(0)"
+                @click="toLogin"
+                style="text-decoration: underline;color:#eb6100;"
+                >登录</a
+              >
+              以查看抽奖记录
+            </div>
+            <div style="text-align:center;color:#B35612;" v-else>
+              <p style="line-height:2vw;margin-top: 6vw;" v-if="freetimes > 0">
+                今日您还有
+                <em class="font-18" id="times">{{ freetimes }}</em>
+                次免费抽奖机会
+              </p>
+              <p style="line-height:2vw;margin-top: 6vw;" v-else>
+                <em style="font-size: 3.5vw;"
+                  >今日免费抽奖次数已用完，继续抽奖将消耗{{
+                    data.expendCoin
+                  }}个聚米币</em
+                >
+              </p>
+              <p style="margin-top: 20px;">
+                <a
+                  href="javascript:void(0);"
+                  style="font-size: 3.5vw;text-decoration: underline;color:#B35612;"
+                  @click="viewshistory"
+                  >查看历史记录</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-if="isIOSShow"
+          style="font-size:0.625vw;color:#B35612; text-align:center;padding:1vw 0;"
+        >
+          活动由聚米众筹提供，与设备生产商Apple Inc.公司无关。
+        </div>
+      </template>
+      <my-wheel></my-wheel>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+      requirejs(["wheel/wheelBug"]);
+    </script>
+    <script
+      type="text/javascript"
+      async="async"
+      charset="utf-8"
+      src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"
+    ></script>
+  </body>
+</html>

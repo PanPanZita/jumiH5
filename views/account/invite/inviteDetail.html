@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>邀请好友投资记录</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+    <div id="box">
+        <template id="recordTemplate">
+            <div class="tab tab-normal tab-noborder">
+                <div class="user-info">
+                    <p>被邀用户：{{ data.data.userPhone }}</p>
+                    <p>实名：{{ data.data.realname }}</p>
+                </div>
+                <div class="has-record" style="margin-top:5.5rem;">
+                    <template v-if="items != null && items.length > 0">
+                        <div class="group" v-for="item in items">
+                            <div class="group-item">
+                                <div class="group-rowspan">
+                                    <div class="group-colspan">
+                                        <p>项目名称：{{item.itemName}}</p>
+                                        <p>投资金额：{{item.investAmount}}</p>
+                                        <p v-if="item.commisson != 0">佣&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金：{{item.commisson}}</p>
+                                        <p>投资时间：{{item.investTime}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <div style="padding-top:6rem; text-align: center;" v-else>
+                        <p class="clr-gray" style="margin:1rem 0;">提醒下好友，理财才是致富之道</p>
+                    </div>
+                    <div id="loadMoreButton" v-if="items != null && items.length >= 10">
+                        <i class="iconfont">&#xe65d;</i>
+                        <span>上拉刷新数据</span>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <my-record></my-record>
+    </div>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+    requirejs(['account/invite/inviteRecordDetail']);
+    </script>
+</body>
+
+</html>

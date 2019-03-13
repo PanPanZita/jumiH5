@@ -1,0 +1,50 @@
+/*  
+* @description: 商品图文排列
+* @author: adhehe
+* @update: null
+*/
+
+.product {
+	display: block;
+}
+
+.product-item {
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	overflow: hidden;
+	position: relative;
+}
+
+.product-img {
+	margin-right: 0.5rem;
+}
+.product-img img{
+	display:block;
+	width:6rem;
+}
+
+.product-info {
+	-webkit-box-flex: 1.0;
+	-moz-box-flex: 1.0;
+	box-flex: 1.0;
+	overflow: hidden;
+}
+
+.product-title {
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+/* 	margin-bottom:0.5rem; */
+	
+/* 	font-size:1rem; */
+/* 	font-weight:bold; */
+	word-break:break-all
+}
+
+.product-other{
+/* 	margin-bottom:0.5rem; */
+/* 	font-size:1rem; */
+	color:#999;
+}

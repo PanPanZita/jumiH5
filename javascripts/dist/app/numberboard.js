@@ -1,0 +1,1 @@
+define([],function(){var t={init:function(t){var e=document.getElementById(t),n=window.getComputedStyle(e);return n.webkitTextSecurity||e.setAttribute("type","password"),this}};return t});

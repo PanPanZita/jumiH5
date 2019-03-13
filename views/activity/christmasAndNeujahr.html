@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>“你追我赶”过吉年，万元大奖等你拿！</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+body{
+	max-width:640px;
+	min-width:320px;
+}
+.christmasAndNeujahrButton{
+	position:absolute;
+	left:0;
+	right:0;
+	bottom:5rem;
+	margin:0 auto;
+	text-align:center;
+	display:block; 
+	width:10rem;
+	height:2rem;
+	background:url(/h5/images/activity/christmasAndNeujahr/button.png) no-repeat; 
+	background-size:100%;
+}
+.christmasAndNeujahrData{
+	position:absolute;
+	top:5.5rem;
+	left:5rem;
+	color:#faf5e3;
+}
+.christmasAndNeujahrData table{}
+.christmasAndNeujahrData table tr{}
+.christmasAndNeujahrData table tr td{padding-right:0.5rem;font-size:0.75rem;line-height:2.25rem;text-align:center;}
+
+.first{color:#f9e1a1;}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<template id="christmasAndNeujahrTemplate">
+		<img src="/h5/images/activity/christmasAndNeujahr/christmasAndNeujahr-01.jpg" alt="" style="width:100%;">
+		
+		<div style="position:relative;">
+			<img src="/h5/images/activity/christmasAndNeujahr/christmasAndNeujahr-02.jpg" alt="" style="width:100%;">
+			<div class="christmasAndNeujahrData">
+				<table width="100%">
+					<tr v-for="(index,item) in data.ranklist" :class="{'first':index==0}">
+						<td class="txt-rowspan1">{{item.nickname}}</td>
+						<td width="30%">{{item.invprice}}</td>
+						<td width="20%">{{item.invcount}}</td>
+						<td width="30%">{{item.gxz}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<img src="/h5/images/activity/christmasAndNeujahr/christmasAndNeujahr-03.jpg" alt="" style="width:100%;">
+		
+		<div style="position:relative;">
+			<img src="/h5/images/activity/christmasAndNeujahr/christmasAndNeujahr-04.jpg" alt="" style="width:100%;">
+			<a href="/phone/detail/431.html" class="christmasAndNeujahrButton"></a>
+		</div>
+	</template>
+	<my-christmasandneujahr></my-christmasandneujahr>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['activity/christmasAndNeujahr'],function(){
+			//根据宽度变化字号
+			var fontsize = function (fontsize){
+				var width = window.innerWidth;
+				fontsize = (fontsize == undefined) ? ( (width < 640) ? ((28 * width) / 640) : 28) : 14; //算法
+				$("html").css("font-size",fontsize); //基本字号
+			}
+			
+			$(function(){
+				fontsize();
+				$("#j-loading").hide();
+				$(window).resize(function(){
+					fontsize();
+				})
+			});
+		});
+	</script>
+	<script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+</html>

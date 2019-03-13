@@ -1,0 +1,340 @@
+html,
+body {
+    background: #faeecc;
+}
+
+#redCover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -o-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+#redCover .cover-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#redCover .cover-main {
+    position: relative;
+    width: 86vw;
+    height: 120.31vw;
+    margin: auto;
+    background: url('/h5/images/activity/newyearRedpacket/redBackground.png') center no-repeat;
+    background-size: cover;
+}
+
+#redCover .cover-main .jumi-avatar {
+    width: 17.45%;
+    margin: 10% auto 0;
+}
+
+#redCover .cover-main h4 {
+    font-size: 4.688vw;
+    margin: 2.078% 0 1.818%;
+    text-align: center;
+    color: #ffdb7b;
+}
+
+#redCover .cover-main p {
+    font-size: 3.438vw;
+    text-align: center;
+    color: #ffdb7b;
+}
+
+#redCover .cover-main h3 {
+    font-size: 5.25vw;
+    font-weight: 300 !important;
+    width: 84.42%;
+    margin: 7.532% auto 0;
+    text-align: center;
+    color: #ffdb7b;
+}
+
+#redCover .cover-main .switcher {
+    position: absolute;
+    right: 0;
+    bottom: 18.88%;
+    left: 0;
+    width: 32.72%;
+    margin: auto;
+    transform-origin: center;
+    animation: switchMotive 1.25s infinite linear;
+}
+
+#redCover .cover-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+@keyframes switchMotive {
+    0% {
+        transform: scale3d(1, 1, 1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale3d(1.25, 1.25, 1.25);
+        opacity: .8;
+    }
+    100% {
+        transform: scale3d(1, 1, 1);
+        opacity: 1;
+    }
+}
+
+/*顶部图像*/
+
+#redpacketBanner {
+    position: relative;
+}
+
+#redpacketBanner img {
+    width: 100%;
+}
+
+/*领取历史*/
+
+#redpacketHistory {
+    margin: 6.25VW auto;
+    width: 91.56vw;
+}
+
+#redpacketHistory p {
+    padding-bottom: 2.8vw;
+    color: #9c9a9b;
+    font-size: 3.28vw;
+    border-bottom: 1px dashed #9c9a9b;
+}
+
+#redpacketHistory .historySons {
+    position: relative;
+    padding: 2.8vw 0;
+    width: 100%;
+    height: 16.85vw;
+}
+
+#redpacketHistory .historySons img {
+    position: absolute;
+    left: 0;
+    width: 11.25vw;
+    height: 11.25vw;
+}
+
+#redpacketHistory .historySons .sonsDetail {
+    position: absolute;
+    left: 14.06vw;
+    width: 50vw;
+    height: 11.25vw;
+}
+
+#redpacketHistory .historySons .sonsDetail .sonsName {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4.8vw;
+    line-height: 4.8vw;
+    color: black;
+    font-size: 4.22vw;
+    border: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#redpacketHistory .historySons .sonsDetail .sonsTime {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3.28vw;
+    line-height: 3.28vw;
+    color: #9c9a9b;
+    font-size: 3.28vw;
+    border: none;
+}
+
+#redpacketHistory .historySons .sonsMoney {
+    position: absolute;
+    right: 0;
+    width: 22.5vw;
+    height: 11.25vw;
+    line-height: 11.25vw;
+    text-align: right;
+    color: #c2584d;
+    font-size: 3.75vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/*底部规则*/
+
+#redpacketRules {
+    margin: 7.8vw auto;
+    position: relative;
+    width: 91.56vw;
+    border: 1px dashed grey;
+    color: #656567;
+    border-radius: 5px;
+}
+
+#redpacketRules h3 {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: -2.2vw;
+    left: 31.88vw;
+    width: 27.8vw;
+    height: 4.4vw;
+    font-size: 4.4vw;
+    line-height: 4.4vw;
+    text-align: center;
+    background: #faeecc;
+}
+
+#redpacketRules p {
+    padding: 1.4vw 3.28vw;
+    font-size: 3.28vw;
+}
+
+#redpacketRules p:first-of-type {
+    padding-top: 6.25vw;
+}
+
+/*弹窗*/
+
+.jumiaz .ui-dialog-body {
+    font-size: 4.2vw;
+    padding: 10vw 3.1vw;
+}
+
+.jumiaz .ui-dialog-body .ui-dialog-content {
+    text-align: center;
+}
+
+.jumiaz .ui-dialog-button {
+    display: flex;
+    justify-content: space-around;
+}
+
+.jumiaz .ui-dialog-button button {
+    font-size: 4.2vw;
+}
+
+/*红包主体*/
+
+.redpacketData,
+.redpacketForm {
+    position: relative;
+    margin: 4.69vw auto;
+    width: 91.56vw;
+    height: 70.625vw;
+}
+
+.redpacketData {
+    background: url('/h5/images/activity/newyearRedpacket/redOne.png') no-repeat center;
+    background-size: 100% 100%;
+}
+
+.redpacketForm {
+    background: url('/h5/images/activity/newyearRedpacket/redTwo.png') no-repeat center;
+    background-size: 100% 100%;
+}
+
+.redpacketData .tipOne {
+    position: absolute;
+    top: 3.13vw;
+    left: 8.12vw;
+    width: 75vw;
+    height: 20.31vw;
+    font-size: 7.5vw;
+    color: #c2584d;
+    text-align: center;
+    line-height: 20.31vw;
+}
+
+.redpacketData .congratulate {
+    position: absolute;
+    top: 3.5vw;
+    left: 38.78vw;
+    color: #c2584d;
+    font-size: 2.8vw;
+}
+
+.redpacketData .tipTwo {
+    position: absolute;
+    padding-top: 3vw;
+    top: 29.69vw;
+    left: 8.12vw;
+    width: 75vw;
+    height: 12.06vw;
+    color: #9c9a9b;
+    font-size: 2.8vw;
+    /* line-height: 9.06vw; */
+    text-align: center;
+}
+
+.redpacketData .tipTwo .intoAccount {
+    color: #c2584d;
+}
+
+.redpacketData .tipThree {
+    position: absolute;
+    left: 5vw;
+    bottom: 6.25vw;
+    width: 81.56vw;
+    height: 13.44vw;
+}
+
+.redpacketButton {
+    display: inline-block;
+    width: 81.56vw;
+    height: 13.44vw;
+    background: #ffd67f;
+    line-height: 13.44vw;
+    border: none;
+    color: #a36236;
+    border-radius: 6.72vw;
+    font-size: 3.75vw;
+    text-align: center;
+    box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, .1);
+}
+
+.redpacketForm input {
+    position: absolute;
+    top: 33.44vw;
+    left: 5vw;
+    display: inline-block;
+    width: 81.56vw;
+    height: 13.44vw;
+    background: #FFF;
+    border: none;
+    font-size: 3.75vw;
+    border-radius: 6.72vw;
+    text-align: center;
+    color: #333;
+    box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, .1);
+}
+
+.redpacketForm .infoSubmitz {
+    position: absolute;
+    left: 5vw;
+    bottom: 6.25vw;
+}

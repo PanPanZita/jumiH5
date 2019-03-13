@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>聚米新年红包</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css?v=4.0.0.0">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/newyearRedpacket.css?v=4.0.0.0">
+</head>
+
+<body>
+    <!-- 加载动画 -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" width="100" />
+    </div>
+    <template id="redpacketTemplate">
+        <!-- 遮罩层 -->
+        <div id="redCover" class="cover" v-if="opening == false">
+            <img src="/h5/images/activity/newyearRedpacket/top.png" alt="头部" class="cover-top">
+            <div class="cover-main">
+                <img src="/h5/images/activity/newyearRedpacket/jumiAvatar.png" alt="聚米头像" class="jumi-avatar">
+                <h4>聚米</h4>
+                <p>发了一个红包，金额随机</p>
+                <h3>{{redpacketTitle}}</h3>
+                <a href="javascript:void(0)" @click="openRedpacket">
+                    <img src="/h5/images/activity/newyearRedpacket/switcher.png" alt="打开红包" class="switcher">
+                </a>
+            </div>
+            <img src="/h5/images/activity/newyearRedpacket/bottom.png" alt="底部" class="cover-bottom">
+        </div>
+        <!-- 主体 -->
+        <div v-else>
+            <div id="redpacketBanner">
+                <img :src="redpacketImg" />
+                <!-- <div class="user-avatar">
+                    <img :src="userHead" alt="用户微信头像" class="portrait">
+                </div> -->
+            </div>
+
+            <!-- 输入手机号领取红包(微信号未关联手机号) -->
+            <div class="redpacketForm" v-if="hasReceive == 0">
+                <input type="tel" placeholder="输入手机号" id="userphone" name="userphone" v-model="userPhone" class="redpacketInput" maxlength="11"
+                    autocomplete="off">
+                <a href="javascript:void(0)" class="redpacketButton infoSubmitz" @click="toReceive" @blur="inputPhoneBlur" @keyup="inputPhoneKeyup"
+                    v-model="clickstatus">立即领取</a>
+            </div>
+
+            <!-- 领取成功（包含：微信号已关联手机号且手机号已注册和微信号已关联手机号且手机号未注册）均已领取,并且红包都未被领完.. -->
+            <div class="redpacketData" v-if="hasReceive == 1">
+                <span class="congratulate">恭喜！获得</span>
+                <p class="tipOne">{{saveMoney}}元</p>
+                <p class="tipTwo">已存入聚米账户
+                    <span class="intoAccount">{{userPhone}}</span>
+                </p>
+                <p class="tipThree">
+                    <a href="javascript:void(0)" class="redpacketButton" v-if="hasRegister == 0" @click="replaceReg">立即注册，激活使用</a>
+                    <a href="javascript:void(0)" class="redpacketButton" v-else @click="replaceUse">立即使用，参与众筹</a>
+                </p>
+            </div>
+
+            <!-- 红包领取完了 -->
+            <div class="redpacketData" v-if="hasReceive == 2">
+                <p class="tipOne">手慢了</p>
+                <p class="tipTwo">{{redpacketNum}}个红包已被全部领取</p>
+                <p class="tipThree">
+                    <a href="/h5/views/main/index.html" class="redpacketButton">没有红包，也要参与</a>
+                </p>
+            </div>
+
+            <!-- 聚米钱发完了 -->
+            <div class="redpacketData" v-if="hasReceive == 3">
+                <p class="tipOne">聚米红包账户余额不足</p>
+                <p class="tipTwo">请联系客服 400-801-4680
+                    <br/>或添加客服微信号：jumisec1 解决</p>
+                <p class="tipThree">
+                    <a href="/h5/views/main/index.html" class="redpacketButton">没有红包，也要参与</a>
+                </p>
+            </div>
+
+            <!-- 红包记录 -->
+            <div id="redpacketHistory">
+                <p>已领取 {{receiveUserList.length}}/{{redpacketNum}} 个红包，共 {{sumRedpacket}}/{{redpacketAmt}} 元</p>
+                <div class="historySons" v-for="item in receiveUserList">
+                    <img :src="item.userHeadImgUrl">
+                    <div class="sonsDetail">
+                        <p class="sonsName">{{item.nickName}}</p>
+                        <p class="sonsTime">{{item.revTime}}</p>
+                    </div>
+                    <div class="sonsMoney">{{item.revAmt}}元</div>
+                </div>
+            </div>
+            <!-- 活动规则 -->
+            <div id="redpacketRules">
+                <h3>红包规则</h3>
+                <p>1.面向所有用户，每个用户限领一次，未注册的用户领取后，完成注册即可正常使用；</p>
+                <p>2.红包可用于项目众筹，抵扣相应的投资金额；</p>
+                <p>3.已经领取的红包在红包账户中管理；</p>
+                <p>4.红包可累积使用，不过期、不可提现。</p>
+            </div>
+        </div>
+    </template>
+    <my-redpacket></my-redpacket>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['activity/newyearRedpacket']);
+        window.onpageshow = function (event) {
+            if (event.persisted) {
+                window.location.reload()
+            };
+        };
+    </script>
+</body>
+
+</html>

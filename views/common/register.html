@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
+    />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>注册</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png" />
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css" />
+    <style>
+      .ui-dialog-protocols .ui-dialog-content {
+        height: 400px;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+        -moz-overflow-scrolling: touch;
+        -o-overflow-scrolling: touch;
+      }
+      .getVoicecode {
+        background: #fff;
+        border: none;
+        outline: none;
+        color: #a36236;
+        font-size: 3.73vw;
+      }
+
+      .getVoicecode.disabled {
+        color: #999999;
+      }
+    </style>
+  </head>
+  <body class="bg">
+    <!-- loading -->
+    <div id="myloading" class="loading">
+      <img src="/h5/images/loading.gif" alt="" />
+    </div>
+
+    <template id="registerTemplate">
+      <form action="javascript:void(0)" id="formRegister">
+        <div class="group group-noborder group-form">
+          <div class="group-item">
+            <div class="group-rowspan">
+              <div class="group-colspan">
+                <input
+                  type="tel"
+                  v-model="phone"
+                  placeholder="请输入手机号"
+                  @blur="inputPhoneBlur"
+                  @keyup="inputPhoneKeyup"
+                  class="form-control form-border"
+                  maxlength="11"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="group-item">
+            <div class="group-rowspan">
+              <div class="group-colspan">
+                <input
+                  type="password"
+                  v-model="password"
+                  placeholder="请设置登录密码（6-16位字母和数字组合）"
+                  @blur="inputPasswordBlur"
+                  @keyup="inputPasswordKeyup"
+                  class="form-control form-border"
+                  maxlength="16"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="group-item">
+            <div class="group-rowspan">
+              <div class="group-colspan">
+                <input
+                  type="text"
+                  v-model="phone_code"
+                  @keyup="inputCodeKeyup"
+                  placeholder="请输入验证码"
+                  class="form-control form-border"
+                  maxlength="4"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="group-item">
+            <div class="group-rowspan">
+              <div
+                class="group-colspan"
+                id="getCodeButtonBox"
+                style="position:relative;"
+              >
+                <button
+                  class="button button-fill button-block getCode"
+                  :class="{'disabled':isShowHide}"
+                  @click="getCode"
+                >
+                  获取验证码
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="group-item">
+            <div class="group-rowspan">
+              <div class="group-colspan">
+                <div id="nc"><div id="sliderNc"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="group-item">
+            <div class="group-rowspan">
+              <div class="group-colspan">
+                <input
+                  type="tel"
+                  v-model="invite_phone"
+                  @blur="inputInvitePhone"
+                  @keyup="inputInvitePhoneKeyup"
+                  placeholder="请输入邀请人手机号（非必填）"
+                  class="form-control form-border"
+                  maxlength="11"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="group-item">
+            <div class="group-rowspan">
+              <div class="group-colspan clr-gray">
+                <p>
+                  点击注册，即表示您同意
+                  <a
+                    href="javascript:void(0)"
+                    @click="protocols"
+                    style="text-decoration: underline;"
+                    >《用户协议》</a
+                  >
+                </p>
+                <div id="protocolBox" style="display:none;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="group-item">
+            <div class="group-rowspan">
+              <div class="group-colspan">
+                <button
+                  type="button"
+                  class="button button-fill button-block"
+                  :class="{'disabled':isShowHideRegister}"
+                  @click="ok"
+                  v-model="clickstatus"
+                >
+                  注册
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="group-item">
+            <div class="group-rowspan">
+              <div class="group-colspan" style="text-align: right;">
+                <span style="color: #f3f3f3;">收不到短信？</span>
+                <button
+                  @click="getVoicecode"
+                  class="getVoicecode disabled"
+                  disabled="disabled"
+                >
+                  获取语音验证码
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </template>
+    <my-register></my-register>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <!-- 人机校验（阿里的滑动验证） -->
+    <script
+      type="text/javascript"
+      charset="utf-8"
+      src="//g.alicdn.com/sd/nch5/index.js"
+    ></script>
+    <script type="text/javascript">
+      requirejs(["common/register"]);
+    </script>
+  </body>
+</html>

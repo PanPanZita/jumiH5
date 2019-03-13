@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        html,
+        body {
+            background: #ea583f;
+        }
+
+        input:active,
+        input:hover {
+            color: #FFF;
+        }
+
+        .form-control {
+            border: 1px solid #c32b23;
+            background: #c92f27;
+            color: #FFF;
+        }
+
+        ::-webkit-input-placeholder {
+            color: #FFF;
+        }
+
+        :-moz-placeholder {
+            color: #FFF;
+        }
+
+        ::-moz-placeholder {
+            color: #FFF;
+        }
+
+        :-ms-input-placeholder {
+            color: #FFF;
+        }
+
+        .button-fill,
+        .button-fill.hover,
+        .button-fill:hover {
+            background: #fec43b;
+            color: #CA4400;
+        }
+
+        .button-fill.button.disabled {
+            background: #F6983E;
+            color: #E3772C;
+        }
+
+        .ui-popup-show .ui-dialog-redpacket {
+            border: none;
+        }
+
+        .ui-dialog-redpacket .ui-dialog-body {
+            background: #EE5045;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .ui-dialog-redpacket .ui-dialog-footer {
+            background: #E64238;
+            border-radius: 0 0 6px 6px;
+            border-top: 1px solid #E64238;
+        }
+
+        .ui-dialog-redpacket .ui-dialog-footer button.ui-dialog-autofocus,
+        .ui-dialog-redpacket .ui-dialog-footer button.ui-dialog-autofocus:active,
+        .ui-dialog-redpacket .ui-dialog-footer button.ui-dialog-autofocus:focus,
+        .ui-dialog-redpacket .ui-dialog-footer button.ui-dialog-autofocus:hover {
+            color: #FFF;
+        }
+
+        .ui-dialog-redpacket .ui-dialog-footer button+button {
+            color: #C85002;
+            background: #FDC33B;
+            border-radius: 18px;
+        }
+
+        .ui-dialog-redpacket .ui-dialog-content {
+            color: #fff;
+        }
+
+        .getVoicecode {
+            border: none;
+            outline: none;
+            background: #ea583f;
+            color: #ffff00;
+            font-size: 3.73vw;
+        }
+
+        .getVoicecode.disabled {
+            color: #a36236;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <template id="redpacketTemplate">
+        <div class="redpacketBanner">
+            <img :src="data.spreadImage" alt="" width="100%" />
+        </div>
+
+        <div style="padding:1rem 1rem 0;color:#fdfbfa;">
+            <p>我是 {{data.nickname}}， 邀请你领取 {{data.rewardValue}} 元红包</p>
+        </div>
+
+        <div class="group group-transparent group-small group-noborder">
+            <div class="group-item">
+                <div class="group-rowspan">
+                    <div class="group-colspan">
+                        <input type="tel" v-model="phone" placeholder="请输入手机号" @keyup="inputPhoneKeyup" class="form-control"
+                            maxlength="11" />
+                    </div>
+                </div>
+                <div class="group-rowspan">
+                    <div class="group-colspan">
+                        <input type="tel" v-model="phoneCode" @keyup="inputCodeKeyup" placeholder="请输入验证码" class="form-control"
+                            maxlength="4" />
+                    </div>
+                </div>
+                <div class="group-rowspan">
+                    <div class="group-colspan" id="getCodeButtonBox" style="position:relative;">
+                        <button class="button button-fill button-block getCode" :class="{'disabled':isShowHide}" @click="getCode">获取验证码</button>
+                    </div>
+                </div>
+                <div class="group-rowspan">
+                    <div class="group-colspan">
+                        <div id="sliderNc"></div>
+                    </div>
+                </div>
+                <div class="group-rowspan">
+                    <div class="group-colspan" style="text-align: right;">
+                        <span style="color: #f3f3f3;">收不到短信？</span>
+                        <button @click="getVoicecode" class="getVoicecode disabled" disabled="disabled">获取语音验证码</button>
+                    </div>
+                </div>
+                <div class="group-rowspan">
+                    <div class="group-colspan">
+                        <a href="javascript:void(0)" class="button button-fill button-block" :class="{'disabled':isShowHideRegister}"
+                            @click="toReceive" style="margin:0.5rem 0 0" v-model="clickstatus">注册领取</a>
+                    </div>
+                </div>
+                <div class="group-rowspan">
+                    <div class="group-colspan">
+                        <p class="clr-white font-10">点击注册，即表示您同意
+                            <a href="javascript:void(0)" @click="protocols" class="clr-yellow" style="text-decoration: underline;">《用户协议》</a>
+                        </p>
+                        <div id="protocolBox" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin:0 1rem 1rem;padding:1rem;background:#e4453b;color:#FFF;font-size:0.75rem;">
+            <h3 style="padding-bottom:0.5rem;text-align:center;">邀请红包说明</h3>
+            <p>1、邀请红包只提供给新注册用户领取，用户注册成功后自动加入聚米账户；</p>
+            <p>2、红包在支付时抵扣使用，可累计，不过期，但不可直接提现。</p>
+        </div>
+
+
+        <div v-if="isHide" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75)">
+            <div style="position:absolute;left:0;right:0;top:0;bottom:0;width:18rem;height:18rem;margin:auto;background:url(/h5/images/common/award.png) no-repeat center center; background-size:100%;">
+                <div style="width:100%;color:#fbc42f;text-align:center;font-size:1rem;">
+                    注册成功！恭喜您已成功领取
+                </div>
+                <div style="width:100%;margin-top:9rem;color:#feee92;text-align:center;">
+                    <em style="font-size:2rem;">{{rewardValue}}元</em>
+                    <br>
+                    <em>红包</em>
+                </div>
+                <div style="width:100%;margin-top:2rem;color:#feee92;text-align:center;">
+                    <button class="button button-fill" style="padding-left:5rem;padding-right:5rem;border-radius:18px;"
+                        @click="toUse">去使用</button>
+                </div>
+            </div>
+        </div>
+
+    </template>
+    <my-redpacket></my-redpacket>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript" charset="utf-8" src="//g.alicdn.com/sd/nch5/index.js"></script>
+    <script type="text/javascript">
+        requirejs(['account/invite/inviteFriend']);
+    </script>
+    <script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+
+</html>

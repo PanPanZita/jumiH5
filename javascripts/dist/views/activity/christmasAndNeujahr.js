@@ -1,0 +1,1 @@
+define(["jquery","vue"],function(e,n){e.ajax({url:"/admin/item/getRank",type:"post",dataType:"json",success:function(a){new n({el:"body",components:{"my-christmasandneujahr":{template:"#christmasAndNeujahrTemplate",data:function(){return{data:a}}}},ready:function(){e("#myloading").remove()}})}})});

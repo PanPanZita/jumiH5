@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="msapplication-tap-highlight" content="no" />
+<title>发现-抽奖活动-聚米众筹</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+	.title{border-left:3px solid #333;padding-left:0.5rem;}
+</style>
+</head>
+<body>
+
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="discoverListTemplate">
+			<div class="tab tab-normal tab-noborder">
+				<ul class="tab-handle">
+					<li class="active"><a href="#tabs1" data-toggle="tab">最新</a></li>
+					<li><a href="#tabs2" data-toggle="tab">价格</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="tabs1">
+						<div v-if="timeSortActionList.items.length">
+							<div class="group group-justify group-list" style="background:transparent;">
+								<a href="/h5/views/topic/topicDetail.html?action_id={{item.id}}" class="group-item" v-for="item in timeSortActionList.items">
+									<span class="group-rowspan">
+										<div style="position:relative;">
+											<img :src="item.image1" width="100%" alt="产品图片" class="async">
+											<span class="statusLimitTime fixed" v-if="item.activityStatus == 1">预告</span>
+											<span class="statusLimitNum fixed" v-if="item.activityStatus == 2 && item.type == 2">抽奖</span>
+											<span class="statusLimitNum fixed" v-if="item.activityStatus == 2 && item.type == 3">兑换</span>
+											<span class="statusEnd fixed" v-if="item.activityStatus == 3">已结束</span>
+										</div>
+									</span>
+									<span class="group-rowspan"><var class="txt-rowspan1" style="height:1.5rem;overflow:hidden;">{{item.name}}</var></span>
+									<span class="group-rowspan">
+										<span class="group-colspan clr-strike">
+											<i class="iconfont clr-strike font-12" v-if="item.singleLimit > 0">&#xe69c;</i>
+											<i class="iconfont clr-strike font-12" v-if="item.islevel == 1">&#xe69b;</i>
+											{{item.expendCoin}}聚米币
+										</span>
+									</span>
+								</a>
+							</div>
+							
+							<!--<a href="javascript:void(0)" id="loadMoreButton" @click="loadMore(timeSortActionList.isLoading,1)">-->
+								<!--<span v-if="timeSortActionList.isLoading==0">点击加载</span>-->
+								<!--<span v-if="timeSortActionList.isLoading==1">正在加载 <img src="/h5/images/loadingDefault.gif" style="display:inline-block;width:1rem;"/></span>-->
+								<!--<span v-if="timeSortActionList.isLoading==2">已无更多记录！</span>-->
+							<!--</a>-->
+						</div>
+						<div style="padding: 0.5rem; text-align: center;" v-else>
+							<i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;">&#xe628;</i>
+							<p class="clr-gray">暂无数据</p>
+						</div>
+						
+					</div>
+					<div class="tab-pane" id="tabs2">
+						<div v-if="priceSortActionList.items.length">
+							<div class="group group-justify group-list" style="background:transparent;">
+								<a href="/h5/views/topic/topicDetail.html?action_id={{item.id}}" class="group-item" v-for="item in priceSortActionList.items">
+									<span class="group-rowspan">
+										<div style="position:relative;">
+											<img :src="item.image1" width="100%" alt="产品图片" class="async">
+											<span class="statusLimitTime fixed" v-if="item.activityStatus == 1">预告</span>
+											<span class="statusLimitNum fixed" v-if="item.activityStatus == 2 && item.type == 2">抽奖</span>
+											<span class="statusLimitNum fixed" v-if="item.activityStatus == 2 && item.type == 3">兑换</span>
+											<span class="statusEnd fixed" v-if="item.activityStatus == 3">已结束</span>
+										</div>
+									</span>
+									<span class="group-rowspan"><var class="txt-rowspan1" style="height:1.5rem;overflow:hidden;">{{item.name}}</var></span>
+									<span class="group-rowspan">
+										<span class="group-colspan clr-strike">
+											<!-- 限购 -->
+											<i class="iconfont clr-strike font-12" v-if="item.singleLimit > 0">&#xe69c;</i>  
+											<!-- 专享 -->
+											<i class="iconfont clr-strike font-12" v-if="item.islevel == 1">&#xe69b;</i>
+											{{item.expendCoin}}聚米币
+										</span>
+									</span>
+								</a>
+							</div>
+							<!--<a href="javascript:void(0)" id="loadMoreButton" @click="loadMore(priceSortActionList.isLoading,2)">-->
+								<!--<span v-if="priceSortActionList.isLoading==0">点击加载</span>-->
+								<!--<span v-if="priceSortActionList.isLoading==1">正在加载 <img src="/h5/images/loadingDefault.gif" style="display:inline-block;width:1rem;"/></span>-->
+								<!--<span v-if="priceSortActionList.isLoading==2">已无更多记录！</span>-->
+							<!--</a>-->
+						</div>
+						<div style="padding: 0.5rem; text-align: center;" v-else>
+							<i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;">&#xe628;</i>
+							<p class="clr-gray">暂无数据</p>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			<div v-if="isIOSShow" style="font-size:0.625rem;color:#999; text-align:center;padding:1rem 0;">活动由聚米众筹提供，与设备生产商Apple Inc.公司无关。</div>
+		</template>
+		<my-discoverlist></my-discoverlist>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['lottery/lottery']);
+	</script>
+	<script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+</html>

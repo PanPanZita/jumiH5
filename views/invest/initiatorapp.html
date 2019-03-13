@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>发起人信息</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+</head>
+<body>
+	
+	<template id="zpfTemplate">
+		<div class="group group-left group-small width60">
+			<div class="group-item">
+				<div class="group-rowspan">
+					<div class="group-colspan">
+						<img  :src="data.litpicPath || '/h5/images/producers.png'" alt="产品图片" class="async" style="width:4rem;height:4rem;border-radius:6px;"/>
+					</div>
+					<div class="group-colspan">
+						<h3>{{data.realname}}</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="group">
+			<div class="group-item">
+				<div class="group-rowspan">
+					<div class="group-colspan"><h3>简介</h3></div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan">{{data.content}}</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="group">
+			<div class="group-item">
+				<div class="group-rowspan">
+					<div class="group-colspan"><h3>附件</h3></div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan">
+						<img v-if="data.file1" alt="" :src="data.file1 || '/h5/images/default11.jpg'" width="100%" class="async" style="margin-bottom:1rem;"/>
+						<img v-if="data.file2" alt="" :src="data.file2 || '/h5/images/default11.jpg'" width="100%" class="async" style="margin-bottom:1rem;"/>
+						<img v-if="data.file3" alt="" :src="data.file3 || '/h5/images/default11.jpg'"  width="100%" class="async"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</template>
+	<my-zpf></my-zpf>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['invest/initiatorapp']);
+	</script>
+</body>
+</html>

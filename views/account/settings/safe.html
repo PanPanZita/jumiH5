@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>密码管理</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+        <template id="safeTemplate">
+            <div class="group group-justify">
+                <div class="group-item">
+                    <!-- 未开户 -->
+                    <a href="javascript:void(0)" class="group-rowspan" v-if="!data.statAcct" @click="tips">
+                        <span class="group-colspan">修改支付密码</span>
+                        <span class="group-colspan">
+                            <i class="iconfont" data-more>&#xe60c;</i>
+                        </span>
+                    </a>
+
+                    <!-- 已开户 -->
+                    <a href="updatePayPwd.html" class="group-rowspan" v-else>
+                        <span class="group-colspan">修改支付密码</span>
+                        <span class="group-colspan">
+                            <i class="iconfont" data-more>&#xe60c;</i>
+                        </span>
+                    </a>
+                </div>
+                <div class="group-item">
+                    <a href="javascript:void(0)" class="group-rowspan" v-if="!data.statAcct" @click="tipsback">
+                        <span class="group-colspan">找回支付密码</span>
+                        <span class="group-colspan">
+                            <i class="iconfont" data-more>&#xe60c;</i>
+                        </span>
+                    </a>
+
+                    <a href="forgetPaypwd.html" class="group-rowspan" v-else>
+                        <span class="group-colspan">找回支付密码</span>
+                        <span class="group-colspan">
+                            <i class="iconfont" data-more>&#xe60c;</i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </template>
+        <my-safe></my-safe>
+    </div>
+
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['account/settings/safe']);
+    </script>
+</body>
+
+</html>

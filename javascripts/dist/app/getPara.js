@@ -1,0 +1,1 @@
+define(["jumi"],function(t){return{get:function(){var t={},i=location.href.split("?");if(i.length>1||void 0!=i[1]){var e=i[1].split("&");for(key in e)t[e[key].split("=")[0]]=e[key].split("=")[1]}else t="";return t},getString:function(){var t=location.href.split("?")[1];return t}}});

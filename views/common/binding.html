@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>绑定手机号</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        body,
+        html {
+            background-color: #ffffff;
+        }
+
+        .clr-gray8c {
+            color: #8c8c8c;
+        }
+
+        #box {
+            padding: 0 10vw;
+        }
+
+        .imgPar {
+            width: 20.27vw;
+            height: 20.27vw;
+            margin: 4.4vw auto;
+        }
+
+        .imgPar img {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #e4e4e4;
+            border-radius: 50%;
+        }
+
+        .styleInput {
+            height: 11.73vw;
+            line-height: 10.4vw;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+            margin-bottom: 5.33vw;
+            position: relative;
+            /* 14px */
+            font-size: 4.26vw;
+        }
+
+        .styleInput .iconPar {
+            padding: 0 3.46vw;
+            border-right: 1px solid #e5e5e5;
+        }
+
+        .styleInput .phoneInput,
+        .styleInput .codeInput {
+            padding-left: 3.46vw;
+            font-size: 4.26vw;
+        }
+
+        .styleInput .getCode {
+            width: 24.4vw;
+            height: 11.56vw;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background-color: #ea6020;
+            color: #ffffff;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            font-size: 4.26vw;
+        }
+
+        .goBinding {
+            width: 100%;
+            height: 11.73vw;
+            line-height: 11.73vw;
+            background-color: #ea6020;
+            color: #ffffff;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 5.33vw;
+            font-size: 4.26vw;
+        }
+
+        .styleInput .getCode.disabled,
+        .goBinding.disabled {
+            cursor: not-allowed;
+            pointer-events: none;
+            background: #dbdbdb;
+        }
+
+        .getVoicecode {
+            border: none;
+            outline: none;
+            background-color: #fff;
+            color: #ec6121;
+            font-size: 3.73vw;
+        }
+
+        .getVoicecode.disabled {
+            color: #bfbfbf;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+        <template id="bindingTemplate">
+            <div class="imgPar">
+                <img :src="headImageUrl || '/h5/images/logoface.png'" alt="用户头像">
+            </div>
+            <div class="clr-gray8c textcenter" style="margin-bottom:8vw;font-size:3.73vw;">
+                <p>尊敬的聚米用户：{{nickName}}</p>
+                <p>为了给您提供更优质的服务，请绑定您的手机号</p>
+            </div>
+            <div class="styleInput">
+                <span class="iconPar">
+                    <i class="iconfont clr-strike" style="font-size: 4.25vw;">&#xe616;</i>
+                </span>
+                <input type="tel" placeholder="请输入您的手机号" maxlength="11" class="phoneInput" @keyup="inputPhoneKeyup"
+                    v-model="phone">
+            </div>
+            <div class="styleInput">
+                <span class="iconPar">
+                    <i class="iconfont clr-strike" style="font-size: 3.8vw;">&#xe607;</i>
+                </span>
+                <input type="tel" placeholder="请输入验证码" maxlength="4" class="codeInput" v-model="phoneCode" @keyup="inputCodeKeyup">
+                <button class="getCode disabled" disabled="disabled" @click="getCode">获取验证码</button>
+            </div>
+            <div id="nc">
+                <div id="sliderNc"></div>
+            </div>
+            <div style="text-align: right;margin-bottom: 5.33vw;">
+                <span class="clr-gray">收不到短信？</span>
+                <button @click="getVoicecode" class="getVoicecode disabled" disabled="disabled">获取语音验证码</button>
+            </div>
+            <button class="goBinding disabled" disabled="disabled" @click="goBinding">立即绑定</button>
+        </template>
+        <my-binding></my-binding>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <!-- 人机校验（阿里的滑动验证） -->
+    <script type="text/javascript" charset="utf-8" src="//g.alicdn.com/sd/nch5/index.js"></script>
+    <script type="text/javascript">
+        requirejs(['common/binding']);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        body {
+            max-width: 640px;
+            min-width: 320px;
+        }
+
+        #appSpreadInfo {
+            position: relative;
+        }
+
+        #appSpreadInfo #weixin {
+            /* display: flex;
+            justify-content: space-between;           
+            left: 18.75vw;
+            right: 18.75vw;
+            bottom: 9.375vw;
+            text-align: center; */
+            position: absolute;
+            width: 30vw;
+            height: 30vw;
+            left: 50%;
+            margin-left: -15vw;
+            top: 68%;
+        }
+
+        /* #appSpreadInfo #weixin .wxPar {
+            width: 28vw;
+            height: 28vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #appSpreadInfo #weixin .wxPar img {
+            display: block;
+            width: 21.875vw;
+        }
+
+        #appSpreadInfo #weixin .wxPar .tip {
+            color: #fefefe;
+            margin-top: 10px;
+            font-size: 3.75vw;
+        } */
+
+        #appSpreadInfo .codeTips {
+            width: 77.5%;
+            height: 6.875vw;
+            line-height: 6.875vw;
+            text-align: center;
+            position: absolute;
+            left: 11.25%;
+            bottom: 41.56vw;
+            color: #fefefe;
+        }
+
+        #appSpreadInfo .codeTips:before,
+        #appSpreadInfo .codeTips:after {
+            display: block;
+            width: 12.75vw;
+            height: 1px;
+            content: '';
+            background-color: #fefefe;
+            position: absolute;
+            top: 3.28vw;
+        }
+
+        #appSpreadInfo .codeTips:before {
+            left: 0;
+        }
+
+        #appSpreadInfo .codeTips:after {
+            right: 0;
+        }
+
+        #toRegister {
+            background: #FFF;
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 4.8vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="appSpreadInfo">
+        <img src="/h5/images/ios/appSpreadInfo-01.jpg" alt="app推广" />
+        <div class="codeTips">长按以下二维码进行APP下载</div>
+        <div id="weixin">
+            <div class="wxPar" id="iosApp" style="display: none;">
+                <img src="/h5/images/ios/iosCode.png" alt="app推广" />
+            </div>
+            <div class="wxPar" id="androidApp" style="display: none;">
+                <img src="/h5/images/ios/androidCode.png" alt="app推广" />
+            </div>
+        </div>
+    </div>
+
+    <div id="toRegister">
+        新用户送
+        <span style="color: #fa633b;font-size:8vw;">188</span>
+        <span style="color: #fa633b;">元</span>
+        红包
+    </div>
+
+    <img src="/h5/images/ios/appSpreadInfo-05.jpg" alt="app推广" />
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['jquery', 'weixin'], function ($, weixin) {
+
+            weixin.setTitle()
+                .setDesc()
+                .setImg()
+                .setUrl(location.origin + "/h5/views/ios/appSpreadInfo.html")
+                .share();
+
+            var userAgent = navigator.userAgent;
+            var isAndroid = userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1; //android终端
+            var isiOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            if (isAndroid) {
+                $("#iosApp").hide();
+                $("#androidApp").show();
+            } else if (isiOS) {
+                $("#iosApp").show();
+                $("#androidApp").hide();
+            }
+
+
+
+
+        });
+    </script>
+    <script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+
+</html>

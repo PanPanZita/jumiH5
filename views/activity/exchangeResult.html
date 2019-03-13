@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>兑换</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+html,body{background:#FFF;}
+.button-border{border-radius: 1rem;}
+.phoneBox{
+	position: relative;
+}
+.exchangeCon{
+	width:100%;
+	position: absolute;
+	top:-2rem;
+	z-index: 11;
+}
+.sign{
+	display: inline-block;
+	width:2px;
+	height:1.2rem;
+	background-color: #ec6121;
+	margin-top: 0.4rem;
+}
+.result{
+	position: absolute;
+	width:100%;
+	top:2.5rem;
+	left:0;
+}
+</style>
+</head>
+<body>
+
+<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+
+	<div class="banner">
+		<img src="/h5/images/activity/shaomai/bg.jpg" alt="" style="width:100%;">
+	</div>	
+
+	<template id="itemnameTemplate">
+		<div class="result">
+			<div class="group group-noborder group-transparent" v-if="data.status == 3">
+			    <div class="group-item">
+			        <div class="group-rowspan">
+			          <div class="group-colspan font-18" style="text-align:center;color:#fff;font-weight: bold">
+			          	<span>尚未查询到兑换资格</span>
+			          </div>
+			        </div> 
+					<div class="group-rowspan">
+						<div class="group-colspan" style="text-align: center;color:#fff;padding-top: 0">
+							<span class="clr-gray font-16">* 请先支持【{{data.item_name}}】</span>
+						</div>
+					</div>
+				</div>	
+			</div>
+			<div class="group group-noborder group-transparent" v-if="data.status == 4">
+			    <div class="group-item">
+			        <div class="group-rowspan">
+			          <div class="group-colspan font-18" style="text-align:center;color:#fff;font-weight: bold">兑换资格已被使用</div>
+			        </div> 
+			        <div class="group-rowspan">
+						<div class="group-colspan clr-strike" style="text-align: center;">兑换时间：<span v-model="exchangeTime">{{data.create_time_str}}</span></div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan" style="text-align: center;color:#fff;padding-top: 0">兑换门店：<span class="exchangeStore">{{data.shop_name}}</span></div>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<div class="phoneBox" v-if="data.status == 3">	
+			<div class="exchangeCon">
+				<div class="group group-noborder group-clear group-transparent group-excel2" style="margin:0 0.5rem">		
+		            <div class="group-item">
+						<div class="group-rowspan group-justify">
+						    <div class="group-colspan">
+							    <button type="submit" id="exchangeRight" class="button button-block button-lg button-halfRadius" @click="exchangeAgain" >重试</button>
+							</div>
+							<div class="group-colspan">
+							    <button type="submit" id="exchangeRight" class="button button-block button-lg button-fill button-halfRadius" @click="exchangeSupport" >立即支持</button>
+							</div>
+						</div>
+					</div> 
+				</div>	
+			</div>
+		</div>	
+		<div class="group group-noborder group-clear" style="margin-top:2.4rem">
+			<div class="group-item">
+				<div class="group-rowspan">
+				    <div class="group-colspan">
+				    	<span class="sign"></span>
+				    </div>
+				    <div class="group-colspan">
+				    	<span class="font-16">兑换内容</span>
+				    </div>
+				    <div class="group-colspan right">
+				    	<a class="clr-gray font-12" @click="exchangeMore">更多图文详情>></a>
+				    </div>
+				</div>
+			</div>
+		</div>		
+		<div class="group group-noborder group-excel3" style="margin:0 0.5rem">
+			<div class="group-item">
+				<div class="group-rowspan">
+				    <div class="group-colspan">
+				    	<img :src="data.pic1" alt="" style="width:100%;">
+				    </div>
+				    <div class="group-colspan">
+				    	<img :src="data.pic2" alt="" style="width:100%;">
+				    </div>
+				     <div class="group-colspan">
+				    	<img :src="data.pic3" alt="" style="width:100%;">
+				    </div>
+				</div>
+			</div>
+		</div>
+		<div class="group group-noborder group-clear">
+			<div class="group-item">	
+				<div class="group-rowspan">
+					<div class="group-colspan clr-gray">
+						<p>{{{data.descr}}}</p>
+					</div>
+				</div>
+			</div>
+		</div>	
+		<div class="group group-noborder">
+			<div class="group-item">	
+				<div class="group-rowspan">
+					<div class="group-colspan">
+					    <i class="iconfont">&#xe644;</i>
+					    <span class="clr-strike" style="padding-left:0.5rem">{{data.user_count}}</span>人已兑换
+					</div>
+				</div>
+			</div>
+		</div>	
+	</template>
+	<my-itemname></my-itemname>	
+
+	<div class="group group-noborder">
+		<div class="group-item">
+			<div class="group-rowspan">
+			    <div class="group-colspan">
+			    	<span class="sign"></span>
+			    </div>
+			    <div class="group-colspan" style="padding-left: 0">
+			    	<span class="font-16">兑换须知</span>
+			    </div>
+			</div>
+			<div class="group-rowspan">
+				<div class="group-colspan">
+					<p>1、每个手机号必须在完成支持指定项目后才具备兑换条件；</p>
+					<p>2、一个手机号只能兑换一次，不能重复兑换；</p>
+					<p>3、该兑换码不设置强制过期时间，具体有效兑换时间，由发起方（商户）公布；</p>
+					<p>4、兑换过程请与现场工作人员确认核实，如有问题遇到问题，请拨打客服热线400-801-4680</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['activity/exchangeResult']);
+	</script> 
+</body>
+</html>

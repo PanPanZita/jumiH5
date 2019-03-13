@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="description" content="聚米众筹:一家专注互联网影视的众筹平台,拥有互动娱乐新玩法的粉丝聚集地,最大的影视垂直行业的金融互联网平台,将互联网新型投资模式和互动方式完美结合">
+    <meta name="keywords" content="聚米众筹、互联网影视众筹、互联网影视众筹平台、文化众筹社区">
+    <title>项目动态</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        .flag-fixed {
+            top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+        <template id="dynamicTemplate">
+            <div class="group group-noborder">
+                <div class="group-item">
+                    <div class="group-rowspan group-small font-16" style="padding-top: 1rem;">
+                        <div class="group-coslpan">
+                            {{jmNotice.title}}
+                        </div>
+                    </div>
+                    <!--<div class="group-rowspan group-small font-14">-->
+                    <!--<div class="group-coslpan">-->
+                    <!--{{jmNotice.subtitle}}-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div class="group-rowspan group-small clr-gray font-12">
+                        <div class="group-coslpan">
+                            {{jmNoticeText.createTime | timeStr}}
+                        </div>
+                    </div>
+                    <div class="group-rowspan group-small">
+                        <div class="group-coslpan">
+                            {{{jmNoticeText.h5Content}}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-item" style="margin:0;border-top:1px solid #eeeeee;">
+                    <div class="group-rowspan">
+                        <a class="group-colspan" style="text-align: center;" href="/h5/views/invest/investComment.html?itemid={{idz}}&commentType=1">
+                            <i class="iconfont">&#xe60d;</i>评论({{data.commentCount}})
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="group">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan clr-gray">相关项目</div>
+                    </div>
+                </div>
+                <a href="/h5/views/invest/invest.html?itemId={{itemBasicInfoResVO.id}}" class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan" style="width:28%;height:100%">
+                            <img :src="itemBasicInfoResVO.imagePath1610" alt="">
+                            <span class="flag-fixed" v-if="itemBasicInfoResVO.itemProcessStatus==1" title="即将开始">
+                                <img src="/h5/images/flag-prev.png" alt="" style="width:4rem;">
+                            </span>
+                            <span class="flag-fixed" v-if="itemBasicInfoResVO.itemProcessStatus==2" title="正在众筹">
+                                <img src="/h5/images/flag-ing.png" alt="" style="width:4rem;">
+                            </span>
+                            <span class="flag-fixed" v-if="itemBasicInfoResVO.itemProcessStatus==3" title="众筹成功">
+                                <img src="/h5/images/flag-success.png" alt="" style="width:4rem;">
+                            </span>
+                            <span class="flag-fixed" v-if="itemBasicInfoResVO.itemProcessStatus==4" title="众筹失败">
+                                <img src="/h5/images/flag-fail.png" alt="" style="width:4rem;">
+                            </span>
+                            <span class="flag-fixed" v-if="itemBasicInfoResVO.itemProcessStatus==5" title="完成兑付">
+                                <img src="/h5/images/flag-complete.png" alt="" style="width:4rem;">
+                            </span>
+                        </div>
+                        <div class="group-colspan">
+                            <p class="font-14">{{itemBasicInfoResVO.showName}}</p>
+                            <p class="font-12 clr-gray" style="margin-top: 0.6rem">
+                                <span>{{itemBasicInfoResVO.itemLabel}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="group">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan clr-gray">相关资讯</div>
+                        <a href="/h5/views/notice/information.html" class="group-colspan clr-gray right">返回所有资讯</a>
+                    </div>
+                </div>
+                <a class="group-item" href="javascript:void(0)" v-for="notice in jmNotices" @click="listDetails($index)">
+                    <div class="group-rowspan">
+                        <div class="group-colspan" style="width:66%;">
+                            <p class="font-14">
+                                <span>{{notice.title}}</span>
+                            </p>
+                            <p class="font-12" style="margin-top: 0.6rem">
+                                <span class="" id="xmdt">
+                                    <img src="/h5/images/xmdt.png" alt="项目动态">
+                                </span>
+                                <span class="clr-gray" style="margin-left: 0.4rem">{{notice.createTime}}</span>
+                            </p>
+                        </div>
+                        <div class="group-colspan" v-if="notice.picPath!=''">
+                            <img :src="notice.picPath" alt="">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </template>
+        <my-dynamic></my-dynamic>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['notice/projectDynamics']);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,772 @@
+/*  
+* @description: 表格
+* @author: adhehe
+* @update: null
+*/
+
+.table{
+	width:100%;
+	background:transparent;
+}
+
+.table thead > tr > th,
+.table tbody > tr > th,
+.table tfoot > tr > th,
+.table thead > tr > td,
+.table tbody > tr > td,
+.table tfoot > tr > td{
+	padding:0.375rem;
+	font-size:1rem;
+	vertical-align: top;
+	text-align:center;
+}
+.table thead > tr > th{}
+
+/* 下划线分隔 */
+.table-underline thead > tr > th,
+.table-underline tbody > tr > th,
+.table-underline tfoot > tr > th,
+.table-underline thead > tr > td,
+.table-underline tbody > tr > td,
+.table-underline tfoot > tr > td{
+	border-bottom:1px solid #eee;
+}
+
+/* 斑马线 */
+.table-stripe tbody > tr:nth-child(odd) > td {
+ 	background: #FFF;
+}
+
+/* 尺寸 */
+.table-sm thead > tr > th,
+.table-sm tbody > tr > th,
+.table-sm tfoot > tr > th,
+.table-sm thead > tr > td,
+.table-sm tbody > tr > td,
+.table-sm tfoot > tr > td{
+	font-size:1rem;
+	line-height:1rem;
+}
+
+.table-lg thead > tr > th,
+.table-lg tbody > tr > th,
+.table-lg tfoot > tr > th,
+.table-lg thead > tr > td,
+.table-lg tbody > tr > td,
+.table-lg tfoot > tr > td{
+	padding:1rem 0.5rem;
+	font-size:1.5rem;
+	line-height:1.5rem;
+}
+
+
+/* 全边框 */
+.table-border thead > tr > th,
+.table-border tbody > tr > th,
+.table-border tfoot > tr > th,
+.table-border thead > tr > td,
+.table-border tbody > tr > td,
+.table-border tfoot > tr > td{
+	border:1px solid #ccc;
+}
+.table-border thead > tr > th,
+.table-border tbdoy > tr > th,
+.table-border tfoot > tr > th {
+	border-bottom: 2px solid #ccc;
+}
+*html .table-border thead tr th,
+*html .table-border tbody tr th,
+*html .table-border tfoot tr th,
+*html .table-border thead tr td,
+*html .table-border tbody tr td,
+*html .table-border tfoot tr td{
+	border:1px solid #ccc;
+}
+*html .table-border thead tr th,
+*html .table-border tbdoy tr th,
+*html .table-border tfoot tr th {
+  border-bottom: 2px solid #ccc;
+}
+
+/* 
+初始样式（无外外框）
+.table{
+	width:100%;
+	background:transparent;
+	border:1px solid #eee;
+	font-size:1.2em;
+}
+.table caption{
+	padding:6px 0;
+	text-align:left;
+	font-weight:bold;
+}
+.table caption.textLeft{text-align:left;}
+.table caption.textRight{text-align:right;}
+.table caption.textCenter{text-align:center;}
+.table thead > tr > th,
+.table tbody > tr > th,
+.table tfoot > tr > th,
+.table thead > tr > td,
+.table tbody > tr > td,
+.table tfoot > tr > td{
+	border-bottom:1px solid #ccc;
+	padding:6px;
+	vertical-align: top;
+	text-align:left;
+}
+.table thead > tr > th,
+.table tbody > tr > th{
+	border-bottom: 2px solid #ccc;
+	background:#f0f0f0;
+	vertical-align: bottom;
+	font-weight:bold;
+}
+.table tbody > tr > th{
+	border-bottom: 1px solid #ccc;
+	background:#f6f6f6;
+}
+*html .table thead tr th,
+*html .table tbody tr th,
+*html .table tfoot tr th,
+*html .table thead tr td,
+*html .table tbody tr td,
+*html .table tfoot tr td{
+	border-bottom:1px solid #ccc;
+	padding:6px;
+	vertical-align: top;
+	text-align:left;
+}
+*html .table thead tr th,
+*html .table tbody tr th{
+	border-bottom: 2px solid #ccc;
+	background:#f0f0f0;
+	vertical-align: bottom;
+	font-weight:bold;
+}
+*html .table tbody tr th{
+	border-bottom: 1px solid #ccc;
+	background:#f6f6f6;
+}
+
+无外边框
+.table-noborder,
+.table-noborder thead > tr > td,
+.table-noborder tbody > tr > td,
+.table-noborder tfoot > tr > td,
+.table-noborder thead > tr > th,
+.table-noborder tbody > tr > th,
+.table-noborder tfoot > tr > th{
+	border:none;
+}
+*html .table-noborder,
+*html .table-noborder thead > tr > td,
+*html .table-noborder tbody > tr > td,
+*html .table-noborder tfoot > tr > td,
+*html .table-noborder thead > tr > th,
+*html .table-noborder tbody > tr > th,
+*html .table-noborder tfoot > tr > th{
+	border:none;
+}
+
+全边框
+.table-border thead > tr > th,
+.table-border tbody > tr > th,
+.table-border tfoot > tr > th,
+.table-border thead > tr > td,
+.table-border tbody > tr > td,
+.table-border tfoot > tr > td{
+	border:1px solid #ccc;
+}
+.table-border thead > tr > th,
+.table-border tbdoy > tr > th,
+.table-border tfoot > tr > th {
+	border-bottom: 2px solid #ccc;
+}
+*html .table-border thead tr th,
+*html .table-border tbody tr th,
+*html .table-border tfoot tr th,
+*html .table-border thead tr td,
+*html .table-border tbody tr td,
+*html .table-border tfoot tr td{
+	border:1px solid #ccc;
+}
+*html .table-border thead tr th,
+*html .table-border tbdoy tr th,
+*html .table-border tfoot tr th {
+  border-bottom: 2px solid #ccc;
+}
+
+标题（th）在左边的
+.table-thleft thead > tr > th,
+.table-thleft tbody > tr > th,
+.table-thleft tfoot > tr > th,
+.table-thleft thead > tr > td,
+.table-thleft tbody > tr > td,
+.table-thleft tfoot > tr > td{
+	border-bottom:1px solid #ddd;
+}
+.table-thleft thead > tr > th,
+.table-thleft tbody > tr > th {
+	background:#fff;
+  	text-align:right;
+	vertical-align:top;
+}
+*html .table-thleft thead tr th,
+*html .table-thleft tbody tr th,
+*html .table-thleft tfoot tr th,
+*html .table-thleft thead tr td,
+*html .table-thleft tbody tr td,
+*html .table-thleft tfoot tr td{
+	border-bottom:1px solid #ddd;
+}
+*html .table-thleft thead tr th,
+*html .table-thleft tbody tr th{
+	background:#fff;
+  	text-align:right;
+	vertical-align:top;
+}
+
+斑马条纹
+.table-stripe tbody > tr:nth-child(even) > td {
+ 	background-color: #f6f6f6;
+}
+*html .table-stripe tbody tr{
+	background-color:expression('#f6f6f6,#fff'.split(',')[rowIndex%2]);
+}
+*+html .table-stripe tbody tr{
+	background-color:expression('#f6f6f6,#fff'.split(',')[rowIndex%2]);
+}
+.table-stripe tbody tr{
+	background-color:expression('#f6f6f6,#fff'.split(',')[rowIndex%2]);
+}
+
+鼠标悬停
+.table-hover tbody > tr:hover > td {
+  	background: #eee;
+}
+.table-hover.table-thleft tbody > tr:hover > td{
+	background: transparent;
+}
+.table-hover.table-thleft tbody > tr > td:hover{
+	background: #eee;
+}
+
+常用时悬停
+*html .table-hover tbody tr{
+	star:expression(
+		onmouseover=function(){
+			this.style.backgroundColor="#eee";
+		},
+		onmouseout=function(){
+			this.style.backgroundColor="#fff";
+		}
+	);
+}
+斑马条纹时悬停
+*html .table-hover.table-stripe tbody tr{
+	star:expression(
+		onmouseover=function(){
+			this.style.backgroundColor="#eee";
+		},
+		onmouseout=function(){
+			if(rowIndex%2==0) this.style.backgroundColor="#f6f6f6"
+			if(rowIndex%2==1) this.style.backgroundColor="#fff";
+		}
+	);
+}
+标题（th）在左边时悬停
+*html .table-hover.table-thleft tbody tr{
+	star:expression(
+		onmouseover=function(){
+			this.style.backgroundColor="#fff";
+		},
+		onmouseout=function(){
+			this.style.backgroundColor="#fff";
+		}
+	);
+}
+*html .table-hover.table-thleft tbody tr td{
+	star:expression(
+		onmouseover=function(){
+			this.style.backgroundColor="#eee";
+		},
+		onmouseout=function(){
+			this.style.backgroundColor="#fff";
+		}
+	);
+}
+
+无样式
+.table-none{border:none;}
+.table-none caption{border-bottom:1px solid #ccc;}
+.table-none thead > tr > th,
+.table-none tbody > tr > th,
+.table-none tfoot > tr > th,
+.table-none thead > tr > td,
+.table-none tbody > tr > td,
+.table-none tfoot > tr > td{
+	border:none;
+}
+.table-none thead > tr > th,
+.table-none tbody > tr > th,
+.table-none tfoot > tr > th {
+	border:none;
+	background:transparent;
+	border-bottom:1px solid #ccc;
+}
+.table-none tbody{
+	border-bottom:1px solid #ccc;
+}
+*html .table-none thead tr th,
+*html .table-none tbody tr th,
+*html .table-none tfoot tr th,
+*html .table-none thead tr td,
+*html .table-none tbody tr td,
+*html .table-none tfoot tr td{
+	border:none;
+}
+*html .table-none thead tr th,
+*html .table-none tbody tr th{
+	border:none;
+	background:transparent;
+	border-bottom:1px solid #ccc;
+}
+*html .table-none tfoot tr td{
+	border-top:1px solid #ccc;
+}
+
+表格外围附加样式
+.table-outbox{
+	border: 1px solid #ccc;
+	background: #ddd;
+	padding: 0px 5px 5px;
+}
+*html .table-outbox{
+	width:97%;
+}
+
+圆角
+.table-radius{
+	border:1px solid #ccc;
+	border-radius:6px;
+	background:#ddd;
+}
+.table-radius .table{border-radius:6px;}
+.table-radius .table caption{text-indent:.5em;}
+
+.table-radius-xs{
+	border:1px solid #ccc;
+	border-radius:2px;
+}
+.table-radius-xs .table{border-radius:2px;}
+.table-radius-xs .table caption{text-indent:.5em;}
+
+.table-radius-sm{
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+.table-radius-sm .table{border-radius:4px;}
+.table-radius-sm .table caption{text-indent:.5em;}
+
+.table-radius-md{
+	border:1px solid #ccc;
+	border-radius:12px;
+}
+.table-radius-md .table{border-radius:12px;}
+.table-radius-md .table caption{text-indent:1em;}
+
+.table-radius-lg{
+	border:1px solid #ccc;
+	border-radius:18px;
+}
+.table-radius-lg .table{border-radius:18px;}
+.table-radius-lg .table caption{text-indent:1em;}
+
+.table-radius-xl{
+	border:1px solid #ccc;
+	border-radius:24px;
+}
+.table-radius-xl .table{border-radius:24px;}
+.table-radius-xl .table caption{text-indent:2em;}
+
+
+表格大小
+.table-xs{}
+.table-xs thead > tr > th,
+.table-xs tbody > tr > th,
+.table-xs tfoot > tr > th,
+.table-xs thead > tr > td,
+.table-xs tbody > tr > td,
+.table-xs tfoot > tr > td{
+	padding:0px;
+	font-size:12px;
+	line-height:1.5em;
+}
+.table-sm{}
+.table-sm thead > tr > th,
+.table-sm tbody > tr > th,
+.table-sm tfoot > tr > th,
+.table-sm thead > tr > td,
+.table-sm tbody > tr > td,
+.table-sm tfoot > tr > td{
+	padding:4px;
+	font-size:12px;
+	line-height:1.5em;
+}
+.table-md{}
+.table-md thead > tr > th,
+.table-md tbody > tr > th,
+.table-md tfoot > tr > th,
+.table-md thead > tr > td,
+.table-md tbody > tr > td,
+.table-md tfoot > tr > td{
+	padding:10px;
+	font-size:14px;
+	line-height:1.5em;
+}
+.table-lg{}
+.table-lg thead > tr > th,
+.table-lg tbody > tr > th,
+.table-lg tfoot > tr > th,
+.table-lg thead > tr > td,
+.table-lg tbody > tr > td,
+.table-lg tfoot > tr > td{
+	padding:16px;
+	font-size:16px;
+	line-height:1.5em;
+}
+.table-xl{}
+.table-xl thead > tr > th,
+.table-xl tbody > tr > th,
+.table-xl tfoot > tr > th,
+.table-xl thead > tr > td,
+.table-xl tbody > tr > td,
+.table-xl tfoot > tr > td{
+	padding:18px;
+	font-size:18px;
+	line-height:1.5em;
+}
+*html .table-xs{}
+*html .table-xs thead tr th,
+*html .table-xs tbody tr th,
+*html .table-xs tfoot tr th,
+*html .table-xs thead tr td,
+*html .table-xs tbody tr td,
+*html .table-xs tfoot tr td{
+	padding:0px 6px 0 0;
+	font-size:0.75em;
+	line-height:1em;
+}
+*html .table-sm{}
+*html .table-sm thead tr th,
+*html .table-sm tbody tr th,
+*html .table-sm tfoot tr th,
+*html .table-sm thead tr td,
+*html .table-sm tbody tr td,
+*html .table-sm tfoot tr td{
+	padding:4px;
+	font-size:0.75em;
+	line-height:1em;
+}
+*html .table-md{}
+*html .table-md thead tr th,
+*html .table-md tbody tr th,
+*html .table-md tfoot tr th,
+*html .table-md thead tr td,
+*html .table-md tbody tr td,
+*html .table-md tfoot tr td{
+	padding:10px;
+	font-size:0.75em;
+	line-height:1.125em;
+}
+*html .table-lg{}
+*html .table-lg thead tr th,
+*html .table-lg tbody tr th,
+*html .table-lg tfoot tr th,
+*html .table-lg thead tr td,
+*html .table-lg tbody tr td,
+*html .table-lg tfoot tr td{
+	padding:16px;
+	font-size:0.875em;
+	line-height:1.4em;
+}
+*html .table-xl{}
+*html .table-xl thead tr th,
+*html .table-xl tbody tr th,
+*html .table-xl tfoot tr th,
+*html .table-xl thead tr td,
+*html .table-xl tbody tr td,
+*html .table-xl tfoot tr td{
+	padding:24px;
+	font-size:0.875em;
+	line-height:1.875em;
+}
+
+表格的状态
+活动
+.table > thead > tr > td.active,
+.table > tbody > tr > td.active,
+.table > tfoot > tr > td.active,
+.table > thead > tr > th.active,
+.table > tbody > tr > th.active,
+.table > tfoot > tr > th.active,
+.table > thead > tr.active > td,
+.table > tbody > tr.active > td,
+.table > tfoot > tr.active > td,
+.table > thead > tr.active > th,
+.table > tbody > tr.active > th,
+.table > tfoot > tr.active > th {
+	background-color: #eee;
+}
+
+.table-hover > tbody > tr > td.active:hover,
+.table-hover > tbody > tr > th.active:hover,
+.table-hover > tbody > tr.active:hover > td {
+	background-color: #ddd;
+	border-color: #ccc;
+}
+*html .table thead tr td.active,
+*html .table tbody tr td.active,
+*html .table tfoot tr td.active,
+*html .table thead tr th.active,
+*html .table tbody tr th.active,
+*html .table tfoot tr th.active,
+*html .table thead tr.active td,
+*html .table tbody tr.active td,
+*html .table tfoot tr.active td,
+*html .table thead tr.active th,
+*html .table tbody tr.active th,
+*html .table tfoot tr.active th {
+  background-color: #eee;
+  color:#000;
+}
+*html .table-hover tbody tr td.active,
+*html .table-hover tbody tr th.active{
+	star:expression(
+		onmouseover=function(){
+			this.style.backgroundColor="#ddd";
+  			this.style.borderColor="#ccc";
+		},
+		onmouseout=function(){
+			this.style.backgroundColor="#eee";
+  			this.style.borderColor="#ccc";
+		}
+	);
+}
+*html .table-hover tbody tr.active td{
+    star:expression(
+		onmouseover=function(){
+			this.parentNode.className += " ieHover0";
+		},
+		onmouseout=function(){
+			this.parentNode.className = "active";
+		}
+	);
+}
+*html .table-hover tbody tr.active.ieHover0 td{
+    background-color:#ddd !important;
+    border-color :#ccc !important;
+}
+
+成功
+.table > thead > tr > td.success,
+.table > tbody > tr > td.success,
+.table > tfoot > tr > td.success,
+.table > thead > tr > th.success,
+.table > tbody > tr > th.success,
+.table > tfoot > tr > th.success,
+.table > thead > tr.success > td,
+.table > tbody > tr.success > td,
+.table > tfoot > tr.success > td,
+.table > thead > tr.success > th,
+.table > tbody > tr.success > th,
+.table > tfoot > tr.success > th {
+	background-color: #4EC243;
+	border-color: #38AC2D;
+}
+
+.table-hover > tbody > tr > td.success:hover,
+.table-hover > tbody > tr > th.success:hover,
+.table-hover > tbody > tr.success:hover > td {
+	background-color: #38AC2D;
+	border-color: #239718;
+}
+*html .table thead tr td.success,
+*html .table tbody tr td.success,
+*html .table tfoot tr td.success,
+*html .table thead tr th.success,
+*html .table tbody tr th.success,
+*html .table tfoot tr th.success,
+*html .table thead tr.success td,
+*html .table tbody tr.success td,
+*html .table tfoot tr.success td,
+*html .table thead tr.success th,
+*html .table tbody tr.success th,
+*html .table tfoot tr.success th {
+	background-color: #4EC243;
+	border-color: #38AC2D;
+}
+
+*html .table-hover tbody tr td.success,
+*html .table-hover tbody tr th.success{
+	star:expression(
+		onmouseover=function(){
+			this.style.backgroundColor="#38AC2D";
+  			this.style.borderColor="#239718";
+		},
+		onmouseout=function(){
+			this.style.backgroundColor="#4EC243";
+  			this.style.borderColor="#38AC2D";
+		}
+	);
+}
+*html .table-hover tbody tr.success td{
+    star:expression(
+		onmouseover=function(){
+			this.parentNode.className += " ieHover1";
+		},
+		onmouseout=function(){
+			this.parentNode.className = "success";
+		}
+	);
+}
+*html .table-hover tbody tr.success.ieHover1 td{
+    background-color:#38AC2D !important;
+    border-color :#239718 !important;
+}
+
+失败
+.table > thead > tr > td.danger,
+.table > tbody > tr > td.danger,
+.table > tfoot > tr > td.danger,
+.table > thead > tr > th.danger,
+.table > tbody > tr > th.danger,
+.table > tfoot > tr > th.danger,
+.table > thead > tr.danger > td,
+.table > tbody > tr.danger > td,
+.table > tfoot > tr.danger > td,
+.table > thead > tr.danger > th,
+.table > tbody > tr.danger > th,
+.table > tfoot > tr.danger > th {
+	background-color: #FF7373;
+	border-color: #DE5252;
+}
+
+.table-hover > tbody > tr > td.danger:hover,
+.table-hover > tbody > tr > th.danger:hover,
+.table-hover > tbody > tr.danger:hover > td {
+	background-color: #FF5B5B;
+	border-color: #ED4F4F;
+}
+*html .table thead tr td.danger,
+*html .table tbody tr td.danger,
+*html .table tfoot tr td.danger,
+*html .table thead tr th.danger,
+*html .table tbody tr th.danger,
+*html .table tfoot tr th.danger,
+*html .table thead tr.danger td,
+*html .table tbody tr.danger td,
+*html .table tfoot tr.danger td,
+*html .table thead tr.danger th,
+*html .table tbody tr.danger th,
+*html .table tfoot tr.danger th {
+  background-color: #FF7373;
+  border-color: #DE5252;
+}
+
+*html .table-hover tbody tr td.danger,
+*html .table-hover tbody tr th.danger {
+	star:expression(
+		onmouseover=function(){
+			this.style.backgroundColor="#FF5B5B";
+  			this.style.borderColor="#ED4F4F";
+		},
+		onmouseout=function(){
+			this.style.backgroundColor="#FF7373";
+  			this.style.borderColor="#DE5252";
+		}
+	);
+}
+*html .table-hover tbody tr.danger td{
+    star:expression(
+		onmouseover=function(){
+			this.parentNode.className += " ieHover2";
+		},
+		onmouseout=function(){
+			this.parentNode.className = "danger";
+		}
+	);
+}
+*html .table-hover tbody tr.danger.ieHover2 td{
+    background-color:#FF5B5B !important;
+    border-color :#ED4F4F !important;
+}
+
+警告
+.table > thead > tr > td.warning,
+.table > tbody > tr > td.warning,
+.table > tfoot > tr > td.warning,
+.table > thead > tr > th.warning,
+.table > tbody > tr > th.warning,
+.table > tfoot > tr > th.warning,
+.table > thead > tr.warning > td,
+.table > tbody > tr.warning > td,
+.table > tfoot > tr.warning > td,
+.table > thead > tr.warning > th,
+.table > tbody > tr.warning > th,
+.table > tfoot > tr.warning > th {
+	background-color: #FF9500;
+	border-color: #ff7600;
+}
+
+.table-hover > tbody > tr > td.warning:hover,
+.table-hover > tbody > tr > th.warning:hover,
+.table-hover > tbody > tr.warning:hover > td {
+	background-color: #FF8300;
+	border-color: #ff5600;
+}
+*html .table thead tr td.warning,
+*html .table tbody tr td.warning,
+*html .table tfoot tr td.warning,
+*html .table thead tr th.warning,
+*html .table tbody tr th.warning,
+*html .table tfoot tr th.warning,
+*html .table thead tr.warning td,
+*html .table tbody tr.warning td,
+*html .table tfoot tr.warning td,
+*html .table thead tr.warning th,
+*html .table tbody tr.warning th,
+*html .table tfoot tr.warning th {
+  background-color: #FF9500;
+  border-color: #ff7600;
+}
+
+*html .table-hover tbody tr td.warning,
+*html .table-hover tbody tr th.warning,
+*html .table-hover tbody tr.warning td {
+	star:expression(
+		onmouseover=function(){
+			this.style.backgroundColor="#FF8300";
+  			this.style.borderColor="#ff5600";
+		},
+		onmouseout=function(){
+			this.style.backgroundColor="#FF9500";
+  			this.style.borderColor="#ff7600";
+		}
+	);
+}
+*html .table-hover tbody tr.warning td{
+    star:expression(
+		onmouseover=function(){
+			this.parentNode.className += " ieHover3";
+		},
+		onmouseout=function(){
+			this.parentNode.className = "warning";
+		}
+	);
+}
+*html .table-hover tbody tr.warning.ieHover3 td{
+    background-color:#FF8300 !important;
+    border-color :#ff5600 !important;
+} */

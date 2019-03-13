@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>新增地址</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="addressTemplate">
+			<form action="javascript:void(0)" id="form">
+				<div class="group group-justify">
+					<div class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan"><label class="form-label">收件人</label></div>
+							<div class="group-colspan">
+								<input type="text" id="username" name="username" v-model="username" @keyup="toInput" placeholder="请输入收货人姓名" class="form-control-noborder textright"/>
+							</div>
+						</div>
+					</div>
+					<div class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan"><label class="form-label">联系电话</label></div>
+							<div class="group-colspan">
+								<input type="tel" id="mobile" name="mobile" v-model="mobile" @keyup="toInput" placeholder="请输入手机号" class="form-control-noborder textright"/>
+							</div>
+						</div>
+					</div>
+					<div class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan"><label class="form-label">选择地区</label></div>
+							<div class="group-colspan">
+								<span class="form-select-box">
+									<select name="level1" id="level1" v-model="province" @change="changeProvince" class="form-select" style="width:40%;margin-bottom:10px;">
+										<option value="">省</option>
+										<option v-for="optionProvince in optionProvinces" :value="optionProvince.name">{{optionProvince.name}}</option>
+									</select>
+								</span>
+								<span class="form-select-box">
+									<select name="level2" id="level2" v-model="city" @change="changeCity" class="form-select" style="width:40%;margin-bottom:10px;">
+										<option value="">市</option>
+										<option v-for="optionCity in optionCitys" :value="optionCity">{{optionCity}}</option>
+									</select>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan"><label class="form-label">详细地址</label></div>
+							<div class="group-colspan">
+								<textarea rows="" cols="" id="address" name="address"  v-model="address" @keyup="toInput" placeholder="请输入详细收货地址" class="form-textarea textright" style="border:none;padding:0;"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="group group-transparent">
+					<div class="group-item">
+						<div class="group-rowspan">
+							<div class="group-colspan">
+								<button type="submit" class="button button-fill button-block" :class="{disabled:isabled}" @click='ok'>保存</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</template>
+		<my-address></my-address>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/active/cartAddressCreate']);
+	</script>
+</body>
+</html>

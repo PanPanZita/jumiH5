@@ -1,0 +1,72 @@
+/*  
+* @description: 头部/底部/侧边等等的定位
+* @author: adhehe
+* @update: null
+*/
+
+/* 底部导航 */
+.nav{
+	display:-moz-box;
+	display:-webkit-box;
+	width:100%;
+	height:3.75rem;
+	overflow:hidden;
+	border-top: 1px solid #e5e5e5;
+	background: rgba(255,255,255,0.9);
+}
+.nav li {
+	display:block;
+	-moz-box-flex:1.0;
+	-webkit-box-flex:1.0;
+	text-align: center;
+}
+.nav li a,
+.nav li a i,
+.nav li a span {
+	display: block;
+}
+.nav li a{
+	color:#999;
+	margin-top:0.65rem;
+}
+.nav li a i{
+	font-size:1.5rem;
+	line-height:1;
+}
+.nav li a span {
+	font-size:0.75rem;
+}
+
+/* 悬浮在顶部的层 */
+.top-fixed,
+.top{
+/* 	display: block; */
+	max-width: 100%;
+	min-width: 320px;
+	width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	text-align: center;
+	z-index:9;
+}
+
+/* 悬浮在底部的层 */
+.foot-fixed,
+.footer{
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index:9;
+	display: block;
+	max-width: 100%;
+	min-width: 320px;
+	width: 100%;
+	overflow: hidden;
+	margin: 0 auto;
+	text-align: center;
+}

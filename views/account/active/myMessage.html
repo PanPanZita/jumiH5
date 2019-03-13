@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>我的消息</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        #box {
+            background: #f2f4f6;
+            padding-bottom: 0 !important;
+        }
+
+        #box a {
+            width: 100%;
+        }
+
+        .nothingz {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 80vh;
+        }
+
+        .nothingz img {
+            width: 21vw;
+        }
+
+        .nothingz p {
+            color: #999;
+            font-size: 4.21vw;
+        }
+
+        .containerz {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 3.75vw 3.75vw 0;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .itemerz {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            margin: 0 0 3.75vw 0;
+            padding: 2.8vw;
+            width: 100%;
+            /* height: 43.75vw; */
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+        }
+
+        .itemerz div:first-of-type {
+            width: 8.6vw;
+            height: 8.6vw;
+        }
+
+        .itemerz div:first-of-type img {
+            width: 100%;
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        .itemerz div:last-of-type {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 75vw;
+        }
+
+        .itemerz div:last-of-type span {
+            width: 100%;
+            font-size: 2.8vw;
+        }
+
+        .itemerz div:last-of-type .nickz {
+            color: #999;
+        }
+
+        .itemerz div:last-of-type .other-say {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            margin: 2.8vw 0;
+            color: black;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .itemerz div:last-of-type .say-time {
+            color: #999;
+        }
+
+        .itemerz div:last-of-type .linez {
+            height: 0;
+            border-top: 1px solid #cccccc;
+            transform: scaleY(0.5);
+        }
+
+        .itemerz div:last-of-type .my-comment {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            margin: 2.8vw 0 0;
+            color: #cccccc;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+        <template id="messageTemplate">
+            <div v-if="messageList.length == 0" class="nothingz">
+                <img src="/h5/images/account/noMessage.png" />
+                <p>暂无消息～</p>
+            </div>
+            <ul class="containerz" v-else>
+                <a v-for="item in messageList" :href="activeHref(item)">
+                    <li class="itemerz">
+                        <div>
+                            <img v-if="item.operatorId" src="/h5/images/vface.png" alt="回复头像">
+                            <img v-else :src="item.litpicPath || '/h5/images/face.jpg'" alt="回复头像">
+                        </div>
+                        <div>
+                            <span class="nickz" v-if="item.operatorId" style="color: #ed6b2f;display: flex;align-items: center;">
+                                聚米众筹
+                                <img src="/h5/images/bigv.png" style="display: inline-block;width: 3.2vw;height: 3.2vw;margin-left: 3px;">
+                            </span>
+                            <span class="nickz" v-else>{{item.nickname || "匿名用户"}}</span>
+                            <span class="other-say">{{item.content}}</span>
+                            <span class="say-time">{{item.commentTime}}</span>
+                            <span class="linez"></span>
+                            <span class="my-comment">{{item.toNickname}}：{{item.parentComment}}</span>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+            <div id="loadMoreButton" class="loadMoreButton" v-if="messageList && messageList.length >= 10">
+                <i class="iconfont">&#xe65d;</i>
+                <span>上拉刷新数据</span>
+            </div>
+        </template>
+        <my-message></my-message>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['account/active/myMessage']);
+    </script>
+</body>
+
+</html>

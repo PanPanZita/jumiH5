@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
+    />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>提现记录</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png" />
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css" />
+    <style type="text/css">
+      .button-sm {
+        height: 1.25rem;
+        padding: 0 1rem;
+        font-size: 0.75rem;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+      <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+      <template id="listTemplate">
+        <template v-if="lists != null && lists.length > 0">
+          <div
+            class="group group-justify group-small group-top"
+            v-for="(index,list) in lists"
+            :key="index"
+          >
+            <div class="group-item">
+              <div class="group-rowspan">
+                <div class="group-colspan">
+                  <p class="clr-strike">{{ list.statusShow }}</p>
+                </div>
+                <div class="group-colspan" v-if="list.status == 0">
+                  <a
+                    href="javascript:void(0);"
+                    class="button button-primary button-sm"
+                    @click="cancelCashout(list.id,index)"
+                    >取消提现</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="group-item">
+              <div class="group-rowspan">
+                <div class="group-colspan">
+                  <p>
+                    提现至：{{ list.bankName }}（****{{ list.accountShow }}）
+                  </p>
+                  <p>提现金额：{{ list.total }}元</p>
+                  <p>手续费：{{ list.fee }}元</p>
+                  <p>实际到账：{{ list.credited }}元</p>
+                  <p>
+                    提交时间：<span class="clr-gray">{{
+                      list.createTime
+                    }}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <div style="padding: 0.5rem; text-align: center;" v-else>
+          <i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;"
+            >&#xe628;</i
+          >
+          <p class="clr-gray">多投资才有银两提现哦</p>
+        </div>
+
+        <div id="loadMoreButton" v-if="lists != null && lists.length >= 10">
+          <i class="iconfont">&#xe65d;</i>
+          <span>上拉刷新数据</span>
+        </div>
+      </template>
+      <my-list></my-list>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+      requirejs(["account/assets/cashoutRecord"]);
+    </script>
+  </body>
+</html>

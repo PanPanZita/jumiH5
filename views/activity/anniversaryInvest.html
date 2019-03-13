@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>聚米2周年</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+body {
+	max-width: 640px;
+	min-width: 320px;
+	-webkit-transform: translate3d(0,0,0);
+}
+
+.ui-dialog-body .ui-dialog-content input,
+.ui-dialog-body .ui-dialog-content textarea {
+	display: block;
+	width: 15rem;
+	border: 1px solid #CCC;
+	padding: 0.5rem;
+	margin:0.5rem 0;
+	font-size: 0.75rem;
+}
+
+.ui-dialog-body .ui-dialog-content textarea {
+	height: 5rem;
+}
+
+button {
+	border: none;
+}
+
+#anniversary {
+	position: relative;
+}
+
+#info {
+	width: 20rem;
+	height: 4rem;
+	padding: 0.5rem;
+	position: absolute;
+	top: 15rem;
+	left: 0rem;
+	right: 0rem;
+	margin: 0 auto;
+	text-align: center;
+	line-height: 1.5;
+}
+
+#infoButton, #loginButton {
+	padding: 0.25rem 1.25rem;
+	border-radius: 8px;
+	background: #ED1045;
+	color: #FFF;
+}
+
+button.linkButton {
+	position: absolute;
+	width: 5rem;
+	height: 1.5rem;
+}
+
+button.activeButton {
+	border-radius: 5px;
+	background: #FC8E00;
+	text-align: center;
+	color: #FFF;
+	line-height: 1.6rem;
+	box-shadow: 0px 3px 0px #d0783b;
+}
+
+button.disabledButton {
+	border-radius: 5px;
+	background: #cccccc;
+	text-align: center;
+	color: #999999;
+	line-height: 1.6rem;
+	box-shadow: 0px 3px 0px #afada6;
+}
+
+button#link2 {
+	left: 1.8rem;
+	top: 58rem;
+}
+
+button#link3 {
+	right: 3.3rem;
+	top: 58rem;
+}
+
+button#link4 {
+	left: 3.3rem;
+	top: 70.5rem;
+}
+
+button#link5 {
+	right: 2.1rem;
+	top: 70.5rem;
+}
+
+button#link6 {
+	left: 2.5rem;
+	top: 83.5rem;
+}
+
+button#link7 {
+	right: 3.4rem;
+	top: 83.5rem;
+}
+
+button#link8 {
+	left: 3.8rem;
+	top: 96rem;
+}
+
+button#link9 {
+	right: 2.5rem;
+	top: 96rem;
+}
+
+button#link10 {
+	left: 1.5rem;
+	top: 109rem;
+}
+
+button#link11 {
+	right: 2rem;
+	top: 109rem;
+}
+
+a#investButton {
+	display: block;
+	position: absolute;
+	width: 12rem;
+	height: 2.4rem;
+	right: 0rem;
+	left: 0rem;
+	top: 114.55rem;
+	margin: 0 auto;
+}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<template id="anniversaryTemplate">
+		<div id="anniversary">
+			<img src="/h5/images/activity/anniversary/anniversaryInvest.jpg" alt="" style="width:100%;">
+			<!-- 未登录 -->
+			<div id="info" style="line-height:2rem;" v-if="!data.is_login">
+				<p>您好！您还未登录，请先</p>
+				<p> <a href="/h5/views/common/login.html?redirectURL=/h5/views/activity/anniversaryInvest.html" id="loginButton" @click="toLogin">登录</a></p>
+			</div>
+			
+			<!-- 已登录 -->
+			<div id="info" v-else>
+				<p style="font-weight:bold;">您好！【{{data.nick}}】</p>
+				
+				<!-- 未达到任何兑换资格 -->
+				<p v-if="data.price_all < 10000" style="font-size:0.625rem;">您还尚未达到兑换资格，活动期间累计投资额已经达到：{{data.price_all}}元，距离获取【{{data.productContent.next_product}}】只差{{data.productContent.next_less_price}}元。</p>
+				
+				<!-- 已达到某一档兑换资格 -->
+				<template v-else>
+					<p v-if="data.price_all < 500000" style="font-size:0.625rem;">活动期间累计投资额已经达到：{{data.price_all}}元，已获得【{{data.productContent.current_product}}】的兑换资格，距离获取【{{data.productContent.next_product}}】只差{{data.productContent.next_less_price}}元。</p>
+					<p v-else style="font-size:0.625rem;">活动期间累计投资额已经达到：{{data.price_all}}元，已获得【{{data.productContent.current_product}}】的兑换资格。</p>
+				</template>
+				
+				<p><a href="/h5/views/main/index.html" id="infoButton">立即投资 <i class="iconfont clr-white font-16" style="vertical-align:middle;">&#xe647;</i></a></p>
+			</div>
+			
+			<button type="button" id="link2" class="linkButton activeButton" @click="toLink(10000,0)">立即兑换</button>
+			<button type="button" id="link3" class="linkButton activeButton" @click="toLinkUpgrade(10000,1)">升级兑换</button>
+			<button type="button" id="link4" class="linkButton activeButton" @click="toLink(50000,0)">立即兑换</button>
+			<button type="button" id="link5" class="linkButton activeButton" @click="toLinkUpgrade(50000,1)">升级兑换</button>
+			<button type="button" id="link6" class="linkButton activeButton" @click="toLink(100000,0)">立即兑换</button>
+			<button type="button" id="link7" class="linkButton activeButton" @click="toLinkUpgrade(100000,1)">升级兑换</button>
+			<button type="button" id="link8" class="linkButton activeButton" @click="toLink(300000,0)">立即兑换</button>
+			<button type="button" id="link9" class="linkButton activeButton" @click="toLinkUpgrade(300000,1)">升级兑换</button>
+			<button type="button" id="link10" class="linkButton activeButton" @click="toLink(500000,0)">立即兑换</button>
+			<button type="button" id="link11" class="linkButton activeButton" @click="toLinkUpgrade(500000,1)">升级兑换</button>
+			
+			<a href="/h5/views/main/index.html" id="investButton" class=""></a>
+		</div>
+		
+		<!-- 收件信息 -->
+		<div id="message" style="display:none;">
+			<p style="color:red;margin-bottom:5px;">单个账号活动内仅可兑换一次奖品，是否确认兑换该奖品</p>
+			<p style="display:block;">收件人：</p>
+			<p><input type="text" v-model="receiver" @keyup="receiverKeyup"/></p>
+			<p>联系方式：</p>
+			<p><input type="tel" v-model="phone" @keyup="phoneKeyup"/></p>
+			<p>收货地址：</p>
+			<p><textarea v-model="address" @keyup="addressKeyup"></textarea></p>
+		</div>
+	</template>
+	<my-anniversary></my-anniversary>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['activity/anniversaryInvest'],function(){
+			//根据宽度变化字号
+			var fontsize = function (fontsize){
+				var width = window.innerWidth;
+				fontsize = (fontsize == undefined) ? ( (width < 640) ? ((28 * width) / 640) : 28) : 14; //算法
+				$("html").css("font-size",fontsize); //基本字号
+			}
+			
+			$(function(){
+				fontsize();
+				$("#j-loading").hide();
+				$(window).resize(function(){
+					fontsize();
+				})
+			});
+		});
+	</script>
+	<script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+</html>

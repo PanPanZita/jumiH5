@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>支持结果</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        .sharebox {
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        .sharebox span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            display: block;
+            width: 21rem;
+            height: 40rem;
+            background: url(/h5/images/account/redpacketShare.png) no-repeat;
+            background-size: 100%;
+            color: #FBDD36;
+            text-align: center;
+            line-height: 2.5;
+            font-size: 0.875rem;
+        }
+
+        .sharebox span em {
+            display: block;
+        }
+
+        .sharebox span em.row1 {
+            margin-top: 13rem;
+            color: #FFDC2F;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .sharebox span em.row2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #FFFDCD;
+            font-size: 1rem;
+            line-height: 3
+        }
+
+        .sharebox span em.row3 {
+            color: #be3709;
+            height: 3rem;
+            line-height: 3rem;
+        }
+
+        .group-list .group-item {
+            float: left;
+            width: 45%;
+            margin: 0 0 3% 3%;
+        }
+
+        .group-list .group-rowspan {
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <template id="successTemplate">
+        <div class="group group-center noMarginBottom group-clear">
+            <div class="group-item">
+                <div class="group-rowspan">
+                    <div class="group-colspan" style="padding:3rem 0.5rem 2rem;">
+                        <i class="iconfont font-60 clr-green">&#xe611;</i>
+                        <p class="font-18">支持成功</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="group" style="padding-bottom: 1rem;">
+            <div class="group-item">
+                <div class="group-rowspan">
+                    <div class="group-colspan">
+                        <a href="/h5/views/main/index.html" class="button button-block">返回首页</a>
+                    </div>
+                    <div class="group-colspan">
+                        <a href="/h5/views/account/training/training.html?isNoviceUser=1" class="button button-fill button-block" v-if="is_novice_item">查看记录</a>
+                        <a href="/h5/views/account/invest/invest.html" class="button button-fill button-block" v-else>查看记录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 邀请好友 -->
+        <div class="group group-center group-noborder" style="background: #f4f4f4;">
+            <div class="group-item group-clear">
+                <div class="group-rowspan">
+                    <div class="group-colspan">
+                        <a href="/h5/views/account/invite/invite.html">
+                            <img src="/h5/images/account/investSuccess.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="group group-justify group-list bgPaddingMargin" v-if="data.recommendList.length > 0">
+            <a href="/h5/views/topic/topicDetail.html?action_id={{item.id}}" class="group-item" v-for="item in data.recommendList" style="background: #f4f4f4;">
+                <span class="group-rowspan">
+                    <div style="position:relative;">
+                        <img :src="item.image1 || 'h5/images/default85.jpg'" width="100%" alt="产品图片">
+                        <span class="statusLimitNum fixed" v-if="item.type == 2">抽奖</span>
+                        <span class="statusLimitNum fixed" v-if="item.type == 3">兑换</span>
+                    </div>
+                </span>
+                <span class="group-rowspan">
+                    <var class="txt-rowspan1" style="height:1.5rem;overflow:hidden;">{{item.name}}</var>
+                </span>
+                <span class="group-rowspan">
+                    <span class="group-colspan clr-strike">
+                        <i class="iconfont clr-strike font-12" v-if="item.singleLimit > 0">&#xe69c;</i>
+                        <i class="iconfont clr-strike font-12" v-if="item.islevel == 1">&#xe69b;</i>
+                        {{item.expendCoin}}聚米币
+                    </span>
+                </span>
+            </a>
+        </div>
+
+        <!-- 分享图片	 -->
+        <a href="javascript:void(0)" class="sharebox" v-show="isShow" @click='hide'>
+            <span>
+                <em class="row1">感谢您支持</em>
+                <em class="row2" style="width: 52vw;margin:0 auto">{{data.itemName}}</em>
+                <em class="row3">{{data.shareIntroducer}}</em>
+            </span>
+        </a>
+    </template>
+    <my-success></my-success>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['invest/investSuccess']);
+    </script>
+</body>
+
+</html>

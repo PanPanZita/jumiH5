@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
+    />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>领取红包</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png" />
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css" />
+    <style type="text/css">
+      html {
+        background: url("/h5/images/account/invest/newBg.png") no-repeat;
+        background-size: cover;
+      }
+
+      body {
+        background: transparent;
+      }
+
+      .notOpen {
+        margin-top: 34vw;
+      }
+
+      #desc {
+        width: 91.25vw;
+        background-color: #fff0c2;
+        margin: 0 auto 18vw;
+        border-radius: 5px;
+        padding: 3.125vw;
+      }
+
+      .redpacketRules h3 {
+        height: 14.6875vw;
+        line-height: 14.6875vw;
+        color: #000;
+        text-align: center;
+        font-weight: bolder;
+      }
+
+      .redpacketRules.rulesOne h3 {
+        border-bottom: 1px dashed #dfd1b3;
+      }
+
+      .redpacketRules.rulesTwo h3 {
+        border-top: 1px dashed #dfd1b3;
+      }
+
+      .redpacketRules p {
+        color: #666666;
+        margin-bottom: 0.5rem;
+      }
+
+      #desc .rulesOne .redMoney {
+        font-style: oblique;
+        font-weight: bolder;
+        /* text-shadow: 0.1em 0.1em #bf2b1f; */
+        /* padding-right: 6px; */
+      }
+
+      .redpacketData {
+        height: 82vw;
+        margin-top: 34vw;
+        background: url("/h5/images/account/invest/alreadyOpen.png") no-repeat
+          center top;
+        background-size: 100%;
+        text-align: center;
+      }
+
+      .redpacketForm {
+        height: 82vw;
+        margin-top: 34vw;
+        background: url("/h5/images/account/invest/notBinding.png") no-repeat
+          center top;
+        background-size: 100%;
+        padding: 5.625vw 9.375vw 0;
+      }
+
+      .redpacketInput,
+      .redpacketInputBtn {
+        display: inline-block;
+        width: 100%;
+        height: 3rem;
+        line-height: 3rem;
+        padding: 0 1rem;
+        margin-bottom: 0.5rem;
+        background: #fff;
+        border: none;
+        border-radius: 2rem;
+        font-size: 1rem;
+      }
+
+      .redpacketInput.phoneCode {
+        width: 56%;
+      }
+
+      .redpacketInputBtn.getCode {
+        width: 40%;
+        float: right;
+      }
+
+      .redpacketInputBtn {
+        background: #ffd679;
+        color: #a36236;
+        text-align: center;
+      }
+
+      .redpacketButton {
+        display: inline-block;
+        width: 80%;
+        height: 3rem;
+        padding: 0 1rem;
+        background: #ffd67f;
+        border: none;
+        border-radius: 2rem;
+        line-height: 2.5;
+        font-size: 1.15rem;
+        text-align: center;
+        color: #a36236;
+        box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+      }
+
+      .firstLine {
+        width: 75vw;
+        height: 23.4375vw;
+        padding-top: 3.125vw;
+        margin: 0 auto;
+      }
+
+      .firstLineFlex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .firstLine .errorImg {
+        width: 14.84375vw;
+      }
+
+      .secondLine {
+        margin-top: 7.8125vw;
+        color: #999;
+        height: 7.5vw;
+        line-height: 7.5vw;
+      }
+
+      .getCode.disabled,
+      .pullDown.disabled {
+        cursor: not-allowed;
+        background: #dbdbdb;
+      }
+
+      .newUser {
+        background: #e2584d;
+        color: #fff0c2;
+        padding: 2px 4px;
+        border-radius: 2px;
+      }
+
+      .getVoicecode {
+        border: none;
+        outline: none;
+        background: #d74237;
+        color: #ffd67b;
+        font-weight: bolder;
+        font-size: 3.73vw;
+      }
+
+      .getVoicecode.disabled {
+        color: #bfbfbf;
+        font-weight: normal;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+      <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <template id="redpacketTemplate">
+      <!-- 红包是待领取状态 -->
+      <template v-if="pageShowstatus == 0">
+        <div class="notOpen" @click="toReceive($event)">
+          <img src="/h5/images/account/invest/notOpen.png" alt="未领取状态" />
+        </div>
+      </template>
+
+      <!-- 输入手机号领取红包(微信号未关联手机号) -->
+      <template class="redpacketForm" v-if="pageShowstatus == 1">
+        <div class="redpacketForm">
+          <input
+            type="tel"
+            placeholder="输入手机号"
+            id="userphone"
+            name="userphone"
+            v-model="userphone"
+            class="redpacketInput"
+            maxlength="11"
+            @keyup="inputPhoneKeyup"
+          />
+          <div>
+            <input
+              type="tel"
+              placeholder="输入验证码"
+              class="phoneCode redpacketInput"
+              name="phoneCode"
+              v-model="phoneCode"
+              maxlength="4"
+              @keyup="inputCodeKeyup"
+            />
+            <button
+              class="getCode redpacketInputBtn disabled"
+              disabled="disabled"
+              @click="getCode"
+            >
+              获取验证码
+            </button>
+          </div>
+          <div id="nc">
+            <div id="sliderNc"></div>
+          </div>
+          <div style="text-align: right;margin-bottom: 0.5rem;">
+            <span style="color: #e6e6e6;">收不到短信？</span>
+            <button
+              @click="getVoicecode"
+              class="getVoicecode disabled"
+              disabled="disabled"
+            >
+              获取语音验证码
+            </button>
+          </div>
+          <a
+            href="javascript:void(0)"
+            class="redpacketInputBtn pullDown disabled"
+            style="margin:0.5rem 0 0"
+            v-model="clickstatus"
+            disabled="disabled"
+            @click="pullDown"
+            >立即领取</a
+          >
+        </div>
+      </template>
+
+      <!-- 微信号已关联手机号已领取 -->
+      <template v-if="pageShowstatus == 2">
+        <div class="redpacketData">
+          <div class="firstLine">
+            <p style="color:#e2584d;font-size:0.75rem;padding-top:0.5rem;">
+              恭喜！获得现金
+            </p>
+            <p style="color:#EC6121;font-size:2rem;">{{ revAmt }}元</p>
+          </div>
+          <p class="secondLine">
+            <span
+              >已存入聚米账户
+              <em class="clr-strike">{{ phone }}</em>
+            </span>
+          </p>
+          <p style="margin-top:12.5vw;">
+            <a
+              href="/h5/views/main/index.html"
+              class="redpacketButton"
+              v-if="isNewUser == 0"
+              >参与众筹，得现金红包</a
+            >
+            <a href="/h5/views/main/index.html" class="redpacketButton" v-else
+              >去提现</a
+            >
+          </p>
+        </div>
+      </template>
+
+      <!-- 手慢了(红包已经全部领取完了·且该用户未领取过)-->
+      <template v-if="pageShowstatus == 3">
+        <div class="redpacketData">
+          <p
+            style="color:#EC6121;font-size:2.5rem;line-height: 24vw;"
+            class="firstLine"
+          >
+            手慢了
+          </p>
+          <p style="color:#999;" class="secondLine">
+            {{ count }}个红包已被全部领取
+          </p>
+          <p style="margin-top:2.5rem;padding:0 1rem;">
+            <a href="/h5/views/main/index.html" class="redpacketButton"
+              >没有红包，也要参与</a
+            >
+          </p>
+        </div>
+      </template>
+
+      <!-- 分享红包账户余额不足 -->
+      <template v-if="pageShowstatus == 4">
+        <div class="redpacketData">
+          <p class="firstLine firstLineFlex">
+            <img
+              src="/h5/images/account/invest/error.png"
+              alt="系统开小差"
+              class="errorImg"
+            />
+          </p>
+          <p class="secondLine">
+            <span>系统开小差了，请联系客服！</span>
+          </p>
+          <p style="margin-top:12.5vw;">
+            <a href="/h5/views/main/index.html" class="redpacketButton"
+              >没有红包,也要参与</a
+            >
+          </p>
+        </div>
+      </template>
+
+      <div id="desc">
+        <div
+          class="redpacketRules rulesOne"
+          v-if="revUserInfoList != null && revUserInfoList.length > 0"
+        >
+          <h3>看看朋友们的手气</h3>
+          <div
+            class="group group-others group-transparent group-small group-top"
+          >
+            <div class="group-item" style="margin:0;">
+              <div class="group-rowspan" v-for="item in revUserInfoList">
+                <div class="group-colspan" style="width:3rem;">
+                  <img
+                    :src="item.userHeadImgUrl  || '/h5/images/face.jpg'"
+                    style="width:3rem;height:3rem;border-radius:50%;"
+                  />
+                </div>
+                <div class="group-colspan" style="width: 40%;">
+                  <div class="font-12">
+                    {{ item.nickName }}
+                    <!-- isNewUser  0：不是；1：是 -->
+                    <em
+                      class="newUser"
+                      style="margin-left:4px;"
+                      v-if="item.isNewUser == 1"
+                      >新用户</em
+                    >
+                    <!-- doubleFactor  doubleFactor>1翻倍 -->
+                    <em
+                      class="clr-redpacket"
+                      style="margin-left:4px;display: inline-block;"
+                      v-if="item.doubleFactor > 1"
+                      >(新用户助翻倍)</em
+                    >
+                  </div>
+                  <div class="font-10 clr-gray">{{ item.receiveTime }}</div>
+                </div>
+                <div class="group-colspan clr-redpacket font-18 redMoney">
+                  <span style="padding-right: 6px;">{{ item.amount }}元</span>
+                  <img
+                    src="/h5/images/account/invest/multiplyTwo.png"
+                    alt="乘以2"
+                    style="display:inline-block;width: 7.8125vw;vertical-align: middle;"
+                    v-if="item.doubleFactor > 1"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="redpacketRules rulesTwo">
+          <h3>现金红包规则</h3>
+          <p>
+            1、分享现金红包在完成投资后才能发起，红包每人限领一次，面向所有用户。
+          </p>
+          <p>
+            2、通过邀请新用户领取可使红包发起者领取到的金额翻倍，每个现金红包最多翻倍一次。
+          </p>
+          <p>3、每个新用户最多可帮助1位好友翻倍。</p>
+        </div>
+      </div>
+    </template>
+    <my-redpacket></my-redpacket>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <!-- 人机校验（阿里的滑动验证） -->
+    <script
+      type="text/javascript"
+      charset="utf-8"
+      src="//g.alicdn.com/sd/nch5/index.js"
+    ></script>
+    <script type="text/javascript">
+      requirejs(["account/invest/cashRedpacketReceive"]);
+    </script>
+  </body>
+</html>

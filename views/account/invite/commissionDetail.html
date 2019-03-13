@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>佣金明细邀请好友-聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+    .explain legend:before,
+    .explain legend:after {
+        color: #333;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading hidden">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+    <div id="box">
+        <template id="inviteTemplate">
+            <div class="tab tab-normal tab-noborder">
+                <ul class="tab-handle top-fixed">
+                    <li class="active"><a href="#tabs1" data-toggle="tab">全部</a></li>
+                    <li><a href="#tabs2" data-toggle="tab">待结算</a></li>
+                    <li><a href="#tabs3" data-toggle="tab">已结算</a></li>
+                </ul>
+                <div class="tab-content" style="padding-top:4rem;">
+                    <div class="tab-pane active" id="tabs1">
+                        <div v-if="allCommList.items.length">
+                            <div class="com-list overflow" v-for="list in allCommList.items">
+                                <div class="f-left">
+                                    <i v-if="list.paymentStatus == 0" class="iconfont" style="font-size: 40px;color:#B6DDA6; ">&#xe6b7;</i><span v-if="list.paymentStatus == 0">待结算</span>
+                                    <i v-if="list.paymentStatus == 1" class="iconfont" style="font-size: 40px;color:#F8C8B2; ">&#xe6b6;</i><span v-if="list.paymentStatus == 1">已结算</span>
+                                </div>
+                                <div class="f-left">
+                                    <h3>{{ list.investDetail }}</h3>
+									<!-- <h3>{{ list.investDetail }}{{ list.investAmount }}元</h3> -->
+                                    <p>{{ list.createTime }}</p>
+                                </div>
+                                <div class="f-right"><em v-if="list.commission > 0">{{ "+"+list.commission }} </em><em v-if="list.commission == 0">0</em><em v-if="list.commission < 0">{{ "-"+list.commission }}</em><span>{{ list.itemStatus != 2 ? "" : "众筹失败" }}</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <a href="javascript:void(0)" id="loadMoreButton1" @click="loadMore(allCommList.isLoading,0)">
+								<span v-if="allCommList.isLoading==0">点击加载</span>
+								<span v-if="allCommList.isLoading==1">正在加载 <img src="/h5/images/loadingDefault.gif" style="display:inline-block;width:1rem;"/></span>
+								<span v-if="allCommList.isLoading==2">已无更多记录！</span>
+							</a>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tabs2">
+                        <div v-if="noPayCommList.items.length">
+                            <div class="com-list overflow" v-for="list in noPayCommList.items">
+                                <div class="f-left">
+                                    <i class="iconfont" style="font-size: 40px;color:#B6DDA6; ">&#xe6b7;</i><span>待结算</span>
+                                </div>
+                                <div class="f-left">
+                                    <h3>{{ list.investDetail }}{{ list.investAmount }}元</h3>
+                                    <p>{{ list.createTime }}</p>
+                                </div>
+                                <div class="f-right"><em v-if="list.commission > 0">{{  "+"+list.commission }} </em><em v-if="list.commission == 0">0</em><em v-if="list.commission < 0">{{ "-"+list.commission }}</em><span>{{ list.itemStatus != 2 ? "" : "众筹失败" }}</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <a href="javascript:void(0)" id="loadMoreButton2" @click="loadMore(noPayCommList.isLoading,1)">
+								<span v-if="noPayCommList.isLoading==0">点击加载</span>
+								<span v-if="noPayCommList.isLoading==1">正在加载 <img src="/h5/images/loadingDefault.gif" style="display:inline-block;width:1rem;"/></span>
+								<span v-if="noPayCommList.isLoading==2">已无更多记录！</span>
+							</a>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tabs3">
+                        <div v-if="payCommList.items.length">
+                            <div class="com-list overflow" v-for="list in payCommList.items">
+                                <div class="f-left">
+                                    <i class="iconfont" style="font-size: 40px;color:#F8C8B2; ">&#xe6b6;</i><span>已结算</span>
+                                </div>
+                                <div class="f-left">
+                                    <h3>{{ list.investDetail }}{{ list.investAmount }}元</h3>
+                                    <p>{{ list.createTime }}</p>
+                                </div>
+                                <div class="f-right"><em v-if="list.commission > 0">{{  "+"+list.commission }} </em><em v-if="list.commission == 0">0</em><em v-if="list.commission < 0">{{ "-"+list.commission }}</em><span>{{ list.itemStatus != 2 ? "" : "众筹失败" }}</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <a href="javascript:void(0)" id="loadMoreButton3" @click="loadMore(payCommList.isLoading,2)">
+								<span v-if="payCommList.isLoading==0">点击加载</span>
+								<span v-if="payCommList.isLoading==1">正在加载 <img src="/h5/images/loadingDefault.gif" style="display:inline-block;width:1rem;"/></span>
+								<span v-if="payCommList.isLoading==2">已无更多记录！</span>
+							</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <my-invite></my-invite>
+    </div>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+    requirejs(['account/invite/commissionDetail']);
+    </script>
+</body>
+
+</html>

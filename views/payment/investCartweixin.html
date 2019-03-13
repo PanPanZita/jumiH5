@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>订单信息</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+.on .onoff-handle{left: auto; right: -1.15em;}
+.off .onoff-handle{right: auto; left: -1.15em;}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+
+	<!-- 页面逻辑解析：：新手训练营纪录订单详情（无订单，寄送订单，备注订单，支持完成）  和   普通投资项目的订单详情（权益回报型【无订单，寄送订单，备注订单，支持完成】都是这个页面（这是个公共页面）-->
+
+
+	<!-- tips:orderType中0=无订单；1=寄送订单；2=备注订单 -->
+
+	<div id="box">
+		<template id="cartTemplate">
+			<div v-if="data.orderType == 1">
+				<div class="group group-justify" v-if="data.jmAddress">
+					<a href="javascript:void(0)" class="group-item" @click="toLink">
+						<div class="group-rowspan">
+							<div class="group-colspan">
+								<p style="overflow:hidden;padding-bottom:0.5rem;">
+									<span class="font-16">{{data.jmAddress.userName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="font-16">{{data.jmAddress.mobile}}</span>
+								</p>
+								<p class="clr-gray">
+									<span>{{data.jmAddress.province}}</span>
+									<span>{{data.jmAddress.city}}</span>
+									<span>{{data.jmAddress.address}}</span>
+								</p>
+							</div>
+							<div class="group-colspan" > 
+								<i class="iconfont" data-more>&#xe60c;</i>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="group group-justify" v-else>		
+					<a href="javascript:void(0)" class="group-item" @click="toLink">
+						<div class="group-rowspan">
+							<div class="group-colspan" style="padding:2rem 0;line-height:2;text-align:center;">
+								<p>尚未维护收货地址</p>
+								<p><button type="button" class="button button-primary button-sm">添加收货地址</button></p>
+							</div>
+						</div>	
+					</a>
+				</div>
+			</div>
+
+			<!-- 档位信息 -->
+			<div class="group group-justify group-clear">
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan font-16" style="padding-bottom: 0;">档位金额:&nbsp;&nbsp;{{data.invPrice}}元</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 项目介绍 -->
+			<div class="group group-justify">
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<p class="clr-gray">{{{data.desc}}}</p>
+							<p>
+								<span class="initiator-items" v-if="data.pic1Path"><img :src="data.pic1Path || '/h5/images/default43.jpg'" width="100%" style="opacity: 1;"></span>
+								<span class="initiator-items" v-if="data.pic2Path"><img :src="data.pic2Path || '/h5/images/default43.jpg'" width="100%" style="opacity: 1;"></span>
+								<span class="initiator-items" v-if="data.pic3Path"><img :src="data.pic3Path || '/h5/images/default43.jpg'" width="100%" style="opacity: 1;"></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="group-item" v-if="data.orderType != 0">
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<p>备注信息</p>
+							<textarea v-model="remark" resize="none" placeholder="可输入150字" style="display:block;width:100%;height:4rem;margin-bottom:0.5rem;border:none;border-radius:0;background:#FFF;font-size:1rem;color:#999;" data-remark></textarea>
+							<p class="clr-gray textright">还可以输入<em class="clr-strike" data-limitnumber>150</em>字</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 价格/数量/合计 -->
+			<div class="group group-justify">
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan font-16">支持份数</div>
+						<div class="group-colspan">
+							<!-- 解决用户名密码自动填充的BUG -->
+							<input type="tel" value="" style="display:none;">
+							<input type="password" value="" style="display:none;">
+							<!-- 解决用户名密码自动填充的BUG end -->
+							<div class="addel">
+							    <a href="javascript:void(0)" v-touch:tap="del" class="addel-del" style="border-right:1px solid #eeeeee;"><i class="iconfont">&#xe697;</i></a>
+							    <span class="addel-info">
+								    <input type="tel" v-model="num" value="{{num}}" autocomplete="off" style="background:transparent;" disabled>
+							    </span>
+							    <a href="javascript:void(0)" v-touch:tap="add" class="addel-add" style="border-left:1px solid #eeeeee;"><i class="iconfont">&#xe698;</i></a>
+							</div>
+						</div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan font-16">总计金额</div>
+						<div class="group-colspan font-18">{{total}}元</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 微信支付 -->
+			<div class="group group-small group-justify">
+				<div class="group-item">
+
+					<div class="group-rowspan">
+						<div class="group-colspan">微信支付</div>				
+					</div>
+
+					<div class="group-rowspan" style="border-bottom:0;" v-if="data.isHongBao == 1">
+						<div class="group-colspan">
+							<label>
+								<div id="hongbaogroup">
+									<p>使用红包</p>
+									<p class="font-12 clr-gray">余额 <em class="clr-strike">{{data.hongbaoBalance}}</em> 元，可抵扣 <em class="clr-red">{{canUseHongbao}}</em> 元</p>
+								</div>
+							</label>
+						</div>
+						<div class="group-colspan">
+							<a href="javascript:void(0)" class="onoff" :class="{'on active':isHongBao}" @click="onoff">
+								<span class="onoff-handle"></span>
+								<span class="onoff-info"></span>
+							</a>
+						</div>
+					</div>
+
+				</div>				
+			</div>		
+			
+			<!-- footer  -->
+			<div class="footer">
+				<div class="group" style="margin:0;">
+					<div class="group-item">
+						<div class="group-rowspan">
+							<span class="group-colspan font-16" style="width:60%;">
+								<span class="font-14">实付金额:</span>
+								<span class="clr-strike"><span class="font-14">{{realtotal}}元</span></span>
+							</span>
+							<div class="group-colspan" style="padding:0;">
+								<a href="javascript:void(0)" class="button button-primary button-block" @click="next">下一步</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+			
+		</template>
+		<my-cart></my-cart>
+	</div>
+    
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['payment/investCartweixin']);
+	</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="msapplication-tap-highlight" content="no" />
+<title>发现-聚米众筹</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+.activityList{overflow:hidden;}
+.activityList li{float:left;width:50%;font-size:0.85714285714285714285714285714286rem;color:#999;}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="recordTemplate">
+			<div class="group group-justify" v-if="awardLogList != null && awardLogList.length > 0">
+				<div class="group-item" v-for="list in awardLogList">
+					<div class="group-rowspan">
+						<div class="group-colspan">{{list.nickname}}</div>
+						<!-- 该展示字段应该根据awardType的状态值从而进行不同的展示 -->
+						<div class="group-colspan clr-gray" v-if="data.type == 2">
+							<span v-if="list.awardType == -1">未中奖</span>
+							<span v-else>中奖</span>
+						</div>
+						<!-- 以上展示字段应该根据awardType的状态值从而进行不同的展示 -->
+						<div class="group-colspan clr-gray" v-if="data.type == 3">已兑换</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="padding: 0.5rem; text-align: center;" v-else>
+				<i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;">&#xe628;</i>
+				<p class="clr-gray">抽奖兑换，心动不如行动</p>
+			</div>
+
+			<div id="loadMoreButton" v-if="awardLogList != null && awardLogList.length >= 20">
+				<i class="iconfont">&#xe65d;</i>
+				<span>上拉刷新数据</span>
+			</div>
+			
+
+			
+			<div v-if="isIOSShow" style="font-size:0.625rem;color:#999; text-align:center;padding:1rem 0;">活动由聚米众筹提供，与设备生产商Apple Inc.公司无关。</div>
+		</template>
+		<my-record></my-record>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['topic/topicRecord']);
+	</script>
+	<script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+</html>

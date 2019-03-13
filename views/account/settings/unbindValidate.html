@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>身份验证</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        .styleInput {
+            width: 93.75vw;
+            height: 13.75vw;
+            line-height: 13.75vw;
+            border: 1px solid #ffffff;
+            background: #ffffff;
+            border-radius: 5px;
+            margin: 2.5vw auto 4.25vw;
+            position: relative;
+            /* 16px */
+            font-size: 5vw;
+        }
+
+        .styleInput .codeInput {
+            padding-left: 6.25vw;
+        }
+
+        .styleInput .getCode {
+            width: 30vw;
+            height: 13vw;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background-color: #ec6121;
+            color: #ffffff;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .styleInput .getCode.disabled {
+            cursor: not-allowed;
+            pointer-events: none;
+            background: #dbdbdb;
+        }
+
+        .next {
+            height: 13.75vw;
+            /* 16px */
+            font-size: 5vw;
+            margin-bottom: 4vw;
+        }
+
+        .cancel {
+            display: block;
+            text-decoration: underline;
+            text-align: center;
+        }
+
+        .getVoicecode {
+            border: none;
+            outline: none;
+            background-color: #f4f4f4;
+            color: #ec6121;
+            font-size: 3.73vw;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+        <template id="unbindingTemplate">
+            <div class="group-item" style="margin-top: 3vw;border-bottom: none;">
+                <div class="group-rowspan">
+                    <div class="group-colspan" class="font-16">
+                        已将短信验证码发送到
+                        <span class="clr-strike">{{phoneStr}}</span>
+                        的手机上，请注意查收
+                    </div>
+                </div>
+            </div>
+            <div class="styleInput">
+                <input type="tel" placeholder="请输入验证码" maxlength="4" class="codeInput" v-model="phoneCode">
+                <button class="getCode" @click="getCode" :class="{'disabled':codeBtndisabled}">60s</button>
+            </div>
+            <div class="group-item" style="border-bottom: none;">
+                <div class="group-rowspan">
+                    <div class="group-colspan" style="text-align: right;">
+                        <span class="clr-gray">收不到短信？</span>
+                        <button @click="getVoicecode" class="getVoicecode">获取语音验证码</button>
+                    </div>
+                </div>
+            </div>
+            <div class="group-item" style="border-bottom: none;">
+                <div class="group-rowspan">
+                    <div class="group-colspan">
+                        <button class="next button button-fill button-block" @click="next">下一步</button>
+                    </div>
+                </div>
+            </div>
+            <a href="JavaScript:void(0)" @click="cancel" class="cancel clr-gray">取消</a>
+        </template>
+        <my-unbinding></my-unbinding>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <!-- 人机校验（阿里的滑动验证） -->
+    <script type="text/javascript" charset="utf-8" src="//g.alicdn.com/sd/nch5/index.js"></script>
+    <script type="text/javascript">
+        requirejs(['account/settings/unbindValidate']);
+    </script>
+</body>
+
+</html>

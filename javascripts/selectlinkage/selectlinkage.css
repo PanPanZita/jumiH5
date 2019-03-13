@@ -1,0 +1,44 @@
+/*!
+ * selectlinkage.css
+ * Date: 2015-08-05
+ */
+.selectlinkage{
+	display:-webkit-box; 
+	display:-moz-box; 
+	display:box;
+	
+	width:20rem;
+	height:10rem;
+	overflow:hidden;
+	position:relative;
+}
+.selectlinkage .selectlinkage-item{
+	-webkit-box-flex:1.0;
+	-moz-box-flex:1.0;
+	box-flex:1.0;
+	
+	overflow:scroll; 
+	-webkit-overflow-scrolling:touch;
+	-moz-overflow-scrolling:touch;
+	-o-overflow-scrolling:touch;
+	
+	height:10rem;
+	text-align:center;
+}
+.selectlinkage .selectlinkage-item::-webkit-scrollbar{
+	display: none;
+}
+.selectlinkage .selectlinkage-item dl{
+	padding:0 0.5rem;
+}
+.selectlinkage .selectlinkage-item dl dt,
+.selectlinkage .selectlinkage-item dl dd{
+	height:2.5rem;
+	font-size:1.25rem;
+	line-height:2.5rem;
+}
+.selectlinkage .selectlinkage-item dl dd.active{
+	border:1px solid #FA8806;
+	border-radius:6px;
+	color:#FA8806;
+}

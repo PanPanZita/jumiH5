@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>领取红包</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+    html,
+    body {
+        background: #faeecc;
+    }
+
+    .redpacketBanner {
+        position: relative;
+    }
+
+    .redpacketForm {
+        height: 16.5rem;
+        margin: 0 1rem 0;
+        padding: 7rem 1rem 0;
+        background: url('/h5/images/account/invest/redpacketBg3.png') no-repeat center top;
+        background-size: 100%;
+    }
+
+    .redpacketInput {
+        display: inline-block;
+        width: 100%;
+        height: 3rem;
+        padding: 0 1rem;
+        margin-bottom: 0.5rem;
+        background: #FFF;
+        border: none;
+        border-radius: 2rem;
+        line-height: 1;
+        font-size: 1rem;
+        text-align: center;
+        color: #333;
+    }
+
+    .redpacketButton {
+        display: inline-block;
+        width: 100%;
+        height: 3rem;
+        padding: 0 1rem;
+        background: #ffd67f;
+        border: none;
+        border-radius: 2rem;
+        line-height: 2.5;
+        font-size: 1.15rem;
+        text-align: center;
+        color: #a36236;
+        box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, .1);
+    }
+
+    .redpacketData {
+        height: 16.5rem;
+        margin: 0 1rem 0;
+        background: url('/h5/images/account/invest/redpacketBg2.png') no-repeat center top;
+        background-size: 100%;
+        text-align: center;
+    }
+
+    .choicePro {
+        margin: 2rem 1rem 0;
+        text-align: center;
+    }
+
+    .choicePro-item {
+        display: block;
+        margin-top: 1rem;
+    }
+
+    .choicePro-item img {
+        border-radius: 5px;
+    }
+
+    .redpacketRules {
+        padding: 1rem;
+    }
+
+    .redpacketRules h3 {
+        margin: 0.5rem 0 1.5rem;
+        border-bottom: 1px dashed #333333;
+        color: #333333;
+        text-align: center;
+    }
+
+    .redpacketRules p {
+        color: #333333;
+        margin-bottom: 0.5rem;
+    }
+
+    .shareBox {
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.75);
+        background-size: 100%;
+    }
+
+    .shareInBox {
+        position: absolute;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        display: block;
+        width: 90%;
+        height: 15rem;
+        color: #FBDD36;
+        text-align: center;
+        line-height: 2.5;
+        font-size: 0.875rem;
+        background: #E2584D;
+        padding: 2rem;
+        border-radius: 6px;
+    }
+
+    .shareInBox .closed {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 2rem;
+        height: 2rem;
+        color: #FFF;
+    }
+    </style>
+</head>
+
+<body style="width:25.5rem;">
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+    <template id="redpacketTemplate">
+        <div class="redpacketBanner">
+            <a v-for="logo in logoList" :href="logo.url?logo.url:'javascript:void(0);'">
+                <img :src="logo.pic || '/h5/images/default11.jpg'" alt="" width="100%" onerror="javascript:this.src='/h5/images/default11.jpg'"/>
+                <img src="/h5/images/account/invest/redpacketMask.png" alt="" width="100%" style="position:absolute;bottom:0;">
+            </a>
+        </div>
+
+        <!-- 手慢了(红包已经全部领取完了·且该用户未领取过)-->
+        <template v-if="hasReceiveOver && hasReceive == false">
+            <div class="redpacketData">
+                <p style="color:#EC6121;font-size:2.5rem;padding-top:1.25rem;">手慢了</p>
+                <p style="margin-top:3.5rem;font-size:0.75rem;color:#999;">{{data.totalCount}}个红包已被全部领取</p>
+                <p style="margin-top:2.5rem;padding:0 1rem;"><a href="/h5/views/main/index.html" class="redpacketButton">没有红包，也要参与</a></p>
+            </div>
+        </template>
+
+        <template v-else>
+            <!-- 输入手机号领取红包(微信号未关联手机号) -->
+            <div class="redpacketForm" v-if="hasRelatedPhone == false">
+                <input type="tel" placeholder="输入手机号" id="userphone" name="userphone" v-model="userphone"
+                       class="redpacketInput" maxlength="11">
+                <a href="javascript:void(0)" class="redpacketButton" @click="toReceive" @blur="inputPhoneBlur"
+                   @keyup="inputPhoneKeyup" style="margin:0.5rem 0 0" v-model="clickstatus">立即领取</a>
+            </div>
+            <!-- 领取成功（包含：微信号已关联手机号且手机号已注册  和  微信号已关联手机号且手机号未注册）均已领取,并且红包都未被领完.. -->
+            <template v-else>
+                <div class="redpacketData">
+                    <p style="color:#e2584d;font-size:0.75rem;padding-top:1.25rem;">恭喜！获得</p>
+                    <p style="color:#EC6121;line-height:1.5;"><span style="font-size:2rem;vertical-align:middle;">{{data.amount}}</span><span
+                            style="font-size:1.5rem;vertical-align:middle;">元</span></p>
+                    <p style="margin-top:3.5rem;font-size:0.75rem;color:#999;">
+                        <span>已存入聚米账户 <em class="clr-strike">{{data.phone}}</em></span>
+                       <!--  <a href="javascript:void(0)" style="text-decoration: underline;color:#999;margin-left:1rem;"
+                           @click="toUpdateDialog">修改</a> -->
+                    </p>
+                    <p style="margin-top:2.5rem;padding:0 1rem;">
+                        <a href="/h5/views/common/register.html" class="redpacketButton" v-if="hasRegister == false">立即注册，激活使用</a>
+                        <a href="/h5/views/main/index.html" class="redpacketButton" v-else>立即使用，参与众筹</a>
+                    </p>
+                </div>
+            </template>
+            <!-- 点击修改手机号后弹出层-->
+            <div class="shareBox" v-if="updatePhonedialog">
+                <div class="shareInBox">
+                    <a href="javascript:void(0)" class="closed" @click="toClose"><i
+                            class="iconfont clr-white">&#xe612;</i></a>
+                    <p>当前手机号{{data.phone}}</p>
+                    <p v-if="hasRegister">手机号修改后将在下次抢红包时生效</p>
+                    <input type="tel" placeholder="输入手机号" id="modifyPhone" name="modifyPhone" v-model="modifyPhone"
+                           class="redpacketInput" maxlength="11">
+                    <a href="javascript:void(0)" class="redpacketButton" @click="toUpdate" style="margin:0.5rem 0 0">确认修改</a>
+                </div>
+            </div>
+        </template>
+
+
+        <!-- 精选内容 -->
+        <div class="choicePro" v-if="recommendPicList != null && recommendPicList.length > 0">
+            <h3>精选内容</h3>
+            <a  class="choicePro-item" v-for="item in recommendPicList" :href="item.url?item.url:'javascript:void(0);'" ><img :src="item.pic" alt="" width="100%"></a>
+            <!-- <a  class="choicePro-item" v-for="item in recommendPicList" :href="javascript:void(0);" ><img :src="item.pic" alt="" width="100%"   v-else></a> -->
+        </div>
+        <div class="redpacketRules" v-if="receiveUserList != null && receiveUserList.length">
+            <h3>看看朋友们的手气</h3>
+            <div class="group group-others group-transparent group-small group-top">
+                <div class="group-item" style="margin:0;">
+                    <div class="group-rowspan" v-for="item in receiveUserList">
+                        <div class="group-colspan" style="width:3rem;">
+                            <img :src="item.litpic" style="width:3rem;height:3rem;border-radius:2px;">
+                        </div>
+                        <div class="group-colspan">
+                            <div class="font-12">{{item.nickname}}</div>
+                            <div class="font-10 clr-gray">{{item.remark}}</div>
+                            <div class="font-10 clr-gray">{{item.receiveTime}}</div>
+                        </div>
+                        <div class="group-colspan clr-strike font-14" style="width:3rem;">{{item.amount}}元</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="redpacketRules">
+            <h3>红包规则</h3>
+            <p>1、【分享红包】在完成投资后才能发起，面向所有用户，每个用户限领一次，未注册的用户领取后，完成注册即可正常使用；</p>
+            <p>2、红包可用于项目众筹，根据用户等级抵扣相应的投资金额（具体抵扣比例请参照【<a href="/h5/views/account/level/getGrowth.html">用户等级说明</a>】）；</p>
+            <p>3、已经领取的红包在红包账户中管理；</p>
+            <p>4、红包可累积使用，不过期、不可提现。</p>
+        </div>
+    </template>
+    <my-redpacket></my-redpacket>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+    requirejs(['account/invest/redpacketReceive']);
+    </script>
+</body>
+
+</html>

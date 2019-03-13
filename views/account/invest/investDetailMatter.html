@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>我的项目</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        .myItemTitle {
+            width: 100%;
+            height: 48.4375vw;
+            background: url('/h5/images/invest/detailBg.png') no-repeat;
+            background-size: contain;
+            color: #fff;
+            padding: 6.875vw 0;
+            position: relative;
+        }
+
+        .seeCon {
+            position: absolute;
+            right: 0;
+            bottom: -11vw;
+            background: transparent;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <!-- 该页面是实物类项目详情页面 -->
+
+    <template id="investDetailTemplate">
+
+        <div class="group myItemTitle">
+            <div class="group-item">
+                <div class="group-rowspan">
+                    <p class="font-18" style="font-weight: bolder;margin-bottom:5vw;" v-if="data.isSuccess ==2  && data.statusPay == 2">已退款</p>
+                    <p class="font-18" style="font-weight: bolder;margin-bottom:5vw;" v-if="data.isSuccess ==0">众筹中</p>
+                    <p class="font-18" style="font-weight: bolder;margin-bottom:5vw;" v-if="data.isSuccess ==1">众筹成功</p>
+                    <p class="font-18" style="font-weight: bolder;margin-bottom:5vw;" v-if="data.isSuccess ==2">众筹失败</p>
+                    <p style="font-weight: bolder;margin-bottom:3.125vw;">项目名称：{{data.itemName}}</p>
+                    <p class="font-12">感谢您的支持！</p>
+                    <button type="button" class="button button-md seeCon" @click="showInfo">查看回报内容</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="group group-justify group-top group-noborder width80" style="margin-bottom: 0;padding-bottom: 0.75rem;" v-for="item in investOrder">
+            <div class="group-item">
+                <div class="group-rowspan">
+                    <div class="group-colspan">项目名称</div>
+                    <div class="group-colspan clr-strike">{{item.itemName}}</div>
+                </div>
+            </div>
+            <div class="group-item">
+                <div class="group-rowspan">
+                    <div class="group-colspan">档位金额</div>
+                    <div class="group-colspan clr-strike">{{item.invPrice/item.invNum}}元</div>
+                </div>
+            </div>
+            <div class="group-item">
+                <div class="group-rowspan">
+                    <div class="group-colspan">支持份数</div>
+                    <div class="group-colspan">{{item.invNum}}份</div>
+                </div>
+            </div>
+            <div class="group-item">
+                <div class="group-rowspan">
+                    <div class="group-colspan">支持金额</div>
+                    <div class="group-colspan">{{item.invPrice}}元</div>
+                </div>
+            </div>
+            <div class="group-item">
+                <div class="group-rowspan">
+                    <div class="group-colspan">支付方式</div>
+                    <div class="group-colspan" v-if="item.payChnl == 00">余额支付</div>
+                    <div class="group-colspan" v-if="item.payChnl == 01">微信支付</div>
+                    <div class="group-colspan" v-if="item.payChnl == 02">支付宝支付</div>
+                </div>
+            </div>
+            <div class="group-item">
+                <div class="group-rowspan">
+                    <div class="group-colspan">支持时间</div>
+                    <div class="group-colspan">{{item.createTime | timeStr}}</div>
+                </div>
+            </div>
+
+            <div class="group-item" v-if="orderType != 0">
+                <div class="group-rowspan">
+                    <div class="group-colspan">订单编号</div>
+                    <div class="group-colspan">{{item.orderno}}</div>
+                </div>
+            </div>
+            <div class="group-item" v-if="orderType != 0">
+                <div class="group-rowspan">
+                    <div class="group-colspan">订单状态</div>
+                    <div class="group-colspan" v-if="item.orderStatus == -1">无效订单</div>
+                    <div class="group-colspan" v-if="item.orderStatus == 0">待支付</div>
+                    <div class="group-colspan" v-if="item.orderStatus == 1">待确认</div>
+                    <div class="group-colspan" v-if="item.orderStatus == 2">待发货</div>
+                    <div class="group-colspan" v-if="item.orderStatus == 3">已完成</div>
+                    <div class="group-colspan" v-if="item.orderStatus == 4">待评价</div>
+                    <div class="group-colspan" v-if="item.orderStatus == 5">已失效</div>
+                </div>
+            </div>
+            <!-- orderType(0:无订单，1：寄送订单，2：备注订单)-->
+            <div class="group-item">
+                <div class="group-rowspan" v-if="item.orderType != 0">
+                    <div class="group-colspan">
+                        <button type="button" class="button button-fill button-block" @click="goOrderDetail(item.orderno)">查看订单</button>
+                    </div>
+                </div>
+                <div class="group-rowspan">
+                    <div class="group-colspan">
+                        <a href="tel:400-801-4680" style="display:block;text-align:center;color:#999;">客服热线：400-801-4680</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </template>
+    <my-detail></my-detail>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['account/invest/investDetailMatter']);
+    </script>
+</body>
+
+</html>

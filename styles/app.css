@@ -1,0 +1,1380 @@
+/*  
+* @description: JUMI WebAPP
+* @author: adhehe
+* @update: null
+*/
+
+@import url("reset.css");
+@import url("public.css");
+@import url("item.css");
+@import url("button.css");
+@import url("form.css");
+@import url("table.css");
+@import url("product.css");
+@import url("progress.css");
+@import url("tab.css");
+@import url("addel.css");
+@import url("text.css");
+@import url("badge.css");
+@import url("slide.css");
+@import url("onoff.css");
+@import url("uploadimg.css");
+@import url("banner.css");
+@import url("fixed.css");
+@import url("zpp.css");
+@import url("jx.css");
+
+/* /////////////////////////////////////////////////////////////////////////////////////////////////register.html */
+.bg {
+  background: #fff url(/h5/images/accountBg.jpg) no-repeat center bottom;
+  background-size: 100%;
+  padding-top: 2.5rem;
+}
+
+.login-weixin {
+  display: block;
+  padding: 15rem 0 1rem;
+  text-align: center;
+}
+
+@media screen and (max-device-width: 400px) {
+  .login-weixin {
+    padding: 10rem 0 1rem;
+  }
+}
+
+@media screen and (max-device-width: 320px) {
+  .login-weixin {
+    padding: 5rem 0;
+  }
+}
+
+.login-weixin em {
+  margin: 0 auto;
+  position: relative;
+  font-size: 0.875rem;
+  line-height: 5;
+  color: #999;
+}
+.login-weixin em:before {
+  content: "";
+  position: absolute;
+  left: -50%;
+  top: 0.4rem;
+  background: #ccc;
+  width: 50px;
+  height: 1px;
+}
+.login-weixin em:after {
+  content: "";
+  position: absolute;
+  right: -50%;
+  top: 0.4rem;
+  background: #ccc;
+  width: 50px;
+  height: 1px;
+}
+.login-weixin i {
+  display: block;
+  font-size: 3rem;
+  line-height: 1;
+  color: #5ead00;
+}
+.login-weixin span {
+  color: #999;
+}
+
+/* 快速导航 */
+.group-menu {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+.group-menu .group-item {
+  margin: 0 1rem;
+}
+.group-menu .group-colspan {
+  border: none;
+  padding: 0;
+}
+.group-menu .group-colspan:first-child {
+  padding-right: 0.25rem;
+}
+.group-menu .group-colspan:last-child {
+  padding-left: 0.25rem;
+}
+
+/* 项目列表 */
+.group-topic .group-colspan {
+  padding: 1rem 0 1.75rem;
+}
+
+.group-topic h3 {
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 1.14285714rem;
+}
+
+.group-topic p {
+  color: #666;
+  line-height: 1.75;
+}
+
+.group-topic p.txt-rowspan4 {
+  color: #666;
+  text-align: left;
+  word-break: normal;
+}
+
+.group-topic p.info {
+  margin-top: 2rem;
+  font-size: 0.85714286rem;
+  text-align: center;
+}
+
+.group-topic p.info span {
+  padding: 0 1rem;
+}
+
+.group-topic p.extraInfo {
+  font-size: 0.85714286rem;
+  text-align: center;
+  color: #999;
+}
+
+.topicMenu1 {
+  display: block;
+  width: auto;
+  background: url(/h5/images/topic/menu1.jpg) no-repeat center center;
+  background-size: 100%;
+  color: #fff;
+  text-align: center;
+  line-height: 2.75rem;
+}
+
+.topicMenu2 {
+  display: block;
+  width: auto;
+  background: url(/h5/images/topic/menu2.jpg) no-repeat center center;
+  background-size: 100%;
+  color: #fff;
+  text-align: center;
+  line-height: 2.75rem;
+}
+.entrance1,
+.entrance2,
+.entrance3,
+.entrance4,
+.discoverEntrance1,
+.discoverEntrance2,
+.discoverEntrance3,
+.discoverEntrance4 {
+  display: block;
+  width: 2.6rem;
+  height: 2.6rem;
+  background: url(/h5/images/topic/entrance3.png) no-repeat center center;
+  background-size: 100%;
+  text-align: center;
+  line-height: 3rem;
+  margin: 0 auto;
+}
+.entrance2 {
+  background: url(/h5/images/topic/entrance4.png) no-repeat center center;
+  background-size: 100%;
+}
+.entrance3 {
+  background: url(/h5/images/topic/entrance2.png) no-repeat center center;
+  background-size: 100%;
+}
+.entrance4 {
+  background: url(/h5/images/topic/entrance1.png) no-repeat center center;
+  background-size: 100%;
+}
+.discover1 {
+  background: url(/h5/images/topic/entrance4.png) no-repeat center center;
+  background-size: 100%;
+}
+.discoverEntrance1 {
+  background: url(/h5/images/topic/entrance4.png) no-repeat center center;
+  background-size: 100%;
+}
+.discoverEntrance2 {
+  background: url(/h5/images/discover/activity.png) no-repeat center center;
+  background-size: 100%;
+}
+.discoverEntrance3 {
+  background: url(/h5/images/discover/exchange.png) no-repeat center center;
+  background-size: 100%;
+}
+.discoverEntrance4 {
+  background: url(/h5/images/discover/lottery.png) no-repeat center center;
+  background-size: 100%;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////topic（旧版1） */
+.topic {
+  padding: 0.5rem 0;
+}
+.topic .group-rowspan {
+  border: none;
+}
+.topic .group-colspan {
+  padding: 0;
+}
+.topic .group-rowspan:first-child .group-colspan:last-child {
+  width: 25%;
+}
+.topic .group-colspan .status {
+  display: block;
+  width: 100%;
+  background: #ccc;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.topic-item li {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  font-size: 0.875rem;
+}
+.topic-item li:last-child {
+  border: none;
+}
+.topic-item li em {
+  color: #fa8806;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////topicNew（旧版2）  */
+.topicNew {
+  padding: 0.5rem;
+}
+.topicNew .topicNewItem {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.topicNew .topicNewItem img {
+  border-radius: 6px 6px 0 0;
+}
+.topicNew .topicNewItem ul {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+
+  padding: 0.5rem 0;
+  background: #fa8806;
+  border-radius: 0 0 6px 6px;
+}
+.topicNew .topicNewItem ul li {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+
+  border-left: 1px solid #ff9e1c;
+  text-align: center;
+  color: #fff;
+}
+.topicNew .topicNewItem ul li:first-child {
+  border-left: none;
+}
+.topicNew .topicNewItem span {
+  display: block;
+  position: absolute;
+  top: 0.5rem;
+  left: -2.5rem;
+  z-index: 9;
+  padding: 0.5rem 3rem;
+  background: #83c44e;
+  color: #fff;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.topicOld {
+  padding: 0.5rem;
+  overflow: hidden;
+}
+.topicOldTitle {
+  padding: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+}
+.topicOld .topicOldItem {
+  position: relative;
+  float: left;
+  width: 48%;
+  overflow: hidden;
+  margin: 0 2% 5% 0;
+}
+.topicOld .topicOldItem img {
+  border-radius: 6px;
+}
+.topicOld .topicOldItem ul {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+
+  padding: 0.5rem 0;
+  margin: 0.5rem 0 0 0;
+  background: #b0b0b0;
+  border-radius: 6px;
+}
+.topicOld .topicOldItem ul li {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+
+  border-left: 1px solid #ccc;
+  text-align: center;
+  color: #fff;
+  font-size: 0.625rem;
+}
+.topicOld .topicOldItem ul li:first-child {
+  border-left: none;
+}
+
+.seal {
+  position: absolute;
+  top: -3.125rem;
+  right: -1.25rem;
+  transform: rotate(15deg);
+  -ms-transform: rotate(15deg); /* Internet Explorer */
+  -moz-transform: rotate(15deg); /* Firefox */
+  -webkit-transform: rotate(15deg); /* Safari 和 Chrome */
+  -o-transform: rotate(15deg); /* Opera */
+  font-size: 7.5rem;
+  opacity: 0.75;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////显示米币的按钮 */
+.buttonPrice {
+  /* 	position:absolute; */
+  /* 	bottom:0.5rem; */
+  color: #ff7c10;
+  border: 1px solid #ff7c10;
+  border-radius: 1rem;
+  padding: 0rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////play.html */
+.play {
+  background: transparent;
+  box-shadow: none;
+}
+.play,
+.play .group-colspan {
+  border: none;
+  /* 	background:transparent; */
+  text-align: center;
+}
+.play .group-colspan a {
+  display: inline-block;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 100%;
+  line-height: 5rem;
+  font-size: 1.625rem;
+  font-weight: normal;
+  color: #fff;
+}
+.play .group-colspan:nth-child(1) a {
+  background: #dc554b;
+}
+.play .group-colspan:nth-child(2) a {
+  background: #38b87f;
+}
+.play .group-colspan:nth-child(3) a {
+  background: #ffa912;
+}
+
+.playQuickEntry {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+
+  padding: 1rem 0.5rem;
+}
+.playQuickEntry .playQuickEntryItem {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  width: 50%;
+  text-align: center;
+}
+.playQuickEntry .playQuickEntryItem a {
+  display: block;
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+}
+.playQuickEntry .playQuickEntryItem:first-child a {
+  color: #fa8806;
+  border: 1px solid #fa8806;
+}
+
+.statusEnd,
+.statusLottery,
+.statusLimitTime,
+.statusLimitNum {
+  color: #fff;
+  border-radius: 0 5px 0 0;
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+.statusEnd {
+  background: #999;
+}
+.statusLottery {
+  background: #ff7c10;
+}
+.statusLimitTime {
+  background: #5cc060;
+}
+.statusLimitNum {
+  background: #f3573e;
+}
+
+.statusinfo {
+  padding: 0.25rem;
+  text-align: center;
+}
+
+.fixed {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.refresh {
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  color: #ccc;
+}
+.detail-info {
+  margin: 0;
+  border: none;
+}
+.detail-info .group-rowspan {
+  border: none;
+}
+.detail-content {
+  padding: 1em;
+}
+.detail-content img {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////account-money-recharge.html */
+.banks li {
+  float: left;
+  display: inline;
+  width: 25%;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////快速搜索 */
+.search {
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  -moz-overflow-scrolling: touch;
+  -o-overflow-scrolling: touch;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background: #fff;
+}
+.search::-webkit-scrollbar {
+  display: none;
+}
+.search .search-inbox {
+  width: 100%;
+  display: table;
+}
+.search .search-inbox a {
+  display: table-cell;
+  text-align: center;
+
+  padding: 0.75rem 0;
+  background: #fff;
+  border-bottom: 1px solid transparent;
+  color: #333;
+  font-size: 1.1428571428571428571428571428571rem;
+}
+.search .search-inbox a.active {
+  border-bottom: 1px solid #ec6121;
+  color: #ec6121;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////常见问题 */
+.cjwt-group {
+  font-size: 1rem;
+}
+.cjwt-title {
+  font-size: 1rem;
+  color: #f25904;
+  cursor: pointer;
+}
+.cjwt-group dd {
+  display: none;
+  padding: 1rem 0;
+}
+.cjwt-group dd p {
+  text-indent: 2rem;
+}
+.cjwt-subtitle {
+  font-size: 1rem;
+  color: #f25904;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////定单中的地址列表 */
+.order-address {
+  padding: 10px;
+}
+.order-address li {
+  padding: 6px 0;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+.order-address li:first-child {
+  border-top: 1px solid #ccc;
+}
+.order-address-detail {
+  display: none;
+}
+.order-address-detail p {
+  line-height: 24px;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////收藏 */
+.favorite {
+  position: absolute;
+  top: 2em;
+  right: 1em;
+  z-index: 999;
+  text-align: center;
+}
+.favorite a {
+  display: inline-block;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1px solid #ccc;
+  border-radius: 100%;
+  font-size: 2rem;
+  color: #ccc;
+}
+.favorite.active a {
+  color: #fa8806;
+  border: 1px solid #fa8806;
+}
+.favorite em {
+  display: block;
+  padding-top: 0.25rem;
+  font-size: 1rem;
+  color: #ccc;
+}
+.favorite.active em {
+  color: #fa8806;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////我的聚米/个人中心 */
+/* 旧版 */
+.account {
+  background: #fa8806;
+  border: none;
+  padding-bottom: 0.5em;
+  color: #fff;
+  line-height: 1.5em;
+  font-size: 16px;
+}
+.account .group-item:first-child {
+  border: none;
+  background: #ff7812;
+  margin: 0;
+  padding-top: 0.5em;
+}
+.account .group-colspan {
+  width: 33.33%;
+  border: none;
+}
+.account .account-item {
+  color: #ffffc1;
+  font-size: 12px;
+}
+/* 新版 */
+
+.group-account .group-item .group-rowspan .group-colspan:first-child {
+  width: 1.5rem;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////BBS首页 */
+.group-bbs {
+  padding: 0;
+}
+
+.group-bbs .group-rowspan {
+  border-bottom: none;
+}
+.group-bbs .group-rowspan:nth-child(1) .group-colspan {
+  padding-bottom: 0;
+}
+.group-bbs .group-rowspan:nth-child(2) .group-colspan {
+  padding-top: 0;
+  text-align: left;
+}
+.group-bbs .group-colspan {
+  vertical-align: top;
+}
+
+/* （旧） */
+.bbs-messagelist {
+  text-align: left;
+}
+.bbs-messagelist p,
+.bbs-messagelist .title,
+.bbs-messagelist .content,
+.bbs-messagelist .reply,
+.bbs-messagelist .pics {
+  overflow: hidden;
+}
+
+.bbs-messagelist .content {
+  margin: 0.5em 0;
+  word-wrap: break-word;
+  word-break: break-all;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.bbs-messagelist .reply {
+  padding: 0.5em;
+  background: #eee;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.bbs-messagelist .pics img {
+  width: 32%;
+  /* 	display:inline-block; */
+  float: left;
+  margin-right: 1%;
+  margin-top: 1%;
+}
+
+/* 赞/评论等操作 */
+.bbs-messagelist-operate {
+  border-top: none;
+  margin-top: 0;
+}
+.bbs-messagelist-operate .group-colspan {
+  width: 50%;
+  text-align: center;
+  padding: 1em 0;
+}
+/* （旧） end */
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////BSS首页的留言按钮*/
+.livemessage {
+  position: fixed;
+  bottom: 60px;
+  left: 4px;
+  z-index: 999;
+  display: block;
+  width: 50px;
+  height: 50px;
+  background: #009de7;
+  border-radius: 100%;
+  text-align: center;
+  font-size: 24px;
+  line-height: 50px;
+  color: #fff;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
+  opacity: 0.7;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////上传按钮 */
+.button-upload {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  line-height: 40px;
+}
+
+.button-upload span {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  z-index: 999;
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 100%;
+  color: #fff;
+  font-size: 12px;
+  line-height: 25px;
+}
+
+.button-upload i {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20px;
+  bottom: 0;
+  margin: auto;
+}
+
+.button-upload input[type="file"] {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////bbs 个人信息 */
+.bbs-personal {
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+.bbs-personal .bbs-personal-edite {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  color: #fff;
+}
+.bbs-personal .headpic {
+  display: inline-block;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 100%;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+  margin-top: 1rem;
+}
+.bbs-personal .bbs-personal-item {
+  padding-top: 0.3rem;
+}
+.bbs-personal-info {
+  /* 	border:1px solid #ccc; */
+  border-radius: 6px;
+  background: #fff;
+  padding: 1rem;
+  margin: 0 0.5rem 0.5rem;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.bbs-personal-info li {
+  display: table;
+}
+.bbs-personal-info li span {
+  display: table-cell;
+  width: 6rem;
+  text-align: right;
+}
+.bbs-personal-info li em {
+  display: table-cell;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////官方消息中的时间 */
+.time {
+  text-align: center;
+  padding-top: 1rem;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////发私信*/
+.imo {
+  height: 4rem;
+  overflow: hidden;
+}
+
+.imo .group-colspan {
+  padding: 6px 0;
+  margin-top: 0;
+  text-align: center;
+}
+
+.imo .imo-textarea {
+  width: 100%;
+  height: 3rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.imo .imo-upload {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  padding: 0 6px;
+  border-radius: 100%;
+}
+.imo .imo-upload .iconfont {
+  position: absolute;
+}
+.imo .imo-upload input[type="file"] {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.chat {
+  margin-top: 4rem;
+}
+
+.chat .time {
+  text-align: center;
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////messagebox */
+.msgbox {
+  padding: 1rem;
+  background: #fff;
+  overflow: hidden;
+  width: 100%;
+  /* 	display:-webkit-box;  */
+  /* 	display:-moz-box;  */
+  /* 	display:box; */
+}
+/* .msgbox .msgbox-item{ */
+/* 	display:block; */
+/* 	-webkit-box-flex:1.0; */
+/* 	-moz-box-flex:1.0; */
+/* 	box-flex:1.0; */
+/* } */
+/* .msgbox .msgbox-item:last-child{ */
+/* 	text-align:right; */
+/* 	padding-left:0.5rem; */
+/* } */
+.msgbox .msgbox-textarea {
+  width: 100%;
+  height: 4rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.msgbox .button {
+  float: right;
+  padding: 0 3rem;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////我的 */
+.chat .myinfo {
+  display: table;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px;
+}
+.chat .myinfo li {
+  display: table-cell;
+}
+.chat .myinfo li:first-child span {
+  position: relative;
+  background: #019de7;
+  border-radius: 6px;
+  margin-right: 10px;
+  padding: 10px;
+  color: #fff;
+  float: right;
+}
+.chat .myinfo li:first-child span:before {
+  position: absolute;
+  top: 17.5px;
+  right: -10px;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #019de7;
+  border-right: 5px solid transparent;
+}
+
+.chat .myinfo li:last-child {
+  width: 40px;
+  vertical-align: top;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////其他人的 */
+.chat .othersinfo {
+  display: table;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px;
+}
+.chat .othersinfo li {
+  display: table-cell;
+}
+.chat .othersinfo li:last-child span {
+  position: relative;
+  background: #fff;
+  border-radius: 6px;
+  margin-left: 10px;
+  padding: 10px;
+  color: #333;
+  float: left;
+}
+.chat .othersinfo li:last-child span:before {
+  position: absolute;
+  top: 17.5px;
+  left: -10px;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid transparent;
+  border-right: 5px solid #fff;
+}
+
+.chat .othersinfo li:first-child {
+  width: 40px;
+  vertical-align: top;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////图片放大显示 占位符 */
+.zoom-pic {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: auto;
+  height: auto;
+  background: rgba(0, 0, 0, 1);
+  display: -webkit-box;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  display: -moz-box;
+  -moz-box-align: center;
+  -moz-box-pack: center;
+  display: -o-box;
+  -o-box-align: center;
+  -o-box-pack: center;
+  display: -ms-box;
+  -ms-box-align: center;
+  -ms-box-pack: center;
+  display: box;
+  box-align: center;
+  box-pack: center;
+}
+.zoom-pic img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////向下拖动更多 */
+.dragmore {
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////个人信息编辑 */
+.interestlist li {
+  width: 100%;
+}
+.interestlist li label {
+  display: inline-block;
+  width: 32%;
+  padding: 10px 0;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////安全保障 */
+.safeguard {
+  position: absolute;
+  top: 22.5%;
+  left: 0;
+  display: block;
+  width: 21%;
+  min-height: 500px;
+}
+.safeguard li {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 2em;
+}
+.safeguard li a {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.safeguard li span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+}
+.safeguard li.active span {
+  background: rgba(255, 255, 255, 1);
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg); /* Internet Explorer */
+  -moz-transform: rotate(45deg); /* Firefox */
+  -webkit-transform: rotate(45deg); /* Safari 和 Chrome */
+  -o-transform: rotate(45deg); /* Opera */
+}
+.safeguard li a img {
+  display: block;
+  width: 100%;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////发起人 */
+.initiator-items {
+  display: inline-block;
+  width: 32%;
+  padding: 1%;
+  vertical-align: top;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////银行卡 */
+.bankcard {
+  position: relative;
+  width: 97.34375vw;
+  height: 47.34375vw;
+  margin: 0 auto;
+  /*background:#FFF;*/
+  /* background: -moz-linear-gradient(top, #376461 0%, #538a87 100%);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #376461),
+    color-stop(100%, #538a87)
+  );
+  background: -webkit-linear-gradient(top, #376461 0%, #538a87 100%);
+  background: -o-linear-gradient(top, #376461 0%, #538a87 100%);
+  background: -ms-linear-gradient(top, #376461 0%, #538a87 100%);
+  background: linear-gradient(to bottom, #376461 0%, #538a87 100%);
+  border-radius: 6px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.75); */
+  /* background-image: url("/h5/images/account/22.png"); */
+  /* background-repeat: no-repeat;
+  background-size: contain; */
+}
+#noBankcard {
+  width: 93.75vw;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+}
+.bankBgcolor,
+.bank-con {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.bankBgcolor {
+  width: 100%;
+  height: 100%;
+}
+.bank-con {
+  height: 100%;
+}
+.bank-logo-show {
+  display: inline-block;
+  width: 10vw;
+  height: 10vw;
+  margin: 4vw 0 0 5vw;
+  border-radius: 100%;
+  vertical-align: middle;
+}
+.bank-name-show {
+  display: inline-block;
+  width: 50vw;
+  margin: 2.5vw 0 0 2.5vw;
+  font-size: 5vw;
+  color: #fff;
+  vertical-align: middle;
+}
+.bankcard .cardnum {
+  width: 93.75vw;
+  margin: 3.6vw auto 0;
+  background: rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #fff;
+}
+#noBankcard .cardnum {
+  width: 100%;
+  margin-top: 7.2vw;
+}
+.bankcard .cardnum span {
+  display: inline-block;
+  font-size: 3vw;
+  padding: 1vw 0 1vw 8vw;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////提示块 */
+.tips {
+  display: block;
+  position: absolute;
+  top: -70%;
+  left: 0;
+  z-index: 999;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////说明/规则/提醒 */
+.explain {
+  padding: 0.5rem;
+  border-radius: 6px;
+  color: #999;
+  border: 1px solid #cdcdcd;
+  border-radius: 5px;
+  font-size: 0.75rem;
+}
+.explain legend {
+  position: relative;
+  padding: 0 1rem;
+  text-align: center;
+  color: #333;
+}
+.explain legend:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "/";
+  color: #cdcdcd;
+}
+.explain legend:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  content: "/";
+  color: #cdcdcd;
+}
+
+.explain-nothing {
+  border: none;
+  padding: 0.5rem 1rem 1rem;
+  margin-top: 1rem;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////暂无记录 */
+.norecord {
+  padding: 6rem 0;
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: #999;
+}
+.norecord i.iconfont {
+  display: block;
+  font-size: 5rem;
+  color: #ccc;
+}
+
+/* ///////////////////////////////////////////////////////////////////////////发红包 */
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////招募 */
+.recruit-toknow {
+  position: fixed;
+  bottom: 8rem;
+  right: 4px;
+  z-index: 999;
+  display: block;
+  padding: 0.5rem;
+  background: #009de7;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 1;
+  color: #fff;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+  opacity: 0.85;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////投资记录 */
+.invest-record {
+  background: #fff;
+  border-bottom: 1px solid #d5d3d4;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  line-height: 3rem;
+}
+.invest-record span {
+  display: inline-block;
+  border-bottom: 3px solid #e25714;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////项目投资详情 */
+.investDetails {
+  background: #fff;
+}
+.investDetails .investDetailsTab {
+  width: 100%;
+}
+.investDetails .investDetailsTab .investDetailsTabHandle {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+
+  border-bottom: 1px solid #e7e7e7;
+  background: #fff;
+}
+.investDetails .investDetailsTab .investDetailsTabHandle li {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+
+  padding: 1rem 0;
+  border-right: 1px solid #e7e7e7;
+  border-top: 1px solid #e7e7e7;
+  text-align: center;
+}
+.investDetails .investDetailsTab .investDetailsTabHandle li.active {
+  border-top: 2px solid #ff7300;
+}
+.investDetails .investDetailsTab .investDetailsTabHandle li.active a {
+  color: #ff7300;
+}
+.investDetails .investDetailsTabContent {
+  background: #fff;
+}
+.investDetails .investDetailsTabContent .investDetailsTabPane {
+  display: none;
+}
+
+.investDetails .investDetailsTabContent .investDetailsTabPane.active {
+  display: block;
+}
+
+/* dialog 样式新增或修改*/
+.my-dialog .ui-dialog-footer {
+  text-align: center;
+}
+.my-dialog .ui-dialog-button {
+  float: none;
+}
+.my-dialog .ui-dialog-autofocus {
+  display: block;
+  width: 100%;
+}
+
+.txtInfo {
+  display: inline-block;
+  width: 14rem;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-text-overflow: ellipsis;
+  -moz-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+/* 回到顶部 */
+.scrollToTop {
+  position: fixed;
+  bottom: 4rem;
+  right: 4px;
+  width: 3rem;
+  height: 3rem;
+  background: #ccc;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 1.25;
+  color: #fff;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+/* 返回资讯 */
+.backNoticeList {
+  position: fixed;
+  bottom: 3rem;
+  right: 2rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  line-height: 4.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* 日期搜索 */
+.date-search {
+  border: 1px solid #eee;
+  border-radius: 2rem;
+  display: block;
+  width: 96%;
+  background: #fff;
+  margin: 2% 2%;
+  padding: 0.5rem 0;
+  text-align: center;
+  color: #666;
+}
+
+/* 切入式登录页面 */
+.popupBox {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+/* app推广条 */
+#appSpread {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  background: #fff;
+}
+#appSpread a#appSpreadImg {
+  display: block;
+}
+#appSpread a#appSpreadImg img {
+  display: block;
+  margin: 0 auto;
+}
+#appSpread a#appSpreadClose {
+  position: absolute;
+  width: 10%;
+  height: 100%;
+  top: 0;
+  right: 0;
+}
+#appSpread a#appSpreadClose i {
+  display: block;
+  margin: 25% 0 0 25%;
+  font-size: 1rem;
+}

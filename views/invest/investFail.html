@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>支持结果</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<template id="failTemplate">
+
+		<div class="group group-center noMarginBottom" style="margin-bottom:0;">
+			<div class="group-item">
+				<div class="group-rowspan">
+					<div class="group-colspan" style="padding:3rem 0.5rem 2rem;">
+						<i class="iconfont font-60 clr-strike">&#xe612;</i>
+						<p class="font-18">支持失败</p>
+						<p class="textcenter clr-gray">错误信息：{{errorMessage}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="group">
+			<div class="group-item">
+				<div class="group-rowspan" style="border-bottom: none;">
+					<div class="group-colspan">
+						<a href="javascript:void(0);" class="button button-block" @click="backindex">返回首页</a>
+					</div>
+					<!-- 新手训练营 -->
+					<div class="group-colspan" v-if="itemid == 1">
+						<a href="javascript:void(0);" class="button button-fill button-block"  @click="trynew">重新支持</a>
+					</div>
+					<!-- 普通项目 -->
+					<div class="group-colspan" v-else>
+						<a href="javascript:void(0);" class="button button-fill button-block"  @click="try">重新支持</a>
+					</div>
+					
+				</div>
+				<div class="group-rowspan" style="padding-bottom: 1rem;">
+					<div class="group-colspan">
+						<p class="clr-gray">温馨提示：具体详情可拨打客服电话400-801-4680</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+
+	</template>
+	<my-fail></my-fail>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['invest/investFail']);
+	</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+/*  
+* @description: 开关按钮
+* @author: adhehe
+* @update: null
+*/
+.onoff{
+	position:relative;
+	display:inline-block;
+	width:3em;
+	height:2em;
+	background:#CCC;
+	z-index:0;
+	margin-left:1.2em;
+	margin-right:1.2em;
+	cursor:pointer;
+}
+.onoff:before{
+	display:block;
+	content: "";
+	position:absolute;
+	bottom:0;
+	left:-1.2em;
+	z-index:-1;
+	width:2.4em;
+	height:2em;
+	background:#CCC;
+	border-radius:5px;
+	overflow:hidden;
+}
+.onoff:after{
+	display:block;
+	content: "";
+	position:absolute;
+	bottom:0;
+	right:-1.2em;
+	z-index:-1;
+	width:2.4em;
+	height:2em;
+	background:#CCC;
+	border-radius:5px;
+	overflow:hidden;
+}
+.onoff-info{
+	display:block;
+	line-height:2em;
+	color:#fff;
+	font-style:normal;
+	text-align:right;
+}
+.onoff-handle{
+	position:absolute;
+  	top:0;
+  	left:-1.2em;
+  	z-index:9;
+	display:block;
+	width:2.4em;
+	height:2em;
+	background:#fff;
+	border:1px solid #CCC;
+  	border-radius:5px;
+}
+
+.onoff.active{
+	background:#EC6121;
+}
+.onoff.active:before{
+	background:#EC6121;
+}
+.onoff.active:after{
+	background:#EC6121;
+}
+.onoff.active .onoff-handle{
+	border:1px solid #EC6121;
+}

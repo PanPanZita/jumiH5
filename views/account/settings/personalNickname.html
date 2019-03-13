@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>个人信息</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+	html,body{background:#FFF;}
+	.varInfo{display:inline-block;width:14rem;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;color:#999;}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<template id="nicknameTemplate">
+		<form id="nicknameForm">
+			<div class="group group-noborder">
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<input type="text" id="nickname" name="nickname" placeholder="昵称" v-model="nickname" class="form-control">
+						</div>
+					</div>
+				</div>
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<button type="button" class="button button-fill button-block" @click="save">保存</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</template>
+	<my-nickname></my-nickname>
+	
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/settings/personalNickname']);
+	</script>
+</body>
+</html>

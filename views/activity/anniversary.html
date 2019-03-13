@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>聚米2周年</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+body{
+	max-width:640px;
+	min-width:320px;
+}
+#gardenParty{
+	position:relative;
+}
+#gardenParty a{
+	position:absolute;
+	width:8rem;
+	height:2rem;
+/*  	background:rgba(0,0,0,0.5); */
+ 	left:0rem;
+	right:0rem;
+	margin:0 auto;
+}
+#link1{
+	top:29.65rem;
+}
+#link2{
+	top:49.65rem;
+}
+#link3{
+	top:69.15rem;
+}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<template id="gardenPartyTemplate">
+		<div id="gardenParty">
+			<img src="/h5/images/activity/anniversary/anniversary.jpg" alt="" style="width:100%;">
+			<a id="link1" href="/h5/views/activity/anniversaryInvest.html"></a>
+			<a id="link2" href="/h5/views/wheel/wheel.html"></a>
+			<a id="link3" href="/h5/views/activity/anniversaryNewUser.html"></a>
+		</div>
+	</template>
+	<my-gardenparty></my-gardenparty>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['activity/anniversary'],function(){
+			//根据宽度变化字号
+			var fontsize = function (fontsize){
+				var width = window.innerWidth;
+				fontsize = (fontsize == undefined) ? ( (width < 640) ? ((28 * width) / 640) : 28) : 14; //算法
+				$("html").css("font-size",fontsize); //基本字号
+			}
+			
+			$(function(){
+				fontsize();
+				$("#j-loading").hide();
+				$(window).resize(function(){
+					fontsize();
+				})
+			});
+		});
+	</script>
+	<script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+</html>

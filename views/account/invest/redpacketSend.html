@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>分享红包</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+	html, body {
+		background: #faeecc;
+	}
+	
+	.redpacketSendBox {
+		min-width:320px;
+		max-width:640px;
+		margin:0 auto;
+	}
+	
+	.redpacketSend {
+		height: 39rem;
+		margin:0 auto;
+		background: url(/h5/images/account/invest/redpacketBg.png) no-repeat top center;
+		background-size: 100%;
+	}
+	
+	.redpacketButton {
+		/* width: 100%;
+		height: 4.5rem;
+		margin: 0 auto;
+		background: url(/h5/images/account/invest/redpacketSendButton.png) no-repeat top center;
+		background-size: 100%;
+		color: #a36236;
+		line-height: 3.5rem;
+		font-size: 1.15rem; */
+		
+		display: inline-block;
+	    width: 100%;
+	    height: 3rem;
+	    padding: 0 1rem;
+	    background: #ffd67f;
+	    border: none;
+	    border-radius: 2rem;
+	    line-height: 2.5;
+	    font-size: 1.15rem;
+	    text-align:center;
+	    color: #a36236;
+	    box-shadow:0px 6px 10px 0px rgba(0, 0, 0, .1);
+	}
+	
+	.sharebox {
+		position: fixed;
+		z-index: 999;
+		top: 0;
+		left: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		background:rgba(0, 0, 0, 0.75);
+	}
+	
+	.sharebox span {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		margin:auto;
+		display: block;
+		width: 21rem;
+		height:40rem;
+		background: url(/h5/images/account/redpacketShare.png) no-repeat;
+		background-size: 100%;
+		color: #FBDD36;
+		text-align: center;
+		line-height: 2.5;
+		font-size: 0.875rem;
+	}
+	
+	.sharebox span em {
+		display: block;
+	}
+</style>
+
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="redpacketTemplate">
+			<div class="redpacketSendBox">
+				<div class="redpacketSend">
+					<div style="color:#e2584d;text-align:center;line-height:7rem;">
+						<span style="font-size:2.5rem;vertical-align:middle;">{{data.redPacketAmount}}</span>
+						<span style="font-size:2rem;vertical-align:middle;">元</span>
+					</div>
+					
+					<div style="font-size:0.75rem;color:#765a3f;padding:1rem 2.5rem;word-break:keep-all;">
+						我在聚米众筹支持了【{{data.itemName}}】项目，可以发出【{{data.redPacketNumber}}】个红包，总价值【{{data.redPacketAmount}}】元，当前剩余【{{data.remainRedPacketNumber}}】个红包未被领取！赶紧邀请小伙伴一同参与！
+					</div>
+					
+					<div style="padding:4rem 1rem 1rem;">
+						<a href="javascript:void(0)" class="redpacketButton" @click="show">分享红包</a>
+					</div>
+					
+					<div style="padding:1rem;color:#faeecc;font-size:0.75rem;line-height:1.25rem;">
+						<h3 style="text-align:center;line-height:2rem;">红包规则</h3>
+						<p>1、分享红包在完成投资后才能发起，红包每人限领一次，面向所有用户，未注册的用户领取后，完成注册就可正常激活使用。</p>
+						<p>2、用户领取红包后可用于项目众筹，红包可抵扣投资金额的1%（如有变化请以平台最新公告为准）。</p>
+						<p>3、已经领取并激活的红包将会进入到红包账户中，可累积使用，不过期、不能直接提现。</p>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 分享图片	 -->
+		    <a href="javascript:void(0)" class="sharebox" v-show="isShow" @click='hide'>
+				<span>
+					<em style="margin-top:13rem;color:#FFDC2F;font-weight:bold;line-height:1;">感谢您支持</em>
+					<em style="white-space: nowrap;overflow:hidden;text-overflow:ellipsis;color:#FFFDCD;font-size:1rem;line-height:3">{{data.itemName}}</em>
+					<em style="color:#be3709;line-height:2.25;">奉上<var style="font-size:1.2rem;">{{data.redPacketNumber}}</var>个红包，拿去挥霍吧</em>
+				</span>
+			</a>
+		</template>
+		<my-redpacket></my-redpacket>
+	</div>
+	
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/invest/redpacketSend']);
+	</script>
+</body>
+</html>

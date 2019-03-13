@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>聚米众筹</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+</head>
+<body>
+
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		function getQueryString(name) {
+		    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+		    var r = window.location.search.substr(1).match(reg);
+		    if (r != null) {
+		        return unescape(r[2]);
+		    }
+		    return null;
+		}
+		requirejs(['jquery'],function($){
+			$.ajax({
+				url:"/ios/detail",
+				data:{itemid:getQueryString("itemid"),actionid:getQueryString("actionid")},
+				success:function(data){
+					if(data.result==true)
+						$(data.content).prependTo('body');
+				}
+			})
+		});
+	</script>
+</body>
+</html>

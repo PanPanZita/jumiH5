@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>梦想玩石新声计划</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+html,body{
+	background:#1f1f1f;
+	color:#fff;
+	min-width:320px;
+	max-width:640px;
+}
+.group{
+	background: #1f1f1f;
+	color:#fff;
+}
+.clr-lightWhite{
+	color:#cdcdcd;
+}
+.clr-golden{
+	color:#f8d43e;
+}
+.clr-black{
+	color:#000;
+}
+.clr-lighrglar{
+	color: #7e7e7e;
+}
+.banner{
+	position: relative;
+}
+.signupFrame{
+	position: absolute;
+	width:40%;
+	text-align: center;
+	vertical-align: middle;
+	left:50%;
+	margin-left: -20%;
+	bottom:1.4rem;	
+}
+.peopleNumber{
+	position: absolute;
+	width:80%;
+	height:60%;
+	left:50%;
+	margin-left: -40%;
+	top:20%;
+}
+.activityHead{
+	display: block;
+	width:50%;
+	margin-left: 25%;
+}
+.activityLast{
+	display: block;
+	width:10%;
+	height:2px;
+	margin-left: 45%;
+	background-color: #f8d43e;
+	padding:0;
+	margin-bottom: 0.75rem;
+}
+.timeHeadPar{
+	position: relative;
+	display: block;
+	width:46%;
+}
+.timeHead{
+	position: absolute;
+	top: 32%;
+	left:4%;
+}
+.form-control{
+	border:none;
+	height:2rem;
+	padding-left: 0.4rem;
+	background: #1f1f1f;
+	color:#fff;
+}
+input:active, input:hover, textarea:active, textarea:hover{
+	color:#fff;
+}
+.form-select{
+	border:none;
+	height:2rem;
+	background: #1f1f1f;
+	color: #fff;
+}
+.form-textarea{
+	background: #1f1f1f;
+	color:#fff;
+}
+.group-item .rowspanBorder{
+	border:1px solid #989898;
+	padding:0.75rem 0.75rem 0;
+}
+.group-item .colspanBot{
+	padding-bottom: 0;
+}
+#video{
+	width:100%;
+}
+#videoWrap{
+	width:100%;
+	height:100%;
+	border:1px solid #fff;
+}
+#playState{
+	position: absolute;
+	display: inline-block;
+	width:20%;
+    height:20%;
+	left:50%;
+	margin-left: -10%;
+	top:40%;
+}
+#signUp{
+	position: fixed;
+	bottom:0;
+	left:0;
+	z-index: 9999;
+	background: #f3d326;
+	height:3rem;
+	line-height: 3rem;
+	font-size: 16px;
+}
+.tips1{
+	width:80%;
+	height:200px;
+	position: fixed;
+	left:50%;
+	margin-left:-40%;
+	top:50%;
+	margin-top: -100px;
+	display: none;
+	z-index: 1024;
+	background-color: #fff;
+	color:#000;
+	border-radius: 10px;
+}
+.Header1{
+	width:100%;
+	line-height: 3rem;
+	text-align: center;
+}
+.Con1{
+	padding-bottom:20px;	
+	text-align: center;
+}
+.sureBtn{
+	height:3.6rem;
+	line-height: 3.6rem;
+	text-align: center;
+	color:#064acf;
+	border-top:1px solid #e2e2e2;
+}
+.activityWrap{
+	width:100%;
+	height:100%;
+	position: fixed;
+	background:rgb(0,0,0);
+	opacity: 0.7;
+	left:0;
+	top:0;
+	z-index: 1024;
+	display: none;
+}
+.zone{
+	width:100%;
+}
+.zone span{
+	padding: 0.2rem 0;
+	display: block;
+	width:40%;
+	text-align: center;
+	margin-left: 30%;
+	border:1px solid #f8d43e;
+	border-radius: 15px;
+}
+</style>
+</head>
+<body>
+    <div class="activityWrap"></div>   
+        <template id="peopleTemplate">
+	        <div class="banner">
+	        	<img src="/h5/images/activity/playrockSound/banner.jpg">
+	        	<div class="signupFrame">
+	        	    <img src="/h5/images/activity/playrockSound/signupFrame.png">
+	        	    <p class="peopleNumber clr-golden">{{data.result+1000}}人已经报名</p>
+	        	</div>        	
+	        </div> 
+        </template> 
+        <my-people></my-people>
+
+     	<div class="group group-noborder" style="margin-top: 2rem">					    
+			<div class="group-item">
+				<div class="group-rowspan">
+					<div class="group-colspan activityHead">
+						<img src="/h5/images/activity/playrockSound/applytime.png" style="width:100%">
+					</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan clr-golden" style="text-align: center;">八大赛区</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan activityLast"></div>
+				</div>
+			</div>
+			<div class="group-item" style="margin-top: 20px;">	
+				<!-- <div class="group-rowspan clr-golden zone">
+					<span>5月12日 - 6月30日</span>
+				</div>
+				<div class="group-rowspan clr-golden zone">
+                    <div class="group-colspan" style="text-align: center;">淮南赛区</div>
+				</div>
+				<div class="group-rowspan clr-golden zone">
+				    <span>5月19日 - 6月30日</span>
+				</div> -->
+				<div class="group-rowspan clr-golden zone">
+					<div class="group-colspan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;蚌埠赛区&nbsp;&nbsp;&nbsp;阜阳赛区&nbsp;&nbsp;&nbsp;亳州赛区&nbsp;&nbsp;&nbsp;淮南赛区<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;铜陵赛区&nbsp;&nbsp;&nbsp;黄山赛区&nbsp;&nbsp;&nbsp;芜湖赛区&nbsp;&nbsp;&nbsp;合肥赛区</div>
+			</div>
+	    </div>
+
+	    <div class="group group-noborder" style="margin-top: 1rem">					    
+			<div class="group-item">
+				<div class="group-rowspan">
+					<div class="group-colspan activityHead">
+						<img src="/h5/images/activity/playrockSound/instructions.png" style="width:100%">
+					</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan clr-golden" style="text-align: center;">活动赛制说明</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan activityLast"></div>
+				</div>
+			</div>
+			<div class="group-item">	
+				<div class="group-rowspan">
+					<div class="group-colspan clr-golden" style="padding-bottom: 0;text-indent: 2rem;">2016年，玩石音乐在成功举办第一季新声计划比赛的基础之上。第二季，将由安徽音乐广播与玩石音乐联合主办，梦想玩石-新声计划·第二季如期到来!<p style="text-indent: 2rem;">这次我们将聚焦整个安徽省的原创音乐，选取省内8个地市作为海选赛区，分别是淮南、蚌埠、铜陵、亳州、阜阳、黄山、芜湖、合肥。欢迎个人选手和乐队选手报名参与。将在对应赛区城市的LIVEHOUSE进行海选，海选优胜的选手依次经过复赛（赛区决赛）、总决赛。最终角逐出2017年梦想玩石-新声计划·第二季的冠亚季军。</p></div>
+				</div>		
+			</div>
+	    </div>
+
+	    <div class="group group-noborder">					    
+			<div class="group-item">
+				<div class="group-rowspan">
+					<div class="group-colspan timeHeadPar">
+						<img src="/h5/images/activity/playrockSound/sharp.png">
+						<p class="timeHead clr-black">7月-8月 公路巡演</p>
+					</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan clr-lightWhite">我们将和上届新声计划优秀学员一起，联手赛区本土知名音乐人。以“现场音乐”的名义进行一次“公路巡演”。“玩石大巴”即将抵达你的城市！你准备好了吗？</div>
+				</div>	
+			</div>
+			<div class="group-item">	
+				<div class="group-rowspan">
+					<div class="group-colspan timeHeadPar">
+						<img src="/h5/images/activity/playrockSound/sharp.png">
+						<p class="timeHead clr-black">9月 试音</p>
+					</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan clr-lightWhite">规则：独唱以四十秒的清唱形式展现 ，乐队可携带木琴手鼓等乐器进行一分钟的原创或非原创表演。奖品：安徽音乐广播提供精美礼品 、赛区海选演播厅录制邀请卡。</div>
+				</div>	
+			</div>
+			<div class="group-item">	
+				<div class="group-rowspan">
+					<div class="group-colspan timeHeadPar" style="width:66%;">
+						<img src="/h5/images/activity/playrockSound/sharp.png">
+						<p class="timeHead clr-black" style="top:38%">9月-10月 海选</p>
+					</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan clr-lightWhite">规则：每组进行一首歌曲的表演，现场发出5张直接晋级卡，剩余选手根据评委打分，比分前五名晋级。一共十名选手晋级。独唱类选手携带伴奏，乐队需携带各乐手的乐器（鼓除外）。奖品：玩石音乐限量周边礼盒（T+毛巾+拨片），玩石音乐VIP会员卡。</div>
+				</div>	
+			</div>
+			<div class="group-item">	
+				<div class="group-rowspan">
+					<div class="group-colspan timeHeadPar">
+						<img src="/h5/images/activity/playrockSound/sharp.png">
+						<p class="timeHead clr-black">10月 复赛</p>
+					</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan clr-lightWhite">届时根据各赛区海选晋级情况，将八大赛区合并至四大赛区进行复赛。复赛即赛区决赛。将决出赛区冠亚季军、赛区最佳吉他手、赛区最佳贝斯手、赛区最佳鼓手、赛区最佳人气奖等奖项。优胜选手将免费前往合肥参加总决赛。</div>
+				</div>
+			</div>
+			<!-- <div class="group-item">	
+				<div class="group-rowspan">
+					<div class="group-colspan timeHeadPar">
+						<img src="/h5/images/activity/playrockSound/sharp.png">
+						<p class="timeHead clr-black">11月 半决赛</p>
+					</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan clr-lightWhite">半决赛采取两两PK形式。抽签决定比赛对手、比赛顺序。两两PK决出晋级选手。PK胜出的10名选手进入总决赛。时间地点：待定</div>
+				</div>	
+			</div> -->
+			<div class="group-item">	
+				<div class="group-rowspan">
+					<div class="group-colspan timeHeadPar">
+						<img src="/h5/images/activity/playrockSound/sharp.png">
+						<p class="timeHead clr-black">11月 总决赛</p>
+					</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan clr-lightWhite">规则：每组选手首轮进行一首歌曲的表演，第一轮晋级者另外进行一首歌曲的表演。最后一轮决出本季新声计划的冠亚季军。独唱类歌手每人需准备至少三首歌曲的高品质伴奏，乐队需携带乐器(鼓除外)。奖品：冠军5000元现金+品牌乐器一件+音乐主舞台表演权；亚军3000元现金+品牌合成器一件；季军2000元现金+魔声耳机一副；
+                </div>
+				</div>		
+			</div>
+	    </div>	
+
+	     <div class="group group-noborder">					    
+			<div class="group-item">
+				<div class="group-rowspan">
+					<div class="group-colspan activityHead" style="width:80%;margin-left: 10%">
+						<img src="/h5/images/activity/playrockSound/previousreview.png" style="width:100%">
+					</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan clr-golden" style="text-align: center;">往届赛事回顾</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan activityLast"></div>
+				</div>
+			</div>
+
+
+	        <!-- 焦点图 -->
+			<template id="indexTemplate">
+				<div class="group-item">	
+					<div class="group-rowspan">
+						<div class="group-colspan">						
+							<div class="slider" id="slider">
+								<ul>
+									<!-- <li v-for="img in imgs"><a href="{{img.url}}"><img src="/h5/images/default21.jpg" data-src="{{img.pic}}" alt="banner" class="async"></a></li> -->
+									<li>
+										<img src="/h5/images/activity/playrockSound/01.jpg">
+									</li>
+									<li>
+										<img src="/h5/images/activity/playrockSound/03.jpg">
+									</li>
+									<li>
+										<img src="/h5/images/activity/playrockSound/02.jpg">
+									</li>
+									<li>
+										<img src="/h5/images/activity/playrockSound/04.jpg">
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</template>
+			<my-index></my-index>
+
+
+			<!-- 视频播放 -->	
+	        <template id="videoTemplate">
+				<div class="group-item" style="margin:0 3rem">		
+					<div class="group-rowspan">
+						<div class="group-colspan" id="videoWrap" @click="videoWrap">                      
+							<video src="/h5/images/activity/playrockSound/intr.mp4" id="video"></video>
+							<div id="playState">
+								<img src="/h5/images/activity/playrockSound/pause.png"  style="width:100%">  
+							</div>						 
+						</div>
+					</div>			
+				</div>
+			</template>
+			<my-video></my-video>	
+
+	    </div>
+
+	    <div class="group group-noborder">					    
+			<div class="group-item">
+				<div class="group-rowspan">
+					<div class="group-colspan activityHead" style="width:60%;margin-left: 20%">
+						<img src="/h5/images/activity/playrockSound/wantApply.png" style="width:100%"> 
+					</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan clr-golden" style="text-align: center;">我要报名</div>
+				</div>
+				<div class="group-rowspan">
+					<div class="group-colspan activityLast"></div>
+				</div>				
+			</div>
+	    </div>
+
+
+	<template id="signupTemplate">	
+		<form action="javascript:void(0)" id="formSignup">
+			<div class="group group-noborder group-form">	
+				<div class="group-item">
+					<div class="group-rowspan rowspanBorder">
+					   	<div class="group-colspan">参赛名称</div>
+						<div class="group-colspan">
+							<input type="text" v-model="bandName" @keyup="bandNameKeyup"  @blur="bandNameBlur"  class="form-control"/>
+						</div>
+					</div>
+					<div class="group-rowspan">
+					   	<div class="group-colspan right clr-lighrglar"></div>
+					</div>
+				</div>
+			</div>	
+			<div class="group group-noborder group-form">		
+				<div class="group-item">
+					<div class="group-rowspan rowspanBorder">
+					    <div class="group-colspan">赛区</div>
+						<div class="group-colspan right">
+							<select class="form-select divisionName" v-model="division">
+							    <option value="" selected>请选择∨</option>
+								<option v-for="division in divisions" v-bind:value="division.value">{{division.text}}</option>
+				            </select>
+						</div>
+					</div>
+				</div>	
+			</div>	
+			<div class="group group-noborder group-form">				    
+				<div class="group-item">
+				    <div class="group-rowspan">
+					    <div class="group-colspan clr-golden">参赛联系人</div>
+					</div>    
+					<div class="group-rowspan rowspanBorder">
+					    <div class="group-colspan">姓名</div>
+						<div class="group-colspan">
+							<input type="text" v-model="username" @keyup="usernameKeyup"  @blur="usernameBlur"  class="form-control" />
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="group group-noborder group-form">		
+				<div class="group-item">  
+					<div class="group-rowspan rowspanBorder">
+					    <div class="group-colspan">学校</div>
+						<div class="group-colspan">
+							<input type="text" v-model="school" @keyup="schoolKeyup"  @blur="schoolBlur" class="form-control" />
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="group group-noborder group-form">		
+				<div class="group-item">  
+					<div class="group-rowspan rowspanBorder">
+					    <div class="group-colspan">手机号码</div>
+						<div class="group-colspan">
+							<input type="tel" v-model="phone"  @keyup="inputPhoneKeyup"  @blur="inputPhoneBlur"  class="form-control" />
+						</div>
+					</div>
+				</div>
+			</div>	
+			<!-- <div class="group group-noborder group-form">		
+				<div class="group-item">  
+					<div class="group-rowspan rowspanBorder">
+					    <div class="group-colspan">邮箱</div>
+						<div class="group-colspan">
+							<input type="email" name="email" v-model="email" placeholder="请务必使用该邮箱发送作品"  class="form-control" />
+						</div>
+					</div>
+				</div>
+			</div>	 -->
+			<div class="group group-noborder group-form">		
+				<div class="group-item">  
+					<div class="group-rowspan rowspanBorder">
+					    <div class="group-colspan">乐队组建时间</div>
+						<div class="group-colspan clr-lighrglar">(个人选手不必填写)</div>
+						<div class="group-colspan">
+							<select class="form-select groupTime" v-model="foundTime">
+							     <option value="" selected>请选择∨</option>
+								 <option v-for="year in years" v-bind:value="year.value">{{year.text}}</option>
+				            </select>
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="group group-noborder group-form">		
+				<div class="group-item">  
+					<div class="group-rowspan rowspanBorder">
+					    <div class="group-colspan">风格</div>
+						<div class="group-colspan">
+							<input type="text" class="style form-control" v-model="style" @keyup="styleKeyup"  @blur="styleBlur"  placeholder="如：朋克、硬摇滚、爵士（50字以内）"  />
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="group group-noborder group-form">		
+				<div class="group-item"> 
+				    <div class="group-rowspan">
+					    <div class="group-colspan">参赛经历</div>
+					</div> 
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<textarea  class="competitionExperience form-textarea" placeholder="如参加校园歌手大赛及获奖信息（填写更多经历通过海选的几率更大哦）（120字以内）" @keyup="cs_experienceKeyup"  @blur="cs_experienceBlur"  v-model="cs_experience" ></textarea>
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="group group-noborder group-form">		
+				<div class="group-item" style="border-bottom:1px dashed #989898"> 
+				    <div class="group-rowspan">
+					    <div class="group-colspan">演出经历</div>
+					</div> 
+					<div class="group-rowspan">
+						<div class="group-colspan" style="padding-bottom: 2rem">
+							<textarea  class="performanceExperience form-textarea" placeholder="如参加某大型演出，担任主唱（120字以内）" @keyup="yc_experienceKeyup"  @blur="yc_experienceBlur"   v-model="yc_experience"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="group group-noborder group-form" style="margin-bottom: 1.6rem;">		
+				<div class="group-item clr-lighrglar"> 
+				    <div class="group-rowspan">
+					    <div class="group-colspan">注：</div>
+					</div> 
+					<div class="group-rowspan">
+						<div class="group-colspan colspanBot">1.此次活动接受个人及乐队（组合）参赛形式。个人选手不必填写“乐队组建时间”一栏。</div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan colspanBot">
+							本次活动最终解释权归“玩石”所有</div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan colspanBot">
+							主办单位：安微广播电视台音乐频率 合肥新鼎明文化传播有限公司
+						</div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan colspanBot">
+							承办单位：玩石音乐工作室
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="group group-noborder group-form">		
+                <div class="group-item">
+					<div class="group-rowspan">
+					    <div class="group-colspan">
+						    <button type="submit" id="signUp" class="button button-block button-link" @click="signUp" >我要报名</button>
+						</div>
+					</div>
+				</div> 
+			</div>	
+         	<div class="tips1">
+		        <div class="Header1">
+		        	<p>提示</p>
+		        </div>	    	
+		    	<div class="Con1">
+		    		<p>恭喜你，提交成功</p>
+		    		<br />
+		    		<p>稍后请记得将作品发送到邮箱</p>
+		    		<p>PLAYROCK@yeah.net哦</p>
+		    	</div>
+		    	<p class="sureBtn" @click="sureBtn">确定</p>
+			</div>    
+		</form>
+	</template>
+	<my-signup></my-signup>			
+   
+
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['activity/playrockSound']);
+	</script>   
+</body>
+</html>

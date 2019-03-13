@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<title>聚米账户</title>
+	<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+	<link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+	<style type="text/css">
+		.group-item .group-rowspan .moneyWrap {
+			text-align: center;
+		}
+
+		.group-item .group-rowspan {
+			border-bottom: 1px solid #eee;
+		}
+
+		.group-item .group-rowspan:last-child {
+			border: none;
+		}
+
+		.accountBg {
+			width: 100%;
+			height: 10rem;
+			position: relative;
+			background: url(/h5/images/account/totalamountBg.png) no-repeat center bottom;
+			background-size: cover;
+		}
+
+		.accountbgCon {
+			width: 80%;
+			height: 6rem;
+			text-align: center;
+			position: absolute;
+			top: 50%;
+			margin-top: -3rem;
+			left: 50%;
+			margin-left: -40%;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100" />
+	</div>
+
+	<div id="box">
+		<!-- 账户余额 -->
+		<template id="assetsTemplate">
+			<div class="group group-noborder group-justify accountBg">
+				<div class="group-item accountbgCon">
+					<div class="group-rowspan">
+						<div class="group-colspan moneyWrap">
+							<span class="clr-gray">总资产(元)</span>
+							<br>
+							<span class="font-26 clr-strike" style="">{{data.totalAmount?data.totalAmount:0}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+		<my-assets></my-assets>
+
+		<!-- 资产众筹 -->
+		<template id="detailTemplate">
+			<div class="group group-justify">
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan clr-gray">资产明细</div>
+					</div>
+					<div class="group-rowspan" style="border-bottom:1px dashed #eeeeee;">
+						<div class="group-colspan">待收本金</div>
+						<div class="group-colspan">
+							<span>{{data.principal?data.principal:0}}元</span>
+						</div>
+					</div>
+					<div class="group-rowspan" style="border-bottom:1px dashed #eeeeee;">
+						<div class="group-colspan">账户余额</div>
+						<div class="group-colspan">
+							<span>{{data.accountBalance?data.accountBalance:0}}元</span>
+						</div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan">提现中</div>
+						<div class="group-colspan">
+							<span>{{data.cashMoney?data.cashMoney:0}}元</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="group group-justify">
+				<div class="group-item">
+					<div class="group-rowspan">
+						<div class="group-colspan clr-gray">我的收益</div>
+					</div>
+					<div class="group-rowspan" style="border-bottom:1px dashed #eeeeee;">
+						<div class="group-colspan">累计收益</div>
+						<div class="group-colspan">
+							<span>{{data.accumulatedIncome?data.accumulatedIncome:0}} 元</span>
+						</div>
+					</div>
+					<div class="group-rowspan" style="border-bottom:1px dashed #eeeeee;">
+						<div class="group-colspan">
+							待收利息
+							<p class="font-10 clr-gray">(按最低预期年化收益计算)</p>
+						</div>
+						<div class="group-colspan">
+							<span>{{data.interest?data.interest:0}} 元</span>
+						</div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan">累计红包优惠</div>
+						<div class="group-colspan">
+							<span>{{data.usedRedPacket?data.usedRedPacket:0}} 元</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+		<my-detail></my-detail>
+
+		<!-- footer  -->
+		<template id="footTemplate">
+			<div class="footer">
+				<div class="group group-excel2" style="margin:0;border-top:1px solid #eee;">
+					<div class="group-item">
+						<div class="group-rowspan font-18" style="height:3.75rem;">
+							<a href="javascript:void(0)" class="group-colspan clr-strike" @click="recharge" style="font-weight: normal;">充值</a>
+							<a href="javascript:void(0)" class="group-colspan clr-strike" @click="cashout">提现</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+		<my-foot></my-foot>
+	</div>
+
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/assets/assets']);
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+define(["jquery"],function(a){a(document).on("click","[data-toggle='tab']",function(){var e=a(this).attr("href");return a(this).parent().addClass("active").siblings().removeClass("active"),a(e).addClass("active").siblings().removeClass("active"),!1})});

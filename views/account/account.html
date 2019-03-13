@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Cache-control" content="max-age=0" />
+    <meta http-equiv="Cache-control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>我的聚米-聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        .nickname {
+            font-size: 1.28571429rem;
+            vertical-align: middle;
+        }
+
+        .level {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            background: url('/h5/images/account/level-icon.png') no-repeat;
+            background-size: 100%;
+            color: #FFF;
+            font-size: 0.5rem;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 1.75rem;
+        }
+
+        .user-status {
+            padding: 0.3rem 0.8rem;
+            border: 1px solid #dbdbdb;
+            border-radius: 14px;
+            color: #dbdbdb;
+        }
+
+        .status-border {
+            border: 1px solid #dbdbdb;
+            color: #dbdbdb;
+        }
+
+        .group-others .group-item .status {
+            position: absolute;
+            right: 0;
+            top: 24%;
+        }
+
+        .ui-dialog-upgrade .ui-dialog-grid .ui-dialog-body {
+            padding: 20px 0 16px 0;
+        }
+
+        .ui-dialog-upgrade .ui-dialog-content {
+            width: 100%;
+        }
+
+        .ui-dialog-upgrade .ui-dialog-footer button.ui-dialog-autofocus {
+            color: #999999;
+        }
+
+        .ui-dialog-upsuccess .ui-dialog-grid .ui-dialog-body {
+            padding: 0;
+        }
+
+        .upsuccess img {
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .ui-dialog-upsuccess .ui-dialog-footer {
+            border-top: none;
+        }
+
+        .ui-dialog-upsuccess .ui-dialog-button {
+            background-color: #ec6121;
+            border-radius: 6px;
+        }
+
+        .ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus,
+        .ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus:active,
+        .ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus:focus,
+        .ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus:hover {
+            color: #ffffff;
+        }
+
+        /* 充值提现按钮 */
+
+        .btn-height {
+            height: 2rem;
+            line-height: 2rem;
+            margin-bottom: 0.6rem;
+            border-radius: 50px;
+            background-color: #ec6121;
+            color: #ffffff;
+            font-size: 1.1rem;
+        }
+
+        .btn-height2 {
+            height: 2rem;
+            line-height: 2rem;
+            margin-bottom: 0.6rem;
+            color: #999999;
+            border: 0;
+            font-size: 1.1rem;
+        }
+
+        /* 邀请好友背景 */
+
+        .bg-invite {
+            margin: 0;
+        }
+
+        .bg-invite-friend {
+            width: 100%;
+        }
+
+        /* 邀请好友配图 */
+
+        .inveteBg {
+            width: 100%;
+            height: 5.5rem;
+        }
+
+        .btn-identification {
+            float: right;
+            margin-top: -50px;
+        }
+
+        .btn-indentuser {
+            height: 2rem;
+            border-radius: 50px;
+            line-height: 2rem;
+        }
+
+        /* 银行卡 */
+
+        .bank-info {
+            color: #999999;
+        }
+
+        a.deleteItem {
+            border: 0;
+        }
+
+        /* 收支详情 */
+
+        .income-detail {
+            padding-right: 0.75rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+    <div id="box">
+        <template id="accountTemplate">
+            <!-- 登录后 -->
+            <template v-if="isLogin">
+                <!-- 个人资料 -->
+                <div class="group group-others">
+                    <div class="group-item">
+                        <div class="group-colspan" style="width:4rem;">
+                            <a href="/h5/views/account/settings/setting.html">
+                                <img :src="data.litpicPath || '/h5/images/face.jpg'" alt="" style="width:3.5rem;height:3.5rem;border-radius:50%;border:3px solid rgba(237,237,237,1);" />
+                            </a>
+                        </div>
+                        <div class="group-colspan" style="text-align: left;">
+                            <span class="nickname">{{data.nickname}}</span>
+                            <a href="/h5/views/account/level/level.html">
+                                <img :src="data.levelPic" alt="" style="display:inline-block;vertical-align: middle;width:2rem;" />
+                            </a>
+                            <p class="clr-gray">{{data.userPhone | myPhone}}</p>
+                            <!-- <p class="font-12 clr-gray" v-if="data.needBorder!=0">距下一个等级还需要{{data.needBorder}}成长值</p> -->
+                            <!-- <p class="font-12 clr-gray" v-else>您已达到当前最高等级</p> -->
+                        </div>
+                        <div class="btn-identification">
+                            <button class="button button-primary btn-indentuser" @click="bankcard">{{data.statAcct ==
+                                8?
+                                '认证用户': '未认证'}}</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 账户信息 -->
+                <div class="group group-justify" style="margin:0;" v-if="isLogin">
+                    <!-- 修改充值+提现 -->
+                    <div class="group-item" v-if="data.statBind == 8">
+                        <div class="group-rowspan">
+                            <a href="/h5/views/account/assets/assets.html">
+                                <div class="group-colspan clr-strike font-18">
+                                    <p class="font-14 clr-gray">账户资产(元)</p>
+                                    <p style="font-weight: bold">{{data.cashBalance}}</p>
+                                </div>
+                            </a>
+                            <div class="group-colspan">
+                                <button class="button button-primary btn-height" @click="recharge">充值</button>
+                                <button class="button button-primary btn-height2" @click="cashout">提现</button>
+                                <p>
+                                    <a href="assets/assetsLog.html?year=&month=" class="font-14 clr-gray">
+                                        收支明细
+                                        <i class="iconfont">&#xe615;</i>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-item deleteItem" v-else @click="toLink">
+                        <div class="group-rowspan">
+                            <div class="group-colspan clr-strike font-18">
+                                <p class="font-14 clr-gray">账户资产(元)</p>
+                                <p style="font-weight: bold">{{data.cashBalance}}</p>
+                            </div>
+                            <div class="group-colspan">
+                                <button class="button button-primary btn-height" @click="toLink">充值</button>
+                                <button class="button button-primary btn-height2" @click="toLink">提现</button>
+                                <p class="income-detail">
+                                    <a href="assets/assetsLog.html?year=&month=" class="font-14 clr-gray deleteItem">
+                                        收支明细
+                                        <i class="iconfont">&#xe615;</i>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <a href="javascript:void(0);" class="group-item" v-else @click="toLink">
+                        <div class="group-rowspan">
+                            <div class="group-colspan font-16 clr-gray" style="text-align: center;">
+                                <img src="/h5/images/ios/openaccount.png" style="width:4rem;margin:0 auto 0.4rem">
+                                <p>立即开户</p>
+                            </div>
+                            <div style="position: absolute;right:0;top:33px;">
+                                <i class="iconfont">&#xe60c;</i>
+                            </div>
+                        </div>
+                    </a> -->
+                <!-- 红包聚米币 -->
+                <div class="group group-excel2" style="border-top:1px solid #eee;border-bottom: 1px solid #eee;">
+                    <div class="group-item">
+                        <div class="group-rowspan">
+                            <a href="reward/redpacketLog.html?year=&month=" class="group-colspan" style="text-align:left;padding:0.5rem 0 0.5rem 0.3rem;">
+                                <i class="left" style="display: block;width:3.34rem;height:3.34rem;background: url(/h5/images/account/jm-hb.png) no-repeat center center;background-size: 80%;"></i>
+                                <div class="left" style="padding:0.4rem 0 0 0.4rem;">
+                                    <p class="clr-gray font-16">红包(元)</p>
+                                    <p class="font-16">{{data.redpacketBalance}}</p>
+                                </div>
+                            </a>
+                            <a href="reward/jumibiLog.html?year=&month=" class="group-colspan" style="text-align:left;padding:0.5rem 0 0.5rem 0.3rem;">
+                                <i class="left" style="display: block;width:3.34rem;height:3.34rem;background: url(/h5/images/account/jumi-bi.png) no-repeat center center;background-size: 80%;"></i>
+                                <div class="left" style="padding:0.4rem 0 0 0.4rem;">
+                                    <p class="clr-gray font-16">聚米币(个)</p>
+                                    <p class="font-16">{{data.coinBalance}}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 邀请好友 -->
+                <div class="group">
+                    <div class="group-item bg-invite">
+                        <a href="invite/invite.html" class="group-rowspan">
+                            <span class="bg-invite-friend">
+                                <img class="inveteBg" :src="data.invitePic" alt="图片">
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 其他 -->
+                <div class="group group-others group-account">
+                    <!-- 0不展示1展示 -->
+                    <div class="group-item" v-if="data.showNoviceItem == 1">
+                        <!-- 0是新手1是非新手 -->
+                        <a href="training/training.html?isNoviceUser={{data.isNoviceUser}}" class="group-rowspan">
+                            <span class="group-colspan">
+                                <i class="iconfont clr-orange">&#xe64b;</i>
+                            </span>
+                            <span class="group-colspan">新手训练营</span>
+                            <!-- <span class="group-colspan">
+								<em class="clr-gray font-12" v-if="data.is_novice_user == 1">{{data.inv_price}}元</em>
+								<i class="iconfont">&#xe60c;</i>
+							</span> -->
+                            <span class="group-colspan">
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="group-item">
+                        <a href="invest/invest.html" class="group-rowspan">
+                            <span class="group-colspan">
+                                <i class="iconfont clr-orange">&#xe645;</i>
+                            </span>
+                            <span class="group-colspan">我的项目</span>
+                            <span class="group-colspan">
+                                <!-- <i class="badge" v-if="data.itemOrderNumber">{{data.itemOrderNumber}}</i> -->
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- 我的订单 -->
+                    <div class="group-item">
+                        <a href="active/activeRecord.html" class="group-rowspan">
+                            <span class="group-colspan">
+                                <i class="iconfont clr-orange">&#xe64a;</i>
+                            </span>
+                            <span class="group-colspan">我的订单</span>
+                            <span class="group-colspan">
+                                <i class="badge" v-if="data.activityOrderNumber">{{data.activityOrderNumber}}</i>
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- 我的消息 -->
+                    <div class="group-item">
+                        <a href="active/myMessage.html" class="group-rowspan">
+                            <span class="group-colspan">
+                                <!-- <i class="iconfont clr-orange">&#xe64a;</i> -->
+                                <img src="/h5/images/account/myMessage.png" alt="消息" style="width: 1.1rem;height: 1.1rem;">
+                            </span>
+                            <span class="group-colspan">
+                                我的消息
+                                <i v-if="data.hasMsg == 0" style="width: 6px;height: 6px;border-radius: 50%;background: #f05718;display: inline-block;margin-left:6px;vertical-align: middle;"></i>
+                            </span>
+                            <span class="group-colspan" style="color: #999999;">
+                                收到的回复
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- 银行卡 -->
+                    <div class="group-item">
+                        <a href="javascript:void(0)" class="group-rowspan" @click="bankcard">
+                            <span class="group-colspan">
+                                <i class="iconfont clr-orange">&#xe6bb;</i>
+                            </span>
+                            <span class="group-colspan">银行卡</span>
+                            <span class="group-colspan bank-info">
+                                {{data.statBind == 8? '已绑卡': '未绑卡'}}
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="group group-others group-account">
+                    <div class="group-item">
+                        <a href="faq/FAQ.html" class="group-rowspan">
+                            <span class="group-colspan" style="padding:0">
+                                <i class="iconfont clr-orange">&#xe6bc;</i>
+                            </span>
+                            <span class="group-colspan">帮助中心</span>
+                            <span class="group-colspan">
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="group-item">
+                        <a href="/h5/views/ios/appSpreadInfo.html" class="group-rowspan">
+                            <span class="group-colspan" style="padding:0">
+                                <i class="iconfont clr-orange">&#xe630;</i>
+                            </span>
+                            <span class="group-colspan">app</span>
+                            <span class="group-colspan">
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- 设置 -->
+                    <div class="group-item">
+                        <a href="/h5/views/account/settings/setting.html" class="group-rowspan">
+                            <span class="group-colspan">
+                                <i class="iconfont clr-orange">&#xe646;</i>
+                            </span>
+                            <span class="group-colspan">设置</span>
+                            <span class="group-colspan">
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </template>
+            <!-- 登录前 -->
+            <template v-else>
+                <!-- 个人资料 -->
+                <div class="group">
+                    <div class="group-item">
+                        <div class="group-rowspan">
+                            <div class="group-colspan" style="text-align: center;">
+                                <a href="javascript:void(0)" class="button button-primary button-lg" @click="toLogin"
+                                    style="margin:1.5rem 0;">登录</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 账户信息 -->
+                <div class="group group-justify" style="margin:0;">
+                    <a href="javascript:void(0);" class="group-item" @click="toLogin">
+                        <div class="group-rowspan">
+                            <div class="group-colspan clr-strike font-18">
+                                <p class="font-14 clr-gray">账户资产(元)</p>
+                                <p style="font-weight: bold">0</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- 红包聚米币 -->
+                <div class="group group-excel2" style="border-top:1px solid #eee;border-bottom: 1px solid #eee;">
+                    <div class="group-item">
+                        <div class="group-rowspan">
+                            <a href="javascript:void(0)" @click="toLogin" class="group-colspan" style="text-align:left;padding:0.5rem 0 0.5rem 0.3rem;">
+                                <i class="left" style="display: block;width:3.34rem;height:3.34rem;background: url(/h5/images/account/jm-hb.png) no-repeat center center;background-size: 80%;"></i>
+                                <div class="left" style="padding:0.4rem 0 0 0.4rem;">
+                                    <p class="clr-gray font-16">红包(元)</p>
+                                    <p class="font-16">0</p>
+                                </div>
+                            </a>
+                            <a href="javascript:void(0)" @click="toLogin" class="group-colspan" style="text-align:left;padding:0.5rem 0 0.5rem 0.3rem;">
+                                <i class="left" style="display: block;width:3.34rem;height:3.34rem;background: url(/h5/images/account/jumi-bi.png) no-repeat center center;background-size: 80%;"></i>
+                                <div class="left" style="padding:0.4rem 0 0 0.4rem;">
+                                    <p class="clr-gray font-16">聚米币(个)</p>
+                                    <p class="font-16">0</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 邀请好友 -->
+                <div class="group" @click="toLogin">
+                    <div class="group-item bg-invite">
+                        <a href="javascript:void(0)" class="group-rowspan">
+                            <span class="bg-invite-friend">
+                                <img src="/h5/images/account/invite-friend.png" alt="图片">
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <!-- 其他 -->
+                <div class="group group-others group-account">
+                    <div class="group-item">
+                        <a href="javascript:void(0)" class="group-rowspan" @click="toLogin">
+                            <span class="group-colspan">
+                                <i class="iconfont clr-orange">&#xe645;</i>
+                            </span>
+                            <span class="group-colspan">我的项目</span>
+                            <span class="group-colspan">
+                                <!-- <i class="badge" v-if="data.itemOrderNumber">{{data.itemOrderNumber}}</i> -->
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- 我的订单 -->
+                    <div class="group-item">
+                        <a href="javascript:void(0)" class="group-rowspan" @click="toLogin">
+                            <span class="group-colspan">
+                                <i class="iconfont clr-orange">&#xe64a;</i>
+                            </span>
+                            <span class="group-colspan">我的订单</span>
+                            <span class="group-colspan">
+                                <i class="badge" v-if="data.activityOrderNumber">{{data.activityOrderNumber}}</i>
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- 我的消息 -->
+                    <div class="group-item">
+                        <a href="javascript:void(0)" class="group-rowspan" @click="toLogin">
+                            <span class="group-colspan">
+                                <img src="/h5/images/account/myMessage.png" alt="消息" style="width: 1.1rem;height: 1.1rem;">
+                            </span>
+                            <span class="group-colspan">我的消息</span>
+                            <span class="group-colspan" style="color: #999999;">
+                                收到的回复
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- 银行卡 -->
+                    <div class="group-item">
+                        <a href="javascript:void(0)" class="group-rowspan" @click="toLogin">
+                            <span class="group-colspan">
+                                <i class="iconfont clr-orange">&#xe6bb;</i>
+                            </span>
+                            <span class="group-colspan">银行卡</span>
+                            <span class="group-colspan">
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="group group-others group-account">
+                    <div class="group-item">
+                        <a href="faq/FAQ.html" class="group-rowspan">
+                            <span class="group-colspan" style="padding:0">
+                                <i class="iconfont clr-orange">&#xe6bc;</i>
+                            </span>
+                            <span class="group-colspan">帮助中心</span>
+                            <span class="group-colspan">
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="group-item">
+                        <a href="/h5/views/ios/appSpreadInfo.html" class="group-rowspan">
+                            <span class="group-colspan" style="padding:0">
+                                <i class="iconfont clr-orange">&#xe630;</i>
+                            </span>
+                            <span class="group-colspan">app</span>
+                            <span class="group-colspan">
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- 设置 -->
+                    <div class="group-item">
+                        <a href="javascript:void(0)" class="group-rowspan" @click="toLogin">
+                            <span class="group-colspan">
+                                <i class="iconfont clr-orange">&#xe646;</i>
+                            </span>
+                            <span class="group-colspan">设置</span>
+                            <span class="group-colspan">
+                                <i class="iconfont">&#xe60c;</i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </template>
+
+            <!-- 版本更新后的操作引导层 -->
+            <!--<a href="javascript:void(0)" @click="closeMask" v-if="data.is_click == 0" style="display:block;position:fixed;top:0;left:0;z-index:999;width:100%;height:100%;">-->
+            <!--<img src="/h5/images/account/maskName.png" alt="" width="100%" height="100%"/>-->
+            <!--</a>-->
+
+            <!-- 修改密码弹出框 -->
+            <div class="upgradeWrap" id="upgradeWrap" style="display: none;">
+                <div class="group group-noborder" style="border-bottom: 1px solid #eeeeee;padding:0 0 0 16px;">
+                    <div class="group-rowspan">
+                        <div class="group-colspan" style="width:28%;">真实姓名</div>
+                        <div class="group-colspan" id="realname"></div>
+                    </div>
+                    <div class="group-rowspan">
+                        <div class="group-colspan" style="width:28%;">身份证号</div>
+                        <div class="group-colspan" id="idNumber"></div>
+                    </div>
+                </div>
+                <form class="group group-noborder" style="padding:0 0 0 16px;">
+                    <div class="group-rowspan" style="position: relative;">
+                        <label for="userpwdreal" class="group-colspan">设置支付密码</label>
+                        <input type="tel" class="group-colspan userpwd userpwdreal" style="-webkit-text-security:disc;text-security:disc;"
+                            name="userpwdreal" id="userpwdreal" v-model="userpwdreal" maxlength="6" @keyup="userpwdrealKeyup"
+                            placeholder="请输入6位数字支付密码" style="padding-top: 1rem;" proving="0">
+                    </div>
+                    <div class="group-rowspan" style="position: relative;">
+                        <label for="userconfirmpwdreal" class="group-colspan">确认支付密码</label>
+                        <input type="tel" class="group-colspan userpwd userconfirmpwdreal" style="-webkit-text-security:disc;text-security:disc;"
+                            name="userconfirmpwdreal" id="userconfirmpwdreal" v-model="userconfirmpwdreal" maxlength="6"
+                            @keyup="userconfirmpwdrealKeyup" placeholder="请再次输入支付密码" style="padding-top: 1rem;" proving="0">
+                    </div>
+                </form>
+                <!-- <p class="upgradetips clr-gray font-12" style="padding:0 0 0 16px;">*账户资金由北京银行存管对接中</p> -->
+            </div>
+
+            <!-- 恭喜您，升级成功 -->
+            <div class="upsuccess textcenter" id="upsuccess" style="display: none;">
+                <img src="/h5/images/ios/upsuccess.png">
+                <p class="font-24" style="padding:20px 0">恭喜您，升级成功！</p>
+            </div>
+        </template>
+        <my-account></my-account>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['account/account']);
+    </script>
+</body>
+
+</html>

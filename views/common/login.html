@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>用户登录</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+</head>
+
+<body class="bg">
+    <!-- 该页面不对外开发 -->
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <template id="loginTemplate">
+        <form action="javascript:void(0)" id="formLogin">
+            <div class="group group-noborder group-form">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <input type="tel" id="mobile" name="mobile" v-model="mobile" @blur="inputMobileBlur" @keyup="inputMobileKeyup" placeholder="请输入手机号"
+                                class="form-control form-border" autocomplete='off' maxlength="11" />
+                        </div>
+                    </div>
+                </div>
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <input type="password" id="password" name="password" v-model="password" @blur="inputPasswordBlur" @keyup="inputPasswordKeyup"
+                                placeholder="请输入登录密码" class="form-control form-border" autocomplete="off" />
+                        </div>
+                    </div>
+                </div>
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan" style="padding-top:1.25rem;">
+                            <button type="button" class="button button-fill button-block button-lg" :class="{'disabled':isShowHide}" @click="toLogin">登录</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </template>
+    <my-login></my-login>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['common/login']);
+    </script>
+</body>
+
+</html>

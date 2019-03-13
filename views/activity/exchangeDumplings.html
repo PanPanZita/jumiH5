@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>兑换</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+html,body{background:#FFF;}
+.button-border{border-radius: 1rem;}
+.phoneBox{
+	position: relative;
+}
+.exchangeCon{
+	width:100%;
+	position: absolute;
+	top:-2rem;
+	z-index: 11;
+}
+.sign{
+	display: inline-block;
+	width:2px;
+	height:1.2rem;
+	background-color: #ec6121;
+	margin-top: 0.4rem;
+}
+</style>
+</head>
+<body>
+
+<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+
+	<div class="banner">
+		<img src="/h5/images/activity/shaomai/shaomai.jpg" alt="" style="width:100%;">
+	</div>	
+
+	<template id="phoneTemplate">
+		<div class="phoneBox">	
+			<div class="exchangeCon">
+				<div class="group group-noborder group-clear group-transparent">		
+					<div class="group-item">  
+						<div class="group-rowspan">
+							<div class="group-colspan">
+								<input type="text"  @keyup="inputPhoneKeyup" v-model="phone" placeholder="请输入兑换手机号" class="button button-block button-lg button-border" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="group group-noborder group-clear group-transparent">		
+		            <div class="group-item">
+						<div class="group-rowspan">
+						    <div class="group-colspan">
+							    <button type="submit" id="exchangeRight" class="button button-block button-lg button-fill button-halfRadius" @click="exchangeRight" >立即兑换</button>
+							</div>
+						</div>
+					</div> 
+				</div>	
+			</div>
+		</div>	
+	</template>
+	<my-phone></my-phone>
+
+	<template id="itemnameTemplate">
+		<div class="group" style="margin-top:7rem">
+			<div class="group-item">
+				<div class="group-rowspan">
+					<div class="group-colspan">
+						<span class="clr-gray">* 兑换前请先支持【{{data.item_name}}】众筹项目</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+	<my-itemname></my-itemname>	
+
+	<div class="group group-noborder">
+		<div class="group-item">
+			<div class="group-rowspan">
+			    <div class="group-colspan">
+			    	<span class="sign"></span>
+			    </div>
+			    <div class="group-colspan" style="padding-left: 0">
+			    	<span class="font-16">兑换须知</span>
+			    </div>
+			</div>
+			<div class="group-rowspan">
+				<div class="group-colspan">
+					<p>1、每个手机号必须在完成支持指定项目后才具备兑换条件；</p>
+					<p>2、一个手机号只能兑换一次，不能重复兑换；</p>
+					<p>3、该兑换码不设置强制过期时间，具体有效兑换时间，由发起方（商户）公布；</p>
+					<p>4、兑换过程请与现场工作人员确认核实，如有问题遇到问题，请拨打客服热线400-801-4680</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['activity/exchangeDumplings']);
+	</script> 
+</body>
+</html>

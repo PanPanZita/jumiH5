@@ -1,0 +1,232 @@
+﻿/*  
+* @description: 按钮
+* @author: adhehe
+* @update: null
+*/
+
+/* //////////////////////基础样式 */
+.button {
+  display: inline-block;
+  height:2.5rem;
+  padding:0 1rem;
+  background:#FFF;
+  border: 1px solid #CCC;
+  border-radius: 0.17857142857142857142857142857143rem;
+  font-size:1rem;
+  font-weight: normal;
+  line-height: 2.5rem;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  color:#333;
+}
+/* .button.hover,
+.button:hover{
+	background:#f0f0f0;
+	border:1px solid #999;
+} */
+
+/* //////////////////////虚线边框 */
+.button-dashed{
+	border-style: dashed;
+}
+.button-dashed.hover,
+.button-dashed:hover{
+	border-style: dashed;
+}
+
+/*//////////////////////主要的*/
+.button-primary {
+	border-color:#ec6121;
+	color: #ec6121;
+}
+.button-primary.hover,
+.button-primary:hover{
+	background:#FFFCF3;
+	border-color:#ec6121;
+	color:#F30;
+}
+
+/*//////////////////////醒目的*/
+.button-strike {}
+.button-strike.hover,
+.button-strike:hover{}
+
+/* //////////////////////通行  */
+.button-health{
+	border-color:#84C34E;
+    color: #84C34E;
+}
+.button-health.hover,
+.button-health:hover{
+	background:#EAF0EC;
+	border-color:#179810;
+    color: #179810;
+}
+
+/* //////////////////////信息 */
+.button-info{
+	border-color:#337AB7;
+    color: #337AB7;
+}
+.button-info.hover,
+.button-info:hover{
+	background: #E5EBF0;
+	border-color:#1E5AB3;
+    color: #1E5AB3;
+}
+
+.button-orange{
+	border:1px solid #FA8806;
+	background:#fff;
+	color:#FA8806;
+}
+.button-orange.hover,
+.button-orange:hover{
+	background:#FBF6EC;
+	color:#FA8806;
+}
+
+.button-orange.active{
+	border:1px solid #FA8806;
+	color:#FA8806;
+}
+
+/* //////////////////////空心半圆角按钮 */
+.button-halfRadius{
+	display: inline-block;
+	border: 1px solid #f60;
+	border-radius: 1rem;
+	height: 2rem;
+	padding:0 2rem;
+	line-height: 2rem;
+	color: #f60;
+	text-align: center;
+	margin:0 auto;
+}
+.button-halfRadius.hover,
+.button-halfRadius:hover{
+	color: #f60;
+	background:#FFFBF9;
+}
+
+/* //////////////////////链接按钮 */
+.button-link {
+  background:transparent;
+  border-color:transparent;
+  border-radius: 0;
+}
+.button-link.hover,
+.button-link:hover{
+	background: transparent;
+	border-color:transparent;
+    color: #000;
+}
+
+/* //////////////////////角注提示 */
+.button-tips {
+  background:transparent;
+  border-color:transparent;
+  border-radius: 0;
+  color: #999;
+}
+.button-tips.hover,
+.button-tips:hover{
+	background: transparent;
+	border-color:transparent;
+    color: #999;
+}
+
+
+/* //////////////////////填充按钮 */
+.button-fill{
+	background: #ec6121;;
+	border-color:transparent;
+	color: #FFF;
+}
+.button-fill.hover,
+.button-fill:hover{
+	background:#E25311;
+	border-color:transparent;
+	color:#FFF;
+}
+
+/*//////////////////////禁用*/
+.button.disabled,
+.button[disabled]{
+  pointer-events: none;
+  cursor: not-allowed;
+  background: transparent;
+  border:1px solid #dbdbdb;
+  color: #ccc;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.button-fill.button.disabled,
+.button-fill.button[disabled]{
+  pointer-events: none;
+	cursor: not-allowed;
+	background: #dbdbdb;
+	border:1px solid transparent;
+	color: #fff;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+}
+
+/*//////////////////////超小按钮*/
+.button-xsm {
+  height:1rem;
+  padding:0rem 0.25rem;
+  font-size: 0.625rem;
+  line-height:0.625rem;
+}
+
+/*//////////////////////小按钮*/
+.button-sm {
+  height:1.5rem;
+  padding:0rem 0.6rem;
+  font-size: 0.85714285714285714285714285714286rem;
+  line-height:1.5rem;
+}
+
+/*//////////////////////中按钮*/
+.button-md {
+  height:2rem;
+  padding:0rem 0.9rem;
+  font-size: 1rem;
+  line-height:2rem;
+}
+
+/*//////////////////////大按钮*/
+.button-lg {
+  height:3rem;
+  padding:0rem 1.2rem;
+  font-size: 1.1428571428571428571428571428571rem;
+  line-height:3rem;
+}
+
+/* //////////////////////块级元素按钮 */
+.button-block {
+  display: block;
+  width: 100%;
+}
+
+/* //////////////////////块级元素按钮--50% */
+.button-half{
+	display:block;
+	width:45%;
+	margin:0 auto;
+}
+
+/* /////////////////////// */
+#loadMoreButton,
+.loadMoreButton{
+	display:block;
+	width:50%;
+	margin:0 auto;
+	padding:1rem 0 2rem;
+	text-align:center;
+	color:#999;
+}

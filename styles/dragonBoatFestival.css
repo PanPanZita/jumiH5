@@ -1,0 +1,314 @@
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+}
+html,
+body {
+    -webkit-overflow-scrolling: touch;
+    -moz-overflow-scrolling: touch;
+    -ms-overflow-scrolling: touch;
+    -o-overflow-scrolling: touch;
+}
+#dragonBoat {
+    -webkit-overflow-scrolling: touch;
+    -moz-overflow-scrolling: touch;
+    -ms-overflow-scrolling: touch;
+    -o-overflow-scrolling: touch;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* overflow: hidden; */
+}
+#dragonBoat::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+#dragonBoat img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    vertical-align: top;
+}
+#dragonBoat .get-zongzi {
+    position: absolute;
+    top: 196vw;
+    left: 18.75vw;
+    width: 62.5vw;
+    height: 12.5vw;
+    background: #ec6121;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 4.375vw;
+    outline: none;
+}
+#dragonBoat .get-zongzi:disabled {
+    background: #dbdbdb;
+}
+#dragonBoat .watch-detail {
+    position: absolute;
+    top: 213vw;
+    left: 0;
+    right: 0;
+    margin: auto;
+    color: #ec6121;
+    font-size: 4.375vw;
+    text-align: center;
+}
+#dragonBoat .shelter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+}
+#dragonBoat .shelter .bye-shelter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 112.8vw);
+    opacity: 0;
+}
+#dragonBoat .shelter .shelter-box {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 112.8vw;
+    background: #f2f4f6;
+}
+#dragonBoat .shelter .shelter-box .scroll-box {
+    -webkit-overflow-scrolling: touch;
+    -moz-overflow-scrolling: touch;
+    -ms-overflow-scrolling: touch;
+    -o-overflow-scrolling: touch;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 11.25vw;
+    width: 100vw;
+    height: 99.05vw;
+    overflow-y: scroll;
+}
+#dragonBoat .shelter .shelter-box .scroll-box::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+#dragonBoat .shelter .shelter-box .form-universal {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 3vw 0;
+    width: 100%;
+}
+#dragonBoat .shelter .shelter-box .form-universal:first-of-type {
+    margin-top: 8vw;
+}
+#dragonBoat .shelter .shelter-box .form-universal label {
+    width: 17.8125vw;
+    height: 4.7vw;
+    font-size: 4.375vw;
+    line-height: 4.7vw;
+    text-align: justify;
+    text-align-last: justify;
+    overflow: hidden;
+}
+#dragonBoat .shelter .shelter-box .form-universal label::after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 0;
+}
+#dragonBoat .shelter .shelter-box .form-universal input {
+    padding: 0 2.5vw;
+    width: 55.65vw;
+    height: 10.9375vw;
+    border: 1px solid #cdcdcd;
+    border-radius: 5px;
+    font-size: 4.375vw;
+    box-sizing: border-box;
+}
+#dragonBoat .shelter .shelter-box .form-universal textarea {
+    padding: 2.5vw;
+    width: 55.65vw;
+    border: 1px solid #cdcdcd;
+    border-radius: 5px;
+    font-size: 4.375vw;
+    box-sizing: border-box;
+    resize: none;
+}
+#dragonBoat .shelter .shelter-box .address-title {
+    position: relative;
+    margin-top: 8vw;
+    width: 100%;
+    height: 4.7vw;
+}
+#dragonBoat .shelter .shelter-box .address-title::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 1px;
+    background: #cdcdcd;
+}
+#dragonBoat .shelter .shelter-box .address-title span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: 4.7vw;
+    width: 64%;
+    background: #f2f4f6;
+    font-size: 4.375vw;
+    line-height: 4.7vw;
+    text-align: center;
+    z-index: 1;
+}
+#dragonBoat .shelter .shelter-box .regular-address {
+    margin-top: 6.25vw;
+    width: 100%;
+}
+#dragonBoat .shelter .shelter-box .regular-address li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3.28vw;
+    padding: 0;
+    width: 100%;
+    height: 20.3125vw;
+    border: 1px solid #cdcdcd;
+    border-radius: 1.25vw;
+}
+#dragonBoat .shelter .shelter-box .regular-address .grey-line {
+    border: 1px solid #ec6121;
+}
+#dragonBoat .shelter .shelter-box .regular-address li .address-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 12.5vw);
+    height: 100%;
+    font-size: 3.6vw;
+}
+#dragonBoat .shelter .shelter-box .regular-address li .address-details div {
+    padding: 0 2.8vw;
+    width: 100%;
+    box-sizing: border-box;
+}
+#dragonBoat
+    .shelter
+    .shelter-box
+    .regular-address
+    li
+    .address-details
+    .top-detail {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    height: 8.44vw;
+    color: black;
+}
+#dragonBoat
+    .shelter
+    .shelter-box
+    .regular-address
+    li
+    .address-details
+    .top-detail
+    span {
+    line-height: 8.44vw;
+}
+#dragonBoat
+    .shelter
+    .shelter-box
+    .regular-address
+    li
+    .address-details
+    .bottom-detail {
+    height: calc(100% - 8.44vw);
+    color: #666666;
+    overflow: hidden;
+}
+#dragonBoat .shelter .shelter-box .regular-address li .switcher {
+    position: relative;
+    width: 12.5vw;
+    height: 100%;
+}
+#dragonBoat .shelter .shelter-box .regular-address li .switcher label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 5.4vw;
+    height: 5.4vw;
+    background: #cdcdcd;
+    border: none;
+    border-radius: 50%;
+    color: #ffffff;
+    outline: none;
+}
+#dragonBoat .shelter .shelter-box .regular-address li .switcher label::after {
+    content: "";
+    position: absolute;
+    top: 0.8vw;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 1.5vw;
+    height: 3vw;
+    border-bottom: 0.45vw solid white;
+    border-right: 0.45vw solid white;
+    transform: rotate3d(0, 0, 1, 30deg);
+}
+#dragonBoat .shelter .shelter-box .regular-address li .switcher input {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+#dragonBoat
+    .shelter
+    .shelter-box
+    .regular-address
+    li
+    .switcher
+    input:checked
+    + label {
+    background: #ec6121;
+}
+#dragonBoat .shelter .shelter-box .submit-address {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 13.75vw;
+    background: #ec6121;
+    border: none;
+    color: #ffffff;
+    font-size: 5vw;
+    outline: none;
+}
+.buttonz .ui-dialog-button {
+    display: flex !important;
+    justify-content: space-around !important;
+}

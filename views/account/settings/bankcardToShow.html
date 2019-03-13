@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>银行卡信息</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        .changeBank {
+            width: 35.625vw;
+            margin: 3.125vw auto;
+            display: block;
+            background: #f4f4f4;
+            color: #999999;
+            border: 1px solid #d8d8d8;
+        }
+
+        .limitTips {
+            display: inline-block;
+            margin-left: 18.375vw;
+            color: #FFFFFF;
+            font-size: 3.2vw;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+    <div id="box">
+        <template id="backcardTemplate">
+            <div class="group" style="margin-top:10px;">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <span>真实姓名</span>
+                            <span style="margin-left:5.4vw;">{{data.realname}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">
+                            <span>身份证号</span>
+                            <span style="margin-left:5.4vw;">{{data.idNumber}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="group" style="background:#f4f4f4;margin-top:4vw;margin-bottom:0;">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan">我的银行卡</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bankcard" id="haveBankcard" v-if="data.statBind == 8">
+                <img :src="data.bankBackground || '/h5/images/account/bankBg.png'" alt="银行卡背景色" class="bankBgcolor">
+                <div class="bank-con">
+                    <img :src="data.bankLogo" class="bank-logo-show">
+                    <span class="bank-name-show">{{data.bankName}}</span>
+                    <div>
+                        <span class="limitTips">单笔限额：{{data.once}}元;</span>
+                        <span class="limitTips" style="margin-left:10vw;">单日限额：{{data.oneDay}}元</span>
+                        <span class="limitTips">单月限额：{{data.oneMonth}}元;</span>
+                    </div>
+                    <p class="cardnum">
+                        <span>* * * *</span>
+                        <span>* * * *</span>
+                        <span>* * * *</span>
+                        <span style="font-size:6vw;">{{data.bankCardNo}}</span>
+                    </p>
+                </div>
+            </div>
+            <button class="button changeBank" @click="changeBank" v-if="data.statBind == 8">更换绑定银行卡</button>
+
+            <div class="bankcard" id="noBankcard" v-else>
+                <p class="textcenter" style="padding-top: 4.6rem;">
+                    <i class="iconfont font-16">&#xe620;</i>
+                    <a href="javascript:void(0);" style="text-decoration: underline;padding-left: 0.3rem;" class="clr-gray" @click="addBankcard">添加银行卡</a>
+                </p>
+                <p class="cardnum" style="height:2.8rem;"></p>
+            </div>
+
+
+
+        </template>
+        <my-backcard></my-backcard>
+    </div>
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        requirejs(['account/settings/bankcardToShow']);
+    </script>
+</body>
+
+</html>

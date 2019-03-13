@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="msapplication-tap-highlight" content="no" />
+<title>专题列表</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+<style type="text/css">
+	.title{border-left:3px solid #333;padding-left:0.5rem;}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+
+		<template id="topiclistTemplate">
+			<div v-if="specialList != null && specialList.length > 0">
+				<a href="topicSingle.html?topic_id={{list.id}}" v-for="list in specialList" style="display:block;margin-bottom:0.5rem;">
+					<p class="textcenter font-18" style="line-height: 3rem;background: #fff;color:#000;font-weight: blod;">{{list.name}}</p>
+					<img :src="list.h5Pic1 || '/h5/images/default21.jpg'" width="100%" />
+				</a>
+			</div>	
+			
+			<div style="padding-top:6rem; text-align: center;" v-else>
+				<i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;line-height:1;">&#xe628;</i>
+				<p class="clr-gray" style="margin:1rem 0;">等一等，活动马上就来</p>
+			</div>
+			<div v-if="isIOSShow" style="font-size:0.625rem;color:#999; text-align:center;padding:1rem 0;">活动由聚米众筹提供，与设备生产商Apple Inc.公司无关。</div>
+		</template>
+		<my-topiclist></my-topiclist>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['topic/topicList']);
+	</script>
+	<script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script>
+</body>
+</html>

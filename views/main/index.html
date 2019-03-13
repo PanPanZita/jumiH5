@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>投资-聚米众筹</title>
+    <link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+    <link rel="stylesheet" type="text/css" href="/h5/styles/jumi.css">
+    <style type="text/css">
+        .title {
+            display: inline-block;
+            width: 100%;
+            text-align: left;
+        }
+
+        .group-active .group-item .group-rowspan .group-colspan {
+            width: 50%;
+            padding: 0.25rem;
+        }
+
+        .group-item {
+            background-color: #fff;
+            padding: 0 1rem;
+            margin: 0;
+        }
+
+        .takein {
+            display: inline-block;
+            position: absolute;
+            width: 2rem;
+            right: 0.4rem;
+            top: 1rem;
+        }
+
+        .slider .slidepage span {
+            background-color: #f4f4f4
+        }
+
+        .ui-dialog-upgrade .ui-dialog-grid .ui-dialog-body {
+            padding: 20px 0 16px 0;
+        }
+
+        .ui-dialog-upgrade .ui-dialog-content {
+            width: 100%;
+        }
+
+        .ui-dialog-upgrade .ui-dialog-footer button.ui-dialog-autofocus {
+            color: #999999;
+        }
+
+        .ui-dialog-upsuccess .ui-dialog-grid .ui-dialog-body {
+            padding: 0;
+        }
+
+        .upsuccess img {
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .ui-dialog-upsuccess .ui-dialog-footer {
+            border-top: none;
+        }
+
+        .ui-dialog-upsuccess .ui-dialog-button {
+            background-color: #ec6121;
+            border-radius: 6px;
+        }
+
+        .ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus,
+        .ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus:active,
+        .ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus:focus,
+        .ui-dialog-upsuccess .ui-dialog-footer button.ui-dialog-autofocus:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div id="myloading" class="loading">
+        <img src="/h5/images/loading.gif" alt="" width="100" />
+    </div>
+
+    <div id="box">
+        <template id="indexTemplate">
+            <!-- 焦点图 -->
+            <div class="slider" id="slider">
+                <ul>
+                    <li v-for="img in imgs">
+                        <a href="{{img.url}}">
+                            <img src="/h5/images/default21.jpg" data-src="{{img.pic}}" alt="banner" class="async">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 首页4个入口 -->
+            <div class="group group-excel4" style="margin:0;height:25%">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <div class="group-colspan" style="border:none;padding: 1rem 0.5rem">
+                            <a href="javascript:void(0)" @click="toInvite">
+                                <i class="entrance1"></i>
+                                <span class="font-14">邀请好友</span>
+                            </a>
+                        </div>
+                        <div class="group-colspan" style="border:none;padding: 1rem 0.5rem">
+                            <a href="/h5/views/wheel/wheel.html">
+                                <i class="entrance2"></i>
+                                <span class="font-14">天天转盘</span>
+                            </a>
+                        </div>
+                        <div class="group-colspan" style="border:none;padding: 1rem 0.5rem;position: relative;">
+                            <a href="/h5/views/training/training.html">
+                                <i class="entrance3"></i>
+                                <span class="font-14">新手专享</span>
+                                <span class="takein" v-if="data.data.isShow == 1">
+                                    <img src="/h5/images/topic/takein.png">
+                                </span>
+                            </a>
+                        </div>
+                        <div class="group-colspan" style="border:none;padding: 1rem 0.5rem">
+                            <a href="/h5/views/account/faq/about.html">
+                                <i class="entrance4"></i>
+                                <span class="font-14">关于聚米</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 最新动态轮播 -->
+            <div class="group" style="margin:0.75rem 0 0;border-bottom: 1px solid #eee">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <span class="group-colspan">
+                            <i class="iconfont">&#xe659;</i>
+                            <em class="font-16"> 最新动态</em>
+                        </span>
+                        <a class="group-colspan right" @click="noticesMore">
+                            <em class="clr-gray font-14">更多</em>
+                            <i class="iconfont">&#xe60c;</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="slider slider-notice group-item" id="sliderNotice" style="background-color: #fff;margin:0 0 0.75rem;padding:0.75rem 0;">
+                <div class="group-rowspan" style="border-bottom: none;height:100%;margin-bottom: 1rem">
+                    <div class="group-colspan" style="vertical-align: baseline;padding:0 1rem">
+                        <ul class="information">
+                            <li v-for="notice in noticesNew">
+                                <a href="{{notice.linkUrl}}" style="text-align: left">
+                                    <p class="font-16">
+                                        <span class="inforTitle" style="font-weight: bold" v-model="title">{{notice.title}}</span>
+                                        <span class="font-12 clr-strike  ptgg" id="ptgg" v-if="notice.type==0">
+                                            <img src="/h5/images/ptgg.png" alt="平台公告">
+                                        </span>
+                                        <span class="font-12 clr-strike  xmdt" id="xmdt" v-if="notice.type==1">
+                                            <img src="/h5/images/xmdt.png" alt="项目动态">
+                                        </span>
+                                        <span class="font-12 clr-strike  mtbd" id="mtbd" v-if="notice.type==2">
+                                            <img src="/h5/images/mtbd.png" alt="媒体报道">
+                                        </span>
+                                    </p>
+                                    <p class="clr-gray font-14 inforCon" style="font-weight: normal;" v-model="subtitle">{{{notice.subtitle}}}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 正在众筹项目		 -->
+            <div class="group group-noborder group-topic" v-for="list in lists">
+                <div class="group-item">
+                    <div class="group-rowspan">
+                        <a class="group-colspan" @click="jumpinvest(list.id,$event)" href="javascript:void(0);">
+                            <span class="flag-fixed" v-if="list.itemProcessStatus==1" title="即将开始">
+                                <img src="/h5/images/flag-prev.png" alt="" style="width:4rem;">
+                            </span>
+                            <span class="flag-fixed" v-if="list.itemProcessStatus==2" title="正在众筹">
+                                <img src="/h5/images/flag-ing.png" alt="" style="width:4rem;">
+                            </span>
+                            <span class="flag-fixed" v-if="list.itemProcessStatus==3" title="众筹成功">
+                                <img src="/h5/images/flag-success.png" alt="" style="width:4rem;">
+                            </span>
+                            <span class="flag-fixed" v-if="list.itemProcessStatus==4" title="众筹失败">
+                                <img src="/h5/images/flag-fail.png" alt="" style="width:4rem;">
+                            </span>
+                            <span class="flag-fixed" v-if="list.itemProcessStatus==5" title="完成兑付">
+                                <img src="/h5/images/flag-complete.png" alt="" style="width:4rem;">
+                            </span>
+                            <p style="width: 100%;height: 58vw;">
+                                <img src="/h5/images/default85.jpg" data-src="{{list.imagePath1610}}" alt="产品图片" width="100%"
+                                    class="async" style="height: 100%;">
+                            </p>
+                            <h3>{{list.showName}}</h3>
+                            <p class="txt-rowspan4">{{list.itemBrief}}</p>
+                            <p class="info">
+                                <span style="color:#EC6121;" v-if="list.itemLabel" v-for="label in list.itemLabel.split('|')">▪
+                                    {{label}}</span>
+                            </p>
+                            <p class="extraInfo" v-if="list.itemProcessStatus==1">距离开始：{{list.remainTime}}</p>
+                            <p class="extraInfo" v-if="list.itemProcessStatus==2">距离结束：{{list.remainTime}}</p>
+                            <p class="extraInfo">发起人：{{list.colCustName}}</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <a href="list.html?type=2&status=0" id="loadMoreButton">查看更多</a> -->
+
+            <div class="group group-noborder group-active">
+                <a href="list.html?type=0&status=3&itemName=" class="group-item" style="margin:0;">
+                    <div class="group-rowspan" style="border:none;">
+                        <div class="group-colspan title font-16" style="width:auto;padding: 0.75rem 0.75rem 0.75rem 0">往期成功项目</div>
+                        <div class="group-colspan clr-gray" style="text-align: right;">
+                            <span class="font-14">更多</span>
+                            <i class="iconfont">&#xe60c;</i>
+                        </div>
+                    </div>
+                </a>
+                <div class="group-item" style="margin-top: 0">
+                    <div class="group-rowspan" style="display: flex;">
+                        <a href="javascript:void(0);" class="group-colspan" v-for="successItem in successItemList"
+                            @click="successjump(successItem.id,$event)">
+                            <div style="position:relative;">
+                                <img src="/h5/images/default85.jpg" data-src="{{successItem.imagePath1610}}" alt=""
+                                    width="100%" class="async" />
+                            </div>
+                            <p style="height:2rem;line-height: 2rem">
+                                <span class="clr-gray" style="display: inline-block;float: left;">目标金额：</span>
+                                <span style="display: inline-block;">{{successItem.targetAmount | tenthousand}}</span>
+                            </p>
+                            <p style="height:2rem;line-height: 2rem">
+                                <span class="clr-gray" style="display: inline-block;float: left;">达成率：</span>
+                                <span style="display: inline-block;">{{successItem.scale | reachrate }}%</span>
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group group-noborder group-active">
+                <a href="list.html?type=0&status=4&itemName=" class="group-item" style="margin:0;">
+                    <div class="group-rowspan" style="border:none;">
+                        <div class="group-colspan title font-16" style="width:auto;padding: 0.75rem 0.75rem 0.75rem 0">成功兑付项目</div>
+                        <div class="group-colspan clr-gray" style="text-align: right;">
+                            <span class="font-14">更多</span>
+                            <i class="iconfont">&#xe60c;</i>
+                        </div>
+                    </div>
+                </a>
+                <div class="group-item" style="margin-top: 0">
+                    <div class="group-rowspan" style="display: flex;">
+                        <a href="javascript:void(0);" class="group-colspan" v-for="repaymentItem in repaymentItemList"
+                            @click="repaymentjump(repaymentItem.id,$event)">
+                            <div style="position:relative;">
+                                <img src="/h5/images/default85.jpg" data-src="{{repaymentItem.imagePath1610}}" alt=""
+                                    width="100%" class="async" />
+                            </div>
+                            <p style="height:2rem;line-height: 2rem">
+                                <span class="clr-gray">已募金额：</span>{{repaymentItem.completeAmount | tenthousand}}</p>
+                            <p style="height:2rem;line-height: 2rem">
+                                <span class="clr-gray">合计利息：</span>{{repaymentItem.repaymentYesinterest}}元</p>
+                            <p style="height:2rem;line-height: 2rem">
+                                <span class="clr-gray">回报周期：</span>{{repaymentItem.cycle}}{{repaymentItem.cycleUnit |
+                                cycleStr}}</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 奖励（之前的活动，已废弃） -->
+            <a href="javascript:void(0)" @click="close" v-if="isHide" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5)">
+                <img src="/h5/images/common/awardJumibi.png" alt="" style="display:block;width:20rem;margin:5rem auto 0;">
+                <span style="display:block;position:absolute;top:11rem;width:100%;color:#fbc42f;text-align:center;font-size:1rem;">欢迎加入聚米众筹</span>
+                <span style="display:block;position:absolute;top:14rem;width:100%;color:#d6483b;text-align:center;font-size:1rem;">奖励您</span>
+                <span style="display:block;position:absolute;top:15.5rem;width:100%;color:#d6483b;text-align:center;font-size:1.65rem;">500米币</span>
+            </a>
+
+            <!-- 修改密码弹出框 -->
+            <div class="upgradeWrap" id="upgradeWrap" style="display: none;">
+                <div class="group group-noborder" style="border-bottom: 1px solid #eeeeee;padding:0 0 0 16px;">
+                    <div class="group-rowspan">
+                        <div class="group-colspan" style="width:28%;">真实姓名</div>
+                        <div class="group-colspan" id="realname"></div>
+                    </div>
+                    <div class="group-rowspan">
+                        <div class="group-colspan" style="width:28%;">身份证号</div>
+                        <div class="group-colspan" id="idNumber"></div>
+                    </div>
+                </div>
+                <form class="group group-noborder" style="padding:0 0 0 16px;">
+                    <div class="group-rowspan" style="position: relative;">
+                        <label for="userpwdreal" class="group-colspan">设置支付密码</label>
+                        <input type="tel" class="group-colspan userpwd userpwdreal" style="-webkit-text-security:disc;text-security:disc;"
+                            name="userpwdreal" id="userpwdreal" v-model="userpwdreal" maxlength="6" @keyup="userpwdrealKeyup"
+                            placeholder="请输入6位数字支付密码" style="padding-top: 1rem;" proving="0">
+                    </div>
+                    <div class="group-rowspan" style="position: relative;">
+                        <label for="userconfirmpwdreal" class="group-colspan">确认支付密码</label>
+                        <input type="tel" class="group-colspan userpwd userconfirmpwdreal" style="-webkit-text-security:disc;text-security:disc;"
+                            name="userconfirmpwdreal" id="userconfirmpwdreal" v-model="userconfirmpwdreal" maxlength="6"
+                            @keyup="userconfirmpwdrealKeyup" placeholder="请再次输入支付密码" style="padding-top: 1rem;" proving="0">
+                    </div>
+                </form>
+                <!-- <p class="upgradetips clr-gray font-12" style="padding:0 0 0 16px;">*账户资金由北京银行存管对接中</p> -->
+            </div>
+
+            <!-- 恭喜您，升级成功 -->
+            <div class="upsuccess textcenter" id="upsuccess" style="display: none;">
+                <img src="/h5/images/ios/upsuccess.png">
+                <p class="font-24" style="padding:20px 0">恭喜您，升级成功！</p>
+            </div>
+        </template>
+        <my-index></my-index>
+    </div>
+
+    <script type="text/javascript" src="/h5/javascripts/require.js"></script>
+    <script type="text/javascript" src="/h5/javascripts/app.js"></script>
+    <script type="text/javascript">
+        //针对安卓系统做的兼容，判断是否是安卓APP进入
+        function isAndroid() {
+            localStorage.fromapp = 'android';
+        }
+
+        requirejs(['main/index']);
+    </script>
+    <!-- <script type="text/javascript" async="async" charset="utf-8" src="https://s95.cnzz.com/z_stat.php?id=1254726076&web_id=1254726076&async=1"></script> -->
+</body>
+
+</html>

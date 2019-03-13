@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>账单</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+	<link rel="stylesheet" type="text/css" href="/h5/styles/Ddate.css">
+<style type="text/css">
+.group-current .group-colspan:first-child{width:55%;}
+.group-current .group-colspan:last-child{width:45%;}
+</style>
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="assetsLogTemplate">
+			<div class="top-fixed" style="border-bottom:0.5rem solid #F4F4F4;background:#F4F4F4;">
+				<div id="date" name="date" class="date-search">请选择日期并搜索</div>
+			</div>
+
+			<div class="tab tab-normal tab-noborder">
+				<ul class="tab-handle top-fixed" style="top:4rem;">
+					<li class="active"><a href="#tabs1" data-toggle="tab">全部</a></li>
+					<li><a href="#tabs2" data-toggle="tab">收入</a></li>
+					<li><a href="#tabs3" data-toggle="tab">支出</a></li>
+				</ul>
+				<div class="tab-content" style="margin-top:7.7rem;">
+					<div class="tab-pane active" id="tabs1">
+						<template v-if="allList != null && allList.items != null && allList.items.length > 0">
+							<div class="group group-justify group-small group-current">
+								<a href="javascript:void(0)" class="group-item" v-for="item in allList.items" @click="showDetail(item.id)">		
+									<div class="group-rowspan">
+										<div class="group-colspan">
+											<p>{{item.transTypeSTR}}</p>
+											<p class="clr-gray font-10">{{item.createTime}}</p>
+										</div>
+										<div class="group-colspan">
+											<em class="clr-strike" v-if="item.flag==1">+{{item.amt}}</em>
+											<em v-else>-{{item.amt}}</em>
+											<i class="iconfont" data-more>&#xe60c;</i>
+										</div>
+									</div>
+								</a>
+							</div>
+						</template>
+						<div style="padding:6rem 0; text-align: center;" v-else>
+							<i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;line-height:1;">&#xe696;</i>
+							<p class="clr-gray" style="margin:1rem 0;">您还没有相关的账单</p>
+						</div>
+						<div id="loadMoreButton1" class="loadMoreButton" v-if="allList != null && allList.items != null && allList.items.length >= 20">
+							<i class="iconfont">&#xe65d;</i>
+							<span>上拉刷新数据</span>
+						</div>
+					</div>
+					
+					<div class="tab-pane" id="tabs2">
+						<template v-if="inList != null && inList.items != null && inList.items.length > 0">
+							<div class="group group-justify group-small group-current">
+								<a href="javascript:void(0)" class="group-item" v-for="item in inList.items" @click="showDetail(item.id)">		
+									<div class="group-rowspan">
+										<div class="group-colspan">
+											<p>{{item.transTypeSTR}}</p>
+											<p class="clr-gray font-10">{{item.createTime}}</p>
+										</div>
+										<div class="group-colspan">
+											<em class="clr-strike">+{{item.amt}}</em>
+											<i class="iconfont" data-more>&#xe60c;</i>
+										</div>
+									</div>
+								</a>
+							</div>
+						</template>
+						<div style="padding:6rem 0; text-align: center;" v-else>
+							<i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;line-height:1;">&#xe696;</i>
+							<p class="clr-gray" style="margin:1rem 0;">您还没有相关的账单</p>
+						</div>
+						<div id="loadMoreButton2" class="loadMoreButton" v-if="inList != null && inList.items != null && inList.items.length >= 20">
+							<i class="iconfont">&#xe65d;</i>
+							<span>上拉刷新数据</span>
+						</div>
+					</div>
+					
+					<div class="tab-pane" id="tabs3">
+						<template v-if="outList != null && outList.items != null && outList.items.length > 0">
+							<div class="group group-justify group-small group-current">
+								<a href="javascript:void(0)" class="group-item" v-for="item in outList.items" @click="showDetail(item.id)">		
+									<div class="group-rowspan">
+										<div class="group-colspan">
+											<p>{{item.transTypeSTR}}</p>
+											<p class="clr-gray font-10">{{item.createTime}}</p>
+										</div>
+										<div class="group-colspan">
+											<em>-{{item.amt}}</em>
+											<i class="iconfont" data-more>&#xe60c;</i>
+										</div>
+									</div>
+								</a>
+							</div>
+						</template>
+						<div style="padding:6rem 0; text-align: center;" v-else>
+							<i class="iconfont" style="color: #EAEAEA; font-size: 7.57142857rem;line-height:1;">&#xe696;</i>
+							<p class="clr-gray" style="margin:1rem 0;">您还没有相关的账单</p>
+						</div>
+						<div id="loadMoreButton3" class="loadMoreButton" v-if="outList != null && outList.items != null && outList.items.length >= 20">
+							<i class="iconfont">&#xe65d;</i>
+							<span>上拉刷新数据</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+		<my-assetslog></my-assetslog>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/assets/assetsLog']);
+	</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>设置</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+	<div id="box">
+		<template id="settingTemplate">
+			<div class="group group-justify">
+				<div class="group-item">
+					<a href="personal.html" class="group-rowspan">
+						<span class="group-colspan">个人信息</span>
+						<span class="group-colspan">
+							<i class="iconfont" data-more>&#xe60c;</i>
+						</span>
+					</a>
+				</div>
+				<div class="group-item">
+					<a href="/h5/views/account/address/address.html" class="group-rowspan">
+						<span class="group-colspan">收货地址</span>
+						<span class="group-colspan">
+							<i class="iconfont" data-more>&#xe60c;</i>
+						</span>
+					</a>
+				</div>
+				<div class="group-item">
+					<a href="safe.html" class="group-rowspan">
+						<span class="group-colspan">密码管理</span>
+						<span class="group-colspan">
+							<i class="iconfont" data-more>&#xe60c;</i>
+						</span>
+					</a>
+				</div>
+				<div class="group-item">
+					<a href="javascript:void(0)" class="group-rowspan" @click="showPhone">
+						<span class="group-colspan">手机绑定</span>
+						<span class="group-colspan">
+							<var class="clr-gray">{{data | phoneStr}}</var> 
+							<i class="iconfont" data-more>&#xe60c;</i>
+						</span>
+					</a>
+				</div>
+			</div>
+			
+			<div class="group group-transparent">
+				<div class="group-item group-clear" style="margin-top: 1rem">
+					<div class="group-rowspan">
+						<a href="javascript:void(0)" class="button button-block button-lg" style="border:none" @click="exit">退出登录</a>
+					</div>
+				</div>
+			</div>
+		</template>
+		<my-setting></my-setting>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/settings/setting']);
+	</script>
+</body>
+</html>

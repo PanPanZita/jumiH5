@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>处理结果</title>
+<link rel="apple-touch-icon-precomposed" href="/h5/images/logoface.png">
+<link rel="stylesheet" type="text/css"	href="/h5/styles/jumi.css">
+</head>
+<body>
+	<!-- loading -->
+	<div id="myloading" class="loading">
+		<img src="/h5/images/loading.gif" alt="" width="100"/>
+	</div>
+	
+
+	<div id="box">
+		<template id="openaccountTemplate">
+			<div class="group group-noborder">
+				<div class="group-item" v-if="result=='true'">
+					<!-- 成功 -->
+					<div class="group-rowspan" >   
+						<div class="group-colspan">
+							<p class="textcenter" style="padding-top: 3rem;"><i class="iconfont font-40 clr-green">&#xe611;</i></p>
+						</div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<p class="textcenter">操作成功</p>
+						</div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<p class="textcenter">具体充值成功时间以银行实际扣款时间为准，</p>
+							<p class="textcenter">如有问题请联系客服（4008-014-680）</p>
+						</div>
+					</div>
+				</div>	
+				<!-- 失败 -->
+				<div class="group-item" v-else>
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<p class="textcenter" style="padding-top: 2rem;"><i class="iconfont font-40 clr-grayc">&#xe612;</i></p>
+						</div>
+					</div>
+					<div class="group-rowspan">
+						<div class="group-colspan">
+							<p class="textcenter">操作失败</p>
+						</div>
+					</div>
+				</div>
+				<!-- 公共的按钮 -->
+				<div class="group-item" style="padding-bottom: 1rem;">
+					<div class="group-rowspan group-excel2">
+						<div class="group-colspan">
+							<button type="button" class="button button-block" @click="backIndex">首页</button>
+						</div>
+						<div class="group-colspan">
+							<button type="button" class="button button-fill button-block" @click="personInfo">个人中心</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+		<my-openaccount></my-openaccount>
+	</div>
+	
+	<script type="text/javascript" src="/h5/javascripts/require.js"></script>
+	<script type="text/javascript" src="/h5/javascripts/app.js"></script>
+	<script type="text/javascript">
+		requirejs(['account/settings/openaccountCg']);
+	</script>
+</body>
+</html>
